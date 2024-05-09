@@ -1,7 +1,9 @@
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import Home from './Home';
+
 
 function Reset() {
     const [email, setEmail] = useState('');
