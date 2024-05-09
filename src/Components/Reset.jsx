@@ -1,7 +1,9 @@
 
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState } from 'react';
+import Home from './Home';
+
 
 function Reset() {
     const [email, setEmail] = useState('');
@@ -55,7 +57,9 @@ function Reset() {
     };
 
   return (
+   
     <div>
+        <Home/>
          <div className='mx-auto items-center justify-center flex flex-col bg-gray-100 h-[100vh]'>
         <div className=''>
     <div className='relative flex flex-col items-center h-[80vh] border-2 mb-3 p-12 bg-white rounded-lg'>
@@ -66,8 +70,6 @@ function Reset() {
 
         </div>
         <form onSubmit={handleSubmit}>
-            
-          
             <div className='mb-5'>
                 <label htmlFor='email' className='block text-sm text-black' > Enter Your Email</label>
                 <input type="email" id="Email"  className="mt-1 w-full rounded-md bg-white text-sm text-black shadow-sm p-2 border-x-2 border-y-2 border-gray-300" onChange={handleEmail}/>
@@ -88,7 +90,7 @@ function Reset() {
             <div className='flex flex-col'>
            <Link to="/"><button type='submit' className='bg-red-500 w-50 border-2 rounded-md p-2 px-[100px] mx-auto mt-5 text-white' onClick={handleSubmit}>Reset </button></Link> 
             
-            <Link to="/signup" className='text-md text-red-700 pt-5 text-right '>Go back</Link>
+            <Link to="/auth/signup" className='text-md text-red-700 pt-5 text-right'>Go back</Link>
             </div>
         </form>
     </div>

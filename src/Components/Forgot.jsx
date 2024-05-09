@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
+import hacker from '../assets/hacker.webp'
+import Home from './Home';
 
 function Forgot() {
     const [email, setEmail] = useState('');
@@ -55,10 +57,15 @@ function Forgot() {
 
   return (
     <div>
-         <div className='mx-auto items-center justify-center flex flex-col bg-gray-100 h-[100vh]'>
-        <h1 className='p-10 text-2xl text-black font-bold'>Create Password</h1>
+        <Home/>
+         <div className='mx-auto items-center justify-center flex flex-col bg-url-{[hacker.webp]} h-[100vh]'>
+        
         <div className=''>
-    <div className='relative flex items-center h-[70vh] border-2 mb-3 p-12 bg-white'>
+    <div className='relative flex flex-col items-center h-[70vh] border-2 mb-3 p-12 bg-transparent'>
+        <div>
+        <h1 className='p-10 text-2xl text-black font-bold'>Create Password</h1>
+        </div>
+        <div>
         <form onSubmit={handleSubmit}>
           
             <div className='mb-5'>
@@ -70,9 +77,10 @@ function Forgot() {
             <div className='flex flex-col'>
             <button type='submit' className='bg-red-500 text-white w-50 border-2 rounded-md p-2 px-[100px] mx-auto mt-5'>Create account</button> 
             
-            <Link to="/signup" className='text-xl text-red-700 pt-5 text-center'>Go back</Link>
+            <Link to="/auth/signup" className='text-xl text-red-700 pt-5 text-center'>Go back</Link>
             </div>
         </form>
+        </div>
     </div>
     </div>
     </div>

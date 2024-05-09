@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import hacker from '../assets/hacker.webp'
+import Home from './Home';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -45,6 +46,8 @@ function Login() {
   };
 
   return (
+    <>
+    <Home/>
     <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[100vh]'>
         {/* <div>
             <img src={hacker} className=''></img>
@@ -87,7 +90,7 @@ function Login() {
                 <p className='text-red-500 italic text-xs'>{error.password}</p>
               )}
             </div>
-            <Link to="/forgot" className="text-red-700">Forgot Password?</Link>
+            <Link to="/auth/forgot" className="text-red-700">Forgot Password?</Link>
             <button
               type='submit'
               className='bg-red-500  text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5'
@@ -96,7 +99,7 @@ function Login() {
             </button>
             <div className='flex gap-2 mt-5 mb-5 text-black'>
               <p>Don't have an account ? </p>
-              <Link to='/signup' className='text-red-700'>
+              <Link to='/auth/signup' className='text-red-700'>
                 Sign Up
               </Link>
             </div>
@@ -106,6 +109,7 @@ function Login() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
