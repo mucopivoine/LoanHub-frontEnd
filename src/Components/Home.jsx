@@ -1,5 +1,7 @@
 // import React from 'react';
 
+import { Link } from "react-router-dom";
+
 
 
 function Home() {
@@ -33,20 +35,20 @@ function Home() {
 
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">
-                <a
+                <Link to="/auth/signin"
                   className="rounded-md bg-red-500 text-white px-5 py-2.5 text-sm font-medium shadow-lg hover:bg-red-700"
-                  href="#"
+                  
                 >
                   Login
-                </a>
+                </Link>
 
                 <div className="hidden sm:flex">
-                  <a
+                  <Link to='/auth/signup'
                     className="rounded-md bg-gray-200 text-gray-900 px-5 py-2.5 text-sm font-medium hover:text-blue-500"
-                    href="#"
+                    
                   >
                     Register
-                  </a>
+                  </Link>
                 </div>
               </div>
 

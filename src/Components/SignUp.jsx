@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import Home from './Home';
 
 function SignUp() {
     const [name, setName] = useState('');
@@ -59,6 +60,8 @@ function SignUp() {
     }
   };
   return (
+    <>
+    <Home/>
     <div className='mx-auto items-center justify-center flex flex-col bg-gray-100 h-[100vh]'>
       
       <div className=''>
@@ -133,13 +136,13 @@ function SignUp() {
               >
                Create account
               </button>
-              <Link to='/reset' className='text-red-700 mt-5 '>
+              <Link to='/auth/reset' className='text-red-700 mt-5 '>
                 Reset Password?
               </Link>
             </div>
             <div className='flex gap-4 mt-2'>
             <p>Already have an account?</p>
-            <Link to='/' className=' text-red-700'>
+            <Link to='/auth/signin' className=' text-red-700'>
               Log In
             </Link>
             </div>
@@ -148,6 +151,7 @@ function SignUp() {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

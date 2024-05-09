@@ -12,11 +12,13 @@ import Login from './Components/Login'
 import Reset from './Components/Reset'
 import Call from './Components/Call'
 import About from './Components/About'
+import Home from './Components/Home'
 
 function App() {
   return (
     <Router>
       <Routes>
+      <Route path="/" element={<Call/>}/>
          <Route path="/auth" element={<AuthRoute/>}>
             <Route path="signin" element={<Login/>}/>
             <Route path="signup" element={<SignUp/>}/>
