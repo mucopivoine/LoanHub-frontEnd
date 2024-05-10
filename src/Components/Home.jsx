@@ -1,17 +1,15 @@
 // import React from 'react';
 
-
-
 function Home() {
   return (
     <div>
-      <header className="bg-white text-black">
-        
+      {/* Sticky Navbar */}
+      <header className="bg-white text-black fixed top-0 left-0 right-0 z-50 shadow-lg font-serif">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
-              <img className="h-12 w-16" src="/money.png" alt="Money Icon" />
-              <h1 className="ml-2 text-3xl font-bold font-poppins">Umwalimu Loan Hub</h1>
+              <img className="h-12 w-12" src="/money.png" alt="Money Icon" />
+              <h1 className="ml-2 text-2xl font-bold font-poppins">Umwalimu Loan Hub</h1>
             </div>
 
             <nav className="hidden md:flex gap-8 text-lg">
@@ -24,10 +22,8 @@ function Home() {
               <a className="hover:text-red-500" href="/loan">
                 Services
               </a>
-             
-             
               <a className="hover:text-red-500" href="/contact">
-               Contact
+                Contact
               </a>
             </nav>
 
@@ -42,7 +38,7 @@ function Home() {
 
                 <div className="hidden sm:flex">
                   <a
-                    className="rounded-md bg-gray-200 text-gray-900 px-5 py-2.5 text-sm font-medium hover:text-blue-500"
+                    className="rounded-md bg-gray-200 hover:bg-gray-400 text-gray-900 px-5 py-2.5 text-sm font-medium hover:text-red-700"
                     href="#"
                   >
                     Register
@@ -51,7 +47,7 @@ function Home() {
               </div>
 
               <div className="block md:hidden">
-                <button className="rounded bg-gray-200 p-2 text-gray-900 hover:text-blue-500 transition duration-300">
+                <button className="rounded bg-red-500  hover:bg-red-700 p-2 text-gray-500  transition duration-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -67,7 +63,8 @@ function Home() {
           </div>
         </div>
       </header>
-      
+
+   
     </div>
   );
 }

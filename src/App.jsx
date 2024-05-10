@@ -3,19 +3,20 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Call from './Components/Call'
 // import Layout from './Layout/Layout'
 // import Admin from './Pages/AdminDash/Admin'
-// import Manager from './Pages/ManagerDash/Manager'
-// import Teacher from './Pages/TeacherDash/Teacher'
-// import Home from './Components/Home'
-// import Main from './Components/Main'
+
 import About from './Components/About'
+// 
+import Main from './Components/Main'
 
 function App() {
   return (
     <>
     <Router>
       <Routes>
-        <Route path="/" element={<Call/>}/>
+        <Route path="/" element={<Call/>}>
+          <Route path="/" element={<Main/>}/>
         <Route path="/about" element={<About/>}/>
+        </Route>
         {/* <Route path="/main" element={<Main/>}/>
        
         <Route path="/" element={<Layout/>}>
