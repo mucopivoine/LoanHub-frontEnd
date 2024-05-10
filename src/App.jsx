@@ -12,15 +12,20 @@ import Login from './Components/Login'
 import Reset from './Components/Reset'
 import Call from './Components/Call'
 import About from './Components/About'
+import Main from './Components/Main'
+
+import About from './Components/About'
 import Home from './Components/Home'
 import OtpInput from './Components/OtpInput'
 import Otpconfirm from './Components/Otpconfirm'
 import Main from './Components/Main'
 
+
 function App() {
   return (
     <Router>
       <Routes>
+
       <Route path="/" element={<Call/>}>
            <Route path="/" element={<Main/>}/>
            <Route path="/aboutUs" element={<About/>}/>
@@ -41,4 +46,8 @@ function App() {
     </Router>
   )
 }
+       
+          
+ 
+
 export default App
