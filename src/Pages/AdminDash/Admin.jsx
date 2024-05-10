@@ -1,9 +1,10 @@
 import React from 'react'
+import SignIn from '../../Components/SignIn'
 
 function Admin() {
   return (
     <div>
-        Admin page
+       <SignIn/>
         </div>
   )
 }
