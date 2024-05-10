@@ -3,11 +3,6 @@ import React from 'react'
 
 function Services() {
   return (
-    <div>Services</div>
-
-
-function Services() {
-  return (
     <div className="=md-px-14 px-4 max-w-screen-2xl mx -auto">
 <div className="text-center my-8">
     <h2 className="font-serif">Our Services</h2>
