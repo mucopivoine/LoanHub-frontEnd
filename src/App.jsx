@@ -16,6 +16,9 @@ import Main from './Components/Main'
 
 import About from './Components/About'
 import Home from './Components/Home'
+import OtpInput from './Components/OtpInput'
+import Otpconfirm from './Components/Otpconfirm'
+import Main from './Components/Main'
 
 
 function App() {
@@ -23,11 +26,28 @@ function App() {
     <Router>
       <Routes>
 
-        <Route path="/" element={<Call/>}>
-          <Route path="/" element={<Main/>}/>
-        <Route path="/about" element={<About/>}/>
-          </Routes>
-        </Router>
+      <Route path="/" element={<Call/>}>
+           <Route path="/" element={<Main/>}/>
+           <Route path="/aboutUs" element={<About/>}/>
+      <Route path="/auth" element={<AuthRoute/>}>
+            <Route path="signin" element={<Login/>}/>
+            <Route path="signup" element={<SignUp/>}/>
+            <Route path="forgot" element={<Forgot/>}/>
+            <Route path="reset" element={<Reset/>}/>
+            <Route path="otpinput" element={<OtpInput/>}/>
+            <Route path="otpconfirm" element={<Otpconfirm/>}/></Route>
+         </Route>
+      <Route path="/" element={<Layout/>}>
+          <Route path="admin" element={<Admin/>}/>
+          <Route path="manager" element={<Manager/>}/>
+          <Route path="teacher" element={<Teacher/>}/>
+         </Route>
+      </Routes>
+    </Router>
+  )
+}
+       
+          
  
 
 export default App

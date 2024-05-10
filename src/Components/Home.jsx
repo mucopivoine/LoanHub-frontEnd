@@ -1,4 +1,7 @@
 
+import { Link } from "react-router-dom";
+import { motion } from 'framer-motion'; 
+
 
 import { Link } from "react-router-dom";
 
@@ -6,7 +9,7 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <div>
-      {/* Sticky Navbar */}
+     
       <header className="bg-white text-black fixed top-0 left-0 right-0 z-50 shadow-lg font-serif">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
@@ -19,15 +22,24 @@ function Home() {
               <a className="hover:text-red-500" href="/">
                 Home
               </a>
-              <a className="hover:text-red-500" href="/about">
+              <Link to="/aboutUs" className="hover:text-red-500">
                 About
-              </a>
-              <a className="hover:text-red-500" href="/loan">
+              </Link>
+              <Link to="/services" className="hover:text-red-500">
                 Services
+
+              </Link>
+             
+             
+              <Link to="/contact" className="hover:text-red-500">
+               Contact
+              </Link>
+
               </a>
               <a className="hover:text-red-500" href="/contact">
                 Contact
               </a>
+
             </nav>
 
             <div className="flex items-center gap-4">
@@ -52,6 +64,7 @@ function Home() {
                   >
                     Register
                   </Link>
+                  
                 </div>
               </div>
 
@@ -73,7 +86,6 @@ function Home() {
         </div>
       </header>
 
-   
     </div>
   );
 }

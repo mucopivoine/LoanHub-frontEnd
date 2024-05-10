@@ -3,7 +3,7 @@ import OtpInput from './OtpInput';
 import Home from './Home';
 import { motion } from 'framer-motion'; 
 
-const Forgot = () => {
+const Otpconfirm = () => {
   const [email, setEmail] = useState('');
   const [showOtpInput, setShowOtpInput] = useState(false);
 
@@ -18,6 +18,7 @@ const Forgot = () => {
       alert('Email must be in the format name@gmail.com');
       return;
     }
+
     // Call backend API to send OTP to the email
     setShowOtpInput(true);
   };
@@ -29,16 +30,16 @@ const Forgot = () => {
   return (
     <>
      
-      <div className='mx-auto items-center justify-center flex flex-col h-[80vh] bg-gray-100'>
+      <div className='mx-auto items-center justify-center flex flex-col h-[90vh]'>
       <motion.div // Animate the form container
           initial={{ opacity: 0, y: 50 }} // Initial animation state
           animate={{ opacity: 1, y: 0 }} // Animation when component mounts
           transition={{ duration: 0.5 }} // Animation duration
           className=''
         >
-        <div className='relative flex flex-col items-center border-2 mb-3 p-12 bg-white '>
+        <div className='relative flex flex-col items-center border-2 mb-3 bg-white'>
           <div className='mb-5'>
-            <h1 className='mb-5 text-xl font-bold'>Please Enter Your Email for Verification</h1>
+            <h1 className='mb-5 text-xl font-bold'>Please Enter Email for Verification</h1>
           </div>
           <div>
             {!showOtpInput ? (
@@ -48,7 +49,7 @@ const Forgot = () => {
                   value={email}
                   onChange={handleEmail}
                   placeholder='Enter Email Address'
-                  className='p-3 mr-3 items-center flex border-2 border-gray-300 w-full'
+                  className='p-3 mr-3 items-center flex border-2 border-gray-500 w-full'
                 />
                 <div>
                 <button
@@ -61,7 +62,7 @@ const Forgot = () => {
               </form>
             ) : (
               <div>
-                <p className='text-xl font-semibold text-gray-500 mb-5'>Enter OTP sent to {email}</p>
+                <p className='text-gray-300 mb-5'>Enter OTP sent to {email}</p>
                 <OtpInput length={4} onOtpSubmit={handleOtpSubmit} />
               </div>
             )}
@@ -73,4 +74,4 @@ const Forgot = () => {
   );
 };
 
-export default Forgot;
+export default Otpconfirm;
