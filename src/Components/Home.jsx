@@ -2,10 +2,6 @@
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion'; 
 
-
-import { Link } from "react-router-dom";
-
-
 function Home() {
   return (
     <div>
@@ -34,12 +30,7 @@ function Home() {
               <Link to="/contact" className="hover:text-red-500">
                Contact
               </Link>
-
-              </a>
-              <a className="hover:text-red-500" href="/contact">
-                Contact
-              </a>
-
+            
             </nav>
 
             <div className="flex items-center gap-4">
@@ -53,9 +44,7 @@ function Home() {
 
                 <div className="hidden sm:flex">
 
-                  <a
-                    className="rounded-md bg-gray-200 hover:bg-gray-400 text-gray-900 px-5 py-2.5 text-sm font-medium hover:text-red-700"
-                    href="#"
+                  
 
                   <Link to='/auth/signup'
                     className="rounded-md bg-gray-200 text-gray-900 px-5 py-2.5 text-sm font-medium hover:text-blue-500"
