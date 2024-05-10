@@ -17,13 +17,8 @@ function App() {
           <Route path="/" element={<Main/>}/>
         <Route path="/about" element={<About/>}/>
         </Route>
-        {/* <Route path="/main" element={<Main/>}/>
-       
-        <Route path="/" element={<Layout/>}>
-          <Route path="/admin" element={<Admin/>}/>
-          <Route path="/manager" element={<Manager/>}/>
-          <Route path="/teacher" element={<Teacher/>}/>
-          </Route> */}
+        
+        
       </Routes>
     </Router>
 
