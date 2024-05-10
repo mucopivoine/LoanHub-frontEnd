@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import Home from './Home';
-
+import { motion } from 'framer-motion';
 
 function Reset() {
     const [email, setEmail] = useState('');
@@ -59,8 +59,14 @@ function Reset() {
   return (
    
     <div>
-        <Home/>
+        
          <div className='mx-auto items-center justify-center flex flex-col bg-gray-100 h-[100vh]'>
+         <motion.div // Animate the form container
+          initial={{ opacity: 0, y: 50 }} // Initial animation state
+          animate={{ opacity: 1, y: 0 }} // Animation when component mounts
+          transition={{ duration: 0.5 }} // Animation duration
+          className=''
+        >
         <div className=''>
     <div className='relative flex flex-col items-center h-[80vh] border-2 mb-3 p-12 bg-white rounded-lg'>
         <div>
@@ -95,6 +101,7 @@ function Reset() {
         </form>
     </div>
     </div>
+    </motion.div>
     </div>
     </div>
   )

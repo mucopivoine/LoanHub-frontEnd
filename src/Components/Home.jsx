@@ -1,7 +1,7 @@
 // import React from 'react';
 
 import { Link } from "react-router-dom";
-
+import { motion } from 'framer-motion'; 
 
 
 function Home() {
@@ -20,17 +20,17 @@ function Home() {
               <a className="hover:text-red-500" href="/">
                 Home
               </a>
-              <a className="hover:text-red-500" href="/about">
+              <Link to="/aboutUs" className="hover:text-red-500">
                 About
-              </a>
-              <a className="hover:text-red-500" href="/loan">
+              </Link>
+              <Link to="/services" className="hover:text-red-500">
                 Services
-              </a>
+              </Link>
              
              
-              <a className="hover:text-red-500" href="/contact">
+              <Link to="/contact" className="hover:text-red-500">
                Contact
-              </a>
+              </Link>
             </nav>
 
             <div className="flex items-center gap-4">
@@ -49,6 +49,7 @@ function Home() {
                   >
                     Register
                   </Link>
+                  
                 </div>
               </div>
 
@@ -69,7 +70,6 @@ function Home() {
           </div>
         </div>
       </header>
-      
     </div>
   );
 }

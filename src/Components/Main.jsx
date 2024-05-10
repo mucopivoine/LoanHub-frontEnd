@@ -1,9 +1,14 @@
 // import React from 'react'
 
+import About from "./About"
+import { motion } from 'framer-motion';
+import Services from "./Services";
+
 function Main() {
   return (
     <div><section>
     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16 bg-gray-100 h-[65rem]">
+
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
         <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full ">
           <img src="/teacher.jpg" className=" inset-0 h-full w-full object-cover"/>
@@ -26,8 +31,10 @@ function Main() {
           </a>
         </div>
       </div>
+    
     </div>
-  </section></div>
+  </section><About/>
+  <Services/></div>
   )
 }
 
