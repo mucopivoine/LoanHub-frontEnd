@@ -49,7 +49,7 @@ function Main() {
         </div>
       </section>
       <About/>
-      
+      <Services/>
     </div>
   );
 

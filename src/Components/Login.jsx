@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import hacker from '../assets/hacker.webp';
-import Home from './Home';
+import axios from 'axios';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('teacher'); // Default to 'teacher'
+  const [fetchError, setFetchError] = useState(null);
+  const [userType, setUserType] = useState('teacher'); 
   const [error, setError] = useState({
     email: '',
     password: '',
@@ -28,7 +28,7 @@ function Login() {
     setUserType(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormSubmitted(true);
 
@@ -45,14 +45,22 @@ function Login() {
     setError(newErrors);
 
     if (Object.values(newErrors).every((val) => val === '')) {
-      console.log('Logged in successfully');
-      // You can add logic here to redirect users based on userType
+      try {
+        const response = await axios.post(
+          `https://umwarimu-loan-hub.onrender.com/api/teacher/login`,
+          { email, password }
+        );
+        console.log('Logged in successfully')
+      } catch (error) {
+        setFetchError('An error occurred while fetching data');
+        console.log('Error occurred during login:', error);
+      }
     }
   };
 
   return (
     <>
-      <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[90vh]'>
+      <div className='mx-auto items-center justify-center flex flex-row  bg-gray-100 h-[110vh]'>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,7 +68,7 @@ function Login() {
           className=''
         >
           <div className=''>
-            <div className='relative flex flex-col items-center h-[80vh] border-2 mb-3 p-12 bg-white'>
+            <div className='relative flex flex-col items-center h-[80vh] border-2  p-12 mt-24 bg-white'>
               <div>
                 <h1 className='p-10 text-2xl text-black font-bold'>LOG IN HERE</h1>
               </div>
@@ -126,6 +134,9 @@ function Login() {
                       Sign Up
                     </Link>
                   </div>
+                  <Link to='/auth/reset' className='text-red-700'>
+                    Reset password
+                  </Link>
                 </form>
               </div>
             </div>

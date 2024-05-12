@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import hacker from '../assets/hacker.webp';
-import Home from './Home';
+import { SigningUp } from '../api/teacher';
 
-function Login() {
+
+function SignUp() {
   const [username, setUsername] = useState('');
   const [teacherid, setTeacherid] = useState('');
   const [email, setEmail] = useState('');
@@ -13,8 +13,22 @@ function Login() {
   const [lastname, setLastname] = useState('');
   const [schoolname, setSchoolname] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
-  const [userType, setUserType] = useState('teacher'); // Default to 'teacher'
+  const [userType, setUserType] = useState('teacher'); 
+  const [message, setMessage] = useState({
+    type: '',
+    content: ''
+  });
   const [error, setError] = useState({
+    username: '',
+    email: '',
+    password: '',
+    firstname: '',
+    lastname: '',
+    schoolname: '',
+    phonenumber: '',
+    teacherid:'',
+  });
+  const [signupData, setSignupData] = useState({
     username: '',
     email: '',
     password: '',
@@ -61,16 +75,27 @@ function Login() {
     setError({ ...error, phonenumber: '' });
   };
 
-  const handleUserTypeChange = (e) => {
-    setUserType(e.target.value);
-  };
+ 
   const handleteacherid = (e) => {
-    setTea
+    setTeacherid(e.target.value);
+    setError({...error, teacherid:''});
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormSubmitted(true);
+    
+
+    const signupData = {
+      username: '',
+      email: '',
+      password: '',
+      firstname: '',
+      lastname: '',
+      schoolname: '',
+      phonenumber: '',
+      teacherid:'',
+    };
 
     let newErrors = {};
     if (!username.trim()) {
@@ -101,13 +126,24 @@ function Login() {
 
     if (Object.values(newErrors).every((val) => val === '')) {
       console.log('Logged in successfully');
-      // You can add logic here to redirect users based on userType
-    }
-  };
-
+      try {
+        const response = await SigningUp(signupData); // Assuming SigningUp returns a promise
+        setMessage({
+          type: 'success',
+          content: response.data, // Assuming response contains data field
+        });
+        
+      } catch (error) {
+        setMessage({
+          type: 'error',
+          content: 'An error occurred while signing up', // Customize error message as needed
+        });
+      }
+    } 
+  }
   return (
     <>
-      <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[150vh]'>
+      <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[130vh]'>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -115,12 +151,13 @@ function Login() {
           className=''
         >
           <div className=''>
-            <div className='relative flex flex-col items-center h-[120vh] border-2 mb-3 p-12 bg-white'>
+            <div className='relative flex flex-col items-center h-[105vh] border-2 p-12 mt-24 bg-white'>
               <div>
                 <h1 className='p-10 text-2xl text-black font-bold'>SIGN UP HERE</h1>
               </div>
               <div>
                 <form onSubmit={handleSubmit}>
+                  <div className='flex flex-row gap-3'>
                   <div className='mb-5'>
                     <label htmlFor='username' className='block text-sm text-black'>
                       Enter Your Username
@@ -128,8 +165,8 @@ function Login() {
                     <input
                       type='text'
                       id='username'
-                      value={username}
-                      onChange={handleUsername}
+                      value={signupData.username}
+                      onChange={handleUsername} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
                     {formSubmitted && error.username && (
@@ -143,14 +180,16 @@ function Login() {
                     <input
                       type='text'
                       id='firstname'
-                      value={firstname}
-                      onChange={handleFirstname}
+                      value={signupData.firstname}
+                      onChange={handleFirstname} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
                     {formSubmitted && error.firstname && (
                       <p className='text-red-500 italic text-xs'>{error.firstname}</p>
                     )}
                   </div>
+                  </div>
+                  <div className='flex flex-row gap-3'>
                   <div className='mb-5'>
                     <label htmlFor='lastname' className='block text-sm text-black'>
                       Enter Your Lastname
@@ -158,8 +197,8 @@ function Login() {
                     <input
                       type='text'
                       id='lastname'
-                      value={lastname}
-                      onChange={handleLastname}
+                      value={signupData.lastname} 
+                      onChange={handleLastname} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
                     {formSubmitted && error.lastname && (
@@ -173,13 +212,14 @@ function Login() {
                     <input
                       type='text'
                       id='schoolname'
-                      value={schoolname}
-                      onChange={handleSchoolname}
+                      value={signupData.schoolname}
+                      onChange={handleSchoolname} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
                     {formSubmitted && error.schoolname && (
                       <p className='text-red-500 italic text-xs'>{error.schoolname}</p>
                     )}
+                  </div>
                   </div>
                   <div className='mb-5'>
                     <label htmlFor='lastname' className='block text-sm text-black'>
@@ -188,14 +228,30 @@ function Login() {
                     <input
                       type='text'
                       id='email'
-                      value={email}
-                      onChange={handleEmail}
+                      value={signupData.email}
+                      onChange={handleEmail} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
                     {formSubmitted && error.email && (
                       <p className='text-red-500 italic text-xs'>{error.email}</p>
                     )}
                   </div>
+                  <div className='mb-5'>
+                    <label htmlFor='lastname' className='block text-sm text-black'>
+                      Enter Your Password
+                    </label>
+                    <input
+                      type='number'
+                      id='password'
+                      value={signupData.password}
+                      onChange={handlePassword} required
+                      className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
+                    />
+                    {formSubmitted && error.password && (
+                      <p className='text-red-500 italic text-xs'>{error.password}</p>
+                    )}
+                  </div>
+                  
                  
                   <div className='mb-5'>
                     <label htmlFor='lastname' className='block text-sm text-black'>
@@ -203,9 +259,9 @@ function Login() {
                     </label>
                     <input
                       type='text'
-                      id='number'
-                      value={teacherid}
-                      onChange={handleteacherid}
+                      id='teacherid'
+                      value={signupData.teacherid}
+                      onChange={handleteacherid} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
                     {formSubmitted && error.teacherid && (
@@ -219,8 +275,8 @@ function Login() {
                     <input
                       type='number'
                       id='phonenumber'
-                      value={phonenumber}
-                      onChange={handlePhonenumber}
+                      value={signupData.phonenumber}
+                      onChange={handlePhonenumber} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
                     {formSubmitted && error.phonenumber && (
@@ -230,11 +286,11 @@ function Login() {
                   {/* Similar to the username and email inputs */}
                   <button
                     type='submit'
-                    className='bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5'
+                    className='bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5' onClick={handleSubmit}
                   >
                     Sign In
                   </button>
-                  <div className='flex gap-2 mt-5 mb-5 text-black'>
+                  <div className='flex gap-2 mt-5 mb-3 text-black'>
                     <p>Don't have an account ? </p>
                     <Link to='/auth/signin' className='text-red-700'>
                       Log in
@@ -247,7 +303,6 @@ function Login() {
         </motion.div>
       </div>
     </>
-  );
-}
-
-export default Login;
+    )
+  }
+export default SignUp;

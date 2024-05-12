@@ -1,9 +1,9 @@
-// import React from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './Layout/Layout'
-import Admin from './Pages/AdminDash/Admin'
-import Manager from './Pages/ManagerDash/Manager'
-import Teacher from './Pages/TeacherDash/Teacher'
+
+import Manager from './Pages/Manager'
+import Teacher from './Pages/Teacher'
 import AuthRoute from './Pages/AuthRoute'
 import SignIn from './Components/SignIn'
 import SignUp from './Components/SignUp'
@@ -18,6 +18,9 @@ import OtpInput from './Components/OtpInput'
 import Otpconfirm from './Components/Otpconfirm'
 import Main from './Components/Main'
 
+import ViewDataForm from './Pages/ViewData'
+import Logout from './Components/Logout'
+
 
 function App() {
   return (
@@ -26,20 +29,23 @@ function App() {
 
       <Route path="/" element={<Call/>}>
            <Route path="/" element={<Main/>}/>
-           <Route path="/aboutUs" element={<About/>}/>
+           <Route path="/about" element={<About/>}/>
       <Route path="/auth" element={<AuthRoute/>}>
             <Route path="signin" element={<Login/>}/>
             <Route path="signup" element={<SignUp/>}/>
             <Route path="forgot" element={<Forgot/>}/>
             <Route path="reset" element={<Reset/>}/>
             <Route path="otpinput" element={<OtpInput/>}/>
-            <Route path="otpconfirm" element={<Otpconfirm/>}/></Route>
+            <Route path="otpconfirm" element={<Otpconfirm/>}/>
+            <Route path="logout" element={<Logout/>}/></Route>
          </Route>
-      <Route path="/" element={<Layout/>}>
-          <Route path="admin" element={<Admin/>}/>
+      <Route path="/layout" element={<Layout/>}>
           <Route path="manager" element={<Manager/>}/>
-          <Route path="teacher" element={<Teacher/>}/>
-         </Route>
+            <Route path="teacher" element={<Teacher/>}/>
+            <Route path="viewdata" element={<ViewDataForm/>}/>
+            </Route>
+         
+         
       </Routes>
     </Router>
   )
