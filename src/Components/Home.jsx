@@ -1,9 +1,9 @@
-// import React from 'react';
 
+import { Link } from "react-router-dom";
 function Home() {
   return (
     <div>
-      {/* Sticky Navbar */}
+     
       <header className="bg-white text-black fixed top-0 left-0 right-0 z-50 shadow-lg font-serif">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
@@ -16,33 +16,42 @@ function Home() {
               <a className="hover:text-red-500" href="/">
                 Home
               </a>
-              <a className="hover:text-red-500" href="/about">
+              <Link to="/aboutUs" className="hover:text-red-500">
                 About
-              </a>
-              <a className="hover:text-red-500" href="/loan">
+              </Link>
+              <Link to="/services" className="hover:text-red-500">
                 Services
-              </a>
-              <a className="hover:text-red-500" href="/contact">
-                Contact
-              </a>
+
+              </Link>
+             
+             
+              <Link to="/contact" className="hover:text-red-500">
+               Contact
+              </Link>
+            
             </nav>
 
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">
-                <a
+                <Link to="/auth/signin"
                   className="rounded-md bg-red-500 text-white px-5 py-2.5 text-sm font-medium shadow-lg hover:bg-red-700"
-                  href="#"
+                  
                 >
                   Login
-                </a>
+                </Link>
 
                 <div className="hidden sm:flex">
-                  <a
-                    className="rounded-md bg-gray-200 hover:bg-gray-400 text-gray-900 px-5 py-2.5 text-sm font-medium hover:text-red-700"
-                    href="#"
+
+                  
+
+                  <Link to='/auth/signup'
+                    className="rounded-md bg-gray-200 text-gray-900 px-5 py-2.5 text-sm font-medium hover:bg-gray-400"
+                    
+
                   >
                     Register
-                  </a>
+                  </Link>
+                  
                 </div>
               </div>
 
@@ -64,7 +73,6 @@ function Home() {
         </div>
       </header>
 
-   
     </div>
   );
 }

@@ -1,5 +1,6 @@
 // import React from 'react';
 
+
 function About() {
   return (
     <div className="flex justify-center items-center mx-auto sm:mb-80  ">
@@ -53,7 +54,7 @@ function About() {
 
             {/* Card 3 */}
             <div className="flex flex-col justify-between h-full group transform hover:translate-y-[-10px] transition duration-300">
-              <div className="bg-white p-8 rounded-lg border  shadow-gray-500 shadow-lg transition hover:border-red-500/50 hover:shadow-red-500/50">
+              <div className="bg-white p-8 rounded-lg shadow-gray-500 shadow-lg transition hover:border-red-500/50 hover:shadow-red-500/50">
                 <div className="flex justify-center mb-6">
                   <img
                     src="/hey.jpg"

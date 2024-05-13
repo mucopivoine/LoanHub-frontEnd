@@ -1,6 +1,9 @@
-// import React from 'react';
+import Services from "./Services";
+import Contacts from "./Contacts";
+import About from "./About"
 import { motion } from 'framer-motion';
-import About from './About';
+
+
 
 function Main() {
   return (
@@ -15,7 +18,7 @@ function Main() {
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1 }}
-                className="w-full object-cover inset-0 h-[40rem] rounded-b-xl"
+                className="w-full object-cover inset-0 h-[40rem] rounded-b-xl "
               />
             </div>
 
@@ -48,9 +51,12 @@ function Main() {
         </div>
       </section>
       <About/>
+      <Services/>
+      <Contacts/>
       
     </div>
   );
+
 }
 
 export default Main;
