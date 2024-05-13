@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Sidemenu from '../Components/Sidemenu';
+import { Sidebar } from 'lucide-react';
 
 function Teacher() {
 
@@ -26,7 +27,7 @@ function Teacher() {
     const emiValue = (principal * rate * Math.pow(1 + rate, time)) / (Math.pow(1 + rate, time) - 1);
     setEmi(emiValue.toFixed(2));
 
-    // Calculate chart data
+   
     const interest = emiValue * time - principal;
     const data = {
       labels: ['Principal', 'Interest'],
@@ -112,7 +113,7 @@ function Teacher() {
         </div>
         <div className='button_collection'>
           <Stack spacing={2} direction="row">       
-          <Button type='submit' className='btn_one' style={{backgroundColor: 'red'}} variant="contained">Calculate</Button>
+          <Button type='submit' className='btn_one' style={{backgroundColor: '#FF8C8C'}} variant="contained">Calculate</Button>
           <Button className='btn_one'  onClick={handleClick}  variant="outlined">Reset</Button>
           </Stack>
         </div>

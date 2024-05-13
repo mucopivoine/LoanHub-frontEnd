@@ -53,13 +53,13 @@ function Home() {
                   >
                     Register
                   </Link>
-                  <Link to=''
+                  {/* <Link to=''
                     className="rounded-md bg-gray-200 text-gray-900 px-5 py-2.5 text-sm font-medium hover:text-blue-500"
                     
 
                   >
                   Log Out
-                  </Link>
+                  </Link> */}
                   
                 </div>
               </div>

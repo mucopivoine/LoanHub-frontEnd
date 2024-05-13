@@ -20,6 +20,9 @@ import Main from './Components/Main'
 
 import ViewDataForm from './Pages/ViewData'
 import Logout from './Components/Logout'
+import Navbar from './Components/Navbar'
+import Dashboard from './Components/Dashboard'
+import Dashboards from './Pages/Dahboards'
 
 
 function App() {
@@ -43,6 +46,11 @@ function App() {
           <Route path="manager" element={<Manager/>}/>
             <Route path="teacher" element={<Teacher/>}/>
             <Route path="viewdata" element={<ViewDataForm/>}/>
+            <Route path="navbar" element={<Navbar/>}/>
+            <Route path="dashboard" element={<Dashboard/>}/>
+            </Route>
+            <Route path="/admin" element={<Dashboards/>}>
+            
             </Route>
          
          

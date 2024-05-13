@@ -39,8 +39,11 @@ const ViewDataForm = () => {
   return (
     <>
     <Sidemenu/>
+    <div className="ml-64 p-10">
+        <h1 className='font-bold text-2xl'>Teacher Account</h1>
+        <p>This is where all main content goes.</p>
     
-    <div className='mx-auto items-center justify-center flex flex-row  bg-gray-100 h-[130vh]'>
+    <div className='mx-auto items-center justify-center flex flex-row  bg-gray-100 h-[150vh]'>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -48,7 +51,7 @@ const ViewDataForm = () => {
         className=''
       >
         <div className=''>
-          <div className='relative flex flex-col items-center h-[120vh] border-2 w-[40vw] p-12 mt-24  bg-white'>
+          <div className='relative flex flex-col items-center h-[120vh] border-2 w-[40vw] p-12  bg-white'>
             <div>
               <h1 className='text-2xl text-black font-bold'>VIEW DATA FORM</h1>
             </div>
@@ -240,6 +243,7 @@ const ViewDataForm = () => {
           </div>
         </div>
       </motion.div>
+      </div> 
     </div>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
@@ -27,6 +27,8 @@ function Login() {
   const handleUserTypeChange = (e) => {
     setUserType(e.target.value);
   };
+   
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,11 +52,19 @@ function Login() {
           `https://umwarimu-loan-hub.onrender.com/api/teacher/login`,
           { email, password }
         );
+        console.log(response.data)
         console.log('Logged in successfully')
       } catch (error) {
         setFetchError('An error occurred while fetching data');
         console.log('Error occurred during login:', error);
       }
+      setTimeout(() => {
+        if(response.data(role) === 'teacher'){
+          Navigate('/layout/teacher')
+        } else if(response.data === 'manager'){
+          Navigate('./layout/manager')
+        }
+      })
     }
   };
 
