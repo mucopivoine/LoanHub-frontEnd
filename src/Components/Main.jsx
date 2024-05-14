@@ -1,7 +1,9 @@
-
+import Services from "./Services";
+import Contacts from "./Contacts";
 import About from "./About"
 import { motion } from 'framer-motion';
-import Services from "./Services";
+
+
 
 function Main() {
   return (
@@ -16,12 +18,12 @@ function Main() {
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1 }}
-                className="w-full object-cover inset-0 h-[40rem] rounded-b-xl"
+                className="w-full object-cover inset-0 h-[40rem] rounded-b-xl "
               />
             </div>
 
             <div className="lg:py-24 mt-40">
-              <h2 className="text-3xl font-bold font-serif sm:text-4xl animate-bounce">
+              <h2 className="text-3xl font-bold font-serif sm:text-4xl ">
                 Teacher Loans Made Easy!
               </h2>
 
@@ -50,6 +52,11 @@ function Main() {
       </section>
       <About/>
       <Services/>
+
+
+      <Contacts/>
+      
+
     </div>
   );
 
