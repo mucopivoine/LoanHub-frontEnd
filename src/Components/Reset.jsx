@@ -1,8 +1,7 @@
 
-import React from 'react'
+
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
-import Home from './Home';
 import { motion } from 'framer-motion';
 
 function Reset() {

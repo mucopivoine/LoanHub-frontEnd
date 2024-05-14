@@ -1,7 +1,5 @@
 
 import { Link } from "react-router-dom";
-import { motion } from 'framer-motion'; 
-
 function Home() {
   return (
     <div>
@@ -47,7 +45,7 @@ function Home() {
                   
 
                   <Link to='/auth/signup'
-                    className="rounded-md bg-gray-200 text-gray-900 px-5 py-2.5 text-sm font-medium hover:text-blue-500"
+                    className="rounded-md bg-gray-200 text-gray-900 px-5 py-2.5 text-sm font-medium hover:bg-gray-400"
                     
 
                   >
