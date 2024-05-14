@@ -23,7 +23,7 @@ function Main() {
             </div>
 
             <div className="lg:py-24 mt-40">
-              <h2 className="text-3xl font-bold font-serif sm:text-4xl animate-bounce">
+              <h2 className="text-3xl font-bold font-serif sm:text-4xl ">
                 Teacher Loans Made Easy!
               </h2>
 
