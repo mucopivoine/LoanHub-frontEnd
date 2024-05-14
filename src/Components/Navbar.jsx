@@ -96,9 +96,9 @@ function Navbar() {
       </div>
       
     </motion.div>
-    <div className="w-[90vw]">
+    {/* <div className="w-[90vw]">
         <Dashboard/>
-    </div>
+    </div> */}
     </div>
     </>
   );

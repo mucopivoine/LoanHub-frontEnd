@@ -109,11 +109,11 @@ function SignUp() {
             username: username,
             email: email,
             password: password,
-            firstname: firstname,
-            lastname: lastname,
-            schoolname: schoolname,
-            phonenumber: phonenumber,
-            teacherid: teacherid,
+            firstName: firstname,
+            LastName: lastname,
+            schoolName: schoolname,
+            phoneNumber: phonenumber,
+            TeacherId: teacherid,
           }
         }).then((response) => {
           console.log(response.data);
@@ -275,12 +275,10 @@ function SignUp() {
                       onChange={(e) => setPhonenumber(e.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                    {/* {formSubmitted && error.phonenumber && (
-                      <p className='text-red-500 italic text-xs'>{error.phonenumber}</p>
-                    )} */}
+                  
                      {phonenumberErr? (<p className='text-red-500 italic text-xs'>{phonenumberErr}</p>):null}
                   </div>
-                  {/* Similar to the username and email inputs */}
+                 
                   <button
                     type='submit'
                     onClick={handleSignUp}

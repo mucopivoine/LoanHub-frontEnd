@@ -1,12 +1,18 @@
 import React from "react";
 import Chart from "./Chart";
-import Navbar from "./Navbar";
+import Sidemenu from "./Sidemenu";
 
 function Dashboard() {
   return (
     <>
-    <Navbar/>
-    <div className="flex flex-col py-10 lg:px-16 md:px10 px-6 h-screen overflow-y-auto w-full">
+    <div className="flex flex-row">
+    <div className="w-[20vw]">
+    <Sidemenu />
+    </div>
+    <div className="">
+        <h1 className="text-2xl font-bold ml-9 p-3">Admin Data</h1>
+        <p className="ml-9 p-3">This is the admin content it goes here</p>
+    <div className="flex flex-col md:px-10 overflow-y-auto w-full">
       <h2 className="lg:text-3xl md:text-2xl text-xl">Dashboard</h2>
 
       <div className="md:flex md:space-x-8 py-6">
@@ -35,6 +41,8 @@ function Dashboard() {
           <li className="text-gray-500 mt-3">Broadband bill: Rs 1000</li>
         </div>
       </div>
+    </div>
+    </div>
     </div>
     </>
   );

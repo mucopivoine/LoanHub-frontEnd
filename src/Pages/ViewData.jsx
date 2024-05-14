@@ -43,7 +43,7 @@ const ViewDataForm = () => {
         <h1 className='font-bold text-2xl'>Teacher Account</h1>
         <p>This is where all main content goes.</p>
     
-    <div className='mx-auto items-center justify-center flex flex-row  bg-gray-100 h-[150vh]'>
+    <div className='mx-auto  flex flex-row  bg-gray-100 h-[150vh]'>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

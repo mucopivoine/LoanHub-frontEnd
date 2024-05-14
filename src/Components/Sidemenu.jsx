@@ -2,7 +2,7 @@ import React , {useState} from 'react'
 import { IoMdClose } from "react-icons/io";
 import { IoMdMenu } from "react-icons/io";
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 function  Sidemenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +36,9 @@ function  Sidemenu() {
           </ul>
         </nav>
       </motion.div>
+      <div>
+        <Outlet/>
+      </div>
     </>
   )
 }

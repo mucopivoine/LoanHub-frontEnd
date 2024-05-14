@@ -46,14 +46,12 @@ function App() {
           <Route path="manager" element={<Manager/>}/>
             <Route path="teacher" element={<Teacher/>}/>
             <Route path="viewdata" element={<ViewDataForm/>}/>
-            <Route path="navbar" element={<Navbar/>}/>
-            <Route path="dashboard" element={<Dashboard/>}/>
+
             </Route>
             <Route path="/admin" element={<Dashboards/>}>
-            
+            <Route path="dashboard" element={<Dashboard/>}/>
+            <Route path="navbar" element={<Navbar/>}/>
             </Route>
-         
-         
       </Routes>
     </Router>
   )

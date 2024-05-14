@@ -54,17 +54,18 @@ function Login() {
         );
         console.log(response.data)
         console.log('Logged in successfully')
-      } catch (error) {
-        setFetchError('An error occurred while fetching data');
-        console.log('Error occurred during login:', error);
-      }
-      setTimeout(() => {
-        if(response.data(role) === 'teacher'){
+      
+        if (response.data.user.role === 'teacher'){
           Navigate('/layout/teacher')
-        } else if(response.data === 'manager'){
-          Navigate('./layout/manager')
+        } else if(response.data.user.role === 'manager'){
+          Navigate('./layout/manager');
+        } 
+      }
+        catch (error) {
+          setFetchError('An error occurred while fetching data');
+          console.log('Error occurred during login:', error);
         }
-      })
+     
     }
   };
 
