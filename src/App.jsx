@@ -1,8 +1,8 @@
 // import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './Layout/Layout'
-import Admin from './Pages/AdminDash/Admin'
-import Manager from './Pages/ManagerDash/Manager'
+
+import Manager from './Components/Leftnav'
 import Teacher from './Pages/TeacherDash/Teacher'
 import AuthRoute from './Pages/AuthRoute'
 
@@ -18,7 +18,9 @@ import Otpconfirm from './Components/Otpconfirm'
 import Main from './Components/Main'
 import Services from './Components/Services'
 import Contacts from './Components/Contacts'
-
+import Leftnav from './Components/Leftnav'
+import AdminDash from './Components/AdminDash'
+// import Piechart from './Components/Piechart'
 
 
 
@@ -41,10 +43,12 @@ function App() {
             <Route path="otpconfirm" element={<Otpconfirm/>}/></Route>
          </Route>
       <Route path="/" element={<Layout/>}>
-          <Route path="admin" element={<Admin/>}/>
+          
           <Route path="manager" element={<Manager/>}/>
           <Route path="teacher" element={<Teacher/>}/>
-          
+          <Route path="leftnav" element={<Leftnav/>}/>
+          <Route path="AdminDash" element={<AdminDash/>}/>
+          {/* <Route path="piechart" element={<Piechart/>}/> */}
          </Route>
 
       </Routes>
