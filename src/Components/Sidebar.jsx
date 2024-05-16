@@ -1,55 +1,71 @@
+import React , {useState} from 'react'
+import { IoIosAnalytics, IoMdClose, IoMdExit } from "react-icons/io";
+import { IoMdMenu } from "react-icons/io";
+import { motion } from 'framer-motion';
+import { Link, Outlet } from 'react-router-dom';
+import { FaRegChartBar, FaTachometerAlt, FaUser } from 'react-icons/fa';
+import { FaUserGroup } from 'react-icons/fa6';
+import { RadialBarChart } from 'recharts';
 
-import { AiFillDashboard } from "react-icons/ai";
-import { IoIosCard } from "react-icons/io";
-import { MdOutlinePayments } from "react-icons/md";
-import { MdOutlineAccountBalance } from "react-icons/md";
-import { HiBanknotes } from "react-icons/hi2";
-import { FaPeopleArrows } from "react-icons/fa6";
-import { IoSettingsOutline } from "react-icons/io5";
-import { SiWebmoney } from "react-icons/si";
-const Sidebar = () => {
+function  Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+
   return (
-    <div className=' h-screen bg-indigo-600 dark:bg-slate-950/50  shadow-lg '>
-      <div className=' flex flex-col gap-3 w-full text-slate-300 h-full justify-between'>
-        <div className='flex flex-col gap-10 px-4 mt-4'>
-          <div className='flex items-center justify-center gap-2'>
-            <SiWebmoney className='text-indigo-900 dark:text-white text-xl md:text-4xl'/>
-            <div className=' hidden md:flex font-bold '>FinaApp</div>
-          </div>
-          <div className='flex flex-col gap-5 text-md sm:text-xs md:text-sm lg:text-lg'>
-            <div className='flex items-center  gap-2'>
-              <div><AiFillDashboard/></div>
-              <div className='hidden sm:flex hover:text-slate-100 cursor-pointer '>Dashboard</div>
+    <>
+      <button onClick={toggleSidebar} className="fixed lg:ml-24 top-5 left-5 z-50 bg-gray-800 text-white px-3 py-2 rounded-md ">
+        {isOpen ? <IoMdMenu /> :  <IoMdClose />}
+      </button>
+      
+      <motion.div
+        initial={{ x: 0 }}
+        animate={{ x: isOpen ? -300 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="fixed top-0 left-0 h-full w-64 bg-gray-100 text-black  z-40">
+        <nav className="p-4 mt-16 w-full">
+          <ul className='p-10'>
+            <div className='flex items-center'>
+            <FaTachometerAlt className='w-[30px]'/>
+            <li className=' rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white hover:border-2 '>
+              <Link to="/admin/maindash">Dashboard</Link>
+            </li>
+            
             </div>
-            <div className='flex items-center  gap-2 hover:text-slate-100 cursor-pointer'>
-              <div><IoIosCard/></div>
-              <div className='hidden sm:flex'>Cards</div>
+            <div className='flex items-center'>
+              <FaUser className='w-[30px]'/>
+            <li className=' rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white ' >
+              <Link to="/admin/viewmanager">Managers</Link>
+            </li>
             </div>
-            <div className='flex items-center  gap-2 hover:text-slate-100 cursor-pointer'>
-              <div><MdOutlinePayments/></div>
-              <div className='hidden sm:flex'>Payments</div>
+            <div className='flex items-center' >
+              <FaUserGroup className='w-[30px]'/>
+            <li className='rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white '>
+              <Link to="/admin/viewteacher"> Teachers</Link>
+            </li>
             </div>
-            <div className='flex items-center  gap-2 hover:text-slate-100 cursor-pointer'>
-              <div><MdOutlineAccountBalance/></div>
-              <div className='hidden sm:flex'>Accounts</div>
+            <div className='flex items-center'>
+              <FaRegChartBar className='w-[30px]'/>
+            <li className='rounded-md p-3 hover:bg-[#FF8C8C] hover:text-white '>
+              <Link to="/admin/analytics"> Analytics</Link>
+            </li>
             </div>
-            <div className='flex items-center  gap-2 hover:text-slate-100 cursor-pointer'>
-              <div><HiBanknotes/></div>
-              <div className='hidden sm:flex'>Loans</div>
+            <div className='flex items-center'>
+            <IoMdExit className='w-[30px]'/>
+            <li className=' rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white '>
+              <Link to="/"> Logout</Link>
+            </li>
+            
             </div>
-            <div className='flex items-center  gap-2 hover:text-slate-100 cursor-pointer'>
-              <div><FaPeopleArrows/></div>
-              <div className='hidden sm:flex'>Beneficiary</div>
-            </div>
-          </div>
-        </div>
-        <div className='flex items-center text-md sm:text-xs md:text-sm lg:text-lg px-4 mb-4 gap-2 hover:text-slate-100 cursor-pointer'>
-          <div><IoSettingsOutline/></div>
-          <div className='hidden sm:flex'>Settings</div>
-        </div>
+          </ul>
+        </nav>
+      </motion.div>
+      <div>
+        <Outlet/>
       </div>
-    </div>
-  );
+    </>
+  )
 }
-
-export default Sidebar;
+export default Sidebar

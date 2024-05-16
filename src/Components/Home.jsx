@@ -16,7 +16,7 @@ function Home() {
               <a className="hover:text-red-500" href="/">
                 Home
               </a>
-              <Link to="/aboutUs" className="hover:text-red-500">
+              <Link to="/about" className="hover:text-red-500">
                 About
               </Link>
               <Link to="/services" className="hover:text-red-500">
@@ -51,6 +51,13 @@ function Home() {
                   >
                     Register
                   </Link>
+                  {/* <Link to=''
+                    className="rounded-md bg-gray-200 text-gray-900 px-5 py-2.5 text-sm font-medium hover:text-blue-500"
+                    
+
+                  >
+                  Log Out
+                  </Link> */}
                   
                 </div>
               </div>

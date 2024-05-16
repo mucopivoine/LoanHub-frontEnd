@@ -63,7 +63,7 @@ const Otpconfirm = () => {
             ) : (
               <div>
                 <p className='text-gray-300 mb-5'>Enter OTP sent to {email}</p>
-                <OtpInput length={4} onOtpSubmit={handleOtpSubmit} />
+                <OtpInput length={6} onOtpSubmit={handleOtpSubmit} />
               </div>
             )}
           </div>
