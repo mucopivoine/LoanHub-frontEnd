@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion'; 
 
 
-const OtpInput = ({ length = 6, onOtpSubmit = () => {}, email }) => {
+const OtpInput = ({ length = 7, onOtpSubmit = () => {}, email }) => {
   const [otp, setOtp] = useState(new Array(length).fill(""));
   const inputRefs = useRef([]);
 

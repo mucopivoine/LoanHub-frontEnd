@@ -1,108 +1,71 @@
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import {
-  ArrowLeftRightIcon,
-  BarChart3Icon,
-  Clock4Icon,
-  LayoutDashboard,
-  HelpCircleIcon,
-  Sidebar,
-} from "lucide-react";
-import { motion } from "framer-motion";
+import React , {useState} from 'react'
+import { IoIosAnalytics, IoMdClose, IoMdExit } from "react-icons/io";
+import { IoMdMenu } from "react-icons/io";
+import { motion } from 'framer-motion';
+import { Link, Outlet } from 'react-router-dom';
+import { FaRegChartBar, FaTachometerAlt, FaUser } from 'react-icons/fa';
+import { FaUserGroup } from 'react-icons/fa6';
+import { RadialBarChart } from 'recharts';
 
-import RightArrowIcon from "./../assets/icons/rightArrow.svg";
-import Dashboard from "./Dashboard";
+function  Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
-const variants = {
-  // todo: change expanded to 30% and nonexpanded to %6
-  expanded: { width: "220px" },
-  nonexpanded: { width: "60px" },
-};
-
-const navLinks = [
-  {
-    link: "Dashboard",
-    icon: LayoutDashboard,
-    path:"dashboard",
-  },
-  {
-    link: "Activity",
-    icon: Clock4Icon,
-    path:'/activity',
-  },
- 
-  {
-    link: "Transactions",
-    icon: ArrowLeftRightIcon,
-    
-  },
-  
-];
-
-function Sidebar() {
-  
-  const [isExpanded, setIsExpanded] = useState(true);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      if (windowWidth < 768) {
-        setIsExpanded(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <>
-    <div className="flex">
-    <motion.div
-      animate={isExpanded ? "expanded" : "nonexpanded"}
-      variants={variants}
-      className={
-        "py-10 h-screen flex flex-col border border-r-1 bg-[#FDFDFD] relative" +
-        (isExpanded ? " px-10" : " px-2 duration-500")
-      }
-    >
-      <div className="logo-div flex space-x-4 items-center text-xl font-bold">
-       
-        <span className={!isExpanded ? "hidden" : "block"}>Admin data</span>
-      </div>
-
-      <div className="flex flex-col space-y-8 mt-12">
-        {navLinks.map((item, index) => (
-          <div className="nav-links w-full" key={index}>
-            <Link to={item.path}
-              className={
-                "flex space-x-3 w-full p-2 rounded " +
-                (activeIndex === index
-                  ? "bg-[#FF8C8C] text-white"
-                  : " text-black") +
-                (!isExpanded ? " pl-4" : "")
-              }
-            >
-              <item.icon className="md:w-6 w-4" />
-              <span className={!isExpanded ? "hidden" : "block"}>
-                {item.link}
-              </span>
-            </Link>
-          </div>
-        ))}
-      </div>
+      <button onClick={toggleSidebar} className="fixed lg:ml-24 top-5 left-5 z-50 bg-gray-800 text-white px-3 py-2 rounded-md ">
+        {isOpen ? <IoMdMenu /> :  <IoMdClose />}
+      </button>
       
-    </motion.div>
-    <div className="w-[90vw]">
-        <Dashboard/>
-    </div>
-    </div>
+      <motion.div
+        initial={{ x: 0 }}
+        animate={{ x: isOpen ? -300 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="fixed top-0 left-0 h-full w-64 bg-gray-100 text-black  z-40">
+        <nav className="p-4 mt-16 w-full">
+          <ul className='p-10'>
+            <div className='flex items-center'>
+            <FaTachometerAlt className='w-[30px]'/>
+            <li className=' rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white hover:border-2 '>
+              <Link to="/admin/maindash">Dashboard</Link>
+            </li>
+            
+            </div>
+            <div className='flex items-center'>
+              <FaUser className='w-[30px]'/>
+            <li className=' rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white ' >
+              <Link to="/admin/viewmanager">Managers</Link>
+            </li>
+            </div>
+            <div className='flex items-center' >
+              <FaUserGroup className='w-[30px]'/>
+            <li className='rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white '>
+              <Link to="/admin/viewteacher"> Teachers</Link>
+            </li>
+            </div>
+            <div className='flex items-center'>
+              <FaRegChartBar className='w-[30px]'/>
+            <li className='rounded-md p-3 hover:bg-[#FF8C8C] hover:text-white '>
+              <Link to="/admin/analytics"> Analytics</Link>
+            </li>
+            </div>
+            <div className='flex items-center'>
+            <IoMdExit className='w-[30px]'/>
+            <li className=' rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white '>
+              <Link to="/"> Logout</Link>
+            </li>
+            
+            </div>
+          </ul>
+        </nav>
+      </motion.div>
+      <div>
+        <Outlet/>
+      </div>
     </>
-  );
+  )
 }
-
-export default Sidebar;
+export default Sidebar

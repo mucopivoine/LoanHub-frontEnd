@@ -9,8 +9,8 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-import RightArrowIcon from "./../assets/icons/rightArrow.svg";
-import Dashboard from "./Dashboard";
+// import RightArrowIcon from "./../assets/icons/rightArrow.svg";
+// import Dashboard from "./Dashboard";
 
 const variants = {
   // todo: change expanded to 30% and nonexpanded to %6
