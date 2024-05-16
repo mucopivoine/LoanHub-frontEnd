@@ -26,6 +26,8 @@ import Logout from './Components/Logout'
 import Navbar from './Components/Navbar'
 import Dashboard from './Components/Dashboard'
 import Dashboards from './Pages/Dahboards'
+
+
 import MainDash from './Components/MainDash/MainDash'
 import RightSide from './Components/RightSide/RightSide'
 
@@ -91,6 +93,7 @@ function App() {
           <Route path="analytics" element={<Analytics/>} />
           <Route path="manageloans" element={<ManageLoans/>} />
         </Route>
+
       </Routes>
     </Router>
   )

@@ -1,17 +1,16 @@
 import React , {useState} from 'react'
-import { IoIosAnalytics, IoMdClose, IoMdExit } from "react-icons/io";
-import { IoMdMenu } from "react-icons/io";
-import { motion } from 'framer-motion';
-import { Link, Outlet } from 'react-router-dom';
-import { FaRegChartBar, FaTachometerAlt, FaUser } from 'react-icons/fa';
-import { FaUserGroup } from 'react-icons/fa6';
-import { RadialBarChart } from 'recharts';
 
-function  Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+
+
+import { AiFillDashboard } from "react-icons/ai";
+import { IoIosCard } from "react-icons/io";
+import { MdOutlinePayments } from "react-icons/md";
+import { MdOutlineAccountBalance } from "react-icons/md";
+import { HiBanknotes } from "react-icons/hi2";
+import { FaPeopleArrows } from "react-icons/fa6";
+import { IoSettingsOutline } from "react-icons/io5";
+import { SiWebmoney } from "react-icons/si";
+const Sidebar = () => {
 
 
   return (
@@ -65,7 +64,13 @@ function  Sidebar() {
       <div>
         <Outlet/>
       </div>
+
+    </div>
+
+  );
+
     </>
   )
+
 }
 export default Sidebar

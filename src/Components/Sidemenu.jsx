@@ -18,7 +18,11 @@ function  Sidemenu() {
       </button>
       
       <motion.div
+
+       
+
         initial={{ x: 300 }}
+
         animate={{ x: isOpen ? -300 : 0 }}
         transition={{ duration: 0.3 }}
         className="fixed top-0 left-0 h-full w-64 bg-[#FF8C8C] text-black  z-40">

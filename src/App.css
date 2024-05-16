@@ -76,6 +76,10 @@
   height: 75px;
   border:red;
 }
+
+
+
+
 :root {
   --yellow: linear-gradient(180deg, #F8D49A -146.42%, #FAD79D -46.42%);
   --orange: #fca61f;
@@ -245,3 +249,4 @@
     left: -60%;
   }
 }
+
