@@ -6,10 +6,10 @@ const Contacts = () => {
     <div className="bg-white min-h-screen py-16 cursor-pointer">
       <div className="w-full max-w-6xl mx-auto px-4">
         <h2 className="text-4xl font-semibold text-center text-black mb-4 font-serif">
-          Contact Us
+          {/* Contact Us */}
         </h2>
         <p className="text-gray-600 text-center mb-8">
-          We would love to hear from you!
+          {/* We would love to hear from you! */}
         </p>
         <div className="flex flex-wrap justify-center">
           {/* Contact Card: Call Us */}

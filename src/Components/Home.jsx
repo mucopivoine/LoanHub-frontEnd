@@ -16,7 +16,7 @@ function Home() {
               <a className="hover:text-red-500" href="/">
                 Home
               </a>
-              <Link to="/aboutUs" className="hover:text-red-500">
+              <Link to="/about" className="hover:text-red-500">
                 About
               </Link>
               <Link to="/services" className="hover:text-red-500">

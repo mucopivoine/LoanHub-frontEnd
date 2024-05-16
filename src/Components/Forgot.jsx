@@ -81,7 +81,10 @@ const Forgot = () => {
               ) : (
                 <div>
                   <p className='text-xl font-semibold text-gray-500 mb-5'>Enter OTP sent to {email}</p>
-                  <OtpInput length={6} onOtpSubmit={handleOtpSubmit} email={email} onOtpVerify={handleOtpVerify} />
+
+ 
+                  <OtpInput length={7} onOtpSubmit={handleOtpSubmit} email={email} onOtpVerify={handleOtpVerify} />
+
 
                 </div>
               )}

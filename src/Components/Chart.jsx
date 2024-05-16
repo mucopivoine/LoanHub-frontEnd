@@ -62,9 +62,14 @@ export const data = {
   ],
 };
 
+
 export default function Chart() {
   return <Line options={options} data={data} />;
 }
+
+
+  return <Line options={options} data={data} />;
+
 
  
 import { FaRegSun, FaTachometerAlt, FaChevronRight, FaWrench, FaStickyNote, FaRegChartBar } from 'react-icons/fa';
