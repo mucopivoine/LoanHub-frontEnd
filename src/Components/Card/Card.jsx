@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Card.css";
 import { motion } from 'framer-motion';
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -119,7 +119,7 @@ function ExpandedCard({ param, setExpanded }) {
       <div className="chartContainer">
         <Chart options={data.options} series={param.series} type="area" />
       </div>
-      <span>Last 24 hours</span>
+      {/* <span>Last 24 hours</span> */}
     </motion.div>
   );
 }

@@ -1,37 +1,68 @@
-import Sidebar from '../Components/Sidebar'
-import React from 'react'
-
-
-function Contact() {
+function End() {
   return (
-    <><div className='flex flex-row'>
-      <Sidebar/>
-      </div>
-      <div>
-      <section className=" mx-auto w-[50%] ml-[20%] bg-white">
-        
-        
-        <div className='bg-white flex flex-col py-5 px-4 max-w-[600px]'>
-          <label className='text-black mb-3'>Your name</label>
-          <input type='text' className='mb-4 py-[5px] px-[10px] text-lg  border-gray-200 border-2 rounded-md text-white'></input>
-          <label className='text-black mb-3' >Enter Email</label>
-          <input type='text' className='mb-4 py-[5px] px-[10px] text-lg border-gray-200 border-2 rounded-md text-white'></input>
-          <label className='text-black mb-3'> Subject</label>
-          <input type='text' className='mb-4 py-[5px] px-[10px] text-lg border-gray-200 border-2 rounded-md text-white'></input>
-          <label className='text-black mb-3'> Message</label>
-          <textarea rows={6}  placeholder='Type your message here' className='mb-4 py-[5px] px-[10px] text-lg border-gray-200 border-2  rounded-md  text-white'/>
+    <footer className="bg-gray-800 text-gray-300">
+      <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Services Section */}
+          <div className="mb-8 sm:mb-0 sm:mr-4 lg:mr-16">
+            <h3 className="text-xl font-bold mb-4">Services</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="text-gray-300 hover:opacity-75">Coaching</a></li>
+              {/* Add more services here */}
+            </ul>
+          </div>
 
-          <button className='btn text-white border-2 p-4 rounded-md bg-red-500'>Submit</button>
-          
+          {/* Company Section */}
+          <div className="mb-8 sm:mb-0 sm:ml-4 lg:ml-24">
+            <h3 className="text-xl font-bold mb-4 font-serif">Company</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="text-gray-300 hover:opacity-75">About</a></li>
+              <li><a href="#" className="text-gray-300 hover:opacity-75">Meet the Team</a></li>
+              {/* Add more company links here */}
+            </ul>
+          </div>
 
+          {/* Helpful Links Section */}
+          <div className="mb-8 sm:mb-0 sm:mr-4 lg:mr-32">
+            <h3 className="text-xl font-bold mb-4">Helpful Links</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="text-gray-300 hover:opacity-75">Contact</a></li>
+              {/* Add more helpful links here */}
+            </ul>
+          </div>
 
+          {/* Legal Section */}
+          <div className="mb-8 sm:mb-0">
+            <h3 className="text-xl font-bold mb-4">Legal</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="text-gray-300 hover:opacity-75">Accessibility</a></li>
+              <li><a href="#" className="text-gray-300 hover:opacity-75">Returns Policy</a></li>
+              {/* Add more legal links here */}
+            </ul>
+          </div>
         </div>
-      </section>
-    </div>
-  
-    </>
 
-  )
+        {/* Social Media Links Section */}
+        <div className="mt-8 flex justify-center items-center space-x-4">
+          <a href="https://www.facebook.com/mwalimu.sacco/?lang=en" target="_blank" rel="noreferrer" className="text-white hover:opacity-75">
+            <i className="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/mwalimu.sacco/?lang=en" target="_blank" rel="noreferrer" className="text-white hover:opacity-75">
+            <i className="fab fa-instagram"></i>
+          </a>
+          <a href="https://twitter.com/mwalimusacco?lang=en" target="_blank" rel="noreferrer" className="text-white hover:opacity-75">
+            <i className="fab fa-twitter"></i>
+          </a>
+        </div>
+
+        {/* Copyright Notice with Heart Symbol */}
+        <p className="mt-8 text-xs text-gray-400 text-center">
+          &copy; 2024. Umwalimu Loan Hub. All rights reserved.{' '}
+          <span className="text-red-500">❤️</span> {/* Heart Symbol */}
+        </p>
+      </div>
+    </footer>
+  );
 }
 
-export default Contact
+export default End;

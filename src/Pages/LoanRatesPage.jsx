@@ -1,4 +1,4 @@
-import React from 'react';
+
 import BarChart from './Barchart';
 
 const LoanRatesPage = () => {

@@ -1,4 +1,5 @@
-import React from "react";
+import Sidebar from "./Sidebar";
+
 const columns = [
   {
     Header: "ID",
@@ -53,6 +54,11 @@ const data = [
 ];
 const Table = ({ columns, data }) => {
   return (
+    <>
+     <Sidebar/>
+    <div>
+   
+
     <table className="min-w-full divide-y divide-gray-200">
       <thead className="bg-gray-50">
         <tr>
@@ -91,14 +97,20 @@ const Table = ({ columns, data }) => {
         ))}
       </tbody>
     </table>
+    </div>
+</>
   );
+
 };
 const ManageLoans = () => {
   return (
     <div className="p-6 w-[80%] ml-[20%]">
       <h2 className="text-2xl font-semibold mb-4">Manage Loans</h2>
       <Table columns={columns} data={data} />
+      
     </div>
+ 
+
   );
 };
 export default ManageLoans;

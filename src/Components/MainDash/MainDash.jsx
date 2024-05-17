@@ -1,21 +1,20 @@
-import React from "react";
+
 import Cards from "../Cards/Cards";
-import Table from "../Table/Table";
+
 import "./MainDash.css";
-import Sidemenu from "../Sidemenu";
 import LoanManagement from "../../Pages/LoanManagement";
 import Sidebar from "../Sidebar";
-import BarChart from "../../Pages/Barchart";
 import TableComponent from "../../Pages/Tablecomponent";
 import ManageLoans from "../ManageLoans";
+import Search from "../../Pages/Search";
 const MainDash = () => {
   return (
     <div className="MainDash ">
-      <h1>Dashboard</h1>
       <div className="">
       <div className="">
       <Sidebar/>
       </div>
+      <Search/>
       <div className="">
       <Cards />
       <div className="mb-14 gap-0" >

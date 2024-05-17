@@ -1,7 +1,3 @@
-import React from "react";
-
-import Chart from "./Chart";
-
 
 import Sidemenu from "./Sidemenu";
 
