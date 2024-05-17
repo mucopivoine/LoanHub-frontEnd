@@ -1,3 +1,6 @@
+
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import  { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -5,13 +8,14 @@ import axios from 'axios';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const navigate = useNavigate();
   const [setFetchError] = useState(null);
-  
   const [error, setError] = useState({
     email: '',
     password: '',
   });
-  const [formSubmitted] = useState(false);
+  
   const handleEmail = (e) => {
     setEmail(e.target.value);
     setError({ ...error, email: '' });
@@ -26,37 +30,43 @@ function Login() {
     const emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
     if (!emailRegex.test(email)) {
       setError({ ...error, email: 'Email is required in the format of name@gmail.com' });
+      setFormSubmitted(true);
       return;
-    } else {
-      setError({ ...error, email: '' });
     }
     // Validate password length
     if (password.length < 8) {
       setError({ ...error, password: 'Password must be at least 8 characters long' });
+      setFormSubmitted(true);
       return;
-    } else {
-      setError({ ...error, password: '' });
     }
-    if (Object.values(error).every((val) => val === '')) {
-      try {
-        const response = await axios.post(
-          `https://umwarimu-loan-hub.onrender.com/api/teacher/login`,
-          { email, password }
-        );
-        console.log(response.data)
-        console.log('Logged in successfully')
-        if (response.data.user.role === 'teacher') {
-          Navigate('/layout/teacher')
-        } else if (response.data.user.role === 'manager') {
-          Navigate('./layout/manager');
-        }
+
+    // Proceed with login
+   try{
+    axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/login', {
+      email:email,
+      password:password,
+    }, {
+      headers:{
+        "Content-Type" :'application/json',
       }
-      catch (error) {
-        setFetchError('An error occurred while fetching data');
-        console.log('Error occurred during login:', error);
-      }
+      })
+      .then((response) => {
+        if(response.data && response.data.user && response.data.user.role)
+        console.log(response.data);
+        console.log('Logged in successfully');
+        setTimeout(()=>{
+          if(response.data.user.role === 'teacher'){
+            navigate('/layout/teacher');
+          }else if(response.data.user.role === 'manager'){
+            navigate('/layout/manager');
+          }
+        }, 3000) 
+      }). catch((error) => {
+        console.log(error);
+      })
+    } catch(error){ 
     }
-  }
+      }
   return (
     <div className='mx-auto items-center justify-center flex flex-row  bg-gray-100 h-[110vh]'>
       <motion.div
@@ -66,6 +76,8 @@ function Login() {
         className=''
       >
         <div className=''>
+          <div className='relative flex flex-col items-center h-[80vh] border-2 p-12 mt-24 bg-white'>
+
           <div className='relative flex flex-col items-center h-[80vh] border-2  p-12 mt-24 bg-white'>
             <div>
               <h1 className='p-10 text-2xl text-black font-bold'>LOG IN HERE</h1>
@@ -107,11 +119,16 @@ function Login() {
                 </Link>
                 <button
                   type='submit'
-                  className='bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5' onClick={handleLogin}
+
+                  className='bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5'
+                  onClick={handleLogin}
                 >
                   Sign In
                 </button>
                 <div className='flex gap-2 mt-5 mb-5 text-black'>
+
+                  <p>Don't have an account?</p>
+
                   <p>Don t have an account ? </p>
                   <Link to='/auth/signup' className='text-red-700'>
                     Sign Up
@@ -123,6 +140,7 @@ function Login() {
               </form>
             </div>
           </div>
+        </div>
         </div>
       </motion.div>
     </div>

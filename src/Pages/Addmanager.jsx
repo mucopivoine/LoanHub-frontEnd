@@ -1,8 +1,8 @@
-
 import Sidebar from '../Components/Sidebar';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Contact() {
+function Addmanager() {
   return (
     <>
       <div className='flex flex-row'>
@@ -25,13 +25,11 @@ function Contact() {
             <input type='text' className='mb-4 py-[5px] px-[10px] text-lg border-gray-200 border-2 rounded-md text-white'></input>
             <label className='text-black mb-3'>Message</label>
             <textarea rows={6} placeholder='Type your message here' className='mb-4 py-[5px] px-[10px] text-lg border-gray-200 border-2 rounded-md text-white' />
-            <button className='btn text-white border-2 p-4 rounded-md bg-red-500'>Submit</button>
+           <Link to="/admin/viewmanager"> <button className='btn text-white border-2 p-4 rounded-md bg-red-500'>Submit</button></Link>
           </div>
         </section>
       </div>
     </>
   );
 }
-
-export default Contact;
-
+export default Addmanager;

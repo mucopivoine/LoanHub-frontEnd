@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md'
+import { Link } from 'react-router-dom';
 const TableComponent = () => {
   const [data, setData] = useState([
     { id: 1, name: 'John Doe', email: 'john@example.com' },
@@ -22,7 +23,7 @@ const TableComponent = () => {
 //   }
   return (
     <>
-    <div className="flex flex-col w-[80%] ml-[20%] ">
+    <div className="flex flex-col w-[70%] lg:ml-[20%] ">
     <button
         className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
         onClick={handleAddPerson}
@@ -86,7 +87,7 @@ const TableComponent = () => {
                       </button>
                       
                     
-                      <button
+                      <Link to="/"></Link><button
                         className=" p-2 "
                         onClick={() => handleAddPerson(person.id)}
                       >

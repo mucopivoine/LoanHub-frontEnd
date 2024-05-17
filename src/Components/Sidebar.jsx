@@ -1,3 +1,6 @@
+
+import React from 'react'
+
 import {useState} from 'react'
 import { FaRegChartBar, FaTachometerAlt } from 'react-icons/fa'
 import { FaUser } from 'react-icons/fa'
@@ -6,11 +9,13 @@ import { IoMdClose, IoMdExit, IoMdMenu } from 'react-icons/io'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
+
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 const toggleSidebar = () => {
 setIsOpen(!isOpen);
 }
+
   return (
     <>
       <button onClick={toggleSidebar} className="fixed lg:ml-24 top-5 left-5 z-50 bg-gray-800 text-white px-3 py-2 rounded-md ">
@@ -22,6 +27,7 @@ setIsOpen(!isOpen);
         transition={{ duration: 0.3 }}
         className="fixed top-0 left-0 h-full w-64  text-black  z-40">
         <nav className="p-4 mt-16 w-full">
+          <h1 className='text-center font-bold text-2xl'>Admin Dashboard</h1>
           <ul className='p-10'>
             <div className='flex items-center'>
             <FaTachometerAlt className='w-[30px]'/>
@@ -59,7 +65,10 @@ setIsOpen(!isOpen);
       <div>
         <Outlet/>
       </div>
-      </>
+
+      </>  
+
+
   );
 }
 export default Sidebar

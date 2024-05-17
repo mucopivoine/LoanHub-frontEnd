@@ -29,6 +29,7 @@ const ViewManager = () => {
     <Sidebar/>
     </div>
     <div>
+      
     <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">
       <div className=''>
       
@@ -98,12 +99,12 @@ const ViewManager = () => {
                       </button>
                       
                     
-                      <button
+                      <Link to="/admin/addmanager"><button
                         className=" p-2 "
                         onClick={() => handleAddPerson(person.id)}
                       >
                        <FaEdit/>
-                      </button>
+                      </button></Link>
                       </div>
                     </td>
                   </tr>
