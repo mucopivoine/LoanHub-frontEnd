@@ -1,4 +1,4 @@
-import React from "react";
+
 import TeacherReview from "../TeacherReview/TeacherReview";
 import Updates from "../Updates/Updates";
 import "./RightSide.css";

@@ -1,29 +1,31 @@
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import  { useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState({ email: '', password: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
-
   const navigate = useNavigate();
-
+  const [setFetchError] = useState(null);
+  const [error, setError] = useState({
+    email: '',
+    password: '',
+  });
+  
   const handleEmail = (e) => {
     setEmail(e.target.value);
     setError({ ...error, email: '' });
   };
-
   const handlePassword = (e) => {
     setPassword(e.target.value);
     setError({ ...error, password: '' });
   };
-
   const handleLogin = async (e) => {
     e.preventDefault();
-
     // Validate email format
     const emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
     if (!emailRegex.test(email)) {
@@ -31,7 +33,6 @@ function Login() {
       setFormSubmitted(true);
       return;
     }
-
     // Validate password length
     if (password.length < 8) {
       setError({ ...error, password: 'Password must be at least 8 characters long' });
@@ -67,7 +68,7 @@ function Login() {
     }
       }
   return (
-    <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[110vh]'>
+    <div className='mx-auto items-center justify-center flex flex-row  bg-gray-100 h-[110vh]'>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -76,6 +77,8 @@ function Login() {
       >
         <div className=''>
           <div className='relative flex flex-col items-center h-[80vh] border-2 p-12 mt-24 bg-white'>
+
+          <div className='relative flex flex-col items-center h-[80vh] border-2  p-12 mt-24 bg-white'>
             <div>
               <h1 className='p-10 text-2xl text-black font-bold'>LOG IN HERE</h1>
             </div>
@@ -111,19 +114,22 @@ function Login() {
                     <p className='text-red-500 italic text-xs'>{error.password}</p>
                   )}
                 </div>
-                
                 <Link to='/auth/forgot' className='text-red-700'>
                   Forgot Password?
                 </Link>
                 <button
                   type='submit'
+
                   className='bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5'
                   onClick={handleLogin}
                 >
                   Sign In
                 </button>
                 <div className='flex gap-2 mt-5 mb-5 text-black'>
+
                   <p>Don't have an account?</p>
+
+                  <p>Don t have an account ? </p>
                   <Link to='/auth/signup' className='text-red-700'>
                     Sign Up
                   </Link>
@@ -135,9 +141,18 @@ function Login() {
             </div>
           </div>
         </div>
+        </div>
       </motion.div>
     </div>
   );
 }
-
 export default Login;
+
+
+
+
+
+
+
+
+

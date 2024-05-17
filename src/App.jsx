@@ -1,36 +1,26 @@
-import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './Layout/Layout'
-
 import Manager from './Pages/ManagerDash'
+import Manager from './Pages/Manager'
 import Teacher from './Pages/Teacher'
 import AuthRoute from './Pages/AuthRoute'
-
 import SignUp from './Components/SignUp'
 import Forgot from './Components/Forgot'
 import Login from './Components/Login'
 import Reset from './Components/Reset'
 import Call from './Components/Call'
 import About from './Components/About'
-
 import OtpInput from './Components/OtpInput'
 import Otpconfirm from './Components/Otpconfirm'
 import Main from './Components/Main'
 import Services from './Components/Services'
 import Contacts from './Components/Contacts'
-
-
-
 import ViewDataForm from './Pages/ViewData'
 import Logout from './Components/Logout'
 import Navbar from './Components/Navbar'
-
 import Dashboards from './Pages/Dahboards'
-
-
 import MainDash from './Components/MainDash/MainDash'
 import RightSide from './Components/RightSide/RightSide'
-
 import LoanManagement from './Pages/LoanManagement'
 import Graph from './Components/Graphs/Graph'
 import Barchart from './Pages/Barchart'
@@ -49,21 +39,17 @@ import Loans from './Pages/Loans'
 import ManagerDash from './Pages/ManagerDash'
 import MnageAnalytics from './Pages/MnageAnalytics'
 import Addmanager from './Pages/Addmanager'
-import { Settings } from 'lucide-react'
-
+import Settings from './Pages/Settings'
 
 function App() {
   return (
     <Router>
       <Routes>
-
         <Route path="/" element={<Call />}>
           <Route path="/" element={<Main />} />
-
           <Route path="/about" element={<About />} />
           <Route path="contact" element={<Contacts />} />
           <Route path="services" element={<Services />} />
-
           <Route path="/auth" element={<AuthRoute />}>
             <Route path="signin" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
@@ -74,6 +60,7 @@ function App() {
             <Route path="logout" element={<Logout />} /></Route>
         </Route>
         <Route path="/layout" element={<Layout />}>
+
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
           <Route path="manager" element={<Manager />} />
@@ -83,6 +70,15 @@ function App() {
         <Route path="/admin" element={<Dashboards />}>
           {/* <Route path="dashboard" element={<Dashboard />} /> */}
           <Route path="navbar" element={<Navbar />} />
+
+          <Route path="manager" element={<Manager />} />
+          <Route path="teacher" element={<Teacher />} />
+          <Route path="viewdata" element={<ViewDataForm />} />
+        </Route>
+        <Route path="/admin" element={<Dashboards />}>
+          
+          {/* <Route path="navbar" element={<Navbar />} /> */}
+
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
           <Route path="maindash" element={<MainDash />} />

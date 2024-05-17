@@ -10,12 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-
-
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fortawesome/fontawesome-free": "^6.5.2",
-    
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
@@ -33,13 +30,11 @@
     "@nivo/line": "^0.87.0",
     "@nivo/pie": "^0.87.0",
     "@react-icons/all-files": "^4.1.0",
-
     "apexcharts": "^3.49.1",
     "axios": "^1.6.8",
-
     "chart.js": "^4.4.2",
     "formik": "^2.4.6",
-    "framer-motion": "^11.2.0",
+    "framer-motion": "^11.2.2",
     "lucide-react": "^0.378.0",
     "reacharts": "^0.4.5",
     "react": "^18.2.0",

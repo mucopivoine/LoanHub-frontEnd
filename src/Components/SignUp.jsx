@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 // import { SigningUp } from '../api/teacher';
 import axios from 'axios';
-
-
 function SignUp() {
   const [username, setUsername] = useState('');
   const [usernameError, setUserNameError] = useState('')
@@ -23,9 +21,9 @@ function SignUp() {
   const [phonenumber, setPhonenumber] = useState('');
   const [phonenumberErr, setPhonenumberErr] = useState('');
 
+
   const [userType, setUserType] = useState('');
   const [userTypeErr, setUserTypeErr] = useState('');
-
   const navigate = useNavigate();
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -33,21 +31,21 @@ function SignUp() {
   };
   const isValid = () => {
     let valid = true
-
     if (!username.trim()) {
+
+    if (!username.trim) {
+
       setUserNameError('username is required');
       valid = false
     } else {
       setUserNameError('');
     }
-
     if (!teacherid.trim()) {
       setTeacheridErr('teacher id is required');
       valid = false
     } else {
       setTeacheridErr(" ")
     }
-
     if (!firstname.trim()) {
       setFirstnameErr('firstname is required');
       valid = false
@@ -78,7 +76,6 @@ function SignUp() {
     } else {
       setPasswordErr('')
     }
-
     if (!email.trim()) {
       setEmailErr('Email is required')
       valid = false
@@ -88,14 +85,16 @@ function SignUp() {
     } else {
       setEmailErr('')
     }
-    return valid
-  }
 
+
+   return valid
+
+  }
   const handleSignUp = async (e) => {
     e.preventDefault();
     if (isValid() == true) {
-
       try {
+
         axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
           username: username,
           email: email,
@@ -125,16 +124,32 @@ function SignUp() {
     }
 
   }
-// try{
-  //   axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/login', {
-  //     email: email,
-  //     password: password,
-  //   }, {
-  //     headers: {
-  //       "Content-Type" :'application/json',
-  //     },
-  //   }).then((response) => {
-  //     console.log(response.data);
+
+        axios({
+          method: 'POST',
+          url: 'http://localhost:5000/api/teacher/signup',
+          headers: {
+            "Content-Type": 'application/json',
+          },
+          data: {
+            username: username,
+            email: email,
+            password: password,
+            firstName: firstname,
+            LastName: lastname,
+            schoolName: schoolname,
+            phoneNumber: phonenumber,
+            TeacherId: teacherid,
+          }
+        }).then((response) => {
+          console.log(response.data);
+          setTimeout(() => {
+            navigate('/login')
+          }, 3000)
+        }).catch((error) => {
+          console.log(error);
+        })
+      } 
   return (
     <>
       <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[140vh]'>
@@ -163,7 +178,6 @@ function SignUp() {
                         onChange={(e) => setUsername(e.target.value)} required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-
                       {usernameError ? (<p className='text-red-500 italic text-xs'>{usernameError}</p>) : null}
                     </div>
                     <div className='mb-5'>
@@ -173,12 +187,10 @@ function SignUp() {
                       <input
                         type='text'
                         id='firstName'
-
                         value={firstname}
                         onChange={(e) => setFirstname(e.target.value)} required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-
                       {firstnameErr ? (<p className='text-red-500 italic text-xs'>{firstnameErr}</p>) : null}
                     </div>
                   </div>
@@ -190,13 +202,12 @@ function SignUp() {
                       <input
                         type='text'
                         id='lastName'
-
                         value={lastname}
                         onChange={(e) => setLastname(e.target.value)} required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-
                       {lastnameErr ? (<p className='text-red-500 italic text-xs'>{lastnameErr}</p>) : null}
+
                     </div>
                     <div className='mb-5'>
                       <label htmlFor='lastname' className='block text-sm text-black'>
@@ -242,11 +253,9 @@ function SignUp() {
                       onChange={(text) => setPassword(text.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-
                     {passwordErr ? (<p className='text-red-500 italic text-xs'>{passwordErr}</p>) : null}
+
                   </div>
-
-
                   <div className='mb-5'>
                     <label htmlFor='lastname' className='block text-sm text-black'>
                       Enter Your ID
@@ -254,13 +263,12 @@ function SignUp() {
                     <input
                       type='text'
                       id='teacher_ID'
-
                       value={teacherid}
                       onChange={(n) => setTeacherid(n.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
+                     {teacheridErr? (<p className='text-red-500 italic text-xs'>{teacheridErr}</p>):null}
 
-                    {teacheridErr ? (<p className='text-red-500 italic text-xs'>{teacheridErr}</p>) : null}
                   </div>
                   <div className='mb-5'>
                     <label htmlFor='lastname' className='block text-sm text-black'>
@@ -274,9 +282,9 @@ function SignUp() {
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
 
+
                     {phonenumberErr ? (<p className='text-red-500 italic text-xs'>{phonenumberErr}</p>) : null}
                   </div>
-
                   <button
                     type='submit'
                     onClick={handleSignUp}
@@ -285,7 +293,7 @@ function SignUp() {
                     Sign Up
                   </button>
                   <div className='flex gap-2 mt-5 mb-3 text-black'>
-                    <p>Don't have an account ? </p>
+                    <p>Don t have an account ? </p>
                     <Link to='/auth/signin' className='text-red-700'>
                       Log in
                     </Link>
@@ -299,5 +307,13 @@ function SignUp() {
     </>
   )
 }
-
 export default SignUp;
+
+
+
+
+
+
+
+
+

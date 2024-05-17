@@ -1,5 +1,10 @@
+
 // import React from 'react';
 // import BarChart from './Barchart';
+
+
+import BarChart from './Barchart';
+
 
 // const LoanRatesPage = () => {
 //   // Sample data for loan rates, payment rates, and interest rates

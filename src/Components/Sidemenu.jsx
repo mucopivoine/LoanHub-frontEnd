@@ -1,4 +1,4 @@
-import React , {useState} from 'react'
+import  {useState} from 'react'
 import { IoMdClose } from "react-icons/io";
 import { IoMdMenu } from "react-icons/io";
 import { motion } from 'framer-motion';
