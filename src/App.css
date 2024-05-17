@@ -1,0 +1,252 @@
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #0e0e0e;
+}
+
+.container {
+  background-color: #FAF9FA;
+  width: 519px;
+  border-radius: 8px;
+  padding: 3rem;
+}
+.heading_text
+{
+  font-size: 10px;
+  font-weight: 400;
+}
+.heading_two
+{
+  padding-top: 5px;
+}
+.total_amount_card
+{
+  width: 445px;
+  height: 138px;
+  background-color: rgba(255, 255, 255, 0.922);
+  margin-top: 22px;
+  
+}
+.card_text {
+  padding-top: 40px;
+}
+.total_amount_heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 800;
+}
+.total_amount_para {
+  text-align: center;
+  font-size: 12px;
+  padding-top: 5px;
+  color: #4B4B4B;
+}
+.input_area
+{
+  margin-top: 40px;
+}
+
+.input_field
+{
+  margin-top: 30px;
+  width: 445px;
+  border: 2; 
+  border-color: gray;
+}
+#outlined-basic {
+  width: 410px;
+}
+
+.button_collection
+{
+  margin-top: 61px;
+  margin-bottom: 1rem;
+}
+.btn_one {
+  background-color: gray;
+  width: 200px;
+  height: 75px;
+  border:red;
+}
+
+
+
+
+:root {
+  --yellow: linear-gradient(180deg, #F8D49A -146.42%, #FAD79D -46.42%);
+  --orange: #fca61f;
+  --black: #242d49;
+  --gray: #788097;
+  --purple: linear-gradient(180deg, #BB67FF 0%, #C484F3 100%);
+  --pink: #FF919D;
+  --glass: rgba(255, 255, 255, 0.54);
+  --boxShadow: 0px 19px 60px rgb(0 0 0 / 8%);
+  --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
+  --activeItem: #f799a354;
+}
+
+.App {
+  /* padding: 0.5rem 3.5rem; */
+  color: var(--black);
+  background: linear-gradient(
+    106.37deg,
+    #ffe1bc 29.63%,
+    #ffcfd1 51.55%,
+    #f3c6f1 90.85%
+  );
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.AppGlass {
+  display: grid;
+  height: 97%;
+  width: 97%;
+  background: var(--glass);
+  border-radius: 2rem;
+  gap: 16px;
+  grid-template-columns: 11rem auto 20rem;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1200px) {
+  .AppGlass{
+    grid-template-columns: 10% 50% auto;
+    overflow-y: scroll;
+  } 
+}
+
+@media screen and (max-width: 768px) {
+  .AppGlass{
+    grid-template-columns: 1fr;
+  } 
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 4rem;
+  transition: all 300ms ease;
+}
+/* logo */
+.bars{
+  display: none;
+}
+
+.logo {
+  display: flex;
+  height: 5rem;
+  font-weight: bold;
+  font-size: 22px;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  height: 4%;
+}
+.logo > span > span {
+  color: var(--pink);
+}
+
+.logo > img {
+  width: 3rem;
+  height: 3rem;
+}
+
+
+/* menu */
+.menu {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 2.5rem;
+  margin-left: 2rem;
+  position: relative;
+  transition: all 300ms ease;
+  border-radius: 0.7rem;
+  font-size: 14px;
+}
+
+.menuItem:hover {
+  cursor: pointer;
+}
+
+.menu .menuItem:last-child {
+  position: absolute;
+  bottom: 2.3rem;
+  width: 100%;
+}
+
+.active {
+  background: var(--activeItem);
+  margin-left: 0;
+}
+.active::before {
+  content: "";
+  width: 8px;
+  height: 100%;
+  background: var(--pink);
+  margin-right: calc(1rem - 8px);
+}
+
+
+/* Tablets */
+@media screen and (max-width: 1200px) {
+  .menuItem>span{
+    display: none;
+  }
+  .logo{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar{
+    position: fixed;
+    z-index: 9;
+    background: #ffe0e0;
+    width: 55%;
+    padding-right: 1rem;
+    height: 100%;
+  }
+  .menuItem>span{
+    display: block;
+  }
+  .logo{
+    display: flex;
+  }
+  .menu .menuItem:last-child {
+    position: relative;
+    margin-top: 6rem;
+  }
+  .bars{
+    display: flex;
+    position: fixed;
+    top: 2rem;
+    left:60%;
+    background:#ffe0e0;
+    padding:10px;
+    border-radius: 10px;
+    z-index: 9;
+  }
+  .close{
+    left: -60%;
+  }
+}
+
