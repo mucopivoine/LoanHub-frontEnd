@@ -20,7 +20,7 @@ setIsOpen(!isOpen);
         initial={{ x: 0 }}
         animate={{ x: isOpen ? -300 : 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 h-full w-64 bg-gray-100 text-black  z-40">
+        className="fixed top-0 left-0 h-full w-64  text-black  z-40">
         <nav className="p-4 mt-16 w-full">
           <ul className='p-10'>
             <div className='flex items-center'>

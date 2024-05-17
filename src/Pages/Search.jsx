@@ -1,7 +1,9 @@
-// import React from 'react';
+import  { useState } from 'react';
 import { FaSearch, FaRegBell, FaEnvelope } from 'react-icons/fa';
 
 function Search() {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   return (
     <div className="flex justify-between mb-12 px-4 py-2 bg-gray-100 shadow-lg rounded-lg ">
       {/* Search Input Section */}
@@ -17,7 +19,7 @@ function Search() {
       </div>
 
       {/* User Profile Section (Aligned to the Left) */}
-      <div className="flex items-center gap-[15px]  ">
+      <div className="flex items-center gap-[15px] relative" onClick={() => setIsProfileOpen(!isProfileOpen)}> {/* Add onClick handler to toggle profile visibility */}
         <div className="flex items-center gap-[25px] border-r-[1px] pr-[25px]">
           <FaRegBell />
           <FaEnvelope />
@@ -31,6 +33,15 @@ function Search() {
               className="h-full w-full rounded-full object-cover"
             />
           </div>
+          {isProfileOpen && (
+            <div className="absolute top-[50px] left-0 w-[200px] bg-white shadow-lg rounded-lg">
+              <div className="p-4">
+                <p>Name: John Doe</p>
+                <p>Email: j</p>
+                <p>Phone: 12</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
