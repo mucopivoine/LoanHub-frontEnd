@@ -13,19 +13,21 @@ function  Sidemenu() {
 
   return (
     <>
-      <button onClick={toggleSidebar} className="fixed lg:ml-24 top-5 left-5 z-50 bg-gray-800 text-white px-3 py-2 rounded-md ">
-        {isOpen ? <IoMdMenu /> :  <IoMdClose />}
-      </button>
-      
       <motion.div
-
-       
-
         initial={{ x: 300 }}
 
         animate={{ x: isOpen ? -300 : 0 }}
         transition={{ duration: 0.3 }}
         className="fixed top-0 left-0 h-full w-64 bg-[#FF8C8C] text-black  z-40">
+          <div className="flex items-center justify-between p-4">
+          <h1 className="text-xl font-bold">Admin Dashboard</h1>
+          <button
+            onClick={toggleSidebar}
+            className="bg-gray-800 text-white px-3 py-2 rounded-md focus:outline-none"
+          >
+            {isOpen ? <IoMdMenu /> : <IoMdClose />}
+          </button>
+        </div>
         <nav className="p-4 mt-16 w-full">
           <ul className='p-10'>
             <li className='mb-5 rounded-md text-center p-3 hover:bg-white hover:border-2 hover:text-red-500'>

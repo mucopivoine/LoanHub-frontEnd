@@ -40,25 +40,32 @@ function Login() {
     }
 
     // Proceed with login
-    try {
-      const response = await axios.post(
-        `https://umwarimu-loan-hub.onrender.com/api/teacher/login`,
-        { email, password }
-      );
-      console.log(response.data);
-      console.log('Logged in successfully');
-
-      if (response.data.user.role === 'teacher') {
-        navigate('/layout/teacher');
-      } else if (response.data.user.role === 'manager') {
-        navigate('/layout/manager');
+   try{
+    axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/login', {
+      email:email,
+      password:password,
+    }, {
+      headers:{
+        "Content-Type" :'application/json',
       }
-    } catch (error) {
-      console.error('Error occurred during login:', error);
-      setFormSubmitted(false);
+      })
+      .then((response) => {
+        if(response.data && response.data.user && response.data.user.role)
+        console.log(response.data);
+        console.log('Logged in successfully');
+        setTimeout(()=>{
+          if(response.data.user.role === 'teacher'){
+            navigate('/layout/teacher');
+          }else if(response.data.user.role === 'manager'){
+            navigate('/layout/manager');
+          }
+        }, 3000) 
+      }). catch((error) => {
+        console.log(error);
+      })
+    } catch(error){ 
     }
-  };
-
+      }
   return (
     <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[110vh]'>
       <motion.div

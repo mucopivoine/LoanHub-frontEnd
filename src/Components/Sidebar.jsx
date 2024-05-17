@@ -26,6 +26,7 @@ setIsOpen(!isOpen);
         transition={{ duration: 0.3 }}
         className="fixed top-0 left-0 h-full w-64 bg-gray-100 text-black  z-40">
         <nav className="p-4 mt-16 w-full">
+          <h1 className='text-center font-bold text-2xl'>Admin Dashboard</h1>
           <ul className='p-10'>
             <div className='flex items-center'>
             <FaTachometerAlt className='w-[30px]'/>

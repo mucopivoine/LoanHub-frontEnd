@@ -6,11 +6,11 @@ import Sidemenu from "../Sidemenu";
 import LoanManagement from "../../Pages/LoanManagement";
 import Sidebar from "../Sidebar";
 import TableComponent from "../../Pages/Tablecomponent";
-import ManageLoans from "../ManageLoans";
+import Settings from "../../Pages/Settings";
 const MainDash = () => {
   return (
     <div className="MainDash">
-      <h1>Dashboard</h1>
+      
       <div className="">
       <div className="">
       <Sidebar/>
@@ -23,9 +23,9 @@ const MainDash = () => {
       <div>
       <TableComponent/>
       </div>
-      {/* <div>
-        <ManageLoans/>
-      </div> */}
+       <div>
+        {/* <Settings/> */}
+      </div> 
       </div>
       </div>
     </div>

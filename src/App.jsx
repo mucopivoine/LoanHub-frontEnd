@@ -49,6 +49,7 @@ import Loans from './Pages/Loans'
 import ManagerDash from './Pages/ManagerDash'
 import MnageAnalytics from './Pages/MnageAnalytics'
 import Addmanager from './Pages/Addmanager'
+import { Settings } from 'lucide-react'
 
 
 function App() {
@@ -98,6 +99,7 @@ function App() {
           <Route path="addmanager" element={<Addmanager/>} />
           <Route path="analytics" element={<Analytics/>} />
           <Route path="manageloans" element={<ManageLoans/>} />
+          <Route path="settings" element={<Settings/>} />
         </Route>
         <Route path="/barnav" element={<Barnav/>}>
         <Route path="managerdash" element={<ManagerDash/>}/>

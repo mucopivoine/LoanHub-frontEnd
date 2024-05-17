@@ -93,7 +93,7 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
               <td key={`cell-${column.accessor}-${row.id}`} className="px-6 py-4">
                 {column.accessor === "status" ? (
                   <span
-                    className={`px-2 py-1 font-semibold leading-tight text-white ${
+                    className={`px-2 py-1 font-semibold leading-tight text-white cursor-pointer ${
                       row[column.accessor] === "Pending"
                         ? "bg-red-500"
                         : "bg-green-500"

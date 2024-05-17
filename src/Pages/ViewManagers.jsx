@@ -29,6 +29,7 @@ const ViewManager = () => {
     <Sidebar/>
     </div>
     <div>
+      
     <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">
       <div className=''>
       

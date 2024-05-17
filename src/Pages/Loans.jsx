@@ -53,7 +53,10 @@ const data = [
     status: "Completed",
   },
 ];
-const Table = ({ columns, data }) => {
+const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
+    const filteredData = data.filter((row) =>
+      row.teacherName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   return (
     <>
     <Barnav/>
@@ -101,10 +104,13 @@ const Table = ({ columns, data }) => {
   );
 };
 const Loans = () => {
+    const [searchTerm, setSearchTerm] = useState("");
   return (
     <div className="p-6 w-[80%] ml-[20%]">
       <h2 className="text-2xl font-semibold mb-4">Manage Loans</h2>
-      <Table columns={columns} data={data} />
+      <Table columns={columns} data={data} 
+       searchTerm={searchTerm}
+       setSearchTerm={setSearchTerm} />
     </div>
    
   );

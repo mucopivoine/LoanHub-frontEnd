@@ -96,33 +96,15 @@ function SignUp() {
     if (isValid() == true) {
 
       try {
-
-        // axios({
-        //   method: 'POST',
-        //   url: 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup',
-        //   headers: {
-        //     "Content-Type": 'application/json',
-        //   },
-        //   data: {
-        //     username: username,
-        //     email: email,
-        //     password: password,
-        //     firstName: firstname,
-        //     LastName: lastname,
-        //     schoolName: schoolname,
-        //     phoneNumber: phonenumber,
-        //     TeacherId: teacherid,
-        //   }
-        // })
         axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
           username: username,
           email: email,
           password: password,
           firstName: firstname,
           LastName: lastname,
-          schoolName: schoolname,
+          schoolName:schoolname,
           phoneNumber: phonenumber,
-          TeacherId: teacherid,
+          teacher_ID: teacherid,
         }, {
           headers: {
             "Content-Type": 'application/json',
@@ -131,7 +113,7 @@ function SignUp() {
           .then((response) => {
             console.log(response.data);
             setTimeout(() => {
-              navigate('/login')
+              navigate('/auth/otpinput')
             }, 3000)
           }).catch((error) => {
             console.log(error);
@@ -143,7 +125,16 @@ function SignUp() {
     }
 
   }
-
+// try{
+  //   axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/login', {
+  //     email: email,
+  //     password: password,
+  //   }, {
+  //     headers: {
+  //       "Content-Type" :'application/json',
+  //     },
+  //   }).then((response) => {
+  //     console.log(response.data);
   return (
     <>
       <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[140vh]'>
