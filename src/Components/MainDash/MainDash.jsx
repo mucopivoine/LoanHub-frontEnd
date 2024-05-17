@@ -5,12 +5,11 @@ import "./MainDash.css";
 import Sidemenu from "../Sidemenu";
 import LoanManagement from "../../Pages/LoanManagement";
 import Sidebar from "../Sidebar";
-import BarChart from "../../Pages/Barchart";
 import TableComponent from "../../Pages/Tablecomponent";
 import ManageLoans from "../ManageLoans";
 const MainDash = () => {
   return (
-    <div className="MainDash ">
+    <div className="MainDash">
       <h1>Dashboard</h1>
       <div className="">
       <div className="">
@@ -22,12 +21,11 @@ const MainDash = () => {
       <LoanManagement/>
       </div>
       <div>
-     
       <TableComponent/>
       </div>
-      <div>
+      {/* <div>
         <ManageLoans/>
-      </div>
+      </div> */}
       </div>
       </div>
     </div>

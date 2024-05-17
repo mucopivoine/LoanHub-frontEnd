@@ -1,5 +1,6 @@
-import Sidebar from "./Sidebar";
-import React, { useState} from "react";
+
+import React, {useState} from "react";
+import Barnav from "../Components/Barnav";
 const columns = [
   {
     Header: "ID",
@@ -52,18 +53,18 @@ const data = [
     status: "Completed",
   },
 ];
-const Table = ({ columns, data,  searchTerm, setSearchTerm }) => {
+const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
   const filteredData = data.filter((row) =>
     row.teacherName.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
     <>
-    <Sidebar/>
+    <Barnav/>
     <div>
     <div>
         <input
           type="text"
-          placeholder="Search by Loan Type"
+          placeholder="Search by Teacher Name"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-[300] px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none "
@@ -114,16 +115,16 @@ const Table = ({ columns, data,  searchTerm, setSearchTerm }) => {
     </>
   );
 };
-const ManageLoans = () => {
+const Teachers = () => {
   const [searchTerm, setSearchTerm] = useState("");
   return (
     <div className="p-6 w-[80%] ml-[20%]">
       <h2 className="text-2xl font-semibold mb-4">Manage Loans</h2>
       <Table columns={columns} data={data}
-       searchTerm={searchTerm}
-       setSearchTerm={setSearchTerm}  />
+      searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm} />
     </div>
    
   );
 };
-export default ManageLoans;
+export default Teachers;

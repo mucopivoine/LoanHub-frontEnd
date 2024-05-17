@@ -1,10 +1,6 @@
 import React from 'react'
 
 function Logout() {
-
-  return (
-    <div>Logout</div>
-
   const handleLogout = async (e) => {
     e.preventDefault();
      
@@ -26,13 +22,8 @@ function Logout() {
       })
      }
 
-
-
-
   return (
-    <div>
-
-    </div>
+    <div>Logout</div>
 
   )
 }

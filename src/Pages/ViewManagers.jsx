@@ -98,12 +98,12 @@ const ViewManager = () => {
                       </button>
                       
                     
-                      <button
+                      <Link to="/admin/addmanager"><button
                         className=" p-2 "
                         onClick={() => handleAddPerson(person.id)}
                       >
                        <FaEdit/>
-                      </button>
+                      </button></Link>
                       </div>
                     </td>
                   </tr>

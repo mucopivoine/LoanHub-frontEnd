@@ -1,11 +1,12 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-
-function Dahboards() {
+function Manager() {
   return (
- <Outlet/>
+    
+        <Outlet/>
+    
   )
 }
 
-export default Dahboards
+export default Manager

@@ -1,7 +1,7 @@
 import Sidebar from '../Components/Sidebar';
 import React from 'react';
 
-function Contact() {
+function Addmanager() {
   return (
     <>
       <div className='flex flex-row'>
@@ -31,5 +31,4 @@ function Contact() {
     </>
   );
 }
-
-export default Contact;
+export default Addmanager;

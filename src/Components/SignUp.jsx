@@ -26,36 +26,16 @@ function SignUp() {
   const [userType, setUserType] = useState('');
   const [userTypeErr, setUserTypeErr] = useState('');
 
-
+  const navigate = useNavigate();
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
   const isValid = () => {
     let valid = true
-    if (!username.trim) {
-      setUserNameError('userName is required');
-      valid = false
-    } else {
-      setUserNameError('');
-    }
 
-    if (!teacherid.trim()) {
-      setTeacheridErr('teacher id is required');
-      valid = false
-    } else {
-      setTeacheridErr(" ")
-    }
-
-
-
-  const navigate = useNavigate();
- 
-
-  const isValid = () => {
-    let valid = true
     if (!username.trim()) {
-      setUserNameError('userName is required');
+      setUserNameError('username is required');
       valid = false
     } else {
       setUserNameError('');
@@ -91,9 +71,7 @@ function SignUp() {
       valid = false
     } else {
       setPhonenumberErr('')
-
     }
-
     if (!password.trim()) {
       setPasswordErr('password is required')
       valid = false
@@ -104,15 +82,13 @@ function SignUp() {
     if (!email.trim()) {
       setEmailErr('Email is required')
       valid = false
-    } else if (isValidEmail(email)) {
+    } else if (!isValidEmail(email)) {
       setEmailErr('Email is invalid')
       valid = false
     } else {
       setEmailErr('')
     }
-
-
-    valid = true
+    return valid
   }
 
   const handleSignUp = async (e) => {
@@ -121,81 +97,52 @@ function SignUp() {
 
       try {
 
-        axios({
-          method: 'POST',
-          url: 'http://localhost:5000/api/teacher/signup',
-          headers: {
-            "Content-Type": 'application/json',
-          },
-          data: {
-            username: username,
-            email: email,
-            password: password,
-            firstName: firstname,
-            LastName: lastname,
-            schoolName: schoolname,
-            phoneNumber: phonenumber,
-            TeacherId: teacherid,
-          }
-        }).then((response) => {
-          console.log(response.data);
-          setTimeout(() => {
-            navigate('/login')
-          }, 3000)
-        }).catch((error) => {
-          console.log(error);
-        })
-      } catch (error) {
-      }
-
-      console.log(error)
-    }
-  }
-
-    }
-
-    if (!password.trim()) {
-      setPasswordErr('password is required')
-      valid = false
-    } else {
-      setPasswordErr('')
-    }
-
-    if (!email.trim()) {
-      setEmailErr('Email is required')
-      valid = false
-    } else {
-      setEmailErr('')
-    }
-
-
-   return valid;
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formIsValid = isValid();
-
-    if (formIsValid) {
-      try {
-        const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
+        // axios({
+        //   method: 'POST',
+        //   url: 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup',
+        //   headers: {
+        //     "Content-Type": 'application/json',
+        //   },
+        //   data: {
+        //     username: username,
+        //     email: email,
+        //     password: password,
+        //     firstName: firstname,
+        //     LastName: lastname,
+        //     schoolName: schoolname,
+        //     phoneNumber: phonenumber,
+        //     TeacherId: teacherid,
+        //   }
+        // })
+        axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
           username: username,
           email: email,
           password: password,
           firstName: firstname,
-          lastName: lastname,
+          LastName: lastname,
           schoolName: schoolname,
           phoneNumber: phonenumber,
-          teacher_ID: teacherid,
-        });
-        console.log("response.data", response.data);
-        alert('Signed up successfully')
-        navigate('/otpinput');
+          TeacherId: teacherid,
+        }, {
+          headers: {
+            "Content-Type": 'application/json',
+          },
+        })
+          .then((response) => {
+            console.log(response.data);
+            setTimeout(() => {
+              navigate('/login')
+            }, 3000)
+          }).catch((error) => {
+            console.log(error);
+          })
       } catch (error) {
-        console.log(error);
       }
+
+
     }
-  };
+
+  }
 
   return (
     <>
@@ -220,15 +167,13 @@ function SignUp() {
                       </label>
                       <input
                         type='text'
-                        id='username'
+                        id='userName'
                         value={username}
                         onChange={(e) => setUsername(e.target.value)} required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-                      {/* {formSubmitted && error.username && (
-                      <p className='text-red-500 italic text-xs'>{error.username}</p>
-                    )} */}
-                    {usernameError ? (<p className='text-red-500 italic text-xs'>{usernameError}</p>): null}
+
+                      {usernameError ? (<p className='text-red-500 italic text-xs'>{usernameError}</p>) : null}
                     </div>
                     <div className='mb-5'>
                       <label htmlFor='firstname' className='block text-sm text-black'>
@@ -236,19 +181,14 @@ function SignUp() {
                       </label>
                       <input
                         type='text'
-
-                        id='firstname'
-
                         id='firstName'
 
                         value={firstname}
                         onChange={(e) => setFirstname(e.target.value)} required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-                      {/* {formSubmitted && error.firstname && (
-                      <p className='text-red-500 italic text-xs'>{error.firstname}</p>
-                    )} */}
-                    {firstnameErr? (<p className='text-red-500 italic text-xs'>{firstnameErr}</p>):null}
+
+                      {firstnameErr ? (<p className='text-red-500 italic text-xs'>{firstnameErr}</p>) : null}
                     </div>
                   </div>
                   <div className='flex flex-row gap-3'>
@@ -258,19 +198,14 @@ function SignUp() {
                       </label>
                       <input
                         type='text'
-
-                        id='lastname'
-
                         id='lastName'
 
                         value={lastname}
                         onChange={(e) => setLastname(e.target.value)} required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-                      {/* {formSubmitted && error.lastname && (
-                      <p className='text-red-500 italic text-xs'>{error.lastname}</p>
-                    )} */}
-                     {lastnameErr? (<p className='text-red-500 italic text-xs'>{lastnameErr}</p>):null}
+
+                      {lastnameErr ? (<p className='text-red-500 italic text-xs'>{lastnameErr}</p>) : null}
                     </div>
                     <div className='mb-5'>
                       <label htmlFor='lastname' className='block text-sm text-black'>
@@ -286,7 +221,7 @@ function SignUp() {
                       {/* {formSubmitted && error.schoolname && (
                       <p className='text-red-500 italic text-xs'>{error.schoolname}</p>
                     )} */}
-                     {schoolnameErr? (<p className='text-red-500 italic text-xs'>{schoolnameErr}</p>):null}
+                      {schoolnameErr ? (<p className='text-red-500 italic text-xs'>{schoolnameErr}</p>) : null}
                     </div>
                   </div>
                   <div className='mb-5'>
@@ -303,7 +238,7 @@ function SignUp() {
                     {/* {formSubmitted && error.email && (
                       <p className='text-red-500 italic text-xs'>{error.email}</p>
                     )} */}
-                     {emailErr? (<p className='text-red-500 italic text-xs'>{emailErr}</p>):null}
+                    {emailErr ? (<p className='text-red-500 italic text-xs'>{emailErr}</p>) : null}
                   </div>
                   <div className='mb-5'>
                     <label htmlFor='lastname' className='block text-sm text-black'>
@@ -316,10 +251,8 @@ function SignUp() {
                       onChange={(text) => setPassword(text.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                    {/* {formSubmitted && error.password && (
-                      <p className='text-red-500 italic text-xs'>{error.password}</p>
-                    )} */}
-                     {passwordErr? (<p className='text-red-500 italic text-xs'>{passwordErr}</p>):null}
+
+                    {passwordErr ? (<p className='text-red-500 italic text-xs'>{passwordErr}</p>) : null}
                   </div>
 
 
@@ -329,19 +262,14 @@ function SignUp() {
                     </label>
                     <input
                       type='text'
-
-                      id='teacherid'
-
                       id='teacher_ID'
 
                       value={teacherid}
                       onChange={(n) => setTeacherid(n.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                    {/* {formSubmitted && error.teacherid && (
-                      <p className='text-red-500 italic text-xs'>{error.teacherid}</p>
-                    )} */}
-                     {teacheridErr? (<p className='text-red-500 italic text-xs'>{teacheridErr}</p>):null}
+
+                    {teacheridErr ? (<p className='text-red-500 italic text-xs'>{teacheridErr}</p>) : null}
                   </div>
                   <div className='mb-5'>
                     <label htmlFor='lastname' className='block text-sm text-black'>
@@ -354,17 +282,13 @@ function SignUp() {
                       onChange={(e) => setPhonenumber(e.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                  
-                     {phonenumberErr? (<p className='text-red-500 italic text-xs'>{phonenumberErr}</p>):null}
+
+                    {phonenumberErr ? (<p className='text-red-500 italic text-xs'>{phonenumberErr}</p>) : null}
                   </div>
-                 
+
                   <button
                     type='submit'
-
                     onClick={handleSignUp}
-
-                    onClick={handleSubmit}
-
                     className='bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5'
                   >
                     Sign Up
@@ -384,4 +308,5 @@ function SignUp() {
     </>
   )
 }
+
 export default SignUp;

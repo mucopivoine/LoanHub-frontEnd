@@ -10,8 +10,8 @@ import {
 import { motion } from "framer-motion";
 
 
-import RightArrowIcon from "./../assets/icons/rightArrow.svg";
-import Dashboard from "./Dashboard";
+// import RightArrowIcon from "./../assets/icons/rightArrow.svg";
+// import Dashboard from "./Dashboard";
 
 
 
@@ -26,7 +26,7 @@ const navLinks = [
   {
     link: "Dashboard",
     icon: LayoutDashboard,
-    path:"dashboard",
+    
   },
   {
     link: "Activity",

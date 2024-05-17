@@ -96,8 +96,6 @@ const ViewTeacher = () => {
                       >
                          <MdDelete className=''/>
                       </button>
-                      
-                    
                       <button
                         className=" p-2 "
                         onClick={() => handleAddPerson(person.id)}
