@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom"
 import End from "./End"
 
 
-function Call() {
+function  Call() {
   return (
     <div>
         <Home/>

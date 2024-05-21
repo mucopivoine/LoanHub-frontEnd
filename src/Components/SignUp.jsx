@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 // import { SigningUp } from '../api/teacher';
@@ -21,7 +21,7 @@ function SignUp() {
   const [phonenumber, setPhonenumber] = useState('');
   const [phonenumberErr, setPhonenumberErr] = useState('');
 
-
+  const [isLoading, setIsLoading] = useState(false);
   const [userType, setUserType] = useState('');
   const [userTypeErr, setUserTypeErr] = useState('');
   const navigate = useNavigate();
@@ -32,9 +32,6 @@ function SignUp() {
   const isValid = () => {
     let valid = true
     if (!username.trim()) {
-
-    if (!username.trim) {
-
       setUserNameError('username is required');
       valid = false
     } else {
@@ -85,13 +82,12 @@ function SignUp() {
     } else {
       setEmailErr('')
     }
+    return valid
+  };
 
-
-   return valid
-
-  }
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     if (isValid() == true) {
       try {
 
@@ -101,7 +97,7 @@ function SignUp() {
           password: password,
           firstName: firstname,
           LastName: lastname,
-          schoolName:schoolname,
+          schoolName: schoolname,
           phoneNumber: phonenumber,
           teacher_ID: teacherid,
         }, {
@@ -110,48 +106,27 @@ function SignUp() {
           },
         })
           .then((response) => {
-            console.log(response.data);
+            console.log(response.data);// Store the token in localStorage
+
             setTimeout(() => {
-              navigate('/auth/otpinput')
+              setIsLoading(false);
+              navigate('/auth/otpinput');
             }, 3000)
           }).catch((error) => {
+            setIsLoading(false);
             console.log(error);
           })
       } catch (error) {
       }
-
-
     }
-
   }
-
-        axios({
-          method: 'POST',
-          url: 'http://localhost:5000/api/teacher/signup',
-          headers: {
-            "Content-Type": 'application/json',
-          },
-          data: {
-            username: username,
-            email: email,
-            password: password,
-            firstName: firstname,
-            LastName: lastname,
-            schoolName: schoolname,
-            phoneNumber: phonenumber,
-            TeacherId: teacherid,
-          }
-        }).then((response) => {
-          console.log(response.data);
-          setTimeout(() => {
-            navigate('/login')
-          }, 3000)
-        }).catch((error) => {
-          console.log(error);
-        })
-      } 
   return (
     <>
+      {isLoading && (
+        <div className='absolute border-2 top-28 w-64 right-4 p-4 text-sm text-green-500 border-green-500 bg-white rounded-md'>
+          Loading...
+        </div>
+      )}
       <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[140vh]'>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -267,7 +242,7 @@ function SignUp() {
                       onChange={(n) => setTeacherid(n.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                     {teacheridErr? (<p className='text-red-500 italic text-xs'>{teacheridErr}</p>):null}
+                    {teacheridErr ? (<p className='text-red-500 italic text-xs'>{teacheridErr}</p>) : null}
 
                   </div>
                   <div className='mb-5'>
@@ -281,8 +256,6 @@ function SignUp() {
                       onChange={(e) => setPhonenumber(e.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-
-
                     {phonenumberErr ? (<p className='text-red-500 italic text-xs'>{phonenumberErr}</p>) : null}
                   </div>
                   <button

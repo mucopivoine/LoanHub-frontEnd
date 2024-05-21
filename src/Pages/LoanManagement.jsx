@@ -29,15 +29,15 @@ const LoanManagement = () => {
   };
 
   return (
-    <div className='mx-auto  h-[50vh] flex flex-row mb-32'>
+    <div className='mx-auto  h-[50vh] flex flex-row mb-32 w-full'>
       <div className=' ml-[20%] w-[40%]'>
-        <h3>Loan Applications Trend</h3>
+        <h3 className='text-center mt-[50px] text-2xl font-semibold'>Loan Applications Trend</h3>
         <Graph data={graphData} />
       </div>
       {/* <h2>Loan Management Dashboard</h2> */}
-      <div className='w-[50%]  '>
-        <h3>Loan Status</h3>
-        <PieChart data={pieChartData} cl />
+      <div className='ml-[70px]'>
+        <h3 className='text-center mt-[50px] text-2xl font-semibold'>Loan Status</h3>
+        <PieChart data={pieChartData} />
       </div>
       
     </div>

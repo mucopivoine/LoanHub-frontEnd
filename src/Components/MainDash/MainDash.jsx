@@ -6,14 +6,13 @@ import LoanManagement from "../../Pages/LoanManagement";
 import Sidebar from "../Sidebar";
 import TableComponent from "../../Pages/Tablecomponent";
 import Search from "../../Pages/Search";
+import ViewManager from "../../Pages/ViewManagers";
 const MainDash = () => {
   return (
     <div className="MainDash ">
 
       <div className="">
-      <div className="">
-      <Sidebar/>
-      </div>
+     
       <Search/>
       <div className="">
       <Cards />
@@ -21,7 +20,7 @@ const MainDash = () => {
       <LoanManagement/>
       </div>
       <div>
-      <TableComponent/>
+      <ViewManager/>
       </div>
        <div>
         {/* <Settings/> */}

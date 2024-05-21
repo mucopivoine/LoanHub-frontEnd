@@ -7,8 +7,12 @@ function Analytics() {
   return (
     <div>
         <Sidebar/>
+        <div className='mt-[70px]'>
         <Cards />
+        <div className='w-[100%]'>
         <LoanManagement/>
+        </div>
+        </div>
     </div>
   )
 }

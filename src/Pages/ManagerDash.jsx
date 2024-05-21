@@ -3,6 +3,7 @@ import Barnav from "../Components/Barnav"
 import NewData from '../Data/NewData'
 import Loans from "./Loans"
 import Teachers from "./Teachers"
+import Search from "./Search"
 
 function ManagerDash() {
   return (
@@ -11,6 +12,7 @@ function ManagerDash() {
     <Barnav/>
    </div>
    <div>
+    <Search/>
     <NewData/>
     <Teachers/>
    </div>
