@@ -94,7 +94,6 @@ function SignUp() {
     e.preventDefault();
     if (isValid() == true) {
       try {
-
         axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
           username: username,
           email: email,

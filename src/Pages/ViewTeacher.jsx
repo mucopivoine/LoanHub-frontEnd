@@ -2,7 +2,7 @@ import Sidebar from '../Components/Sidebar';
 import { useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md'
-import { IoIosPersonAdd } from 'react-icons/io';
+// import { IoIosPersonAdd } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 const ViewTeacher = () => {
   const [data, setData] = useState([
