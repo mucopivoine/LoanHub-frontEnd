@@ -1,28 +1,33 @@
-import Sidebar from '../Components/Sidebar';
-import { useState } from 'react';
-import { FaEdit } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md'
-// import { IoIosPersonAdd } from 'react-icons/io';
-import { Link } from 'react-router-dom';
-const ViewTeacher = () => {
-  const [data, setData] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
-    { id: 3, name: 'Bob Smith', email: 'bob@example.com' },
-    { id: 4, name: 'Alice Johnson', email: 'alice@example.com' },
-    { id: 5, name: 'Mike Brown', email: 'ike@example.com' },
-    { id: 6, name: 'Emily Davis', email: 'emily@example.com' },
-  ]);
-  const handleAddPerson = () => {
-    const newPerson = { id: data.length + 1, name: '', email: '' };
-    setData([...data, newPerson]);
-  };
-  const handleDeletePerson = (id) => {
-    setData(data.filter((person) => person.id!== id));
-  };
-//   const handleAdd = (id) =>{
-//     setData(data.fil)
-//   }
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Sidebar from '../Components/Sidemenu';
+
+function ViewTeacher() {
+  const [teachers, setTeachers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState('');
+
+  const getToken  = localStorage.getItem('token')
+  useEffect(() => {
+    const fetchTeachers = async () => {
+      try {
+        const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacher/all',{
+          headers: {
+            Authorization:`Bearer ${getToken}`
+          },
+        });
+        setTeachers(response.data);
+      } catch (error) {
+        setError('Failed to fetch teacher data');
+        console.error('Error fetching teacher data:', error);
+      }
+    };
+
+    fetchTeachers();
+  }, []);
+
+ 
   return (
     <>
     <div>
@@ -115,6 +120,7 @@ const ViewTeacher = () => {
     </div>
     </div>
     </>
+
   );
-};
-export default ViewTeacher;
+}
+ export default ViewTeacher;

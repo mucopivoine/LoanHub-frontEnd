@@ -1,5 +1,5 @@
 
-// import React from "react";
+import React, { useState} from "react";
 import Barnav from "../Components/Barnav";
 const columns = [
   {
@@ -61,7 +61,7 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
     <>
     <Barnav/>
     <div>
-    <table className="min-w-full divide-y divide-gray-200">
+    <table className="min-w-full divide-y divide-gray-200 items-center">
       <thead className="bg-gray-50">
         <tr>
           {columns.map((column) => (
@@ -82,7 +82,7 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
               <td key={`cell-${column.accessor}-${row.id}`} className="px-6 py-4">
                 {column.accessor === "status" ? (
                   <span
-                    className={`px-2 py-1 font-semibold leading-tight text-white ${
+                    className={`px-2 py-1 font-semibold leading-tight text-white cursor-pointer ${
                       row[column.accessor] === "Pending"
                         ? "bg-red-500"
                         : "bg-green-500"

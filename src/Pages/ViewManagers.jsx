@@ -1,36 +1,86 @@
-import Sidebar from '../Components/Sidebar';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md'
-// import { IoIosPersonAdd } from 'react-icons/io';
+import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import Sidebar from '../Components/Sidebar';
+
+const cookie =document.cookie.split('jwt=')[1];
+
+
 const ViewManager = () => {
-  const [data, setData] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
-    { id: 3, name: 'Bob Smith', email: 'bob@example.com' },
-    { id: 4, name: 'Alice Johnson', email: 'alice@example.com' },
-    { id: 5, name: 'Mike Brown', email: 'ike@example.com' },
-    { id: 6, name: 'Emily Davis', email: 'emily@example.com' },
-  ]);
-  const handleAddPerson = () => {
-    const newPerson = { id: data.length + 1, name: '', email: '' };
-    setData([...data, newPerson]);
+  const [managers, setManagers] = useState([]);
+  const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [editingManager, setEditingManager] = useState(null);
+  const [updateData, setUpdateData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirm: ''
+  });
+  const fetchManagers = async () => {
+    try {
+      console.log('Token:', cookie);
+          const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookie}`
+        }
+      });
+
+      console.log('Response data:', response.data);
+
+      // Check if the response contains the users key and if it's an array
+      if (response.data && Array.isArray(response.data.users)) {
+        setManagers(response.data.users);
+      } else {
+        console.error('Expected an array but received:', response.data);
+        setError('Unexpected data format received from server');
+      }
+    } catch (error) {
+      console.error('Error fetching manager data:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        setError(error.response.data.error || 'Failed to fetch manager data');
+      } else {
+        setError('Failed to fetch manager data');
+      }
+  }
+};
+  useEffect(() => {
+    fetchManagers();
+  }, []);
+
+  const handleDeletePerson = async(id) => {
+    // Implement delete logic here
   };
-  const handleDeletePerson = (id) => {
-    setData(data.filter((person) => person.id!== id));
+
+  const handleEditClick = (person) => {
+    setEditingManager(person);
   };
-//   const handleAdd = (id) =>{
-//     setData(data.fil)
-//   }
+
+  const handleUpdateChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdatePerson = () => {
+    // Implement update logic here
+  };
+
+  // Filter managers based on search term
+  const filteredManagers = managers.filter(manager =>
+    manager.username.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
-    
     <div>
     <Sidebar/>
-    </div>
-    <div>
-      
+    </div> 
     <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">
       <div className=''>
       
@@ -41,13 +91,11 @@ const ViewManager = () => {
         
         Add Person
       </button></Link>
-      
       </div>
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
                 <tr>
                   <th
                     scope="col"
@@ -77,48 +125,82 @@ const ViewManager = () => {
                     <span className="sr-only">Edit</span>
                   </th>
                 </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {data.map((person) => (
-                  <tr key={person.id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{person.id}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{person.name}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{person.email}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium gap-4">
-                       <div className='flex gap-5'>
-                      <button
-                        className=" -  gap-5 "
-                        onClick={() => handleDeletePerson(person.id)}
-                      >
-                         <MdDelete className=''/>
-                      </button>
-                      
-                    
-                      <Link to="/admin/addmanager"><button
-                        className=" p-2 "
-                        onClick={() => handleAddPerson(person.id)}
-                      >
-                       <FaEdit/>
-                      </button></Link>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+              
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {Array.isArray(filteredManagers) && filteredManagers.map((manager) => (
+                    <tr key={manager.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{manager.username}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{manager.email}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{manager.phoneNumber}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium gap-4">
+                        <div className="flex gap-5">
+                          <button
+                            className=""
+                            onClick={() => handleDeletePerson(manager.id)}
+                          >
+                            <MdDelete />
+                          </button>
+                          <button
+                            className="p-2"
+                            onClick={() => handleEditClick(person)}
+                          >
+                            <FaEdit />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
+        {editingManager && (
+          <div className="mt-8">
+            <h2>Edit Manager: {editingManager.name}</h2>
+            <div className="flex flex-col gap-4">
+              <input
+                type="password"
+                name="currentPassword"
+                placeholder="Current Password"
+                value={updateData.currentPassword}
+                onChange={handleUpdateChange}
+                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
+              />
+              <input
+                type="password"
+                name="newPassword"
+                placeholder="New Password"
+                value={updateData.newPassword}
+                onChange={handleUpdateChange}
+                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
+              />
+              <input
+                type="password"
+                name="confirm"
+                placeholder="Confirm Password"
+                value={updateData.confirm}
+                onChange={handleUpdateChange}
+                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
+              />
+              <button
+                className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded"
+                onClick={handleUpdatePerson}
+              >
+                Update Manager
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-     
-    </div>
-    </div>
     </>
   );
 };
+
 export default ViewManager;

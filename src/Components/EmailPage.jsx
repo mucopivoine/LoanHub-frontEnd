@@ -5,10 +5,9 @@ import OtpInput from './OtpInput';
 import { motion } from 'framer-motion'; 
 import { Link } from 'react-router-dom';
 
-const Forgot = () => {
+const EmailPage = () => {
   const [email, setEmail] = useState('');
-  const [showOtpInput, setShowOtpInput] = useState(false);
-
+  
   const handleEmail = (event) => {
     setEmail(event.target.value);
   };
@@ -21,28 +20,10 @@ const Forgot = () => {
       return;
     }
 
-    try {
-      const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot', { email });
-      console.log('Response from API:', response.data);
-      setShowOtpInput(true);
-    } catch (error) {
-      console.error('Error sending email:', error);
-     
-    }
-  };
-  const handleOtpSubmit = (otp) => {
-    console.log('OTP submitted:', otp);
-  };
-  const handleOtpVerify = async (otp) => {
-    try {
-      const response = await axios.post ('https://umwarimu-loan-hub-api.onrender.com/api/teacher/verifyotp', {
-        email: email, 
-      });
-      console.log('OTP Verification Response:', response.data);
-    } catch(error) {
-      console.log('Error verifying OTO:', error);
-    }
-  }
+   
+
+  
+}
   return (
     <>
       <div className='mx-auto items-center justify-center flex flex-col h-[80vh] bg-gray-100'>
@@ -57,7 +38,6 @@ const Forgot = () => {
               <h1 className='mb-5 text-xl font-bold'>Please Enter Your Email for Verification</h1>
             </div>
             <div>
-              {!showOtpInput ? (
                 <form onSubmit={handleEmailSubmit}>
                   <input
                     type="email"
@@ -66,7 +46,7 @@ const Forgot = () => {
                     placeholder='Enter Email Address'
                     className='p-3 mr-3 items-center flex border-2 border-gray-300 w-full'/>
                   <div>
-                  <Link to="/auth/reset-password"> <button
+                  <Link to="/auth/reset"> <button
                       type="submit"
                       className='bg-red-500 text-white w-50 border-2 rounded-md p-2 px-[100px] mx-auto mt-5' 
                     >
@@ -74,17 +54,12 @@ const Forgot = () => {
                     </button></Link> 
                   </div>
                 </form>
-              ) : (
-                <div>
-                  <p className='text-xl font-semibold text-gray-500 mb-5'>Enter OTP sent to {email}</p>
-                  <OtpInput length={7} onOtpSubmit={handleOtpSubmit} email={email} onOtpVerify={handleOtpVerify} />
-                </div>
-              )}
             </div>
           </div>
         </motion.div>
       </div>
     </>
   );
-};
-export default Forgot;
+  };
+
+export default EmailPage;

@@ -5,7 +5,7 @@ function Search({ messages = [] }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <div className="flex justify-between mb-12 px-4 py-2 bg-gray-100 shadow-lg rounded-lg ">
+    <div className="flex mb-[20px] justify-between px-4 py-2 bg-gray-100 shadow-lg rounded-lg">
       {/* Search Input Section */}
       <div className="flex items-center rounded-[5px] lg:ml-[300px]">
         <input

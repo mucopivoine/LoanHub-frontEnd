@@ -1,10 +1,15 @@
 
+import React from 'react';
+import PieChart from '../Components/Graphs/PieChart';
+
+
 import Pie from '../Pages/Pie'
+
 import Graph from '../Components/Graphs/Graph';
 import 'chart.js/auto';
+import LoansProfilePieChart from '../Data/LoansProfilePieChart';
 
 const LoanManagement = () => {
-  
   const pieChartData = {
     labels: ['Approved Loans', 'Pending Loans', 'Rejected Loans'],
     datasets: [
@@ -23,12 +28,14 @@ const LoanManagement = () => {
         label: 'Loan Applications',
         data: [10, 20, 15, 25, 30, 20], 
         fill: false,
-        borderColor: '#BB67FF',
+        borderColor: 'blue',
       },
     ],
   };
-
   return (
+
+    
+
     <div className='mx-auto  h-[50vh] flex flex-row mb-32 w-full '>
       <div className=' ml-[20%] w-[40%]'>
         <h3>Loan Applications Trend</h3>
@@ -37,9 +44,9 @@ const LoanManagement = () => {
       
       <div className='w-[100%] ml-96'>
         <h3>Loan Status</h3>
-        <Pie data={pieChartData} cl />
+        <Pie data={pieChartData} />
+
       </div>
-      
     </div>
   );
 };
