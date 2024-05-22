@@ -40,70 +40,75 @@ import ManagerDash from './Pages/ManagerDash'
 import MnageAnalytics from './Pages/MnageAnalytics'
 import Addmanager from './Pages/Addmanager'
 import Settings from './Pages/Settings'
+import NewDash from "./Pages/NewDash"
+import Pie from './Pages/Pie'
+
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Call />}>
-          <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
-          <Route path="contact" element={<Contacts />} />
-          <Route path="services" element={<Services />} />
-          <Route path="/auth" element={<AuthRoute />}>
-            <Route path="signin" element={<Login />} />
-            <Route path="signup" element={<SignUp />} />
-            <Route path="forgot" element={<Forgot />} />
-            <Route path="reset" element={<Reset />} />
-            <Route path="otpinput" element={<OtpInput />} />
-            <Route path="otpconfirm" element={<Otpconfirm />} />
-            <Route path="logout" element={<Logout />} /></Route>
-        </Route>
-        <Route path="/layout" element={<Layout />}>
+        <Route path='/' element={<Layout />}>
+          <Route path="/" element={<Call />}>
+            <Route path="/" element={<Main />} />
+            <Route path="/about" element={<About />} />
+            <Route path="contact" element={<Contacts />} />
+            <Route path="services" element={<Services />} />
+            <Route path="/auth" element={<AuthRoute />}>
+              <Route path="signin" element={<Login />} />
+              <Route path="signup" element={<SignUp />} />
+              <Route path="forgot" element={<Forgot />} />
+              <Route path="reset" element={<Reset />} />
+              <Route path="otpinput" element={<OtpInput />} />
+              <Route path="otpconfirm" element={<Otpconfirm />} />
+              <Route path="logout" element={<Logout />} /></Route>
+          </Route>
+          {/* <Route path="/layout" element={<Layout />}> */}
 
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
           <Route path="manager" element={<Manager />} />
-          
 
-        </Route>
-        <Route path="/admin" element={<Dashboards />}>
-          {/* <Route path="dashboard" element={<Dashboard />} /> */}
-          <Route path="navbar" element={<Navbar />} />
 
-          <Route path="manager" element={<Manager />} />
-          <Route path="teacher" element={<Teacher />} />
-          <Route path="viewdata" element={<ViewDataForm />} />
-        </Route>
-        <Route path="/admin" element={<Dashboards />}>
-          
-          {/* <Route path="navbar" element={<Navbar />} /> */}
+          {/* </Route> */}
+          <Route path="/admin" element={<Dashboards />}>
+            {/* <Route path="dashboard" element={<Dashboard />} /> */}
+            <Route path="navbar" element={<Navbar />} />
 
-          <Route path="teacher" element={<Teacher />} />
-          <Route path="viewdata" element={<ViewDataForm />} />
-          <Route path="maindash" element={<MainDash />} />
-          <Route path="rightside" element={<RightSide />} />
-          <Route path="loanmanage" element={<LoanManagement />} />
-          <Route path="graph" element={<Graph />} />
-          <Route path='sidebar' element={<Sidebar />} />
-          <Route path="piechart" elemnt={<PieChart />} />
-          <Route path="table" element={<TableComponent/>}/>
-          {/* <Route path="loanratespage" element={<LoanRatesPage/>}/> */}
-          <Route path="contactus" element={<ContactUs />} />
-          <Route path="viewteacher" element={<ViewTeacher />} />
-          <Route path="viewmanager" element={<ViewManager/>} />
-          <Route path="addmanager" element={<Addmanager/>} />
-          <Route path="analytics" element={<Analytics/>} />
-          <Route path="manageloans" element={<ManageLoans/>} />
-          <Route path="settings" element={<Settings/>} />
-        </Route>
-        <Route path="/barnav" element={<Barnav/>}>
-        <Route path="managerdash" element={<ManagerDash/>}/>
-        <Route path="barnav" element={<Barnav/>}/>
-        <Route path="teachers" element={<Teachers/>}/>
-        <Route path="loans" element={<Loans/>} />
-        
-        <Route path="manageAnalytics" element={<MnageAnalytics/>}/>
+            <Route path="manager" element={<Manager />} />
+            <Route path="teacher" element={<Teacher />} />
+            <Route path="viewdata" element={<ViewDataForm />} />
+          </Route>
+          <Route path="/admin" element={<Dashboards />}>
+
+            {/* <Route path="navbar" element={<Navbar />} /> */}
+            <Route path="Pie" element={<Pie />} />
+            <Route path="NewDash" element={<NewDash />} />
+            <Route path="teacher" element={<Teacher />} />
+            <Route path="viewdata" element={<ViewDataForm />} />
+            <Route path="maindash" element={<MainDash />} />
+            <Route path="rightside" element={<RightSide />} />
+            <Route path="loanmanage" element={<LoanManagement />} />
+            <Route path="graph" element={<Graph />} />
+            <Route path='sidebar' element={<Sidebar />} />
+            <Route path="piechart" elemnt={<PieChart />} />
+            <Route path="table" element={<TableComponent />} />
+            {/* <Route path="loanratespage" element={<LoanRatesPage/>}/> */}
+            <Route path="contactus" element={<ContactUs />} />
+            <Route path="viewteacher" element={<ViewTeacher />} />
+            <Route path="viewmanager" element={<ViewManager />} />
+            <Route path="addmanager" element={<Addmanager />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="manageloans" element={<ManageLoans />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          <Route path="/barnav" element={<Barnav />}>
+            <Route path="managerdash" element={<ManagerDash />} />
+            <Route path="barnav" element={<Barnav />} />
+            <Route path="teachers" element={<Teachers />} />
+            <Route path="loans" element={<Loans />} />
+            <Route path="manageAnalytics" element={<MnageAnalytics />} />
+          </Route>
         </Route>
       </Routes>
     </Router>

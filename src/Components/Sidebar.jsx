@@ -24,37 +24,37 @@ setIsOpen(!isOpen);
         initial={{ x: 0 }}
         animate={{ x: isOpen ? -300 : 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 h-full w-64  text-black  z-40">
+        className="fixed top-0 left-0 h-full w-64  text-black bg-red-500 z-40">
         <nav className="p-4 mt-16 w-full">
           <h1 className='text-center font-bold text-2xl'>Admin Dashboard</h1>
           <ul className='p-10'>
             <div className='flex items-center'>
             <FaTachometerAlt className='w-[30px]'/>
-            <li className=' rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white hover:border-2 '>
+            <li className=' rounded-md  p-3 hover:bg-white hover:text-red-500 hover:border-2 '>
               <Link to="/admin/maindash">Dashboard</Link>
             </li>
             </div>
             <div className='flex items-center'>
               <FaUser className='w-[30px]'/>
-            <li className=' rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white ' >
+            <li className=' rounded-md  p-3 hover:border-2 hover:bg-white hover:text-red-500 ' >
               <Link to="/admin/viewmanager">Managers</Link>
             </li>
             </div>
             <div className='flex items-center' >
               <FaUserFriends className='w-[30px]'/>
-            <li className='rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white '>
+            <li className='rounded-md  p-3 hover:bg-white hover:text-red-500 hover:border-2 '>
               <Link to="/admin/manageloans"> Teachers</Link>
             </li>
             </div>
             <div className='flex items-center'>
               <FaRegChartBar className='w-[30px]'/>
-            <li className='rounded-md p-3 hover:bg-[#FF8C8C] hover:text-white '>
+            <li className='rounded-md p-3 hover:bg-white hover:text-red-500 hover:border-2  '>
               <Link to="/admin/analytics"> Analytics</Link>
             </li>
             </div>
             <div className='flex items-center'>
             <IoMdExit className='w-[30px]'/>
-            <li className=' rounded-md  p-3 hover:bg-[#FF8C8C] hover:text-white '>
+            <li className=' rounded-md  p-3 hover:bg-white hover:text-red-500 hover:border-2  '>
               <Link to="/"> Logout</Link>
             </li>
             </div>

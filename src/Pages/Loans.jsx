@@ -1,5 +1,5 @@
 
-import React from "react";
+// import React from "react";
 import Barnav from "../Components/Barnav";
 const columns = [
   {

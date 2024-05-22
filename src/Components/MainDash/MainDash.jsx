@@ -5,7 +5,8 @@ import "./MainDash.css";
 import LoanManagement from "../../Pages/LoanManagement";
 import Sidebar from "../Sidebar";
 import TableComponent from "../../Pages/Tablecomponent";
-import Search from "../../Pages/Search";
+// import Search from "../../Pages/Search";
+import NewDash from "../../Pages/NewDash";
 const MainDash = () => {
   return (
     <div className="MainDash ">
@@ -14,11 +15,12 @@ const MainDash = () => {
       <div className="">
       <Sidebar/>
       </div>
-      <Search/>
+      {/* <Search/> */}
       <div className="">
-      <Cards />
+      <NewDash />
       <div className="mb-14 gap-0" >
-      <LoanManagement/>
+       <LoanManagement/> 
+      
       </div>
       <div>
       <TableComponent/>

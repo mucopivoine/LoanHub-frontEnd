@@ -25,6 +25,7 @@ const ViewManager = () => {
 //   }
   return (
     <>
+    
     <div>
     <Sidebar/>
     </div>
