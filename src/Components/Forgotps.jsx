@@ -45,9 +45,9 @@ const Forgotps = () => {
         );
         console.log(response.data);
         toast.success('Email sent successfully! Please check your email for the reset link.');
-        setTimeout(() => {
-          navigate('/auth/reset-password');
-        }, 3000);
+        // setTimeout(() => {
+        //   navigate('/auth/reset-password');
+        // }, 3000);
       } catch (error) {
         if (error.response) {
           console.log('Error response:', error.response.data);

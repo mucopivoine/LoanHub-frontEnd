@@ -25,7 +25,7 @@ setIsOpen(!isOpen);
         initial={{ x: 0 }}
         animate={{ x: isOpen ? -300 : 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed top-0 h-full w-64 bg-red-300 text-black left-0  z-40">
+        className="fixed top-0 h-full w-64 bg-red-400 text-black left-0  z-40">
         <nav className="p-4 mt-16 w-full">
           <h1 className='text-center font-bold text-2xl'>Admin Dashboard</h1>
           <ul className='p-10'>

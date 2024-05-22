@@ -42,12 +42,6 @@ setIsOpen(!isOpen);
             </li>
             </div>
             <div className='flex items-center'>
-              <FaCalculator className='w-[30px]'/>
-            <li className=' rounded-md  p-3 hover:bg-white hover:text-[#FF8C8C] ' >
-              <Link to="/layout/teacher">Loan Calculation</Link>
-            </li>
-            </div>
-            <div className='flex items-center'>
               <FaUser className='w-[30px]'/>
             <li className=' rounded-md  p-3 hover:bg-white hover:text-[#FF8C8C] ' >
               <Link to="/layout/teachercontact">Contact us</Link>

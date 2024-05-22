@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -47,23 +48,33 @@ function Login() {
         { email, password },
         { headers: { 'Content-Type': 'application/json' } }
       );
-      if (response.data && response.data.token) {
+      if (response.data) {
         // Save token to localStorage
+        console.log(response.data.token);
+        let token = response.data.token;
+        const expires = new Date();
+        expires.setTime(expires.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day
+        document.cookie = `jwt=${token};expires=${expires.toUTCString()};path=/`;
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user.role));
         console.log('Logged in successfully');
 
-        // Redirect based on user role
-        if (response.data.user && response.data.user.role) {
-          const userRole = response.data.user.role;
-          if (userRole === 'teacher') {
-            navigate('/layout/teacher');
-          } else if (userRole === 'manager') {
-            navigate('/barnav/managerdash');
-          } else if (userRole === 'admin') {
-            navigate('/admin/maindash');
+        // Show toast message
+        toast.success('Logged in successfully! Redirecting...');
+
+        // Redirect based on user role after a delay to allow toast to be seen
+        setTimeout(() => {
+          if (response.data.user && response.data.user.role) {
+            const userRole = response.data.user.role;
+            if (userRole === 'teacher') {
+              navigate('/layout/teacherloans');
+            } else if (userRole === 'manager') {
+              navigate('/barnav/managerdash');
+            } else if (userRole === 'admin') {
+              navigate('/admin/maindash');
+            }
           }
-        }
+        }, 2000); // 2 seconds delay for toast
       } else {
         console.error('Token not found in response:', response.data);
         setFetchError('Token not found in response');
@@ -140,6 +151,7 @@ function Login() {
           </div>
         </div>
       </motion.div>
+      <ToastContainer />
     </div>
   );
 }

@@ -82,7 +82,7 @@ function TeacherContact() {
         </div>
        
       </div>
-      <ManageTeachers/>
+      {/* <ManageTeachers/> */}
     </>
   );
 }

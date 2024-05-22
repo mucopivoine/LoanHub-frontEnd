@@ -5,6 +5,9 @@ import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 
+const cookie =document.cookie.split('jwt=')[1];
+
+
 const ViewManager = () => {
   const [managers, setManagers] = useState([]);
   const [error, setError] = useState('');
@@ -15,43 +18,40 @@ const ViewManager = () => {
     newPassword: '',
     confirm: ''
   });
+  const fetchManagers = async () => {
+    try {
+      console.log('Token:', cookie);
+          const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookie}`
+        }
+      });
 
-  useEffect(() => {
-    const fetchManagers = async () => {
-      try {
-        const token = getToken();
-        if (!token) {
-          setError('Authentication required. Please log in.');
-          return;
-        }
-        
-        const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        
-        setManagers(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 401) {
-          setError('Authentication required. Please log in.');
-        } else {
-          setError('Failed to fetch manager data');
-        }
-        console.error('Error fetching manager data:', error);
+      console.log('Response data:', response.data);
+
+      // Check if the response contains the users key and if it's an array
+      if (response.data && Array.isArray(response.data.users)) {
+        setManagers(response.data.users);
+      } else {
+        console.error('Expected an array but received:', response.data);
+        setError('Unexpected data format received from server');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching manager data:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        setError(error.response.data.error || 'Failed to fetch manager data');
+      } else {
+        setError('Failed to fetch manager data');
+      }
+  }
+};
+  useEffect(() => {
     fetchManagers();
   }, []);
 
-  // Utility functions for token management
-  const getToken = () => {
-    const token = localStorage.getItem('token');
-    // console.log('Token:', token); // Debugging statement
-    return token;
-  };
-
-  const handleDeletePerson = (id) => {
+  const handleDeletePerson = async(id) => {
     // Implement delete logic here
   };
 
@@ -72,8 +72,8 @@ const ViewManager = () => {
   };
 
   // Filter managers based on search term
-  const filteredManagers = managers.filter((manager) =>
-    manager.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredManagers = managers.filter(manager =>
+    manager.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -93,7 +93,6 @@ const ViewManager = () => {
           <Link to="/admin/contactus">
             <button
               className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
-             
             >
               Add Person
             </button>
@@ -135,22 +134,22 @@ const ViewManager = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredManagers.map((person) => (
-                    <tr key={person.id}>
+                  {Array.isArray(filteredManagers) && filteredManagers.map((manager) => (
+                    <tr key={manager.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{person.id}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{person.name}</div>
+                        <div className="text-sm text-gray-900">{manager.username}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{person.email}</div>
                       </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{person.phoneNumber}</div>
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium gap-4">
-                        <div className='flex gap-5'>
+                        <div className="flex gap-5">
                           <button
                             className=""
-                            onClick={() => handleDeletePerson(person.id)}
+                            onClick={() => handleDeletePerson(manager.id)}
                           >
                             <MdDelete />
                           </button>

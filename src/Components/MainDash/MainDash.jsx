@@ -7,6 +7,7 @@ import Sidebar from "../Sidebar";
 import TableComponent from "../../Pages/Tablecomponent";
 import Search from "../../Pages/Search";
 import ViewManager from "../../Pages/ViewManagers";
+import DashboardStatsGrid from "../../Data/DashboardStatsGrid";
 const MainDash = () => {
   return (
     <div className="MainDash ">
@@ -15,8 +16,8 @@ const MainDash = () => {
      
       <Search/>
       <div className="">
-      <Cards />
-      <div className="mb-14 gap-0" >
+      <DashboardStatsGrid/>
+      <div className="" >
       <LoanManagement/>
       </div>
       <div>

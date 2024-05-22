@@ -1,30 +1,40 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import { MdDelete } from 'react-icons/md';
+
+const cookie = document.cookie.split('jwt=')[1];
 
 function ViewTeachers() {
   const [teachers, setTeachers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const handleFetch = async () => {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    
     try {
+      console.log('Token:', cookie);
       const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacher/all', {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${cookie}`,
         }
       });
-      console.log('response.data', response.data);
-      setTeachers(response.data);
+
+      console.log('Response data:', response.data);
+
+      if (response.data && Array.isArray(response.data.users)) {
+        setTeachers(response.data.users);
+      } else {
+        console.error('Expected an array but received:', response.data);
+        setError('Unexpected data format received from server');
+      }
     } catch (error) {
       console.error('Error fetching teacher data:', error);
       if (error.response) {
-        console.log('Error response:', error.response.data);
+        console.error('Response data:', error.response.data);
         setError(error.response.data.error || 'Failed to fetch teacher data');
       } else {
         setError('Failed to fetch teacher data');
@@ -37,12 +47,48 @@ function ViewTeachers() {
   }, []);
 
   const handleDeleteTeacher = async (id) => {
-    // Handle delete teacher logic here
+    try {
+      const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/teacher/delete/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${cookie}`,
+        }
+      });
+
+      if (response.status === 200) {
+        setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher.TeacherId !== id));
+      } else {
+        setError('Failed to delete teacher');
+      }
+    } catch (error) {
+      console.error('Error deleting teacher:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        setError(error.response.data.error || 'Failed to delete teacher');
+      } else {
+        setError('Failed to delete teacher');
+      }
+    }
   };
 
   const filteredTeachers = teachers.filter((teacher) =>
-    teacher.name.toLowerCase().includes(searchTerm.toLowerCase())
+    teacher.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredTeachers.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(filteredTeachers.length / itemsPerPage);
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
 
   return (
     <div className="flex">
@@ -75,15 +121,19 @@ function ViewTeachers() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filteredTeachers.map((teacher) => (
+            {Array.isArray(currentItems) && currentItems.map((teacher) => (
               <tr key={teacher.id}>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.TeacherId}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{teacher.username}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <Link to={`/teacherdetails/${teacher.TeacherId}`} className="text-black hover:underline">
+                    {teacher.username}
+                  </Link>
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.email}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
                     className="text-red-600 hover:text-red-800"
-                    onClick={() => handleDeleteTeacher(teacher.id)}
+                    onClick={() => handleDeleteTeacher(teacher.TeacherId)}
                   >
                     <MdDelete />
                   </button>
@@ -92,6 +142,23 @@ function ViewTeachers() {
             ))}
           </tbody>
         </table>
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className="px-4 py-2 border border-gray-300 rounded-md"
+          >
+            Previous
+          </button>
+          <span>Page {currentPage} of {totalPages}</span>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 border border-gray-300 rounded-md"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

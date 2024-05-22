@@ -90,16 +90,25 @@ function SignUp() {
     setIsLoading(true);
     if (isValid() == true) {
       try {
-
+        console.log({
+          username: username,
+          email: email,
+          password: password,
+          firstName: firstname,
+          lastName: lastname,
+          schoolName: schoolname,
+          phoneNumber: phonenumber,
+          teacherId: teacherid,
+        })
         axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
           username: username,
           email: email,
           password: password,
           firstName: firstname,
-          LastName: lastname,
+          lastName: lastname,
           schoolName: schoolname,
           phoneNumber: phonenumber,
-          teacher_ID: teacherid,
+          teacherId: teacherid,
         }, {
           headers: {
             "Content-Type": 'application/json',

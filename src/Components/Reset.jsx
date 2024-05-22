@@ -50,7 +50,7 @@ function Reset() {
         e.preventDefault();
         if(isValid()== true) {
             try {
-                axios.post('http://umwarimu-loan-hub-api.onrender.com/api/teacher/resetpassword', {
+             const response = await axios.post('http://umwarimu-loan-hub-api.onrender.com/api/teacher/resetpassword', {
                     email:email,
                     newPassword:password,
                     confrim:confirmPassword,
@@ -133,7 +133,7 @@ function Reset() {
                             ): null}
                         </div>
                         <div className='flex flex-col'>
-                            <Link to="/"><button type='submit' className='bg-red-500 w-50 border-2 rounded-md p-2 px-[100px] mx-auto mt-5 text-white' onClick={handleReset}>Reset </button></Link>
+                            <button type='submit' className='bg-red-500 w-50 border-2 rounded-md p-2 px-[100px] mx-auto mt-5 text-white' onClick={handleReset}>Reset </button>
 
                             <Link to="/auth/signup" className='text-md text-red-700 pt-5 text-right'>Go back</Link>
                         </div>

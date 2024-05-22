@@ -13,7 +13,7 @@ function Search() {
           className="bg-[#F8F9FC] h-[40px] outline-none pl-[13px] w-[350px] rounded-[5px] placeholder:text-[14px] leading-[20px] font-normal"
           placeholder="Search for..."
         />
-        <div className="bg-purple-400 h-[40px] w-[40px] flex items-center justify-center cursor-pointer rounded-tr-[5px] rounded-br-[5px] ">
+        <div className="bg-gray-400 h-[40px] w-[40px] flex items-center justify-center cursor-pointer rounded-tr-[5px] rounded-br-[5px] ">
           <FaSearch color="white"  />
         </div>
       </div>
