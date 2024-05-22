@@ -25,7 +25,7 @@ const TableComponent = () => {
     <>
     <div className="flex flex-col w-[70%] lg:ml-[20%] ">
     <button
-        className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
+        className="bg-red-400 hover:bg-red-300 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
         onClick={handleAddPerson}
       >
         Add Person

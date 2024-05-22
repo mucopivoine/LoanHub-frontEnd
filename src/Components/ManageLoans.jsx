@@ -1,5 +1,6 @@
 import Sidebar from "./Sidebar";
-import React, { useState } from "react";
+import { useState } from "react";
+import Search from "../Pages/Search";
 const columns = [
   {
     Header: "ID",
@@ -58,6 +59,8 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
   );
   return (
     <>
+    
+    
           <Sidebar />
           <div>
           <input
@@ -115,13 +118,17 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
 const ManageLoans = () => {
   const [searchTerm, setSearchTerm] = useState("");
       return (
+        <>
+        {/* <Search/> */}
       <div className="p-6 w-[80%] ml-[20%]">
+      
         <h2 className="text-2xl font-semibold mb-4">Manage Loans</h2>
 
         <Table columns={columns} data={data}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm} />
       </div>
+      </>
       );
 };
       export default ManageLoans;

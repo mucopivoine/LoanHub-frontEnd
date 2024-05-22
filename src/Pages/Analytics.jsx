@@ -1,13 +1,16 @@
 
 import Sidebar from '../Components/Sidebar'
 import LoanManagement from './LoanManagement'
-import Cards from '../Components/Cards/Cards'
+import NewDash from '../Pages/NewDash'
+
+
+
 
 function Analytics() {
   return (
     <div>
         <Sidebar/>
-        <Cards />
+        <NewDash/>
         <LoanManagement/>
     </div>
   )

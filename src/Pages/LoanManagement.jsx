@@ -1,16 +1,16 @@
-// import React from 'react';
-import PieChart from '../Components/Graphs/PieChart';
+
+import Pie from '../Pages/Pie'
 import Graph from '../Components/Graphs/Graph';
 import 'chart.js/auto';
 
 const LoanManagement = () => {
-  // Sample data for the pie chart and graph
+  
   const pieChartData = {
     labels: ['Approved Loans', 'Pending Loans', 'Rejected Loans'],
     datasets: [
       {
         label: 'Loan Status',
-        data: [30, 20, 10], // Sample data percentages
+        data: [30, 20, 10], 
         backgroundColor: ['#BB67FF', '#FC929D', 'rgb(248, 213, 155)'],
       },
     ],
@@ -21,7 +21,7 @@ const LoanManagement = () => {
     datasets: [
       {
         label: 'Loan Applications',
-        data: [10, 20, 15, 25, 30, 20], // Sample data for loan applications over months
+        data: [10, 20, 15, 25, 30, 20], 
         fill: false,
         borderColor: '#BB67FF',
       },
@@ -29,15 +29,15 @@ const LoanManagement = () => {
   };
 
   return (
-    <div className='mx-auto  h-[50vh] flex flex-row mb-32'>
+    <div className='mx-auto  h-[50vh] flex flex-row mb-32 w-full '>
       <div className=' ml-[20%] w-[40%]'>
         <h3>Loan Applications Trend</h3>
         <Graph data={graphData} />
       </div>
-      {/* <h2>Loan Management Dashboard</h2> */}
-      <div className='w-[50%]  '>
+      
+      <div className='w-[100%] ml-96'>
         <h3>Loan Status</h3>
-        <PieChart data={pieChartData} cl />
+        <Pie data={pieChartData} cl />
       </div>
       
     </div>

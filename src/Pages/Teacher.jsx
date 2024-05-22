@@ -74,6 +74,7 @@ function Teacher() {
   return (
     <>
     <Sidemenu/>
+    
 
       <div className="ml-64 p-10">
         <h1 className='font-bold text-2xl'>Teacher Account</h1>
