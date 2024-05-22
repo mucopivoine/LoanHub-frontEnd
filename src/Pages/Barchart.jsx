@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart } from 'recharts';
 const Barchart = () => {
   const data = [

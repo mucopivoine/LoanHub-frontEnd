@@ -1,5 +1,5 @@
-import React from 'react'
-import Barnav from '../Components/Barnav'
+
+// import Barnav from '../Components/Barnav'
 import NewData from '../Data/NewData'
 import LoanManagement from './LoanManagement'
 

@@ -90,6 +90,7 @@ function SignUp() {
     setIsLoading(true);
     if (isValid() == true) {
       try {
+
         console.log({
           username: username,
           email: email,
@@ -100,6 +101,7 @@ function SignUp() {
           phoneNumber: phonenumber,
           teacherId: teacherid,
         })
+
         axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
           username: username,
           email: email,

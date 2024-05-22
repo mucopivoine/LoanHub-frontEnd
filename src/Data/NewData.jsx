@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import  { PureComponent } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 const data = [
   { name: 'Year 1', uv: 4000, pv: 2400, amt: 2400 },
@@ -14,8 +14,8 @@ export default class Example extends PureComponent {
   render() {
     return (
         <div className="mt-10 lg:ml-[270px] ">
-            
-      <ResponsiveContainer width="70%" height={300} >
+      <ResponsiveContainer width="80%" height={500} >
+
         <BarChart
           width={500}
           height={300}
@@ -27,8 +27,8 @@ export default class Example extends PureComponent {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" fill="#bb67ff" />
-          <Bar dataKey="uv" fill="#FC929D" />
+          <Bar dataKey="pv" fill="#3B82F6" />
+          <Bar dataKey="uv" fill="#EF4444" />
         </BarChart>
       </ResponsiveContainer>
       </div>

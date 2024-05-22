@@ -1,5 +1,5 @@
 
-import React, {useState} from "react";
+import  {useState} from "react";
 import Barnav from "../Components/Barnav";
 const columns = [
   {
@@ -52,6 +52,14 @@ const data = [
     amount: "$8000",
     status: "Completed",
   },
+  {
+    id: 5,
+    teacherName: "Mary Anna",
+    loanType: "short term",
+    amount: "$6000",
+    status: "pending",
+  },
+  
 ];
 const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
   const filteredData = data.filter((row) =>
@@ -95,8 +103,8 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
                   <span
                     className={`px-2 py-1 font-semibold leading-tight text-white cursor-pointer ${
                       row[column.accessor] === "Pending"
-                        ? "bg-red-500"
-                        : "bg-green-500"
+                        ? '#BB67FF'
+                        : '#FC929D'
                     }`}
                   >
                     {row[column.accessor]}

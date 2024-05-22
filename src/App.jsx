@@ -1,28 +1,9 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import Manager from './Pages/Manager';
-import Teacher from './Pages/Teacher';
-import AuthRoute from './Pages/AuthRoute';
-import SignUp from './Components/SignUp';
-import Forgot from './Components/Forgot';
-import Login from './Components/Login';
-import Reset from './Components/Reset';
-import Call from './Components/Call';
-import About from './Components/About';
-import OtpInput from './Components/OtpInput';
-import Otpconfirm from './Components/Otpconfirm';
-import Main from './Components/Main';
-import Services from './Components/Services';
-import Contacts from './Components/Contacts';
-import ViewDataForm from './Pages/ViewData';
-import Logout from './Components/Logout';
-import Navbar from './Components/Navbar';
-import Dashboards from './Pages/Dahboards';
-import MainDash from './Components/MainDash/MainDash';
-import RightSide from './Components/RightSide/RightSide';
-import LoanManagement from './Pages/LoanManagement';
-import Graph from './Components/Graphs/Graph';
+
 import Barchart from './Pages/Barchart';
 import Sidebar from './Components/Sidebar';
 import ContactUs from './Pages/ContactUs';
@@ -48,26 +29,56 @@ import TeacherProfile from './Components/TeacherProfile';
 import ViewTeachers from './Components/ViewTeachers';
 import TeacherDetails from './Pages/TeacherDetails';
 
+
+import Manager from './Pages/ManagerDash'
+// import Manager from './Pages/Manager'
+import Teacher from './Pages/Teacher'
+import AuthRoute from './Pages/AuthRoute'
+import SignUp from './Components/SignUp'
+import Forgot from './Components/Forgot'
+import Login from './Components/Login'
+import Reset from './Components/Reset'
+import Call from './Components/Call'
+import About from './Components/About'
+import OtpInput from './Components/OtpInput'
+import Otpconfirm from './Components/Otpconfirm'
+import Main from './Components/Main'
+import Services from './Components/Services'
+import Contacts from './Components/Contacts'
+import ViewDataForm from './Pages/ViewData'
+import Logout from './Components/Logout'
+import Navbar from './Components/Navbar'
+import Dashboards from './Pages/Dahboards'
+import MainDash from './Components/MainDash/MainDash'
+import RightSide from './Components/RightSide/RightSide'
+import LoanManagement from './Pages/LoanManagement'
+import Graph from './Components/Graphs/Graph'
+import Settings from './Pages/Settings'
+import NewDash from "./Pages/NewDash"
+import Pie from './Pages/Pie'
+
+
+
 function App() {
   return (
     <Router>
       <Routes>
+
         <Route path="/" element={<Call />}>
           <Route index element={<Main />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contacts />} />
           <Route path="services" element={<Services />} />
-          <Route path="auth" element={<AuthRoute />}>
-            <Route path="signin" element={<Login />} />
-            <Route path="signup" element={<SignUp />} />
-            <Route path="forgot" element={<Forgot />} />
-            <Route path="reset-password" element={<Reset />} />
-            <Route path="forgotps" element={<Forgotps />} />
-            <Route path="otpinput" element={<OtpInput />} />
-            <Route path="otpconfirm" element={<Otpconfirm />} />
-            <Route path="logout" element={<Logout />} />
-          </Route>
         </Route>
+        <Route path="/auth" element={<AuthRoute />}>
+              <Route path="signin" element={<Login />} />
+              <Route path="signup" element={<SignUp />} />
+              <Route path="forgot" element={<Forgot />} />
+              <Route path="reset" element={<Reset />} />
+              <Route path="otpinput" element={<OtpInput />} />
+              <Route path="otpconfirm" element={<Otpconfirm />} />
+              <Route path="logout" element={<Logout />} />
+          </Route>
         <Route path="/layout" element={<Layout />}>
           <Route path="teacherloans" element={<TeacherLoans />} />
           <Route path="viewteacher" element={<ViewTeacher />} />
@@ -81,6 +92,8 @@ function App() {
           <Route path="navbar" element={<Navbar />} />
           <Route path="teacherdetails/:id" element={<TeacherDetails />} />
           <Route path="manager" element={<Manager />} />
+          <Route path="Pie" element={<Pie />} />
+            <Route path="NewDash" element={<NewDash />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
           <Route path="maindash" element={<MainDash />} />
@@ -104,7 +117,10 @@ function App() {
           <Route path="teachers" element={<Teachers />} />
           <Route path="loans" element={<Loans />} />
           <Route path="manageAnalytics" element={<MnageAnalytics />} />
-        </Route>
+          <Route path="teacher" element={<Teacher />} />
+          <Route path="viewdata" element={<ViewDataForm />} />
+          <Route path="manager" element={<Manager />} />
+          </Route>
       </Routes>
     </Router>
   );
