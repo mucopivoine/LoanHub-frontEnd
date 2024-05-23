@@ -25,7 +25,7 @@ setIsOpen(!isOpen);
         initial={{ x: 0 }}
         animate={{ x: isOpen ? -300 : 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed top-0  h-full w-66 bg-red-300 text-black left-0  z-40">
+        className="fixed top-0  h-full w-66 bg-red-500 text-black left-0  z-40">
         <nav className="p-4 mt-16 w-full">
           <h1 className='text-center font-bold text-2xl'>Teacher Dashboard</h1>
           <ul className='p-10'>
@@ -50,7 +50,7 @@ setIsOpen(!isOpen);
             <div className='flex items-center'>
             <IoMdExit className='w-[30px]'/>
             <li className=' rounded-md  p-3 hover:bg-white hover:text-[#FF8C8C] '>
-              <Link to="/auth/layout">Logout</Link>
+              <Link to="/auth/logout">Logout</Link>
             </li>
             </div>
           </ul>

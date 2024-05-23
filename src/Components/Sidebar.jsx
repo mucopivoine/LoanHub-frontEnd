@@ -55,6 +55,13 @@ setIsOpen(!isOpen);
             </li>
             </div>
             <div className='flex items-center'>
+            <FaUserFriends className='w-[30px]'/>
+            <li className=' rounded-md  p-3 hover:border-2 hover:bg-white hover:text-red-500 ' >
+
+              <Link to="/admin/database">Database</Link>
+            </li>
+            </div>
+            <div className='flex items-center'>
               <FaRegChartBar className='w-[30px]'/>
 
             <li className='rounded-md p-3 hover:bg-white hover:text-red-500 hover:border-2  '>

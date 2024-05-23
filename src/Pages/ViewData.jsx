@@ -81,7 +81,7 @@ function ViewData() {
           <h2 className="text-xl font-bold mb-4">Loan Application Form</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4 flex flex-wrap -mx-2">
-            <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+            {/* <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
                 <label className="block text-gray-700">TeacherId</label>
                 <input
                   type="text"
@@ -90,7 +90,7 @@ function ViewData() {
                   className="w-full p-2 border border-gray-300 rounded-md mt-2"
                   required
                 />
-              </div>
+              </div> */}
               <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
                 <label className="block text-gray-700">Full Name</label>
                 <input

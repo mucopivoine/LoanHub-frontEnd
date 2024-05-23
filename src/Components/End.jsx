@@ -1,6 +1,3 @@
-
-
-
 function End() {
   return (
     <footer className="bg-gray-800 text-gray-300">
