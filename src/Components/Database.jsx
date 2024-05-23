@@ -1,13 +1,20 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import { MdDelete } from 'react-icons/md';
+import { FaEdit } from 'react-icons/fa';
 
-const cookie = document.cookie.split('jwt=')[1];
+const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+};
 
-function ViewTeachers() {
+const cookie = getCookie('jwt');
+
+function Database() {
   const [teachers, setTeachers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
@@ -15,28 +22,36 @@ function ViewTeachers() {
   const itemsPerPage = 10;
 
   const handleFetch = async () => {
+    if (!cookie) {
+      console.error('No JWT token found in cookies.');
+      setError('No authentication token found. Please log in.');
+      return;
+    }
+
     try {
       console.log('Token:', cookie);
-      const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacher/all', {
+      const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${cookie}`,
         }
       });
 
+      console.log('fetching data');
       console.log('Response data:', response.data);
 
       if (response.data && Array.isArray(response.data.users)) {
+        console.log('Data received:', response.data.users);
         setTeachers(response.data.users);
       } else {
         console.error('Expected an array but received:', response.data);
         setError('Unexpected data format received from server');
       }
     } catch (error) {
-      console.error('Error fetching teacher data:', error);
+      console.error('Error fetching teacher data:', error.message);
       if (error.response) {
         console.error('Response data:', error.response.data);
-        setError(error.response.data.error || 'Failed to fetch teacher data');
+        setError(error.response.data.message || 'Failed to fetch teacher data');
       } else {
         setError('Failed to fetch teacher data');
       }
@@ -48,9 +63,15 @@ function ViewTeachers() {
   }, []);
 
   const handleDeleteTeacher = async (id) => {
+    if (!cookie) {
+      console.error('No JWT token found in cookies.');
+      setError('No authentication token found. Please log in.');
+      return;
+    }
+
     try {
       console.log('Deleting teacher with ID:', id);
-      const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/teacher/delete/${id}`, {
+      const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/delete/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${cookie}`,
@@ -64,10 +85,10 @@ function ViewTeachers() {
         setError('Failed to delete teacher');
       }
     } catch (error) {
-      console.error('Error deleting teacher:', error);
+      console.error('Error deleting teacher:', error.message);
       if (error.response) {
         console.error('Response data:', error.response.data);
-        setError(error.response.data.error || 'Failed to delete teacher');
+        setError(error.response.data.message || 'Failed to delete teacher');
       } else {
         setError('Failed to delete teacher');
       }
@@ -75,7 +96,7 @@ function ViewTeachers() {
   };
 
   const filteredTeachers = teachers.filter((teacher) =>
-    teacher.username.toLowerCase().includes(searchTerm.toLowerCase())
+    teacher.names.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Pagination logic
@@ -83,6 +104,7 @@ function ViewTeachers() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredTeachers.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredTeachers.length / itemsPerPage);
+
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
@@ -111,10 +133,13 @@ function ViewTeachers() {
                 ID
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
+                Names
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
+                School Name
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Salary
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
@@ -124,13 +149,10 @@ function ViewTeachers() {
           <tbody className="bg-white divide-y divide-gray-200">
             {Array.isArray(currentItems) && currentItems.map((teacher) => (
               <tr key={teacher.TeacherId}>
-                <td className="px-6 py-4 whitespace-nowrap">{teacher.TeacherId}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Link to={`/teacherdetails/${teacher.TeacherId}`} className="text-black hover:underline">
-                    {teacher.username}
-                  </Link>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">{teacher.email}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{teacher.teacher_ID}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{teacher.names}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{teacher.schoolName}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{teacher.salary}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
                     className="text-red-600 hover:text-red-800"
@@ -165,4 +187,4 @@ function ViewTeachers() {
   );
 }
 
-export default ViewTeachers;
+export default Database;

@@ -3,7 +3,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import Manager from './Pages/Manager';
-
 import Barchart from './Pages/Barchart';
 import Sidebar from './Components/Sidebar';
 import ContactUs from './Pages/ContactUs';
@@ -20,7 +19,6 @@ import Loans from './Pages/Loans';
 import ManagerDash from './Pages/ManagerDash';
 import MnageAnalytics from './Pages/MnageAnalytics';
 import Addmanager from './Pages/Addmanager';
-import Settings from './Pages/Settings';
 import ViewData from './Pages/ViewData';
 import TeacherLoans from './Pages/TeacherLoans';
 import TeacherContact from './Pages/TeacherContact';
@@ -28,10 +26,6 @@ import ManageTeachers from './Pages/ManageTechers';
 import TeacherProfile from './Components/TeacherProfile';
 import ViewTeachers from './Components/ViewTeachers';
 import TeacherDetails from './Pages/TeacherDetails';
-
-
-import Manager from './Pages/ManagerDash'
-// import Manager from './Pages/Manager'
 import Teacher from './Pages/Teacher'
 import AuthRoute from './Pages/AuthRoute'
 import SignUp from './Components/SignUp'
@@ -56,6 +50,7 @@ import Graph from './Components/Graphs/Graph'
 import Settings from './Pages/Settings'
 import NewDash from "./Pages/NewDash"
 import Pie from './Pages/Pie'
+import Database from './Components/Database';
 
 
 
@@ -69,15 +64,17 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contacts />} />
           <Route path="services" element={<Services />} />
-        </Route>
+        
         <Route path="/auth" element={<AuthRoute />}>
               <Route path="signin" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="forgot" element={<Forgot />} />
-              <Route path="reset" element={<Reset />} />
+              <Route path="forgotps" element={<Forgotps />} />
+              <Route path="reset-password" element={<Reset />} />
               <Route path="otpinput" element={<OtpInput />} />
               <Route path="otpconfirm" element={<Otpconfirm />} />
               <Route path="logout" element={<Logout />} />
+          </Route>
           </Route>
         <Route path="/layout" element={<Layout />}>
           <Route path="teacherloans" element={<TeacherLoans />} />
@@ -93,7 +90,8 @@ function App() {
           <Route path="teacherdetails/:id" element={<TeacherDetails />} />
           <Route path="manager" element={<Manager />} />
           <Route path="Pie" element={<Pie />} />
-            <Route path="NewDash" element={<NewDash />} />
+          <Route path="NewDash" element={<NewDash />} />
+          <Route path="database" element={<Database />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
           <Route path="maindash" element={<MainDash />} />

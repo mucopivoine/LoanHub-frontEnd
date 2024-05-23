@@ -22,7 +22,7 @@ const MainDash = () => {
       <DashboardStatsGrid/>
       </div>
       <div className="">
-      <NewDash />
+      {/* <NewDash /> */}
       <div className="mb-14 gap-0" >
        <LoanManagement/> 
       </div>

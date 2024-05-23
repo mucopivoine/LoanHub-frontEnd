@@ -14,7 +14,8 @@ function ManagerDash() {
    <div>
     <Search/>
     <NewData/>
-    <Teachers/>
+    {/* <Teachers/> */}
+    
    </div>
    </>
   )
