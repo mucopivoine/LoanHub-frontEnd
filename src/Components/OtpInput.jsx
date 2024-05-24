@@ -44,8 +44,7 @@ const OtpInput = ( length = 7, onOtpSubmit = () => {}, email ) => {
       }, {
         headers: {
           "Content-Type": 'application/json',
-        }, 
-        withCredentials: true,
+        },  withCredentials: true,
       });
 
       console.log(response.data);

@@ -51,27 +51,20 @@ function Reset() {
         e.preventDefault();
         if (isValid()) {
             try {
-                console.log('Sending request with data:', {
-                    email: email,
-                    newPassword: password,
-                    confirm: confirmPassword,
-                    token: token,
-                });
                 const response = await axios.post(
                     'http://umwarimu-loan-hub-api.onrender.com/api/teacher/resetpassword',
                     {
                         email: email,
                         newPassword: password,
-                        confirm: confirmPassword,
-                        token: token,
+                        confirm: confirmPassword
                     },
                     {
                         headers: {
                             "Content-Type": 'application/json',
                         },
+                        withCredentials: true,
                     }
                 );
-                console.log('Response data:', response.data);
                 setTimeout(() => {
                     navigate('/auth/signin');
                 }, 3000);

@@ -56,6 +56,7 @@ function ViewData() {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
+        withCredentials: true,
         body: formData,
       });
 

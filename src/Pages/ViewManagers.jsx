@@ -4,7 +4,7 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
-
+const cookie = document.cookie.split('jwt=')[1];
 const cookie =document.cookie.split('jwt=')[1];
 const ViewManager = () => {
   const [managers, setManagers] = useState([]);
@@ -16,13 +16,14 @@ const ViewManager = () => {
     newPassword: '',
     confirm: ''
   });
+
   const fetchManagers = async () => {
     try {
       console.log('Token:', cookie);
-          const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
+      const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${cookie}`
+          Authorization: `Bearer ${cookie}`,
         }
       });
       console.log('Response data:', response.data);
@@ -41,11 +42,19 @@ const ViewManager = () => {
       } else {
         setError('Failed to fetch manager data');
       }
-  }
-};
+    }
+  };
+
   useEffect(() => {
     fetchManagers();
   }, []);
+
+  const handleDeletePerson = async (id) => {
+    // Implement delete logic here
+  };
+
+  const handleEditClick = (manager) => {
+    setEditingManager(manager);
   const handleDeletePerson = async() => {
     // Implement delete logic here
   };
@@ -68,7 +77,6 @@ const ViewManager = () => {
   );
   return (
     <>
-    
     <div>
     <Sidebar/>
     </div>
@@ -79,7 +87,6 @@ const ViewManager = () => {
 
       
 >
-      
         Add Person
       </button></Link>
       </div>
@@ -116,11 +123,12 @@ const ViewManager = () => {
                     <span className="sr-only">Edit</span>
                   </th>
                 </tr>
+
                 <tbody className="bg-white divide-y divide-gray-200">
                   {Array.isArray(filteredManagers) && filteredManagers.map((manager) => (
-                    <tr key={manager.id}>
+                    <tr key={manager._id}>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{manager.username}</div>
+                        <div className="text-sm text-gray-900">{manager.firstName}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{manager.email}</div>
@@ -132,13 +140,17 @@ const ViewManager = () => {
                         <div className="flex gap-5">
                           <button
                             className=""
-                            onClick={() => handleDeletePerson(manager.id)}
+                            onClick={() => handleDeletePerson(manager._id)}
                           >
                             <MdDelete />
                           </button>
                           <button
                             className="p-2"
+
+                            onClick={() => handleEditClick(manager)}
+
                             onClick={() => handleEditClick()}
+
                           >
                             <FaEdit />
                           </button>
