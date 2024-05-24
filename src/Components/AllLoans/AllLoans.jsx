@@ -1,47 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Sidebar from './Sidebar';
+import Sidebar from '../Sidebar';
 import { MdDelete } from 'react-icons/md';
 
 const cookie = document.cookie.split('jwt=')[1];
 
-function Database() {
+function AllLoans() {
   const [teachers, setTeachers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const navigate = useNavigate();
 
   const handleFetch = async () => {
     try {
       console.log('Token:', cookie);
-      const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', {
+      const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/getAll', {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${cookie}`, // Corrected template literal usage
+          'Authorization': `Bearer ${cookie}`,
         },
         withCredentials: true,
       });
 
-      console.log('fetching data');
-      console.log('Response data:', response.data);
+      console.log('API Response:', response); // Log the entire response object
 
-      if (response.data && Array.isArray(response.data.teachers)) {
-        setTeachers(response.data.teachers);
-        console.log('Teachers set:', response.data.teachers);
+      if (response.data && Array.isArray(response.data.loans)) {
+        // Assuming 'loans' is the key containing the array of teacher data
+        setTeachers(response.data.loans.map((loan) => ({
+          fullName: loan.fullName,
+          phoneNumber: loan.phoneNumber,
+          workSchool: loan.workSchool,
+          amountRequested: loan.amountRequested,
+          teacher_ID: loan.teacher_ID,
+        })));
       } else {
-        console.error('Expected an array but received:', response.data);
+        console.error('Unexpected data format received from server:', response.data);
         setError('Unexpected data format received from server');
       }
     } catch (error) {
       console.error('Error fetching teacher data:', error.message);
       if (error.response) {
         setError(error.response.data.message || 'Failed to fetch teacher data');
-        if (error.response.status === 403) {
-          navigate('/login');  // Redirect to login page if token is invalid
-        }
       } else {
         setError('Failed to fetch teacher data');
       }
@@ -59,7 +59,8 @@ function Database() {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${cookie}`, // Corrected template literal usage
-        }
+        },
+        withCredentials: true,
       });
 
       console.log('Delete response status:', response.status);
@@ -80,7 +81,7 @@ function Database() {
   };
 
   const filteredTeachers = teachers.filter((teacher) => {
-    return teacher.names && teacher.names.toLowerCase().includes(searchTerm.toLowerCase());
+    return teacher.fullName && teacher.fullName.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -113,16 +114,16 @@ function Database() {
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                ID
-              </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Full Name
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 School Name
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Salary
+                Phone Number
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Amount
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
@@ -131,11 +132,11 @@ function Database() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {Array.isArray(currentItems) && currentItems.map((teacher) => (
-              <tr key={teacher._id}>
-                <td className="px-6 py-4 whitespace-nowrap">{teacher.teacher_ID}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{teacher.names}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{teacher.schoolName}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{teacher.salary}</td>
+              <tr key={teacher.teacher_ID}>
+                <td className="px-6 py-4 whitespace-nowrap">{teacher.fullName}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{teacher.phoneNumber}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{teacher.workSchool}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{teacher.amountRequested}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
                     className="text-red-600 hover:text-red-800"
@@ -165,9 +166,9 @@ function Database() {
             Next
           </button>
         </div>
-      </div>
+      </div> 
     </div>
   );
 }
 
-export default Database;
+export default AllLoans;
