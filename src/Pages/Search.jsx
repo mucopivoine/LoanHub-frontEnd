@@ -5,9 +5,8 @@ function Search({ messages = [] }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <div className="flex mb-[20px] justify-between px-4 py-2 bg-gray-100 shadow-lg rounded-lg">
-      {/* Search Input Section */}
-      <div className="flex items-center rounded-[5px] lg:ml-[300px]">
+    <div className="flex mb-10 w-full justify-between top-0 bg-gray-100 shadow-lg rounded-lg">
+      <div className="flex items-center rounded-[5px] lg:ml-[100px]">
         <input
           type="text"
           className="bg-[#F8F9FC] h-[40px] outline-none pl-[13px] w-[350px] rounded-[5px] placeholder:text-[14px] leading-[20px] font-normal"
@@ -17,8 +16,6 @@ function Search({ messages = [] }) {
           <FaSearch color="white" />
         </div>
       </div>
-
-      {/* User Profile Section */}
       <div className="flex items-center gap-[15px] relative">
         <div className="flex items-center gap-[25px] border-r-[1px] pr-[25px]">
           <FaRegBell />
@@ -63,5 +60,4 @@ function Search({ messages = [] }) {
     </div>
   );
 }
-
 export default Search;

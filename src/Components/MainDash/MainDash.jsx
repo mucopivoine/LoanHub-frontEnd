@@ -13,27 +13,35 @@ import DashboardStatsGrid from "../../Data/DashboardStatsGrid";
 import NewDash from "../../Pages/NewDash";
 const MainDash = () => {
   return (
-    <div className="MainDash ">
-      <div className="">
+    <div className="MainDash flex flex-row">
+      <div className="fixed">
+        <Sidebar/>
+      </div>
+      <div>
+        <Search/>
+        <DashboardStatsGrid/>
+        <LoanManagement/>
+      </div>
+      {/* <div className="">
       <div className="">
       <Search/>
       </div>
-      <div className="lg:ml-[10%] ">
+      <div className="">
       <DashboardStatsGrid/>
       </div>
       <div className="">
       {/* <NewDash /> */}
-      <div className="lg:ml-[20%]" >
-       <LoanManagement/> 
-      </div>
-      <div>
-      <ViewManager/>
-      </div>
-       <div>
+      {/* <div className="" > */}
+       {/* <LoanManagement/>  */}
+      {/* </div>
+      <div> */}
+      {/* <ViewManager/> */}
+      {/* </div>
+       <div> */}
         {/* <Settings/> */}
-      </div> 
-      </div>
-      </div>
+      {/* </div> 
+      </div> */}
+      {/* </div> */} 
     </div>
   );
 };

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import Sidemenu from '../Components/Sidemenu';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ViewData() {
   const [fullName, setFullName] = useState('');
   const [workSchool, setSchoolName] = useState('');
   const [email, setEmail] = useState('');
+  const [maritalStatus, setMaritalStatus] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [teacher_ID, setTeacherId] = useState('');
-  const [teacherId, setTeacherID] = useState('');
-  const [bankkAccountNumber, setBankNumber] = useState('');
+  const [bankAccountNumber, setBankNumber] = useState('');
   const [amountRequested, setLoanAmount] = useState('');
   const [purpose, setPurpose] = useState('');
   const [monthlySalary, setMonthlyIncome] = useState('');
@@ -18,7 +20,7 @@ function ViewData() {
   const handleProofOfEmploymentUpload = (e) => {
     setProofOfEmployment(e.target.files[0]);
   };
-
+  // const navigate = useNavigate();
   const handleCopyOfNationalIdUpload = (e) => {
     setCopyOfNationalId(e.target.files[0]);
   };
@@ -26,17 +28,16 @@ function ViewData() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare form data
     const formData = new FormData();
     formData.append('fullName', fullName);
     formData.append('workSchool', workSchool);
     formData.append('email', email);
     formData.append('phoneNumber', phoneNumber);
-    formData.append('teacher_ID', teacher_ID);
-    formData.append('teacherId', teacherId);
-    formData.append('bankkAccountNumber', bankkAccountNumber);
+    formData.append('teacher_ID', teacher_ID); // Ensure this matches the expected format
+    formData.append('bankAccountNumber', bankAccountNumber);
     formData.append('amountRequested', amountRequested);
     formData.append('purpose', purpose);
+    formData.append('maritalStatus', maritalStatus.toLowerCase());
     formData.append('monthlySalary', monthlySalary);
 
     if (proofOfEmployment) {
@@ -47,28 +48,29 @@ function ViewData() {
       formData.append('copyOfNationalId', copyOfNationalId);
     }
 
-    // Debug: Log FormData entries
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
+    const token = document.cookie.split('jwt=')[1];
 
     try {
       const response = await fetch('https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/add', {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
         body: formData,
       });
 
       if (response.ok) {
-        console.log('Loan Application Submitted Successfully');
-        // Handle successful submission (e.g., show a success message, clear form)
+        toast.success('Loan Application Submitted Successfully');
+        // setTimeout(() => {
+        //   navigate
+        // })
       } else {
         const errorData = await response.json();
+        toast.error('Loan Application Submission Failed', errorData);
         console.error('Loan Application Submission Failed', errorData);
-        // Handle failed submission (e.g., show an error message)
       }
     } catch (error) {
       console.error('An error occurred while submitting the loan application:', error);
-      // Handle error during submission
     }
   };
 
@@ -81,16 +83,6 @@ function ViewData() {
           <h2 className="text-xl font-bold mb-4">Loan Application Form</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4 flex flex-wrap -mx-2">
-            {/* <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                <label className="block text-gray-700">TeacherId</label>
-                <input
-                  type="text"
-                  value={teacherId}
-                  onChange={(e) => setTeacherID(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-md mt-2"
-                  required
-                />
-              </div> */}
               <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
                 <label className="block text-gray-700">Full Name</label>
                 <input
@@ -133,7 +125,7 @@ function ViewData() {
                   required
                 />
               </div>
-            </div> 
+            </div>
             <div className="mb-4 flex flex-wrap -mx-2">
               <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
                 <label className="block text-gray-700">Teacher Id</label>
@@ -149,7 +141,7 @@ function ViewData() {
                 <label className="block text-gray-700">Bank Account Number</label>
                 <input
                   type="text"
-                  value={bankkAccountNumber}
+                  value={bankAccountNumber}
                   onChange={(e) => setBankNumber(e.target.value)}
                   className="w-full p-2 border border-gray-300 rounded mt-2"
                   required
@@ -166,6 +158,19 @@ function ViewData() {
                   className="w-full p-2 border border-gray-300 rounded mt-2"
                   required
                 />
+              </div>
+              <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+                <label className="block text-gray-700">Marital status</label>
+                <select
+                  value={maritalStatus}
+                  onChange={(e) => setMaritalStatus (e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded mt-2"
+                  required
+                >
+                  <option value="" disabled>Select your status</option>
+                  <option value="single">Single</option>
+                  <option value="married">Married</option>
+                </select>
               </div>
             </div>
             <div className="mb-4">
@@ -203,7 +208,7 @@ function ViewData() {
                 className="w-full p-2 border border-gray-300 rounded mt-2"
               />
             </div>
-            
+
             <button
               type="submit"
               className="w-full p-2 bg-red-500 text-white rounded"
@@ -213,6 +218,7 @@ function ViewData() {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
