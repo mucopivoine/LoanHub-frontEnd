@@ -22,8 +22,7 @@ function SignUp() {
   const [phonenumberErr, setPhonenumberErr] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [userType, setUserType] = useState('');
-  const [userTypeErr, setUserTypeErr] = useState('');
+ 
   const navigate = useNavigate();
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -128,9 +127,10 @@ function SignUp() {
             console.log(error);
           })
       } catch (error) {
-      }
+ console.log(error);
     }
   }
+}
   return (
     <>
       {isLoading && (

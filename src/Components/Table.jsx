@@ -1,5 +1,5 @@
 
-import { useState } from 'eact';
+import { useState } from 'react';
 
 const TableComponent = () => {
   const [data, setData] = useState([

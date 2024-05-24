@@ -1,12 +1,13 @@
 import React from 'react';
 import { FaHandHoldingUsd } from 'react-icons/fa';
+
 function DashboardStatsGrid() {
   const statsData = [
     {
       label: "Approved Loans",
       value: "$3425.60",
       change: "+234",
-      iconBgColor: "bg-red-500",
+      iconBgColor: "bg-red-400",
     },
     {
       label: "Pending Loans",
@@ -15,24 +16,19 @@ function DashboardStatsGrid() {
       iconBgColor: "bg-blue-500",
     },
     {
-      label: "  Total  Loans",
+      label: "Total Loans",
       value: "$7325.20",
       change: "+658",
       iconBgColor: "bg-yellow-500",
     },
-    // {
-    //     label: "Paid  Loans",
-    //     value: "$7325.20",
-    //     change: "+658",
-    //     iconBgColor: "bg-green-500",
-    //   },
   ];
+
   return (
-    <div className="flex flex-wrap gap-7 ml-[20%] mt-34">
+    <div className="flex flex-wrap justify-center gap-7 mt-34">
       {statsData.map((stat, index) => (
         <BoxWrapper key={index}>
           <div className={`rounded-full h-16 w-16 flex items-center justify-center ${stat.iconBgColor}`}>
-            <FaHandHoldingUsd  className="text-3xl text-white" />
+            <FaHandHoldingUsd className="text-3xl text-white" />
           </div>
           <div className="pl-4">
             <span className="text-sm text-gray-500 font-light">{stat.label}</span>
@@ -43,18 +39,16 @@ function DashboardStatsGrid() {
           </div>
         </BoxWrapper>
       ))}
-      {/* Placeholder to maintain space and push to the right */}
-      <div className="flex-1 min-w-[calc((100%/3)-2rem)]"></div>
     </div>
   );
 }
+
 function BoxWrapper({ children }) {
   return (
-    <div
-      className="bg-white rounded-lg p-6 flex-1 shadow-lg flex items-center transform transition-transform duration-150 ease-in-out hover:scale-105 cursor-pointer mt-4"
-    >
+    <div className="bg-white rounded-lg p-6 shadow-lg flex items-center transform transition-transform duration-150 ease-in-out hover:scale-105 cursor-pointer mt-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
       {children}
     </div>
   );
 }
+
 export default DashboardStatsGrid;

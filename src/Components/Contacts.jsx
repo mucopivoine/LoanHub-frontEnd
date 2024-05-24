@@ -1,6 +1,6 @@
 import  { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faMobile, faLocationArrow,faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faMobile, faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import emailjs from '@emailjs/browser';
 // import {Link} from "react-router-dom"
 
@@ -106,10 +106,11 @@ const Contacts = () => {
           </div>
         </div>
 
+
         <div className="flex justify-center items-center min-h-screen bg-white">
           <form onSubmit={handleSubmit} className="w-full max-w-lg p-8 bg-white shadow-md rounded-lg">
             <h2 className="text-2xl font-bold mb-6">Send us Message</h2>
-            
+
             <div className="mb-4">
               <label className="block text-gray-700 mb-2" htmlFor="fullName">Full Name</label>
               <input 

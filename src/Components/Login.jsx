@@ -5,13 +5,14 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+ // Ensure this import is correct
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
-  const [fetchError, setFetchError] = useState(null);
+  const [ setFetchError] = useState(null);
   const [error, setError] = useState({
     email: '',
     password: '',
@@ -60,7 +61,6 @@ function Login() {
         toast.success('Logged in successfully! Redirecting...', {
           className: 'red-line',
         });
-  
 
         setTimeout(() => {
           const userRole = response.data.user.role;
@@ -127,7 +127,7 @@ function Login() {
                     <p className="text-red-500 italic text-xs">{error.password}</p>
                   )}
                 </div>
-               
+
                 <button
                   type="submit"
                   className="bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5"
@@ -135,18 +135,17 @@ function Login() {
                 >
                   Sign In
                 </button>
-                <div className="flex flex-col  mt-24  text-black">
-                <div className=" flex flex-row ">
-                  <p>Don't have an account..</p>
-                  <Link to="/auth/signup" className="text-red-900 mb-2">
-                    Sign Up
-                  </Link>
+                <div className="flex flex-col mt-24 text-black">
+                  <div className="flex flex-row">
+                    <p>Dont have an account..</p>
+                    <Link to="/auth/signup" className="text-red-900 mb-2">
+                      Sign Up
+                    </Link>
                   </div>
-                  
-                  <Link to="/auth/forgotps" className="text-red-900 mt-6  ml-32">
+
+                  <Link to="/auth/forgotps" className="text-red-900 mt-6 ml-32">
                     Forgot Password?
                   </Link>
-                  
                 </div>
               </form>
             </div>

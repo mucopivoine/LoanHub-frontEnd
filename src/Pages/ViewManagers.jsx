@@ -4,7 +4,7 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
-import Search from './Search';
+
 const cookie =document.cookie.split('jwt=')[1];
 const ViewManager = () => {
   const [managers, setManagers] = useState([]);
@@ -46,7 +46,7 @@ const ViewManager = () => {
   useEffect(() => {
     fetchManagers();
   }, []);
-  const handleDeletePerson = async(id) => {
+  const handleDeletePerson = async() => {
     // Implement delete logic here
   };
   const handleEditClick = (person) => {
@@ -76,7 +76,10 @@ const ViewManager = () => {
       <div className=''>
     <Link to="/admin/contactus"><button
         className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
-      >
+
+      
+>
+      
         Add Person
       </button></Link>
       </div>
@@ -135,7 +138,7 @@ const ViewManager = () => {
                           </button>
                           <button
                             className="p-2"
-                            onClick={() => handleEditClick(person)}
+                            onClick={() => handleEditClick()}
                           >
                             <FaEdit />
                           </button>
