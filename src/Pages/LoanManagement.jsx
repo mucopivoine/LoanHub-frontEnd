@@ -37,12 +37,12 @@ const LoanManagement = () => {
   
 
   
-    <div className="mx-auto w-full h-[60vh] flex flex-col lg:flex-row gap-5">
-      <div className="lg:w-[80%] ">
+    <div className="mx-auto w-full h-[60vh] flex flex-col lg:flex-row gap-5 ">
+      <div className="lg:w-[80%] ml-72 ">
         <h3 className="font-bold text-center lg:text-left">LOAN APPLICATION TREND</h3>
         <Graph data={graphData} />
       </div>
-      <div className="w-full lg:w-[70%] lg:mt-20">
+      <div className="w-full lg:w-[70%] lg:mt-32 ">
         <h3 className="font-bold text-center lg:text-left">LOAN STATUS</h3>
         <Pie data={pieChartData} />
       </div>
