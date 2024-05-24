@@ -35,6 +35,10 @@ const Sidebar = () => {
             </li>
             <li className="flex items-center p-3 hover:bg-white hover:text-red-500 rounded-md">
               <FaUserFriends className="mr-3 w-[20px]"/>
+              <Link to="/admin/allLoans">Loans_Requests</Link>
+            </li>
+            <li className="flex items-center p-3 hover:bg-white hover:text-red-500 rounded-md">
+              <FaUserFriends className="mr-3 w-[20px]"/>
               <Link to="/admin/database">Database</Link>
             </li>
             <li className="flex items-center p-3 hover:bg-white hover:text-red-500 rounded-md">
