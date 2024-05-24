@@ -89,7 +89,7 @@ function Login() {
       console.error('Login failed', error);
       setFetchError(error.response?.data?.message || 'An error occurred');
       if (error.code === 'ERR_NETWORK') {
-        toast.error('Network error: Please check your internet connection or try again later.');
+        toast.error('Try again');
       }
     }
   };

@@ -1,23 +1,35 @@
+import { Link } from "react-router-dom";
+import{faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 function End() {
   return (
+    <>
+    <Link to="/">
+            <FontAwesomeIcon icon={faArrowCircleUp} className="text-3xl text-red-800 hover:text-red-600 ml-98 mb-4 " />
+          </Link>
     <footer className="bg-gray-800 text-gray-300">
       <div className="container bg-gray-800 mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Services Section */}
           <div className="mb-4 sm:mb-0">
-            <h3 className="text-xl font-bold mb-4">Services</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-300 hover:opacity-75">Coaching</a></li>
-              {/* Add more services here */}
-            </ul>
+         <Link to="/">  <h3 className="text-xl font-bold mb-4">Home</h3></Link> 
+         <Link to ="/about">   <h3 className="text-xl font-bold mb-4">About</h3></Link> 
+         <Link to ="/services">  <h3 className="text-xl font-bold mb-4">Services</h3></Link> 
+         <Link to ="/contact"> <h3 className="text-xl font-bold mb-4"> Contact</h3></Link> 
+           
+            
           </div>
 
           {/* Company Section */}
           <div className="mb-4 sm:mb-0">
             <h3 className="text-xl font-bold mb-4 font-serif">Company</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-300 hover:opacity-75">About</a></li>
-              <li><a href="#" className="text-gray-300 hover:opacity-75">Meet the Team</a></li>
+              <li className="text-gray-300 hover:opacity-75">BNR</li>
+              <li className="text-gray-300 hover:opacity-75">RCA</li>
+              <li className="text-gray-300 hover:opacity-75">RSSB</li>
+              <li className="text-gray-300 hover:opacity-75">REB</li>
               {/* Add more company links here */}
             </ul>
           </div>
@@ -26,7 +38,8 @@ function End() {
           <div className="mb-4 sm:mb-0">
             <h3 className="text-xl font-bold mb-4">Helpful Links</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-300 hover:opacity-75">Contact</a></li>
+              <li><a href="https://umwalimusacco.rw/?page_id=26" className="text-gray-300 hover:opacity-75">Sacco</a></li>
+              <li><a href="https://umwalimusacco.rw/?page_id=26" className="text-gray-300 hover:opacity-75">Umwalimu Sacco</a></li>
               {/* Add more helpful links here */}
             </ul>
           </div>
@@ -35,9 +48,8 @@ function End() {
           <div className="mb-4 sm:mb-0">
             <h3 className="text-xl font-bold mb-4">Legal</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-300 hover:opacity-75">Accessibility</a></li>
-              <li><a href="#" className="text-gray-300 hover:opacity-75">Returns Policy</a></li>
-              {/* Add more legal links here */}
+              <li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3315124" className="text-gray-300 hover:opacity-75">Accessibility</a></li>
+              <li><a href="https://www.investopedia.com/loan-terms-5075341#:~:text=Loan%20terms%20refer%20to%20the,special%20conditions%20that%20may%20apply." className="text-gray-300 hover:opacity-75">Returns Policy</a></li>
             </ul>
           </div>
         </div>
@@ -62,6 +74,7 @@ function End() {
         </p>
       </div>
     </footer>
+    </>
   );
 }
 

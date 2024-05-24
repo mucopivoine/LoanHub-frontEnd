@@ -20,15 +20,16 @@ function Database() {
       const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${cookie}`,
+          'Authorization': `Bearer ${cookie}`, // Corrected template literal usage
         }
       });
 
-      console.log('fetching data')
-      console.log('Response data length:', response.data?.users?.length);
+      console.log('fetching data');
+      console.log('Response data:', response.data);
 
-      if (response.data && Array.isArray(response.data.users)) {
-        setTeachers(response.data.users);
+      if (response.data && Array.isArray(response.data.teachers)) {
+        setTeachers(response.data.teachers);
+        console.log('Teachers set:', response.data.teachers);
       } else {
         console.error('Expected an array but received:', response.data);
         setError('Unexpected data format received from server');
@@ -56,13 +57,14 @@ function Database() {
       const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/delete/${id}`, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${cookie}`,
+          'Authorization': `Bearer ${cookie}`, // Corrected template literal usage
         }
       });
 
       console.log('Delete response status:', response.status);
       if (response.status === 200) {
-        setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher.TeacherId !== id));
+        setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher.teacher_ID !== id)); // Adjusted to match the correct property name
+        console.log('Teacher deleted:', id);
       } else {
         setError('Failed to delete teacher');
       }
@@ -76,9 +78,9 @@ function Database() {
     }
   };
 
-  const filteredTeachers = teachers.filter((teacher) =>
-    teacher.names.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredTeachers = teachers.filter((teacher) => {
+    return teacher.names && teacher.names.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -96,7 +98,7 @@ function Database() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="w-[70%] p-6 ml-[20%]">
+      <div className="w-[70%] ml-[20%]">
         <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
         <input
           type="text"
@@ -113,7 +115,7 @@ function Database() {
                 ID
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Names
+                Full Name
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 School Name
@@ -128,7 +130,7 @@ function Database() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {Array.isArray(currentItems) && currentItems.map((teacher) => (
-              <tr key={teacher.TeacherId}>
+              <tr key={teacher.teacher_ID}>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.teacher_ID}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.names}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.schoolName}</td>
@@ -136,7 +138,7 @@ function Database() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
                     className="text-red-600 hover:text-red-800"
-                    onClick={() => handleDeleteTeacher(teacher.TeacherId)}
+                    onClick={() => handleDeleteTeacher(teacher.teacher_ID)}
                   >
                     <MdDelete />
                   </button>

@@ -12,17 +12,13 @@ const Sidebar = () => {
 
   return (
     <>
-      <button
+      {/* <button
         onClick={toggleSidebar}
-        className="fixed lg:ml-24 top-5 left-5 z-50 bg-gray-800 text-white px-3 py-2 rounded-md">
+        className=" lg:ml-24 top-5 left-5 z-50 bg-gray-800 text-white px-3 py-2 rounded-md">
         {isOpen ? <IoMdClose /> : <IoMdMenu />}
-      </button>
-      <motion.div
-        initial={{ x: 300 }}
-        animate={{ x: isOpen ?  0: -300 }}
-        transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 h-full lg:w-64 bg-red-400">
-        <nav className="p-4 mt-16 w-full">
+      </button> */}
+      <div className='bg-red-400 h-[100vh] fixed left-0 top-0'>
+        <nav className="p-4 mt-16 w-full ">
           <h1 className="text-center font-bold text-2xl">Admin Dashboard</h1>
           <ul className="p-10 space-y-4">
             <li className="flex items-center p-3 hover:bg-white hover:text-red-500 rounded-md">
@@ -51,8 +47,8 @@ const Sidebar = () => {
             </li>
           </ul>
         </nav>
-      </motion.div>
-      <div className="lg:ml-64">
+        </div>
+      <div className="relative">
         <Outlet />
       </div>
     </>
