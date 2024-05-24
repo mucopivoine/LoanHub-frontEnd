@@ -18,7 +18,7 @@ const Services = () => {
   };
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-4 md:px-14 ">
+    <div className="max-w-screen-2xl mx-auto px-4 md:px-14">
       <div className="text-center my-8">
         <h2 className="font-serif text-4xl font-bold text-center mt-32">Our Services</h2>
         <p className="text-sm text-neutralGrey mb-8 w-3/4 mx-auto text-gray-600 font-sans-serif">

@@ -1,12 +1,9 @@
-// import React from 'react';
-
-
 function About() {
   return (
-    <div className="flex justify-center items-center mx-auto sm:mb-80  ">
-      <section className=" w-full max-w-screen-lg ">
-        <div className="container  ">
-          <h2 className="text-4xl font-bold text-center font-serif mt-32 ">
+    <div className="flex justify-center items-center mx-auto sm:mb-80 bg-white">
+      <section className="w-full max-w-screen-lg">
+        <div className="container bg-white">
+          <h2 className="text-4xl font-bold text-center font-serif mt-32">
             About Us
           </h2>
 
@@ -34,7 +31,7 @@ function About() {
 
             {/* Card 2 */}
             <div className="flex flex-col justify-between h-full group transform hover:translate-y-[-10px] transition duration-300">
-              <div className="bg-white p-8 rounded-lg  shadow-gray-500 shadow-lg transition hover:border-red-500/50 hover:shadow-red-500/50">
+              <div className="bg-white p-8 rounded-lg shadow-gray-500 shadow-lg transition hover:border-red-500/50 hover:shadow-red-500/50">
                 <div className="flex justify-center mb-6">
                   <img
                     src="/mission.gif"
@@ -62,7 +59,7 @@ function About() {
                     className="w-32 h-32 rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-2xl font-bold text-center mb-4 font-serif animate-pulse ">
+                <h3 className="text-2xl font-bold text-center mb-4 font-serif animate-pulse">
                   Our Values
                 </h3>
                 <p className="text-gray-600 text-center">
@@ -74,7 +71,7 @@ function About() {
 
             {/* Card 4 */}
             <div className="flex flex-col justify-between h-full group transform hover:translate-y-[-10px] transition duration-300">
-              <div className="bg-white p-8 rounded-lg   shadow-gray-500 shadow-lg transition hover:border-red-500/50 hover:shadow-red-500/50 ">
+              <div className="bg-white p-8 rounded-lg shadow-gray-500 shadow-lg transition hover:border-red-500/50 hover:shadow-red-500/50">
                 <div className="flex justify-center mb-6">
                   <img
                     src="/last.gif"
@@ -87,7 +84,7 @@ function About() {
                 </h3>
                 <p className="text-gray-600 text-center">
                   Transforming education by facilitating financial
-                  opportunities, ensuring educators prosperity .
+                  opportunities, ensuring educators prosperity.
                 </p>
               </div>
             </div>

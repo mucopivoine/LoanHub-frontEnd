@@ -1,6 +1,6 @@
 
-import React from 'react';
-import PieChart from '../Components/Graphs/PieChart';
+
+// import PieChart from '../Components/Graphs/PieChart';
 
 
 import Pie from '../Pages/Pie'
@@ -36,14 +36,14 @@ const LoanManagement = () => {
 
     
 
-    <div className='mx-auto  h-[50vh] flex flex-row mb-32 w-full '>
-      <div className=' ml-[20%] w-[40%]'>
-        <h3>Loan Applications Trend</h3>
+    <div className='mx-auto w-full h-[50vh] flex flex-row mb-56 gap-6  '>
+      <div className=' ml-[20%] w-[200%] '>
+        <h3 className='mb-28 font-bold'>LOAN APPLICATION TREND</h3>
         <Graph data={graphData} />
       </div>
       
-      <div className='w-[100%] ml-96'>
-        <h3>Loan Status</h3>
+      <div className='w-[100%] mt-36 '>
+        <h3 className='font-bold'>LOAN STATUS</h3>
         <Pie data={pieChartData} />
 
       </div>

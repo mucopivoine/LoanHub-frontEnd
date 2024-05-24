@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import axios from 'axios';
 import Sidebar from "./Sidebar";
-import Search from "../Pages/Search";
+// import Search from "../Pages/Search";
 
 const columns = [
   {

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import { MdDelete } from 'react-icons/md';
+import Search from '../Pages/Search';
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -91,8 +92,12 @@ function ViewTeachers() {
   };
 
   return (
+    <>
+    <Search/>
     <div className="flex">
+      
       <Sidebar />
+      
       <div className="w-[70%] p-6 ml-[20%]">
         <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
         <input
@@ -161,6 +166,7 @@ function ViewTeachers() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

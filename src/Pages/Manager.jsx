@@ -1,11 +1,8 @@
 // import React from 'react'
-
-function Manager() {
+ function Manager() {
   return (
     <div>Manager</div>
-    full names
-    email
-    message
+//   
   )
 }
 
