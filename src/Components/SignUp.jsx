@@ -277,7 +277,7 @@ function SignUp() {
                     Sign Up
                   </button>
                   <div className='flex gap-2 mt-5 mb-3 text-black'>
-                    <p>Don t have an account ? </p>
+                    <p>Already have an account. </p>
                     <Link to='/auth/signin' className='text-red-700'>
                       Log in
                     </Link>

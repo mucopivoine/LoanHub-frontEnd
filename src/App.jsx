@@ -58,7 +58,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contacts />} />
           <Route path="services" element={<Services />} />
-        <Route path="/auth" element={<AuthRoute />}>
+             <Route path="/auth" element={<AuthRoute />}>    
               <Route path="signin" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="forgot" element={<Forgot />} />

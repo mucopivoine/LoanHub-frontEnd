@@ -69,7 +69,7 @@ const OtpInput = ({ length = 7, onOtpSubmit = () => {}, email }) => {
       >
         <div className='relative flex flex-col items-center border-2 mt-24 p-12 bg-white'>
           <div className=''>
-            <h1 className='mb-5 text-xl font-bold'>Enter code sent to {email}</h1>
+            <h1 className='mb-5 text-xl font-bold'>Enter code sent to Email {email}</h1>
           </div>
           <div>
             {otp.map((value, index) => (
@@ -91,7 +91,7 @@ const OtpInput = ({ length = 7, onOtpSubmit = () => {}, email }) => {
               className='border-2 text-white w-50 bg-red-500 px-[100px] mx-auto mt-5 p-2 rounded-xl'
               onClick={() => onOtpSubmit(otp.join(""))}
             >
-              Submit OTP
+              Send
             </button>
           </div>
         </div>
