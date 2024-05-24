@@ -22,8 +22,7 @@ function SignUp() {
   const [phonenumberErr, setPhonenumberErr] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [userType, setUserType] = useState('');
-  const [userTypeErr, setUserTypeErr] = useState('');
+ 
   const navigate = useNavigate();
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -129,9 +128,10 @@ function SignUp() {
             console.log(error);
           })
       } catch (error) {
-      }
+ console.log(error);
     }
   }
+}
   return (
     <>
       {isLoading && (
@@ -278,7 +278,7 @@ function SignUp() {
                     Sign Up
                   </button>
                   <div className='flex gap-2 mt-5 mb-3 text-black'>
-                    <p>Don t have an account ? </p>
+                    <p>Already have an account. </p>
                     <Link to='/auth/signin' className='text-red-700'>
                       Log in
                     </Link>

@@ -1,6 +1,8 @@
 
-import React, { useState} from "react";
+import { useState} from "react";
 import Barnav from "../Components/Barnav";
+import { Sidebar } from "lucide-react";
+import Search from "./Search";
 const columns = [
   {
     Header: "ID",
@@ -59,6 +61,7 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
     );
   return (
     <>
+    
     <Barnav/>
     <div>
     <table className="min-w-full divide-y divide-gray-200 items-center">
@@ -106,11 +109,14 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
 const Loans = () => {
     const [searchTerm, setSearchTerm] = useState("");
   return (
+    <div>
+    <Search/>
     <div className="p-6 w-[80%] ml-[20%]">
       <h2 className="text-2xl font-semibold mb-4">Manage Loans</h2>
       <Table columns={columns} data={data} 
        searchTerm={searchTerm}
        setSearchTerm={setSearchTerm} />
+    </div>
     </div>
    
   );

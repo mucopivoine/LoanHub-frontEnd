@@ -1,4 +1,11 @@
-import Pie from '../Pages/Pie';
+
+
+
+// import PieChart from '../Components/Graphs/PieChart';
+
+
+import Pie from '../Pages/Pie'
+
 import Graph from '../Components/Graphs/Graph';
 import 'chart.js/auto';
 
@@ -27,6 +34,9 @@ const LoanManagement = () => {
   };
 
   return (
+  
+
+  
     <div className="mx-auto w-full h-[60vh] flex flex-col lg:flex-row gap-5">
       <div className="lg:w-[80%] ">
         <h3 className="font-bold text-center lg:text-left">LOAN APPLICATION TREND</h3>

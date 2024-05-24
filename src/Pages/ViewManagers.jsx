@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
-
 const cookie = document.cookie.split('jwt=')[1];
-
+const cookie =document.cookie.split('jwt=')[1];
 const ViewManager = () => {
   const [managers, setManagers] = useState([]);
   const [error, setError] = useState('');
@@ -27,9 +26,7 @@ const ViewManager = () => {
           Authorization: `Bearer ${cookie}`,
         }
       });
-
       console.log('Response data:', response.data);
-
       // Check if the response contains the users key and if it's an array
       if (response.data && Array.isArray(response.data.users)) {
         setManagers(response.data.users);
@@ -58,8 +55,12 @@ const ViewManager = () => {
 
   const handleEditClick = (manager) => {
     setEditingManager(manager);
+  const handleDeletePerson = async() => {
+    // Implement delete logic here
   };
-
+  const handleEditClick = (person) => {
+    setEditingManager(person);
+  };
   const handleUpdateChange = (e) => {
     const { name, value } = e.target;
     setUpdateData((prevData) => ({
@@ -67,66 +68,62 @@ const ViewManager = () => {
       [name]: value,
     }));
   };
-
   const handleUpdatePerson = () => {
     // Implement update logic here
   };
-
   // Filter managers based on search term
   const filteredManagers = managers.filter(manager =>
     manager.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   return (
     <>
-      <div>
-        <Sidebar />
+    <div>
+    <Sidebar/>
+    </div>
+    <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">
+      <div className=''>
+    <Link to="/admin/contactus"><button
+        className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
+
+      
+>
+        Add Person
+      </button></Link>
       </div>
-      <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px]">
-        <div className=''>
-          <Link to="/admin/contactus">
-            <button
-              className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
-            >
-              Add Person
-            </button>
-          </Link>
-        </div>
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead>
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Names
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Email
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Mobile Number
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Action
-                    </th>
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
-                    </th>
-                  </tr>
-                </thead>
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    ID
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Email
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Modify
+                  </th>
+                  <th scope="col" className="relative px-6 py-3">
+                    <span className="sr-only">Edit</span>
+                  </th>
+                </tr>
+
                 <tbody className="bg-white divide-y divide-gray-200">
                   {Array.isArray(filteredManagers) && filteredManagers.map((manager) => (
                     <tr key={manager._id}>
@@ -149,7 +146,11 @@ const ViewManager = () => {
                           </button>
                           <button
                             className="p-2"
+
                             onClick={() => handleEditClick(manager)}
+
+                            onClick={() => handleEditClick()}
+
                           >
                             <FaEdit />
                           </button>
@@ -203,5 +204,4 @@ const ViewManager = () => {
     </>
   );
 };
-
 export default ViewManager;

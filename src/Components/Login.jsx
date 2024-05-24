@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+ // Ensure this import is correct
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
-
   const navigate = useNavigate();
-  const [fetchError, setFetchError] = useState(null);
-
+  const [ setFetchError] = useState(null);
   const [error, setError] = useState({
     email: '',
     password: '',
@@ -31,8 +30,6 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    // Validate email format
     const emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
     if (!emailRegex.test(email)) {
       setError({ ...error, email: 'Email is required in the format of name@gmail.com' });
@@ -40,7 +37,6 @@ function Login() {
       return;
     }
 
-    // Validate password length
     if (password.length < 8) {
       setError({ ...error, password: 'Password must be at least 8 characters long' });
       setFormSubmitted(true);
@@ -55,30 +51,25 @@ function Login() {
       );
 
       if (response.data) {
-        // Save token to localStorage
-        console.log(response.data.token);
-        let token = response.data.token;
+        const token = response.data.token;
         const expires = new Date();
         expires.setTime(expires.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day
         document.cookie = `jwt=${token};expires=${expires.toUTCString()};path=/`;
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user.role));
-        console.log('Logged in successfully');
 
-        // Show toast message
-        toast.success('Logged in successfully! Redirecting...');
+        toast.success('Logged in successfully! Redirecting...', {
+          className: 'red-line',
+        });
 
-        // Redirect based on user role after a delay to allow toast to be seen
         setTimeout(() => {
-          if (response.data.user && response.data.user.role) {
-            const userRole = response.data.user.role;
-            if (userRole === 'teacher') {
-              navigate('/layout/teacherloans');
-            } else if (userRole === 'manager') {
-              navigate('/barnav/managerdash');
-            } else if (userRole === 'admin') {
-              navigate('/admin/maindash');
-            }
+          const userRole = response.data.user.role;
+          if (userRole === 'teacher') {
+            navigate('/layout/teacherloans');
+          } else if (userRole === 'manager') {
+            navigate('/barnav/managerdash');
+          } else if (userRole === 'admin') {
+            navigate('/admin/maindash');
           }
         }, 2000); // 2 seconds delay for toast
       } else {
@@ -88,11 +79,8 @@ function Login() {
     } catch (error) {
       console.error('Login failed', error);
       setFetchError(error.response?.data?.message || 'An error occurred');
-      if (error.code === 'ERR_NETWORK') {
-        toast.error('Try again');
-      }
     }
-  };
+  }
 
   return (
     <div className="mx-auto items-center justify-center flex flex-row bg-gray-100 h-[110vh]">
@@ -100,6 +88,7 @@ function Login() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
+        className=""
       >
         <div className="">
           <div className="relative flex flex-col items-center h-[80vh] border-2 p-12 mt-24 bg-white">
@@ -138,20 +127,24 @@ function Login() {
                     <p className="text-red-500 italic text-xs">{error.password}</p>
                   )}
                 </div>
-                <Link to="/auth/forgotps" className="text-red-700">
-                  Forgot Password?
-                </Link>
+
                 <button
                   type="submit"
                   className="bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5"
                   onClick={handleLogin}
                 >
-                  Log in
+                  Sign In
                 </button>
-                <div className="flex gap-2 mt-5 mb-5 text-black">
-                  <p>Don’t have an account? </p>
-                  <Link to="/auth/signup" className="text-red-700">
-                    Log in
+                <div className="flex flex-col mt-24 text-black">
+                  <div className="flex flex-row">
+                    <p>Dont have an account..</p>
+                    <Link to="/auth/signup" className="text-red-900 mb-2">
+                      Sign Up
+                    </Link>
+                  </div>
+
+                  <Link to="/auth/forgotps" className="text-red-900 mt-6 ml-32">
+                    Forgot Password?
                   </Link>
                 </div>
               </form>
