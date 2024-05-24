@@ -108,7 +108,7 @@ function ViewTeachers() {
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                ID
+                Account Number
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Name
@@ -124,7 +124,7 @@ function ViewTeachers() {
           <tbody className="bg-white divide-y divide-gray-200">
             {Array.isArray(currentItems) && currentItems.map((teacher) => (
               <tr key={teacher.TeacherId}>
-                <td className="px-6 py-4 whitespace-nowrap">{teacher.TeacherId}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{teacher.accountNumber}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <Link to={`/teacherdetails/${teacher.TeacherId}`} className="text-black hover:underline">
                     {teacher.username}
