@@ -132,7 +132,7 @@ function AllLoans() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {Array.isArray(currentItems) && currentItems.map((teacher) => (
-              <tr key={teacher.teacher_ID}>
+              <tr key={teacher._id}>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.fullName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.phoneNumber}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.workSchool}</td>
