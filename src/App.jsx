@@ -53,6 +53,7 @@ import Pie from './Pages/Pie'
 import Database from './Components/Database';
 import Approves from './Pages/Approves ';
 import AddTeacherdtl from './Pages/AddTeacherdtl';
+import AllLoans from './Components/AllLoans/AllLoans';
 
 
 
@@ -94,6 +95,7 @@ function App() {
           <Route path="teacherdetails/:id" element={<TeacherDetails />} />
           <Route path="manager" element={<Manager />} />
           <Route path="Pie" element={<Pie />} />
+          <Route path="allLoans" element={<AllLoans />} />
           <Route path="NewDash" element={<NewDash />} />
           <Route path="database" element={<Database />} />
           <Route path="teacher" element={<Teacher />} />

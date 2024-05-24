@@ -5,8 +5,7 @@ import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 
-const cookie =document.cookie.split('jwt=')[1];
-
+const cookie = document.cookie.split('jwt=')[1];
 
 const ViewManager = () => {
   const [managers, setManagers] = useState([]);
@@ -18,13 +17,14 @@ const ViewManager = () => {
     newPassword: '',
     confirm: ''
   });
+
   const fetchManagers = async () => {
     try {
       console.log('Token:', cookie);
-          const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
+      const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${cookie}`
+          Authorization: `Bearer ${cookie}`,
         }
       });
 
@@ -45,18 +45,19 @@ const ViewManager = () => {
       } else {
         setError('Failed to fetch manager data');
       }
-  }
-};
+    }
+  };
+
   useEffect(() => {
     fetchManagers();
   }, []);
 
-  const handleDeletePerson = async(id) => {
+  const handleDeletePerson = async (id) => {
     // Implement delete logic here
   };
 
-  const handleEditClick = (person) => {
-    setEditingManager(person);
+  const handleEditClick = (manager) => {
+    setEditingManager(manager);
   };
 
   const handleUpdateChange = (e) => {
@@ -78,59 +79,59 @@ const ViewManager = () => {
 
   return (
     <>
-    <div>
-    <Sidebar/>
-    </div> 
-    <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">
-      <div className=''>
-      
-    <Link to="/admin/contactus"><button
-        className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
-      
-      >
-        
-        Add Person
-      </button></Link>
+      <div>
+        <Sidebar />
       </div>
-      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200">
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    ID
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Email
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Modify
-                  </th>
-                  <th scope="col" className="relative px-6 py-3">
-                    <span className="sr-only">Edit</span>
-                  </th>
-                </tr>
-              
+      <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px]">
+        <div className=''>
+          <Link to="/admin/contactus">
+            <button
+              className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
+            >
+              Add Person
+            </button>
+          </Link>
+        </div>
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Names
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Email
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Mobile Number
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Action
+                    </th>
+                    <th scope="col" className="relative px-6 py-3">
+                      <span className="sr-only">Edit</span>
+                    </th>
+                  </tr>
+                </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {Array.isArray(filteredManagers) && filteredManagers.map((manager) => (
-                    <tr key={manager.id}>
+                    <tr key={manager._id}>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{manager.username}</div>
+                        <div className="text-sm text-gray-900">{manager.firstName}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{manager.email}</div>
@@ -142,13 +143,13 @@ const ViewManager = () => {
                         <div className="flex gap-5">
                           <button
                             className=""
-                            onClick={() => handleDeletePerson(manager.id)}
+                            onClick={() => handleDeletePerson(manager._id)}
                           >
                             <MdDelete />
                           </button>
                           <button
                             className="p-2"
-                            onClick={() => handleEditClick(person)}
+                            onClick={() => handleEditClick(manager)}
                           >
                             <FaEdit />
                           </button>

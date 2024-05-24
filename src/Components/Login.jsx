@@ -51,7 +51,7 @@ function Login() {
       const response = await axios.post(
         'https://umwarimu-loan-hub-api.onrender.com/api/teacher/login',
         { email, password },
-        { headers: { 'Content-Type': 'application/json' } }
+        { headers: { 'Content-Type': 'application/json' } ,  withCredentials: true,}
       );
 
       if (response.data) {

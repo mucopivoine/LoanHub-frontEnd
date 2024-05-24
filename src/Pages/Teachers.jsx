@@ -103,7 +103,7 @@ const Teachers = () => {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${cookie}`,
-          }
+          },  withCredentials: true,
         });
 
         if (response.data && Array.isArray(response.data.teachers)) {
