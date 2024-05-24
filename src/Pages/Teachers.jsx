@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import axios from "axios";
 import Barnav from "../Components/Barnav";
-import { Search } from "lucide-react";
 
 const columns = [
   {
@@ -25,8 +24,7 @@ const columns = [
     accessor: "status",
   },
 ];
-
-const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
+const Table = ( columns, data, searchTerm, setSearchTerm ) => {
   const filteredData = data.filter((row) =>
     row.teacherName.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -87,15 +85,12 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
     </>
   );
 };
-
 const Teachers = () => {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-
   const cookie = document.cookie.split('jwt=')[1];
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -103,9 +98,8 @@ const Teachers = () => {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${cookie}`,
-          }
+          },  withCredentials: true,
         });
-
         if (response.data && Array.isArray(response.data.teachers)) {
           setData(response.data.teachers);
         } else {
@@ -124,13 +118,10 @@ const Teachers = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
-
   return (
     <div className="p-6 w-[80%] ml-[20%]">
       <h2 className="text-2xl font-semibold mb-4">Manage Loans</h2>
@@ -138,5 +129,4 @@ const Teachers = () => {
     </div>
   );
 };
-
 export default Teachers;

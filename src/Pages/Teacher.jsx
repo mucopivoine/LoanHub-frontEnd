@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { IoMdClose } from "react-icons/io";
@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Sidemenu from '../Components/Sidemenu';
 
+import Search from './Search';
 function Teacher() {
 
   const [loanAmount, setLoanAmount] = useState('');
@@ -65,46 +66,10 @@ function Teacher() {
   };
 
   return (
-    <>
-
-    <Sidemenu/>
     
-
-      <div className="ml-64 p-10">
-        <h1 className='font-bold text-2xl'>Teacher Account</h1>
-        <p>This is where all main content goes.</p>
-      <div className='container'>
-        <div className='heading_text'>
-          <h1 className='heading_one'>Simple Calculator</h1>
-          <p className='heading_two'>Calculate your simple interest Easily</p>
-        </div>
-        <div className='total_amount_card'>
-          <div className='card_text '>
-          <h3 className='total_amount_heading'>₹ {Add}</h3>
-          <p className='total_amount_para'>Total simple interest</p>
-
-          </div>
-          <div className="bg-gray-100 p-6 rounded-lg mb-6">
-            <div className="text-center">
-              <h3 className="text-xl font-bold text-red-500">₹ {Add}</h3>
-              <p className="text-gray-600">Total simple interest</p>
-            </div>
-          </div>
-          <form onSubmit={calcSum}>
-            <div className="space-y-4 mb-6">
-              <TextField type="number" value={num1 || ""} onChange={(e) => setNum1(e.target.value)} id="outlined-basic" label="₹ Principal amount" variant="outlined" fullWidth />
-              <TextField type="number" value={num2 || ""} onChange={(e) => setNum2(e.target.value)} id="outlined-basic" label="Rate of interest (p.a) %" variant="outlined" fullWidth />
-              <TextField type="number" value={num3 || ""} onChange={(e) => setNum3(e.target.value)} id="outlined-basic" label="Time period (Yr)" variant="outlined" fullWidth />
-            </div>
-            <Stack spacing={2} direction="row" justifyContent="center">
-              <Button type='submit' style={{ backgroundColor: 'red' }} variant="contained">Calculate</Button>
-              <Button onClick={handleClick} variant="outlined">Reset</Button>
-            </Stack>
-          </form>
-        </div>
-      </div>
-     
-      </div>
+    <>
+   <Search/>
+    <Sidemenu/>
     </>
   );
 }

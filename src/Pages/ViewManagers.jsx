@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 
 const cookie =document.cookie.split('jwt=')[1];
-
-
 const ViewManager = () => {
   const [managers, setManagers] = useState([]);
   const [error, setError] = useState('');
@@ -27,9 +25,7 @@ const ViewManager = () => {
           Authorization: `Bearer ${cookie}`
         }
       });
-
       console.log('Response data:', response.data);
-
       // Check if the response contains the users key and if it's an array
       if (response.data && Array.isArray(response.data.users)) {
         setManagers(response.data.users);
@@ -50,15 +46,12 @@ const ViewManager = () => {
   useEffect(() => {
     fetchManagers();
   }, []);
-
-  const handleDeletePerson = async(id) => {
+  const handleDeletePerson = async() => {
     // Implement delete logic here
   };
-
   const handleEditClick = (person) => {
     setEditingManager(person);
   };
-
   const handleUpdateChange = (e) => {
     const { name, value } = e.target;
     setUpdateData((prevData) => ({
@@ -66,29 +59,27 @@ const ViewManager = () => {
       [name]: value,
     }));
   };
-
   const handleUpdatePerson = () => {
     // Implement update logic here
   };
-
   // Filter managers based on search term
   const filteredManagers = managers.filter(manager =>
     manager.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   return (
     <>
+    
     <div>
     <Sidebar/>
-    </div> 
+    </div>
     <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">
       <div className=''>
-      
     <Link to="/admin/contactus"><button
         className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
+
       
-      >
-        
+>
+      
         Add Person
       </button></Link>
       </div>
@@ -125,7 +116,6 @@ const ViewManager = () => {
                     <span className="sr-only">Edit</span>
                   </th>
                 </tr>
-              
                 <tbody className="bg-white divide-y divide-gray-200">
                   {Array.isArray(filteredManagers) && filteredManagers.map((manager) => (
                     <tr key={manager.id}>
@@ -148,7 +138,7 @@ const ViewManager = () => {
                           </button>
                           <button
                             className="p-2"
-                            onClick={() => handleEditClick(person)}
+                            onClick={() => handleEditClick()}
                           >
                             <FaEdit />
                           </button>
@@ -202,5 +192,4 @@ const ViewManager = () => {
     </>
   );
 };
-
 export default ViewManager;

@@ -2,7 +2,7 @@ import Services from "./Services";
 import Contacts from "./Contacts";
 import About from "./About"
 import { motion } from 'framer-motion';
-
+import {Link } from 'react-router-dom';
 
 
 function Main() {
@@ -40,12 +40,14 @@ function Main() {
                 and financial tools created with teachers in mind. Join us in supporting educators to thrive!
               </motion.p>
 
-              <a
+              <Link to="/auth/signin"><a
                 href="#"
                 className="mt-8 font-bold inline-block rounded bg-red-500 px-12 py-3 text-sm text-white transition hover:bg-red-500 focus:outline-none focus:ring focus:ring-gray-400"
               >
+                
                 Get Started Today
               </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+
 import Sidemenu from '../Components/Sidemenu';
 import TeacherProfile from '../Components/TeacherProfile';
-import { Link } from 'react-router-dom';
-
+import { Link,  } from 'react-router-dom';
+import { useState } from 'react';
 const loanTypes = [
   {
     type: 'Short Term Loan',
@@ -37,10 +37,10 @@ function TeacherLoans() {
     setClickedIndex(index);
   };
 
-  const handleRequestLoan = () => {
-    // Handle loan request logic here
-    console.log('Loan requested');
-  };
+  // const handleRequestLoan = () => {
+  //   // Handle loan request logic here
+  //   console.log('Loan requested');
+  // };
   return (
     <div className="flex flex-col lg:flex-row">
       <Sidemenu className="lg:w-1/5" />

@@ -1,7 +1,10 @@
 function About() {
   return (
+
+
     <div className="flex justify-center items-center mx-auto bg-white">
       <section className="w-full max-w-screen-lg bg-white">
+
         <div className="container bg-white">
           <h2 className="text-4xl font-bold text-center font-serif mt-32">
             About Us
