@@ -21,8 +21,7 @@ function Database() {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${cookie}`, // Corrected template literal usage
-        },
-        withCredentials: true,
+        }
       });
 
       console.log('fetching data');
@@ -131,7 +130,7 @@ function Database() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {Array.isArray(currentItems) && currentItems.map((teacher) => (
-              <tr key={teacher._id}>
+              <tr key={teacher.teacher_ID}>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.teacher_ID}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.names}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.schoolName}</td>
