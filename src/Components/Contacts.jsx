@@ -93,8 +93,8 @@ const Contacts = () => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-          <form onSubmit={handleSubmit} className="w-full max-w-lg p-8 bg-white shadow-md rounded-lg">
+        <div className="flex justify-center items-center min-h-screen">
+          <form onSubmit={handleSubmit} className="w-full max-w-lg p-8 bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
             
             <div className="mb-4">

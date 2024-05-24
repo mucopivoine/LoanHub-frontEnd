@@ -1,8 +1,7 @@
-// import PieChart from '../Components/Graphs/PieChart';
-import Pie from '../Pages/Pie'
+import Pie from '../Pages/Pie';
 import Graph from '../Components/Graphs/Graph';
 import 'chart.js/auto';
-import LoansProfilePieChart from '../Data/LoansProfilePieChart';
+
 const LoanManagement = () => {
   const pieChartData = {
     labels: ['Approved Loans', 'Pending Loans', 'Rejected Loans'],
@@ -14,6 +13,7 @@ const LoanManagement = () => {
       },
     ],
   };
+
   const graphData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
@@ -25,18 +25,19 @@ const LoanManagement = () => {
       },
     ],
   };
+
   return (
-   
-    <div className='mx-auto w-full h-[50vh] flex flex-row mb-56 gap-6  '>
-      <div className=' ml-[20%] w-[200%] '>
-        <h3 className='mb-28 font-bold'>LOAN APPLICATION TREND</h3>
+    <div className="mx-auto w-full h-[60vh] flex flex-col lg:flex-row gap-5">
+      <div className="lg:w-[80%] ">
+        <h3 className="font-bold text-center lg:text-left">LOAN APPLICATION TREND</h3>
         <Graph data={graphData} />
       </div>
-      <div className='w-[100%] mt-36 '>
-        <h3 className='font-bold'>LOAN STATUS</h3>
+      <div className="w-full lg:w-[70%] lg:mt-20">
+        <h3 className="font-bold text-center lg:text-left">LOAN STATUS</h3>
         <Pie data={pieChartData} />
       </div>
     </div>
   );
 };
+
 export default LoanManagement;

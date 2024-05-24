@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -6,9 +5,6 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
-
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -18,11 +14,11 @@ function Login() {
   const navigate = useNavigate();
   const [fetchError, setFetchError] = useState(null);
 
-
   const [error, setError] = useState({
     email: '',
     password: '',
   });
+
   const handleEmail = (e) => {
     setEmail(e.target.value);
     setError({ ...error, email: '' });
@@ -36,10 +32,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-
-
     // Validate email format
-
     const emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
     if (!emailRegex.test(email)) {
       setError({ ...error, email: 'Email is required in the format of name@gmail.com' });
@@ -47,10 +40,7 @@ function Login() {
       return;
     }
 
-
-
     // Validate password length
-
     if (password.length < 8) {
       setError({ ...error, password: 'Password must be at least 8 characters long' });
       setFormSubmitted(true);
@@ -58,12 +48,12 @@ function Login() {
     }
 
     try {
-
       const response = await axios.post(
         'https://umwarimu-loan-hub-api.onrender.com/api/teacher/login',
         { email, password },
         { headers: { 'Content-Type': 'application/json' } }
       );
+
       if (response.data) {
         // Save token to localStorage
         console.log(response.data.token);
@@ -98,20 +88,18 @@ function Login() {
     } catch (error) {
       console.error('Login failed', error);
       setFetchError(error.response?.data?.message || 'An error occurred');
-
+      if (error.code === 'ERR_NETWORK') {
+        toast.error('Network error: Please check your internet connection or try again later.');
+      }
     }
-  }
+  };
 
   return (
-
     <div className="mx-auto items-center justify-center flex flex-row bg-gray-100 h-[110vh]">
-
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-
-        className=""
       >
         <div className="">
           <div className="relative flex flex-col items-center h-[80vh] border-2 p-12 mt-24 bg-white">
@@ -158,12 +146,12 @@ function Login() {
                   className="bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5"
                   onClick={handleLogin}
                 >
-                  Sign In
+                  Log in
                 </button>
                 <div className="flex gap-2 mt-5 mb-5 text-black">
                   <p>Don’t have an account? </p>
                   <Link to="/auth/signup" className="text-red-700">
-                    Sign Up
+                    Log in
                   </Link>
                 </div>
               </form>
@@ -173,7 +161,6 @@ function Login() {
       </motion.div>
       <ToastContainer />
     </div>
-    
   );
 }
 

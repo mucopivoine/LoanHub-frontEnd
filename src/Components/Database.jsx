@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import { MdDelete } from 'react-icons/md';
-import { FaEdit } from 'react-icons/fa';
 
-const getCookie = (name) => {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-};
-
-const cookie = getCookie('jwt');
+const cookie = document.cookie.split('jwt=')[1];
 
 function Database() {
   const [teachers, setTeachers] = useState([]);
@@ -20,14 +12,9 @@ function Database() {
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const navigate = useNavigate();
 
   const handleFetch = async () => {
-    if (!cookie) {
-      console.error('No JWT token found in cookies.');
-      setError('No authentication token found. Please log in.');
-      return;
-    }
-
     try {
       console.log('Token:', cookie);
       const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', {
@@ -37,11 +24,10 @@ function Database() {
         }
       });
 
-      console.log('fetching data');
-      console.log('Response data:', response.data);
+      console.log('fetching data')
+      console.log('Response data length:', response.data?.users?.length);
 
       if (response.data && Array.isArray(response.data.users)) {
-        console.log('Data received:', response.data.users);
         setTeachers(response.data.users);
       } else {
         console.error('Expected an array but received:', response.data);
@@ -50,8 +36,10 @@ function Database() {
     } catch (error) {
       console.error('Error fetching teacher data:', error.message);
       if (error.response) {
-        console.error('Response data:', error.response.data);
         setError(error.response.data.message || 'Failed to fetch teacher data');
+        if (error.response.status === 403) {
+          navigate('/login');  // Redirect to login page if token is invalid
+        }
       } else {
         setError('Failed to fetch teacher data');
       }
@@ -63,12 +51,6 @@ function Database() {
   }, []);
 
   const handleDeleteTeacher = async (id) => {
-    if (!cookie) {
-      console.error('No JWT token found in cookies.');
-      setError('No authentication token found. Please log in.');
-      return;
-    }
-
     try {
       console.log('Deleting teacher with ID:', id);
       const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/delete/${id}`, {
@@ -87,7 +69,6 @@ function Database() {
     } catch (error) {
       console.error('Error deleting teacher:', error.message);
       if (error.response) {
-        console.error('Response data:', error.response.data);
         setError(error.response.data.message || 'Failed to delete teacher');
       } else {
         setError('Failed to delete teacher');
@@ -99,7 +80,6 @@ function Database() {
     teacher.names.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredTeachers.slice(indexOfFirstItem, indexOfLastItem);

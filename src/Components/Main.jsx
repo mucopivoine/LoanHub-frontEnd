@@ -18,7 +18,7 @@ function Main() {
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1 }}
-                className="w-full object-cover inset-0 h-[40rem] rounded-b-xl "
+                className="w-full  object-cover inset-0 sm:h-[42rem] rounded-b-xl "
               />
             </div>
 

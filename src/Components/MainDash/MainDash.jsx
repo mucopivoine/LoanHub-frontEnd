@@ -18,12 +18,12 @@ const MainDash = () => {
       <div className="">
       <Search/>
       </div>
-      <div className="">
+      <div className="lg:ml-[10%] ">
       <DashboardStatsGrid/>
       </div>
       <div className="">
       {/* <NewDash /> */}
-      <div className="mb-14 gap-0" >
+      <div className="lg:ml-[20%]" >
        <LoanManagement/> 
       </div>
       <div>

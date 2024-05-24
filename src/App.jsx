@@ -51,6 +51,8 @@ import Settings from './Pages/Settings'
 import NewDash from "./Pages/NewDash"
 import Pie from './Pages/Pie'
 import Database from './Components/Database';
+import Approves from './Pages/Approves ';
+import AddTeacherdtl from './Pages/AddTeacherdtl';
 
 
 
@@ -81,6 +83,8 @@ function App() {
           <Route path="viewteacher" element={<ViewTeacher />} />
           <Route path="viewdata" element={<ViewData />} />
           <Route path="manager" element={<Manager />} />
+          <Route path="approves" element={<Approves />} />
+          <Route path="addteacherdtl" element={<AddTeacherdtl />} />
           <Route path="teachercontact" element={<TeacherContact />} />
           <Route path="manageteachers" element={<ManageTeachers />} />
           <Route path="teacherprofile" element={<TeacherProfile />} />

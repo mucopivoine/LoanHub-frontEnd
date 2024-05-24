@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -72,7 +72,7 @@ function Home() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white shadow-lg mt-2 px-4 py-2 text-lg">
+          <div className={`fixed left-0  w-60 bg-white  rounded-md shadow-lg p-4 text-lg transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <nav className="flex flex-col gap-4">
               <a className="hover:text-red-500" href="/">
                 Home
