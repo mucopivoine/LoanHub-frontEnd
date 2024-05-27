@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { IoMdClose, IoMdExit, IoMdMenu } from 'react-icons/io';
-import { FaRegChartBar, FaTachometerAlt, FaUser, FaUserFriends } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import { IoMdClose, IoMdMenu } from 'react-icons/io';
+import { FaRegChartBar, FaUser, FaUserFriends } from 'react-icons/fa';
+import { Link, Outlet } from 'react-router-dom';
 
 function Barnav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
   const handleResize = () => {
     setIsLargeScreen(window.innerWidth >= 1024);
-  }
+  };
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -29,7 +29,7 @@ function Barnav() {
       {!isLargeScreen && (
         <button
           onClick={toggleSidebar}
-          className="fixed lg:ml-24 top-5 left-5 z-50 bg-gray-800 text-white px-3 py-2 rounded-md "
+          className="fixed lg:ml-24 top-5 left-5 z-50 bg-gray-800 text-white px-3 py-2 rounded-md"
         >
           {isOpen ? <IoMdClose /> : <IoMdMenu />}
         </button>
@@ -42,13 +42,29 @@ function Barnav() {
           isLargeScreen ? '' : 'transform transition-transform'
         }`}
       >
-        <nav className="p-4 mt-16 w-full">
+        <nav className="p-4 mt-16 w-full ">
           <h1 className="text-center font-bold text-xl">Manager Dashboard</h1>
           <ul className="p-10">
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
-              <FaTachometerAlt className="w-[20px]" />
-              <Link to="/barnav/profile">Profile</Link>
+            <li
+              className="flex flex-col items-center relative cursor-pointer"
+              onMouseEnter={() => setIsProfileOpen(true)}
+              onMouseLeave={() => setIsProfileOpen(false)}
+            >
+              <div className="h-[70px] w-[70px] rounded-full flex items-center justify-center mb-1 mr-6  p-3  gap-2 text-lg ">
+                <img src="/happy.jpg" alt="User Profile" className="h-full w-full rounded-full object-cover" />
+              </div>
+              <p className="mr-6 mb-5" >Manager profile</p>
+              {isProfileOpen && (
+                <div className="absolute top-12 right-0 w-[200px] bg-white shadow-lg rounded-lg">
+                  <div className="p-4 text-sm">
+                    <p>Name: John Doe</p>
+                    <p>Email: johnDoe@gmail.com</p>
+                    <p>Phone: 078992900</p>
+                  </div>
+                </div>
+              )}
             </li>
+
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaUser className="w-[20px]" />
               <Link to="/barnav/teachers">Teachers</Link>
@@ -61,10 +77,6 @@ function Barnav() {
               <FaRegChartBar className="w-[20px]" />
               <Link to="/barnav/manageAnalytics">Analytics</Link>
             </li>
-            {/* <li className="flex items-center py-5 rounded-md gap-2 text-lg mb-5 p-2 hover:bg-white hover:text-red-500 hover:border-2">
-              <IoMdExit className="w-[30px]" />
-              <Link to="/">Logout</Link>
-            </li> */}
           </ul>
         </nav>
       </motion.div>
