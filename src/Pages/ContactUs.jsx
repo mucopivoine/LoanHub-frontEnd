@@ -1,3 +1,4 @@
+import Sidebar from '../Components/Sidebar';
 import  { useState } from 'react';
 
 const ManagerForm = () => {
@@ -25,6 +26,8 @@ const ManagerForm = () => {
   };
 
   return (
+    <>
+    <Sidebar/>
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-6 text-center">Create Manager</h2>
       <form onSubmit={handleSubmit}>
@@ -102,6 +105,7 @@ const ManagerForm = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 
