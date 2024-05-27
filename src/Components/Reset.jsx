@@ -57,11 +57,13 @@ function Reset() {
         if (isValid()) {
             try {
                 const response = await axios.post(
+
                     `https://umwarimu-loan-hub-api.onrender.com/api/teacher/resetpassword/${token}`, // Pass token in URL
                     {
                         email: email,
                         newPassword: password,
-                        confirm: confirmPassword
+                        confirm: confirmPassword,
+                        token: token,
                     },
                     {
                         headers: {
@@ -138,8 +140,13 @@ function Reset() {
                             {confirmPasswordErr && (<p className='text-red-500 italic text-xs'>{confirmPasswordErr}</p>)}
                         </div>
                         <div className='flex flex-col'>
+
                             <button type='submit' className='bg-red-500 w-50 border-2 rounded-md p-2 px-[100px] mx-auto mt-5 text-white'>Reset</button>
-                            <Link to="/auth/signup" className='text-md text-red-700 pt-5 text-right'> Back</Link> 
+                        
+
+                            
+                            <Link to="/auth/signup" className='text-md text-red-700 pt-5 text-right'>Go back</Link>
+
                         </div>
                     </form>
                 </div>

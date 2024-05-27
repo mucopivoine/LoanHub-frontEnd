@@ -1,15 +1,10 @@
 
 import { Link } from "react-router-dom";
-import{faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function End() {
   return (
     <>
-    <Link to="/">
-            <FontAwesomeIcon icon={faArrowCircleUp} className="text-3xl text-red-800 hover:text-red-600 ml-98 mb-4 " />
-          </Link>
+   
     <footer className="bg-gray-800 text-gray-300">
       <div className="container bg-gray-800 mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
