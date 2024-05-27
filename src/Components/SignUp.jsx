@@ -6,8 +6,8 @@ import axios from 'axios';
 function SignUp() {
   const [username, setUsername] = useState('');
   const [usernameError, setUserNameError] = useState('')
-  const [teacherid, setTeacherid] = useState('');
-  const [teacheridErr, setTeacheridErr] = useState('');
+  const [accountNumber, setAccountNumber] = useState('');
+  const [accountNumberErr, setAccountNumberError] = useState('');
   const [email, setEmail] = useState('');
   const [emailErr, setEmailErr] = useState('');
   const [password, setPassword] = useState('');
@@ -36,11 +36,11 @@ function SignUp() {
     } else {
       setUserNameError('');
     }
-    if (!teacherid.trim()) {
-      setTeacheridErr('teacher id is required');
+    if (!accountNumber.trim()) {
+      setAccountNumberError('Account Number is required');
       valid = false
     } else {
-      setTeacheridErr(" ")
+      setAccountNumberError(" ")
     }
     if (!firstname.trim()) {
       setFirstnameErr('firstname is required');
@@ -98,7 +98,7 @@ function SignUp() {
           lastName: lastname,
           schoolName: schoolname,
           phoneNumber: phonenumber,
-          teacherId: teacherid,
+          accountNumber: accountNumber,
         })
 
         axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
@@ -109,7 +109,7 @@ function SignUp() {
           lastName: lastname,
           schoolName: schoolname,
           phoneNumber: phonenumber,
-          teacherId: teacherid,
+          accountNumber: accountNumber,
         }, {
           headers: {
             "Content-Type": 'application/json',
@@ -245,17 +245,16 @@ function SignUp() {
                   </div>
                   <div className='mb-5'>
                     <label htmlFor='lastname' className='block text-sm text-black'>
-                      Enter Your ID
+                      Enter Your Account Number
                     </label>
                     <input
                       type='text'
                       id='teacher_ID'
-                      value={teacherid}
-                      onChange={(n) => setTeacherid(n.target.value)} required
+                      value={accountNumber}
+                      onChange={(n) => setAccountNumber(n.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                    {teacheridErr ? (<p className='text-red-500 italic text-xs'>{teacheridErr}</p>) : null}
-
+                    {accountNumberErr ? (<p className='text-red-500 italic text-xs'>{accountNumber}</p>) : null}
                   </div>
                   <div className='mb-5'>
                     <label htmlFor='lastname' className='block text-sm text-black'>
