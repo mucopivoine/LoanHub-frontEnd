@@ -21,7 +21,7 @@ const ViewManager = () => {
   const fetchManagers = async () => {
     try {
       console.log('Token:', cookie);
-      const response = await axios.get('http://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
+      const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookie}`
@@ -56,7 +56,7 @@ const ViewManager = () => {
   const handleDeletePerson = async (id) => {
     try {
       console.log('Deleting manager with ID:', id);
-      const response = await axios.delete(`http://umwarimu-loan-hub-api.onrender.com/api/manager/delete/${id}`, {
+      const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/manager/delete/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookie}`
@@ -113,42 +113,41 @@ const ViewManager = () => {
         Add Manager
       </button></Link> */}
       </div>
-      <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">
-        <div className=''>
-          <Link to="/admin/contactus">
-            <button
-              className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
-            >
-              Add Manager
-            </button>
-          </Link>
-        </div>
+     
+       
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead>
+                <thead className="bg-gray-50">
                   <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Modify</th>
-                    <th>Edit</th>
+                    <th  scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Names</th>
+                    <th  scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                    <th  scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone Number</th>
+                    <th  scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modify</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="bg-white divide-y divide-gray-200">
                   {filteredManagers.map((manager) => (
                     <tr key={manager._id}>
-                      <td>{manager.username}</td>
-                      <td>{manager.email}</td>
-                      <td>{manager.phoneNumber}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{manager.username}</div></td>
+                      <td  className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{manager.email}</div></td>
+                      <td className="px-6 py-4 whitespace-nowrap"> <div className="text-sm text-gray-900">{manager.phoneNumber}</div></td>
                       <td>
+                        <div className='flex gap-5'>
                         <button onClick={() => handleDeletePerson(manager._id)}>
                           <MdDelete />
                         </button>
                         <button onClick={() => handleEditClick(manager)}>
                           <FaEdit />
                         </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -189,7 +188,7 @@ const ViewManager = () => {
           </div>
         )}
       </div>
-      </div>
+    
     </>
   );
 };
