@@ -115,9 +115,6 @@ function Database() {
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                ID
-              </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Full Name
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -134,7 +131,6 @@ function Database() {
           <tbody className="bg-white divide-y divide-gray-200">
             {Array.isArray(currentItems) && currentItems.map((teacher) => (
               <tr key={teacher._id}>
-                <td className="px-6 py-4 whitespace-nowrap">{teacher.teacher_ID}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.names}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.schoolName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.salary}</td>
