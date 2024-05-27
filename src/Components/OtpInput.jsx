@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
-const OtpInput = ( length = 7, onOtpSubmit = () => {}, email ) => {
+const OtpInput = ({ length = 7, onOtpSubmit = () => {}, email }) => {
   const [otp, setOtp] = useState(new Array(length).fill(""));
   const inputRefs = useRef([]);
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ const OtpInput = ( length = 7, onOtpSubmit = () => {}, email ) => {
               className='border-2 text-white w-50 bg-red-500 px-[100px] mx-auto mt-5 p-2 rounded-xl'
               onClick={handleSubmit}
             >
-              Submit OTP
+              Submit
             </button>
           </div>
         </div>
