@@ -19,7 +19,7 @@ const Forgotps = () => {
   const isValid = () => {
     let valid = true;
     if (!email.trim()) {
-      setEmailErr('Email must be in format name@gmail.com');
+      setEmailErr('Email must be in the format name@gmail.com');
       valid = false;
     } else if (!isValidEmail(email)) {
       setEmailErr('Email is invalid');
@@ -34,31 +34,34 @@ const Forgotps = () => {
     event.preventDefault();
     if (isValid()) {
       try {
+        let userType = localStorage.getItem('user');
         let endpoint = '';
-        if (localStorage.getItem('user') === '"teacher"') {
-          endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot';
-        } else if (localStorage.getItem('user') === '"manager"') {
-          endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/manager/forgot';
-        } else if (localStorage.getItem('user') === '"admin"') {
-          endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/user/forgot';
-        } else {
-          // Default to teacher endpoint if role is not specified
-          endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot';
+
+        switch (userType) {
+          case '"teacher"':
+            endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot';
+            break;
+          case '"manager"':
+            endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/manager/forgot';
+            break;
+          case '"admin"':
+            endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/user/forgot';
+            break;
+          default:
+            // Default to teacher endpoint if role is not specified
+            endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot';
         }
-    
-        const response = await axios.post(endpoint,
-          { email: email },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },  withCredentials: true,
-          }
-        );
+
+        console.log(`Submitting email to endpoint: ${endpoint}`);
+
+        const response = await axios.post(endpoint, { email }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },  
+          withCredentials: true,
+        });
         console.log(response.data);
         toast.success('Email sent successfully! Please check your email for the reset link.');
-        // setTimeout(() => {
-        //   navigate('/auth/reset-password');
-        // }, 3000);
       } catch (error) {
         if (error.response) {
           console.log('Error response:', error.response.data);
