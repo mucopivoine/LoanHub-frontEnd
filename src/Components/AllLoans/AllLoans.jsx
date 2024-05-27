@@ -27,13 +27,12 @@ function AllLoans() {
       console.log('API Response:', response); // Log the entire response object
 
       if (response.data && Array.isArray(response.data.loans)) {
-        // Assuming 'loans' is the key containing the array of teacher data
         setTeachers(response.data.loans.map((loan) => ({
           fullName: loan.fullName,
           phoneNumber: loan.phoneNumber,
           workSchool: loan.workSchool,
           amountRequested: loan.amountRequested,
-          teacher_ID: loan.teacher_ID,
+          _id: loan._id,
         })));
       } else {
         console.error('Unexpected data format received from server:', response.data);
@@ -55,18 +54,18 @@ function AllLoans() {
 
   const handleDeleteTeacher = async (id) => {
     try {
-      console.log('Deleting teacher with ID:', id);
-      const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/delete/${id}`, {
+      console.log('Deleting teacher with ID:', id); // Log the ID before sending the delete request
+      const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/delete/${id}`, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${cookie}`, // Corrected template literal usage
+          'Authorization': `Bearer ${cookie}`,
         },
         withCredentials: true,
       });
 
       console.log('Delete response status:', response.status);
       if (response.status === 200) {
-        setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher.teacher_ID !== id)); // Adjusted to match the correct property name
+        setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher._id !== id)); // Adjusted to match the correct property name
         console.log('Teacher deleted:', id);
       } else {
         setError('Failed to delete teacher');
@@ -143,7 +142,7 @@ function AllLoans() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
                     className="text-red-600 hover:text-red-800"
-                    onClick={() => handleDeleteTeacher(teacher.teacher_ID)}
+                    onClick={() => handleDeleteTeacher(teacher._id)}
                   >
                     <MdDelete />
                   </button>

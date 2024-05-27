@@ -64,7 +64,7 @@ function Database() {
 
       console.log('Delete response status:', response.status);
       if (response.status === 200) {
-        setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher.teacher_ID !== id)); // Adjusted to match the correct property name
+        setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher._id !== id)); // Adjusted to match the correct property name
         console.log('Teacher deleted:', id);
       } else {
         setError('Failed to delete teacher');
@@ -133,7 +133,7 @@ function Database() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {Array.isArray(currentItems) && currentItems.map((teacher) => (
-              <tr key={teacher.teacher_ID}>
+              <tr key={teacher._id}>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.teacher_ID}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.names}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.schoolName}</td>
@@ -141,7 +141,7 @@ function Database() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
                     className="text-red-600 hover:text-red-800"
-                    onClick={() => handleDeleteTeacher(teacher.teacher_ID)}
+                    onClick={() => handleDeleteTeacher(teacher._id)}
                   >
                     <MdDelete />
                   </button>

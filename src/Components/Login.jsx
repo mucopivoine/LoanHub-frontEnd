@@ -83,7 +83,7 @@ function Login() {
     } catch (error) {
       console.error('Login failed', error);
       setFetchError(error.response?.data?.message || 'An error occurred');
-      toast.error(error.response?.data?.message || 'Network error, please try again later');
+      toast.error(error.response?.data?.message || ' Please try again ');
     }
   }
   toast.error('Login failed for all endpoints. Please check your credentials and try again.');

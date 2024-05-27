@@ -5,7 +5,8 @@ import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 
-const cookie =document.cookie.split('jwt=')[1];
+const cookie = document.cookie.split('jwt=')[1];
+
 const ViewManager = () => {
   const [managers, setManagers] = useState([]);
   const [error, setError] = useState('');
@@ -16,17 +17,17 @@ const ViewManager = () => {
     newPassword: '',
     confirm: ''
   });
+
   const fetchManagers = async () => {
     try {
       console.log('Token:', cookie);
-          const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
+      const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookie}`
         }
       });
       console.log('Response data:', response.data);
-      // Check if the response contains the users key and if it's an array
       if (response.data && Array.isArray(response.data.users)) {
         setManagers(response.data.users);
       } else {
@@ -38,20 +39,50 @@ const ViewManager = () => {
       if (error.response) {
         console.error('Response data:', error.response.data);
         setError(error.response.data.error || 'Failed to fetch manager data');
+      } else if (error.request) {
+        console.error('Request data:', error.request);
+        setError('Request to the server failed');
       } else {
-        setError('Failed to fetch manager data');
+        console.error('Other error:', error.message);
+        setError('An unexpected error occurred');
       }
-  }
-};
+    }
+  };
+
   useEffect(() => {
     fetchManagers();
   }, []);
-  const handleDeletePerson = async() => {
-    // Implement delete logic here
+
+  const handleDeletePerson = async (id) => {
+    try {
+      console.log('Deleting manager with ID:', id);
+      const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/manager/delete/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookie}`
+        }
+      });
+      console.log('Delete response status:', response.status);
+      if (response.status === 200) {
+        setManagers((prevManagers) => prevManagers.filter((manager) => manager._id !== id));
+      } else {
+        setError('Failed to delete manager');
+      }
+    } catch (error) {
+      console.error('Error deleting manager:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        setError(error.response.data.error || 'Failed to delete manager');
+      } else {
+        setError('Failed to delete manager');
+      }
+    }
   };
-  const handleEditClick = (person) => {
-    setEditingManager(person);
+
+  const handleEditClick = (manager) => {
+    setEditingManager(manager);
   };
+
   const handleUpdateChange = (e) => {
     const { name, value } = e.target;
     setUpdateData((prevData) => ({
@@ -59,87 +90,63 @@ const ViewManager = () => {
       [name]: value,
     }));
   };
+
   const handleUpdatePerson = () => {
     // Implement update logic here
   };
-  // Filter managers based on search term
+
   const filteredManagers = managers.filter(manager =>
     manager.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   return (
     <>
-    
+
     <div>
     <Sidebar/>
     </div>
     <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">
       <div className=''>
-    <Link to="/admin/contactus"><button
-        className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
+    <Link to="/admin/contactus">
+      <button className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
 >
-  
         Add Manager
       </button></Link>
       </div>
-      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200">
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    ID
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Email
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Modify
-                  </th>
-                  <th scope="col" className="relative px-6 py-3">
-                    <span className="sr-only">Edit</span>
-                  </th>
-                </tr>
+     
+       
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th  scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Names</th>
+                    <th  scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                    <th  scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone Number</th>
+                    <th  scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modify</th>
+                  </tr>
+                </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {Array.isArray(filteredManagers) && filteredManagers.map((manager) => (
-                    <tr key={manager.id}>
+                  {filteredManagers.map((manager) => (
+                    <tr key={manager._id}>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{manager.username}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{manager.email}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{manager.phoneNumber}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium gap-4">
-                        <div className="flex gap-5">
-                          <button
-                            className=""
-                            onClick={() => handleDeletePerson(manager.id)}
-                          >
-                            <MdDelete />
-                          </button>
-                          <button
-                            className="p-2"
-                            onClick={() => handleEditClick()}
-                          >
-                            <FaEdit />
-                          </button>
+                      <div className="text-sm text-gray-900">{manager.username}</div></td>
+                      <td  className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{manager.email}</div></td>
+                      <td className="px-6 py-4 whitespace-nowrap"> <div className="text-sm text-gray-900">{manager.phoneNumber}</div></td>
+                      <td>
+                        <div className='flex gap-5'>
+                        <button onClick={() => handleDeletePerson(manager._id)}>
+                          <MdDelete />
+                        </button>
+                        <button onClick={() => handleEditClick(manager)}>
+                          <FaEdit />
+                        </button>
                         </div>
                       </td>
                     </tr>
@@ -159,7 +166,6 @@ const ViewManager = () => {
                 placeholder="Current Password"
                 value={updateData.currentPassword}
                 onChange={handleUpdateChange}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
               />
               <input
                 type="password"
@@ -167,7 +173,6 @@ const ViewManager = () => {
                 placeholder="New Password"
                 value={updateData.newPassword}
                 onChange={handleUpdateChange}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
               />
               <input
                 type="password"
@@ -175,19 +180,17 @@ const ViewManager = () => {
                 placeholder="Confirm Password"
                 value={updateData.confirm}
                 onChange={handleUpdateChange}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
               />
-              <button
-                className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded"
-                onClick={handleUpdatePerson}
-              >
+              <button onClick={handleUpdatePerson}>
                 Update Manager
               </button>
             </div>
           </div>
         )}
       </div>
+    
     </>
   );
 };
+
 export default ViewManager;

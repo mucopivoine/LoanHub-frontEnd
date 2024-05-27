@@ -1,7 +1,7 @@
 
 import { useState} from "react";
 import Barnav from "../Components/Barnav";
-import { Sidebar } from "lucide-react";
+// import { Sidebar } from "lucide-react";
 import Search from "./Search";
 const columns = [
   {
@@ -64,14 +64,14 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
     
     <Barnav/>
     <div>
-    <table className="min-w-full divide-y divide-gray-200 items-center">
+    <table className="min-w-full divide-y">
       <thead className="bg-gray-50">
         <tr>
           {columns.map((column) => (
             <th
               key={column.accessor}
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              className=" text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               {column.Header}
             </th>
@@ -111,7 +111,7 @@ const Loans = () => {
   return (
     <div>
     <Search/>
-    <div className="p-6 w-[80%] ml-[20%]">
+    <div className="p-6 w-[80%]">
       <h2 className="text-2xl font-semibold mb-4">Manage Loans</h2>
       <Table columns={columns} data={data} 
        searchTerm={searchTerm}
