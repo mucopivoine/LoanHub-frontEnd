@@ -94,9 +94,9 @@ function Teachers() {
   return (
     <>
     
-    <div className="flex">
+    <div className="ml-[30px]">
     <Barnav/>
-      <div className="w-[70%] p-6 ml-[2%] lg:mt-[40px]">
+      <div className="w-[70%] lg:mt-[100px]">
         <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
         <input
           type="text"

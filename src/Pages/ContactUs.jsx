@@ -4,7 +4,7 @@ import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom"
 import Search from "./Search"
-import Sidebar from '../Components/Sidebar';
+// import Sidebar from '../Components/Sidebar';
 const cookie =document.cookie.split('jwt=')[1];
 
 const ManagerForm = () => {

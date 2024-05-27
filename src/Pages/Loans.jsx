@@ -64,7 +64,9 @@ const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
     
     <Barnav/>
     <div>
-    <table className="min-w-full divide-y">
+      <h1 className="text-2xl font-bold mt-5 ">Loans status</h1>
+    <table className="min-w-full divide-y mt-[50px]">
+      
       <thead className="bg-gray-50">
         <tr>
           {columns.map((column) => (

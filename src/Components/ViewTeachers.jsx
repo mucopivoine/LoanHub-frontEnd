@@ -95,7 +95,7 @@ function ViewTeachers() {
     <Search/>
     <div className="flex">
       <Sidebar />
-      <div className="w-[70%] p-6 ml-[2%] lg:mt-[30px]">
+      <div className="w-[70%] p-6 ml-[2%] lg:mt-[50px]">
         <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
         <input
           type="text"
