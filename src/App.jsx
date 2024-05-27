@@ -44,7 +44,7 @@ import MainDash from './Components/MainDash/MainDash'
 import RightSide from './Components/RightSide/RightSide'
 import LoanManagement from './Pages/LoanManagement'
 import Graph from './Components/Graphs/Graph'
-import Settings from './Pages/Settings'
+// import Settings from './Pages/Settings'
 import NewDash from "./Pages/NewDash"
 import Pie from './Pages/Pie'
 
@@ -78,7 +78,7 @@ function App() {
 
               <Route path="reset" element={<Reset />} />
 
-              <Route path="reset-password" element={<Reset />} />
+              
 
               <Route path="otpinput" element={<OtpInput />} />
               <Route path="otpconfirm" element={<Otpconfirm />} />
