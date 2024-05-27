@@ -3,7 +3,23 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [  {
+    name: 'custom-logger',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        console.log('Request URL:', req.url);
+        try {
+          decodeURI(req.url);
+        } catch (error) {
+          console.error('Malformed URI:', req.url);
+          res.statusCode = 400;
+          res.end('Malformed URI');
+          return;
+        }
+        next();
+      });
+    }
+  },react()],
   build:{
     outDir:'build',
     chunkSizeWarningLimit: 2000,

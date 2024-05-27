@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidemenu from '../Components/Sidemenu';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// Import custom CSS for background obscuring
 
 function ViewData() {
   const [fullName, setFullName] = useState('');
@@ -20,7 +21,7 @@ function ViewData() {
   const handleProofOfEmploymentUpload = (e) => {
     setProofOfEmployment(e.target.files[0]);
   };
-  // const navigate = useNavigate();
+
   const handleCopyOfNationalIdUpload = (e) => {
     setCopyOfNationalId(e.target.files[0]);
   };
@@ -33,7 +34,7 @@ function ViewData() {
     formData.append('workSchool', workSchool);
     formData.append('email', email);
     formData.append('phoneNumber', phoneNumber);
-    formData.append('teacher_ID', teacher_ID); // Ensure this matches the expected format
+    formData.append('teacher_ID', teacher_ID);
     formData.append('bankAccountNumber', bankAccountNumber);
     formData.append('amountRequested', amountRequested);
     formData.append('purpose', purpose);
@@ -61,10 +62,24 @@ function ViewData() {
       });
 
       if (response.ok) {
-        toast.success('Loan Application Submitted Successfully');
-        setTimeout(() => {
-          navigate('/layout/allloans');
-        })
+        toast.success('Loan Application Submitted Successfully', {
+          className: 'toast-message',
+          onClose: () => {
+            // Clear input fields
+            setFullName('');
+            setSchoolName('');
+            setEmail('');
+            setMaritalStatus('');
+            setPhoneNumber('');
+            setTeacherId('');
+            setBankNumber('');
+            setLoanAmount('');
+            setPurpose('');
+            setMonthlyIncome('');
+            setProofOfEmployment(null);
+            setCopyOfNationalId(null);
+          },
+        });
       } else {
         const errorData = await response.json();
         toast.error('Loan Application Submission Failed', errorData);
@@ -78,7 +93,7 @@ function ViewData() {
   return (
     <>
       <Sidemenu />
-      <div className="flex justify-center items-center min-h-screen mt-[50px]">
+      <div className={`flex justify-center items-center min-h-screen mt-[50px] ${ToastContainer.hasToast ? 'background-blur' : ''}`}>
         <div className="bg-white p-8 rounded shadow-md w-full max-w-3xl">
           <h1 className="text-2xl font-bold mb-6">Teacher Account Details</h1>
           <h2 className="text-xl font-bold mb-4">Loan Application Form</h2>
@@ -164,7 +179,7 @@ function ViewData() {
                 <label className="block text-gray-700">Marital status</label>
                 <select
                   value={maritalStatus}
-                  onChange={(e) => setMaritalStatus (e.target.value)}
+                  onChange={(e) => setMaritalStatus(e.target.value)}
                   className="w-full p-2 border border-gray-300 rounded mt-2"
                   required
                 >
