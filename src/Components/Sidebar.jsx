@@ -1,4 +1,4 @@
-SIDEBAR 
+
 import { useState } from 'react';
 import { FaRegChartBar,  FaUser, FaDatabase, FaHandHoldingUsd, FaChalkboardTeacher } from 'react-icons/fa';
 import { IoMdClose,  IoMdMenu } from 'react-icons/io';

@@ -1,5 +1,3 @@
-
-
 import { FaHandHoldingUsd } from 'react-icons/fa';
 
 function DashboardStatsGrid() {
