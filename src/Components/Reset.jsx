@@ -56,7 +56,8 @@ function Reset() {
                     {
                         email: email,
                         newPassword: password,
-                        confirm: confirmPassword
+                        confirm: confirmPassword,
+                        token: token,
                     },
                     {
                         headers: {
@@ -96,7 +97,7 @@ function Reset() {
                             <label htmlFor='email' className='block text-sm text-black'>Enter Your Email</label>
                             <input
                                 type="email"
-                                id="Email"
+                                id="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -128,14 +129,10 @@ function Reset() {
                             {confirmPasswordErr && (<p className='text-red-500 italic text-xs'>{confirmPasswordErr}</p>)}
                         </div>
                         <div className='flex flex-col'>
-
-                            <button type='submit' className='bg-red-500 w-50 border-2 rounded-md p-2 px-[100px] mx-auto mt-5 text-white' onClick={handleReset}>Reset </button>
-
-                            <Link to="/auth/signup" className='text-md text-red-700 pt-5 text-right'> Back</Link>
                             <button type='submit' className='bg-red-500 w-50 border-2 rounded-md p-2 px-[100px] mx-auto mt-5 text-white'>
                                 Reset
                             </button>
-                            
+                            <Link to="/auth/signup" className='text-md text-red-700 pt-5 text-right'>Go back</Link>
                         </div>
                     </form>
                 </div>
@@ -145,3 +142,4 @@ function Reset() {
 }
 
 export default Reset;
+``
