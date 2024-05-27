@@ -44,7 +44,7 @@ const Sidemenu = () => {
           <ul className="p-10">
           <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5  hover:bg-white hover:text-red-500 hover:border-2">
               <FaUser className="w-[20px]" />
-              <Link to="/layout/profile">Profile</Link>
+              <Link to="/layout/teacherprofile">Profile</Link>
             </li>
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5  hover:bg-white hover:text-red-500 hover:border-2">
               <FaUserFriends className="w-[20px]" />

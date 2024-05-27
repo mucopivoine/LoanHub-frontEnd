@@ -34,8 +34,19 @@ const Forgotps = () => {
     event.preventDefault();
     if (isValid()) {
       try {
-        const response = await axios.post(
-          'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot',
+        let endpoint = '';
+        if (localStorage.getItem('user') === '"teacher"') {
+          endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot';
+        } else if (localStorage.getItem('user') === '"manager"') {
+          endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/manager/forgot';
+        } else if (localStorage.getItem('user') === '"admin"') {
+          endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/user/forgot';
+        } else {
+          // Default to teacher endpoint if role is not specified
+          endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot';
+        }
+    
+        const response = await axios.post(endpoint,
           { email: email },
           {
             headers: {
