@@ -4,7 +4,7 @@ import "./MainDash.css";
 import LoanManagement from "../../Pages/LoanManagement";
 import Sidebar from "../Sidebar";
 import Search from "../../Pages/Search";
-import ViewManager from "../../Pages/ViewManagers";
+// import ViewManager from "../../Pages/ViewManagers";
 import DashboardStatsGrid from "../../Data/DashboardStatsGrid";
 
 
