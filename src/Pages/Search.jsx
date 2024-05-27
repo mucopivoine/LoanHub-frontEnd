@@ -18,7 +18,7 @@ function Search({ messages = [] }) {
   }, []);
   return (
     <div
-      className={`flex fixed mb-10 sm:w-[90%] lg:w-[82%] sm:ml-[70px] right-0 justify-between top-0 bg-gray-100 shadow-lg rounded-lg ${
+      className={`flex fixed mb-10 sm:w-[90%] lg:w-[81%] sm:ml-[70px] right-0 justify-between top-0 bg-gray-100 shadow-lg rounded-lg ${
         isSearchFixed ? 'z-50' : ''
       }`}
     >
