@@ -5,14 +5,13 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
- // Ensure this import is correct
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
-  const [ setFetchError] = useState(null);
+  const [fetchError, setFetchError] = useState(null); // Fix the state declaration
   const [error, setError] = useState({
     email: '',
     password: '',
@@ -47,7 +46,7 @@ function Login() {
       const response = await axios.post(
         'https://umwarimu-loan-hub-api.onrender.com/api/teacher/login',
         { email, password },
-        { headers: { 'Content-Type': 'application/json' } ,  withCredentials: true,}
+        { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
       );
 
       if (response.data) {
@@ -65,20 +64,22 @@ function Login() {
         setTimeout(() => {
           const userRole = response.data.user.role;
           if (userRole === 'teacher') {
-            navigate('/layout/teacherloans');
+            navigate('/layout/teacheranalytics');
           } else if (userRole === 'manager') {
-            navigate('/barnav/managerdash');
+            navigate('/barnav/manageAnalytics');
           } else if (userRole === 'admin') {
-            navigate('/admin/maindash');
+            navigate('/admin/analytics');
           }
         }, 2000); // 2 seconds delay for toast
       } else {
         console.error('Token not found in response:', response.data);
         setFetchError('Token not found in response');
+        toast.error('Token not found in response');
       }
     } catch (error) {
       console.error('Login failed', error);
       setFetchError(error.response?.data?.message || 'An error occurred');
+      toast.error(error.response?.data?.message || 'Network error, please try again later');
     }
   }
 

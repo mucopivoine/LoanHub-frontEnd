@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import { MdDelete } from 'react-icons/md';
+import { Search } from 'lucide-react';
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -98,9 +99,11 @@ function AllLoans() {
   };
 
   return (
+    <>
+    <Search/>
     <div className="flex">
       <Sidebar />
-      <div className="w-[70%] ml-[20%]">
+      <div className="w-[70%] ml-[2%] ">
         <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
         <input
           type="text"
@@ -168,6 +171,7 @@ function AllLoans() {
         </div>
       </div> 
     </div>
+    </>
   );
 }
 

@@ -23,12 +23,12 @@ function DashboardStatsGrid() {
       change: "+658",
       iconBgColor: "bg-yellow-500",
     },
-    {
-        label: "  Total   Loans",
-        value: "$7325.20",
-        change: "+708",
-        iconBgColor: "bg-green-500",
-      },
+    // {
+    //     label: "  Total   Loans",
+    //     value: "$7325.20",
+    //     change: "+708",
+    //     iconBgColor: "bg-green-500",
+    //   },
     // Removed the last green box
   ];
 
