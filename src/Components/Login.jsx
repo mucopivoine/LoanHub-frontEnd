@@ -26,7 +26,11 @@ function Login() {
     setPassword(e.target.value);
     setError({ ...error, password: '' });
   };
-
+  const loginEndpoints = [
+    'https://umwarimu-loan-hub-api.onrender.com/api/teacher/login',
+    'https://umwarimu-loan-hub-api.onrender.com/api/manager/login',
+    'https://umwarimu-loan-hub-api.onrender.com/api/user/login'
+  ];
   const handleLogin = async (e) => {
     e.preventDefault();
     const emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
@@ -41,10 +45,10 @@ function Login() {
       setFormSubmitted(true);
       return;
     }
-
+    for (const endpoint of loginEndpoints) {
     try {
       const response = await axios.post(
-        'https://umwarimu-loan-hub-api.onrender.com/api/teacher/login',
+        endpoint,
         { email, password },
         { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
       );
@@ -82,6 +86,8 @@ function Login() {
       toast.error(error.response?.data?.message || ' Please try again ');
     }
   }
+  toast.error('Login failed for all endpoints. Please check your credentials and try again.');
+}
 
   return (
     <div className="mx-auto items-center justify-center flex flex-row bg-gray-100 h-[110vh]">

@@ -4,6 +4,8 @@ import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom"
 import { Search } from 'lucide-react';
+
+
 const cookie =document.cookie.split('jwt=')[1];
 
 const ManagerForm = () => {
@@ -108,10 +110,10 @@ const ManagerForm = () => {
 
   return (
     <>
-    <div className='flex'>
-    <Sidebar/>
-    </div>
+
+    
     <Search/>
+    <Sidebar/>
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-6 text-center">Create Manager</h2>
       <form onSubmit={handleSubmit}>

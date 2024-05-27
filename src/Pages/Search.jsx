@@ -72,7 +72,7 @@ function Search({ messages = [] }) {
             </div>
           )}
         </div> */}
-       <Link to="/auth/logout" ><button className='p-3 m-2 rounded-md text-md hover:bg-white hover:text-red-500'>Logout</button></Link>
+       <Link to="/" ><button className='p-3 m-2 rounded-md text-md hover:bg-white hover:text-red-500'>Logout</button></Link>
       </div>
     </div>
   );
