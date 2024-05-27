@@ -1,5 +1,4 @@
-
-import  { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar';
@@ -60,7 +59,7 @@ function ViewTeachers() {
 
       console.log('Delete response status:', response.status);
       if (response.status === 200) {
-        setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher.TeacherId !== id));
+        setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher._id !== id));
       } else {
         setError('Failed to delete teacher');
       }
@@ -126,10 +125,10 @@ function ViewTeachers() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {Array.isArray(currentItems) && currentItems.map((teacher) => (
-              <tr key={teacher.TeacherId}>
+              <tr key={teacher._id}>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.accountNumber}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <Link to={`/teacherdetails/${teacher.TeacherId}`} className="text-black hover:underline">
+                  <Link to={`/teacherdetails/${teacher._id}`} className="text-black hover:underline">
                     {teacher.username}
                   </Link>
                 </td>
@@ -137,7 +136,7 @@ function ViewTeachers() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
                     className="text-red-600 hover:text-red-800"
-                    onClick={() => handleDeleteTeacher(teacher.TeacherId)}
+                    onClick={() => handleDeleteTeacher(teacher._id)}
                   >
                     <MdDelete />
                   </button>

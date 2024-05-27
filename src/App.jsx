@@ -76,9 +76,7 @@ function App() {
               <Route path="forgot" element={<Forgot />} />
               <Route path="forgotps" element={<Forgotps />} />
 
-              <Route path="reset" element={<Reset />} />
-
-              <Route path="reset-password" element={<Reset />} />
+              <Route path='reset/token' element={<Reset />} />
 
               <Route path="otpinput" element={<OtpInput />} />
               <Route path="otpconfirm" element={<Otpconfirm />} />
