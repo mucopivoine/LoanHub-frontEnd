@@ -1,9 +1,9 @@
 // import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 const data = [
-  { name: "Male", value: 540 },
-  { name: "Female", value: 620 },
-  { name: "Other", value: 210 },
+  { name: "Total Teachers", value: 540 },
+  { name: "Total Loans", value: 620 },
+  { name: "Total managers", value: 210 },
 ];
 const RADIAN = Math.PI / 180;
 const COLORS = ["#3B82F6", " #EF4444", "#F59E0B "];

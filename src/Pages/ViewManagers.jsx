@@ -5,7 +5,7 @@ import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 const cookie = document.cookie.split('jwt=')[1];
-const cookie =document.cookie.split('jwt=')[1];
+
 const ViewManager = () => {
   const [managers, setManagers] = useState([]);
   const [error, setError] = useState('');
@@ -75,6 +75,7 @@ const ViewManager = () => {
   const filteredManagers = managers.filter(manager =>
     manager.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   return (
     <>
     <div>
@@ -202,6 +203,7 @@ const ViewManager = () => {
         )}
       </div>
     </>
-  );
-};
+  )
+}
+}
 export default ViewManager;

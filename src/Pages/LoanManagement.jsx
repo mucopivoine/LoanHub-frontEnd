@@ -1,11 +1,5 @@
 
-
-
-// import PieChart from '../Components/Graphs/PieChart';
-
-
-import Pie from '../Pages/Pie'
-
+import Pie from '../Pages/Pie';
 import Graph from '../Components/Graphs/Graph';
 import 'chart.js/auto';
 
@@ -34,15 +28,12 @@ const LoanManagement = () => {
   };
 
   return (
-  
-
-  
-    <div className="mx-auto w-full h-[60vh] flex flex-col lg:flex-row gap-5 ">
-      <div className="lg:w-[80%] ml-72 ">
-        <h3 className="font-bold text-center lg:text-left">LOAN APPLICATION TREND</h3>
+    <div className="mx-auto w-full h-[90vh] flex flex-col  lg:flex-row gap-8  ml-80 "> {/* Adjusted spacing */}
+      <div className="lg:w-[50%]"> {/* Adjusted width */}
+        <h3 className="font-bold text-center lg:text-left ">LOAN APPLICATION TREND</h3>
         <Graph data={graphData} />
       </div>
-      <div className="w-full lg:w-[70%] lg:mt-32 ">
+      <div className="w-full lg:w-[50%] mb-[72px] mt-24"> {/* Adjusted width and spacing */}
         <h3 className="font-bold text-center lg:text-left">LOAN STATUS</h3>
         <Pie data={pieChartData} />
       </div>
