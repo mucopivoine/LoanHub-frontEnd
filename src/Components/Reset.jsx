@@ -52,7 +52,7 @@ function Reset() {
         if (isValid()) {
             try {
                 const response = await axios.post(
-                    'http://umwarimu-loan-hub-api.onrender.com/api/teacher/resetpassword',
+                    'https://umwarimu-loan-hub-api.onrender.com/api/teacher/resetpassword',
                     {
                         email: email,
                         newPassword: password,
@@ -142,4 +142,3 @@ function Reset() {
 }
 
 export default Reset;
-``
