@@ -62,9 +62,9 @@ function ViewData() {
 
       if (response.ok) {
         toast.success('Loan Application Submitted Successfully');
-        // setTimeout(() => {
-        //   navigate
-        // })
+        setTimeout(() => {
+          navigate('/layout/allloans');
+        })
       } else {
         const errorData = await response.json();
         toast.error('Loan Application Submission Failed', errorData);
@@ -78,7 +78,7 @@ function ViewData() {
   return (
     <>
       <Sidemenu />
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen mt-[50px]">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-3xl">
           <h1 className="text-2xl font-bold mb-6">Teacher Account Details</h1>
           <h2 className="text-xl font-bold mb-4">Loan Application Form</h2>

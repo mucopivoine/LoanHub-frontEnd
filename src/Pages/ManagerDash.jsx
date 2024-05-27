@@ -4,6 +4,7 @@ import NewData from '../Data/NewData'
 import Loans from "./Loans"
 import Teachers from "./Teachers"
 import Search from "./Search"
+import LoanManagement from "./LoanManagement"
 
 function ManagerDash() {
   return (
@@ -14,7 +15,7 @@ function ManagerDash() {
    <div>
     <Search/>
     <NewData/>
-    {/* <Teachers/> */}
+    <LoanManagement/>
     
    </div>
    </>

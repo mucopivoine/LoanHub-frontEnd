@@ -13,7 +13,7 @@ export default class Example extends PureComponent {
   static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-72d7y5';
   render() {
     return (
-        <div className="mt-10 lg:ml-[270px] ">
+        <div className="mt-20  ">
       <ResponsiveContainer width="80%" height={500} >
 
         <BarChart

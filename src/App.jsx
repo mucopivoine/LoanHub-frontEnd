@@ -54,6 +54,8 @@ import Approves from './Pages/Approves ';
 import AddTeacherdtl from './Pages/AddTeacherdtl';
 import AllLoans from './Components/AllLoans/AllLoans';
 import Manager from './Components/Manager';
+import Profile from './Forms/Profile';
+import TeacherAnalytics from './Pages/TeacherAnalytics';
 
 
 
@@ -92,6 +94,7 @@ function App() {
           <Route path="teachercontact" element={<TeacherContact />} />
           <Route path="manageteachers" element={<ManageTeachers />} />
           <Route path="teacherprofile" element={<TeacherProfile />} />
+          <Route path="teacheranalytics" element={<TeacherAnalytics />} />
         </Route>
         <Route path="/admin" element={<Dashboards />}>
           <Route path="navbar" element={<Navbar />} />
@@ -117,7 +120,7 @@ function App() {
           <Route path="addmanager" element={<Addmanager />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="manageloans" element={<ManageLoans />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="/barnav" element={<Barnav />}>
           <Route path="managerdash" element={<ManagerDash />} />

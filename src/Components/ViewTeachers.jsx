@@ -13,7 +13,7 @@ function ViewTeachers() {
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 7;
 
   const handleFetch = async () => {
     try {
@@ -96,10 +96,8 @@ function ViewTeachers() {
     <>
     <Search/>
     <div className="flex">
-      
       <Sidebar />
-      
-      <div className="w-[70%] p-6 ml-[20%]">
+      <div className="w-[70%] p-6 ml-[2%] lg:mt-[30px]">
         <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
         <input
           type="text"

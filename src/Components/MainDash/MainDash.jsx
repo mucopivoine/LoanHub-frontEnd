@@ -14,11 +14,10 @@ const MainDash = () => {
       <div className="fixed">
         <Sidebar />
       </div>
-      <div className="flex-grow ml-[200px] p-4"> {/* Add margin to avoid overlap with fixed Sidebar */}
+      <div className=""> 
         <Search />
         <DashboardStatsGrid />
         <LoanManagement />
-        <ViewManager />
       </div>
     </div>
   );
