@@ -3,16 +3,30 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Sidemenu from './Sidemenu';
 
+
 const TeacherProfile = () => {
-  const { id } = useParams(); // Get the teacher ID from the URL params
+  const { id } = useParams(); 
   const [teacher, setTeacher] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const cookie = document.cookie.split('jwt=')[1];
+  if (!cookie) {
+    setError("Authentication token not found");
+    setLoading(false);
+  }
+
   useEffect(() => {
     const fetchTeacherData = async () => {
       try {
-        const response = await axios.get(`https://umwarimu-loan-hub-api.onrender.com/api/teacher/getOne/${id}`);
+        console.log('Token:', cookie);
+        const response = await axios.put(`https://umwarimu-loan-hub-api.onrender.com/api/teacher/put/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${cookie}`,
+          },
+          withCredentials: true,
+        });
         setTeacher(response.data);
       } catch (error) {
         setError(error);
@@ -21,11 +35,16 @@ const TeacherProfile = () => {
       }
     };
 
-    fetchTeacherData();
-  }, [id]);
+    if (id) {
+      fetchTeacherData();
+    } else {
+      setError("Teacher ID is undefined");
+      setLoading(false);
+    }
+  }, [id, cookie]);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading profile: {error.message}</p>;
+  if (error) return <p>Error loading profile: {error.message || error}</p>;
 
   return (
     <>

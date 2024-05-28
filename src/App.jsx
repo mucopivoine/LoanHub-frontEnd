@@ -93,7 +93,7 @@ function App() {
           <Route path="addteacherdtl" element={<AddTeacherdtl />} />
           <Route path="teachercontact" element={<TeacherContact />} />
           <Route path="manageteachers" element={<ManageTeachers />} />
-          <Route path="teacherprofile" element={<TeacherProfile />} />
+          <Route path="teacherprofile/:id" element={<TeacherProfile/>} />
           <Route path="teacheranalytics" element={<TeacherAnalytics />} />
         </Route>
         <Route path="/admin" element={<Dashboards />}>

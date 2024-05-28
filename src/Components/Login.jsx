@@ -65,6 +65,7 @@ function Login() {
           document.cookie = `jwt=${token};expires=${expires.toUTCString()};path=/`;
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('user', JSON.stringify(response.data.user.role));
+          
           toast.success('Logged in successfully ');
         
 

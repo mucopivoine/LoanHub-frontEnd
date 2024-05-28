@@ -2,24 +2,50 @@ import React, { useState, useEffect } from 'react';
 import { FaWpforms, FaUser, FaUserFriends } from 'react-icons/fa';
 import { IoMdClose, IoMdExit, IoMdMenu } from 'react-icons/io';
 import { motion } from 'framer-motion';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Sidemenu = () => {
+  const { id } = useParams(); // Assuming you are getting the id from route params
   const [isOpen, setIsOpen] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
+  const [teacher, setTeacher] = useState(null);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
   const handleResize = () => {
     setIsLargeScreen(window.innerWidth >= 1024);
   };
+  const cookie = document.cookie.split('jwt=')[1];
   useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    const fetchTeacherData = async () => {
+      try {
+        const response = await axios.get(`https://umwarimu-loan-hub-api.onrender.com/api/teacher/put/${id}`,{
+         
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${cookie}`,
+          },
+          withCredentials: true,
+        
+        });
+        setTeacher(response.data);
+      } catch (error) {
+        console.error('Error fetching teacher data:', error);
+      }
+    };
+    
+    fetchTeacherData();
+  }, [id]);
 
   return (
     <>
@@ -42,15 +68,15 @@ const Sidemenu = () => {
         <nav className="p-4 mt-16 w-full">
           <h1 className="text-center font-bold text-xl">Teacher Dashboard</h1>
           <ul className="p-10">
-          <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5  hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaUser className="w-[20px]" />
-              <Link to="/layout/teacherprofile">Profile</Link>
+              <Link to={`/layout/teacherprofile/${teacher?._id}`}>Profile</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5  hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaUserFriends className="w-[20px]" />
               <Link to="/layout/teacherloans">Loans</Link>
             </li>
-            <li className="flex items-center py-3 rounded-md gap-2 text-lg mb-5  hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center py-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaWpforms className='w-[20px]'/>
               <Link to="/layout/viewdata">Request_Loan</Link>
             </li>
@@ -58,11 +84,6 @@ const Sidemenu = () => {
               <FaUser className="w-[20px]" />
               <Link to="/layout/teachercontact">Contact us</Link>
             </li>
-            {/* <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
-              <FaUser className="w-[20px]" />
-              <Link to="/layout/loansstatus">Loans_Status</Link>
-            </li> */}
-            
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <IoMdExit className="w-[20px]" />
               <Link to="/layout/teacheranalytics">Analytics</Link>

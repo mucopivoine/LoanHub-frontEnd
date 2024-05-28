@@ -80,7 +80,7 @@ function UsersignUp() {
           withCredentials: true,
         })
           .then((response) => {
-            console.log(response.data);// Store the token in localStorage
+            console.log(response.data);
 
             setTimeout(() => {
               setIsLoading(false);
