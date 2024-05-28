@@ -30,49 +30,55 @@ const Forgotps = () => {
     return valid;
   };
 
+  const forgotEndpoints = [
+    'https://umwarimu-loan-hub-api.onrender.com/api/user/forgot',
+    'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot',
+    'https://umwarimu-loan-hub-api.onrender.com/api/manager/forgot',
+  ];
+
   const handleEmailSubmit = async (event) => {
     event.preventDefault();
     if (isValid()) {
-      try {
-        let userType = localStorage.getItem('user');
-        let endpoint = '';
+      let anySuccess = false;
+      let errorMessages = [];
 
-        switch (userType) {
-          case '"teacher"':
-            endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot';
-            break;
-          case '"manager"':
-            endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/manager/forgot';
-            break;
-          case '"admin"':
-            endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/user/forgot';
-            break;
-          default:
-            // Default to teacher endpoint if role is not specified
-            endpoint = 'https://umwarimu-loan-hub-api.onrender.com/api/teacher/forgot';
+      for (const endpoint of forgotEndpoints) {
+        try {
+          console.log(`Submitting email to endpoint: ${endpoint}`);
+          const response = await axios.post(endpoint, { email }, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          });
+          console.log(`Response from ${endpoint}:`, response.data);
+          anySuccess = true;
+          break; // Stop after the first successful request
+        } catch (error) {
+          if (error.response) {
+            console.log(`Error response from ${endpoint}:`, error.response.data);
+            if (error.response.status === 404) {
+              errorMessages.push('Email not registered.');
+            } else if (error.response.status === 500) {
+              errorMessages.push('Server error. Please try again later.');
+            } else {
+              errorMessages.push('An unexpected error occurred. Please try again.');
+            }
+          } else if (error.request) {
+            console.log(`Error request from ${endpoint}:`, error.request);
+            errorMessages.push('No response from server. Please check your network connection.');
+          } else {
+            console.log(`Error from ${endpoint}:`, error.message);
+            errorMessages.push('An unexpected error occurred. Please try again.');
+          }
         }
+      }
 
-        console.log(`Submitting email to endpoint: ${endpoint}`);
-
-        const response = await axios.post(endpoint, { email }, {
-          headers: {
-            'Content-Type': 'application/json',
-          },  
-          withCredentials: true,
-        });
-        console.log(response.data);
+      if (anySuccess) {
         toast.success('Email sent successfully! Please check your email for the reset link.');
-      } catch (error) {
-        if (error.response) {
-          console.log('Error response:', error.response.data);
-          setFetchError('Failed to send email. Please try again.');
-        } else if (error.request) {
-          console.log('Error request:', error.request);
-          setFetchError('Network error. Please check your internet connection.');
-        } else {
-          console.log('Error', error.message);
-          setFetchError('An unexpected error occurred. Please try again.');
-        }
+      } else {
+        setFetchError(errorMessages.join(' '));
+        toast.error(errorMessages.join(' ') || 'Failed to send email. Please try again.');
       }
     }
   };

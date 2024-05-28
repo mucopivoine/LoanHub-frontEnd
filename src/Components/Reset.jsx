@@ -57,39 +57,25 @@ function Reset() {
         if (isValid()) {
             try {
                 const response = await axios.post(
-
-                    `https://umwarimu-loan-hub-api.onrender.com/api/teacher/resetpassword/${token}`, // Pass token in URL
+                    `https://umwarimu-loan-hub-api.onrender.com/api/teacher/resetpassword/${token}`,
                     {
                         email: email,
                         newPassword: password,
                         confirm: confirmPassword,
-                        token: token,
                     },
                     {
                         headers: {
                             "Content-Type": 'application/json',
                         },
-                        withCredentials: true,
                     }
                 );
-                toast.success('Password reset was successful! Redirecting...', {
-                    className: 'red-line',
-                });
-
+                toast.success('Password reset was successful Redirecting...');
                 setTimeout(() => {
                     navigate('/auth/signin');
                 }, 3000);
             } catch (error) {
-                if (error.response) {
-                    console.error('Error Response:', error.response.data);
-                    console.error('Status Code:', error.response.status);
-                } else if (error.request) {
-                    console.error('Error Request:', error.request);
-                } else {
-                    console.error('Error Message:', error.message);
-                }
-                console.error('Error Config:', error.config);
-                toast.error(error.response?.data?.message || 'Please try again');
+                console.error('Error:', error);
+                toast.error(error.response?.data?.message || 'An error occurred during password reset.');
             }
         }
     };
