@@ -35,7 +35,7 @@ const Sidemenu = () => {
         initial={{ x: 0 }}
         animate={{ x: isLargeScreen ? 0 : isOpen ? 0 : '-100%' }}
         transition={{ duration: 0.3 }}
-        className={`fixed top-0 left-0 h-full w-64 bg-red-400 text-black z-40 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-200 text-black z-40 ${
           isLargeScreen ? '' : 'transform transition-transform'
         }`}
       >

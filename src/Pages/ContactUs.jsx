@@ -1,38 +1,24 @@
 
-import Sidebar from '../Components/Sidebar';
-import  { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import {Link} from "react-router-dom"
-import Search from "./Search"
-
-
-const cookie =document.cookie.split('jwt=')[1];
+import { useNavigate } from 'react-router-dom';
+import Sidebar from '../Components/Sidebar';
+import Search from './Search';
+import { ToastContainer, toast } from 'react-toastify';
+const cookie = document.cookie.split('jwt=')[1];
 
 const ManagerForm = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState('');
-  const [managers, setManagers] = useState([]);
   const [formData, setFormData] = useState({
     username: '',
     firstName: '',
-    lastName: '',
+    LastName: '',
     email: '',
     password: '',
     phoneNumber: ''
   });
-
-  useEffect(() => {
-    // Cleanup function to clear form data when the component unmounts
-    return () => {
-      setFormData({
-        username: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        phoneNumber: ''
-      });
-    };
-  }, []);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,72 +28,41 @@ const ManagerForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form data submitted:', formData);
-    // Clear the form after submission
-    setFormData({
-      username: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      phoneNumber: ''
-    });
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent form submission
 
-  const fetchManagers = async () => {
     try {
       console.log('Token:', cookie);
-          const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/signup', {
+      const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/signup', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookie}`
         }
       });
-      console.log('Response data:', response.data);
-      // Check if the response contains the users key and if it's an array
-      if (response.data && Array.isArray(response.data.users)) {
-        setManagers(response.data.users);
+
+      // Check if the response status is 200 (OK) before processing data
+      if (response.status === 200 && response.data && Array.isArray(response.data.users)) {
+        setFormSubmitted(true);
+        console.log('Response data:', response.data);
+        toast.success('Manager created successfully!')
+        setTimeout(() => {
+          navigate('/admin/viewmanager');
+        });
       } else {
-        console.error('Expected an array but received:', response.data);
-        setError('Unexpected data format received from server');
+        console.error('Unexpected response:', response);
+        setError('Unexpected response from server');
       }
     } catch (error) {
       console.error('Error fetching manager data:', error);
-      if (error.response) {
+      toast.error('Failed to create manager. Please try again later.')
+      if (axios.isAxiosError(error) && error.response) {
         console.error('Response data:', error.response.data);
         setError(error.response.data.error || 'Failed to fetch manager data');
       } else {
         setError('Failed to fetch manager data');
       }
-  }
-};
-  useEffect(() => {
-    fetchManagers();
-  }, []);
-  // const handleDeletePerson = async() => {
-  //   // Implement delete logic here
-  // };
-  // const handleEditClick = (person) => {
-  //   setEditingManager(person);
-  // };
-  // const handleUpdateChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setUpdateData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-  // const handleUpdatePerson = () => {
-  //   // Implement update logic here
-  // };
-  // // Filter managers based on search term
-  // const filteredManagers = managers.filter(manager =>
-  //   manager.username.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
-
+    }
+  };
   return (
     <>
 
@@ -115,7 +70,10 @@ const ManagerForm = () => {
     <Search/>
     <Sidebar/>
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Create Manager</h2>
+    <h2 className="text-2xl font-bold mb-6 text-center">Create Manager</h2>
+        {formSubmitted ? (
+          <p className="text-green-500 text-center mb-4">Manager created successfully!</p>
+        ) : (
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700">Username</label>
@@ -183,18 +141,19 @@ const ManagerForm = () => {
             required
           />
         </div>
-        <Link to ="/admin/viewmanager">
         <button
           type="submit"
-          className="mt-4 w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+          className="mt-4 w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600" onClick={handleSubmit}
         >
           Create
         </button>
-        </Link>
+        
       </form>
+        )}
     </div>
+    <ToastContainer/>
     </>
   );
 };
 
-export default ManagerForm;
+export default ManagerForm

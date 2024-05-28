@@ -9,7 +9,7 @@ function MnageAnalytics() {
     <div>
       <Search/>
         <NewData/>
-        <LoanManagement/>
+        
     </div>
   )
 }

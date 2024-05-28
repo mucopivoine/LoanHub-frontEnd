@@ -1,21 +1,19 @@
-.MainDash{
-    /* padding-top: 1rem; */
+.main-dash-container {
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    z-index: 0;
-}
-
-@media screen and (max-width: 1200px) {
-    .MainDash{
-        justify-content:flex-start;
-        margin-top: 2rem;
+    min-height: 100vh;
+    background-color: #f7fafc;
+  }
+  
+  .main-content {
+    margin-left: 250px; /* Adjust according to the width of the sidebar */
+    padding: 20px;
+     /* Adjust according to the width of the sidebar */
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+      width: 100%;
     }
-}
-
-@media screen and (max-width: 768px)
-{
-    .MainDash{
-        align-items: center;
-    }
-}
+  }
+  

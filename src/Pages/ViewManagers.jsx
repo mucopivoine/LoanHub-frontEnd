@@ -4,7 +4,7 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
-
+import Search from './Search';
 const cookie = document.cookie.split('jwt=')[1];
 
 const ViewManager = () => {
@@ -101,8 +101,8 @@ const ViewManager = () => {
 
   return (
     <>
-
-    <div>
+ <Search/>
+    <div className='flex'>
     <Sidebar/>
     </div>
     <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[100px] ">
@@ -144,7 +144,7 @@ const ViewManager = () => {
                         <button onClick={() => handleDeletePerson(manager._id)}>
                           <MdDelete />
                         </button>
-                        <button onClick={() => handleEditClick(manager)}>
+                        <button onClick={() => handleEditClick(manager._id)}>
                           <FaEdit />
                         </button>
                         </div>

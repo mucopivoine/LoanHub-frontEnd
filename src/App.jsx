@@ -56,7 +56,9 @@ import AllLoans from './Components/AllLoans/AllLoans';
 import Manager from './Components/Manager';
 import Profile from './Forms/Profile';
 import TeacherAnalytics from './Pages/TeacherAnalytics';
-
+import MostRequestedLoans from './Pages/MostrequestedLoans';
+import UserignUp from './Components/Usersignup';
+import Otpuser from './Components/Otpuser';
 
 
 function App() {
@@ -70,7 +72,7 @@ function App() {
           <Route path="contact" element={<Contacts />} />
           <Route path="services" element={<Services />} />   
           <Route path="/auth" element={<AuthRoute />}>
-
+ 
               <Route path="signin" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="forgot" element={<Forgot />} />
@@ -79,6 +81,8 @@ function App() {
               <Route path="otpinput" element={<OtpInput />} />
               <Route path="otpconfirm" element={<Otpconfirm />} />
               <Route path="logout" element={<Logout />} />
+              <Route path="otpuser" element={<Otpuser />} />
+              <Route path="usersignup" element={<UserignUp/>}/>
           </Route>
           </Route>
         <Route path="/layout" element={<Layout />}>
@@ -125,7 +129,9 @@ function App() {
           <Route path="manageAnalytics" element={<MnageAnalytics />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
+          <Route path="mostrequestedloans" element={<MostRequestedLoans/>}/>
           </Route>
+          
       </Routes>
     </Router>
   )

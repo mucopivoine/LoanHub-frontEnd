@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import { MdDelete } from 'react-icons/md';
-import { Search } from 'lucide-react';
+import Search from '../../Pages/Search';
+import { FaEdit } from 'react-icons/fa';
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -102,8 +103,8 @@ function AllLoans() {
     <Search/>
     <div className="flex">
       <Sidebar />
-      <div className="w-[70%] ml-[2%] ">
-        <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
+      <div className="w-[70%] ml-[2%] mt-[100px] ">
+        <h2 className="text-2xl font-semibold mb-4">Loans requested</h2>
         <input
           type="text"
           placeholder="Search by teacher name"
@@ -140,12 +141,17 @@ function AllLoans() {
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.workSchool}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.amountRequested}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
+                <div className='flex gap-5'>
                   <button
                     className="text-red-600 hover:text-red-800"
                     onClick={() => handleDeleteTeacher(teacher._id)}
                   >
                     <MdDelete />
                   </button>
+                  <button onClick={() => handleEditClick(teacher._id)}>
+                          <FaEdit />
+                        </button>
+                        </div>
                 </td>
               </tr>
             ))}
