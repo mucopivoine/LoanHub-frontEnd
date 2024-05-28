@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-// import { SigningUp } from '../api/teacher';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 function UsersignUp() {
   const [username, setUsername] = useState('');
@@ -37,8 +38,6 @@ function UsersignUp() {
     } else {
         setNamesErr(" ");
     }
-    
-   
     if (!password.trim()) {
       setPasswordErr('password is required')
       valid = false
@@ -85,7 +84,7 @@ function UsersignUp() {
 
             setTimeout(() => {
               setIsLoading(false);
-              navigate('/auth/otpinput');
+              navigate('/auth/otpuser');
             }, 3000)
           }).catch((error) => {
             setIsLoading(false);
@@ -111,7 +110,7 @@ function UsersignUp() {
           className=''
         >
           <div className=''>
-            <div className='relative flex flex-col items-center h-[120vh] border-2 p-12 mt-24 bg-white'>
+            <div className='relative flex flex-col items-center h-[90vh] border-2 p-12 mt-24 bg-white'>
               <div>
                 <h1 className='p-10 text-2xl text-black font-bold'>SIGN UP HERE</h1>
               </div>
@@ -172,7 +171,7 @@ function UsersignUp() {
                       onChange={(text) => setPassword(text.target.value)} required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                    {passwordErr ? (<p className='text-red-500 italic text-xs'>{passwordErr}</p>) : null}a
+                    {passwordErr ? (<p className='text-red-500 italic text-xs'>{passwordErr}</p>) : null}
                   </div>
                   <button
                     type='submit'
@@ -196,7 +195,7 @@ function UsersignUp() {
     </>
   )
 }
-export default UserignUp;
+export default UsersignUp;
 
 
 
