@@ -34,7 +34,7 @@ const Sidebar = () => {
               <div className="h-[50px] w-[50px] rounded-full flex items-center justify-center mb-2 mr-6">
                 <img src="/happy.jpg" alt="User Profile" className="h-full w-full rounded-full object-cover" />
               </div>
-              <p className="mr-6">User profile</p>
+              {/* <p className="mr-6">User profile</p> */}
               {isProfileOpen && (
                 <div className="absolute top-12 right-0 w-[200px] bg-white shadow-lg rounded-lg">
                   <div className="p-4 text-sm">

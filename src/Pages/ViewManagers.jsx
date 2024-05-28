@@ -4,6 +4,8 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
+// import { Search } from 'lucide-react';
+import Search from './Search';
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -103,6 +105,7 @@ const ViewManager = () => {
     <>
 
     <div>
+      <Search/>
     <Sidebar/>
     </div>
     <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">

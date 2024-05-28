@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Assuming you're using React Router for routing
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios'; // Import axios for making HTTP requests
 
-function TeacherDetails() {
-  const { id } = useParams(); // Extract the teacher ID from the URL parameters
+const TeacherDetails = () => {
+  const { id } = useParams();
   const [teacher, setTeacher] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,12 +11,8 @@ function TeacherDetails() {
   useEffect(() => {
     const fetchTeacherDetails = async () => {
       try {
-        const response = await fetch(`https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getOne/${id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch teacher details');
-        }
-        const data = await response.json();
-        setTeacher(data);
+        const response = await axios.get(`https://your-api-url.com/api/teacherDetails/getteacher/${id}`);
+        setTeacher(response.data.user);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -31,7 +28,7 @@ function TeacherDetails() {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error loading profile: {error}</div>;
   }
 
   if (!teacher) {

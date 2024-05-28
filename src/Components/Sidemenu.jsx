@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { FaWpforms, FaUser, FaUserFriends } from 'react-icons/fa';
 import { IoMdClose, IoMdExit, IoMdMenu } from 'react-icons/io';
 import { motion } from 'framer-motion';
 import { Link, Outlet } from 'react-router-dom';
-
 const Sidemenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
-
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -20,7 +18,6 @@ const Sidemenu = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
   return (
     <>
       {!isLargeScreen && (
@@ -35,7 +32,7 @@ const Sidemenu = () => {
         initial={{ x: 0 }}
         animate={{ x: isLargeScreen ? 0 : isOpen ? 0 : '-100%' }}
         transition={{ duration: 0.3 }}
-        className={`fixed top-0 left-0 h-full w-64 bg-red-400 text-black z-40 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-200 text-black z-40 ${
           isLargeScreen ? '' : 'transform transition-transform'
         }`}
       >
@@ -62,7 +59,6 @@ const Sidemenu = () => {
               <FaUser className="w-[20px]" />
               <Link to="/layout/loansstatus">Loans_Status</Link>
             </li> */}
-            
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <IoMdExit className="w-[20px]" />
               <Link to="/layout/teacheranalytics">Analytics</Link>
@@ -76,5 +72,13 @@ const Sidemenu = () => {
     </>
   );
 };
-
 export default Sidemenu;
+
+
+
+
+
+
+
+
+

@@ -47,6 +47,7 @@ import Graph from './Components/Graphs/Graph'
 // import Settings from './Pages/Settings'
 import NewDash from "./Pages/NewDash"
 import Pie from './Pages/Pie'
+// import TeacherDetails from './Pages/TeacherDetails';
 
 
 import Database from './Components/Database';
@@ -56,6 +57,7 @@ import AllLoans from './Components/AllLoans/AllLoans';
 import Manager from './Components/Manager';
 import Profile from './Forms/Profile';
 import TeacherAnalytics from './Pages/TeacherAnalytics';
+import LoanDetails from './Components/AllLoans/LoanDetails';
 
 
 
@@ -95,9 +97,11 @@ function App() {
           <Route path="teacherprofile" element={<TeacherProfile />} />
           <Route path="teacheranalytics" element={<TeacherAnalytics />} />
         </Route>
+       
+
         <Route path="/admin" element={<Dashboards />}>
           <Route path="navbar" element={<Navbar />} />
-          <Route path="teacherdetails/:id" element={<TeacherDetails />} />
+          <Route path="teacherprofile/:id" element={<TeacherDetails />} />
           <Route path="manager" element={<Manager />} />
           <Route path="Pie" element={<Pie />} />
           <Route path="allLoans" element={<AllLoans />} />
@@ -120,6 +124,8 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="manageloans" element={<ManageLoans />} />
           <Route path="profile" element={<Profile />} />
+          
+          <Route path="loanDetails/:id" element={<LoanDetails />} /> 
         </Route>
         <Route path="/barnav" element={<Barnav />}>
           <Route path="managerdash" element={<ManagerDash />} />
