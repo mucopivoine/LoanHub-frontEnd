@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Sidebar from '../Sidebar';
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -19,16 +20,22 @@ const LoanDetails = () => {
           },
           withCredentials: true
         });
-        console.log(cookie);
-        console.log(response.data); // Log response data
-        setLoanDetails(response.data);
+        console.log('Cookie:', cookie);
+        console.log('Response data:', response.data); // Log response data
+
+        if (response.data.loan) {
+          setLoanDetails(response.data.loan);
+        } else {
+          setError('Loan details not found');
+        }
       } catch (error) {
-        console.error(error); // Log the error object
+        console.error('Error fetching loan details:', error); // Log the error object
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
+
     fetchLoanDetails();
   }, [id]);
 
@@ -45,39 +52,46 @@ const LoanDetails = () => {
   }
 
   return (
-    <div className="py-28 px-2 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-900 to-slate-950">
-      <h2 className="text-2xl font-bold mb-4 text-gray-400">Loan Details</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full bg-slate-50 border border-gray-200"key={LoanDetails._id}>
-          <tbody>
-            <tr>
-              <th className="py-3 px-4 sm:px-6 lg:px-8 bg-white font-bold text-left">Field</th>
-              <th className="py-3 px-4 sm:px-6 lg:px-11 bg-white font-bold text-left">Value</th>
-            </tr>
-            <tr>
-              <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Names</td>
-              <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.fullName || "Not available"}</td>
-            </tr>
-            <tr>
-              <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Email</td>
-              <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.email || "Not available"}</td>
-            </tr>
-            <tr>
-              <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Phone Number</td>
-              <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.phoneNumber || "Not available"}</td>
-            </tr>
-            <tr>
-              <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">School Name</td>
-              <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.workSchool || "Not available"}</td>
-            </tr>
-            <tr>
-              <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Amount Requested</td>
-              <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.amountRequested || "Not available"}</td>
-            </tr>
-          </tbody>
-        </table>
+    <>
+      <div>
+        <Sidebar />
+        <div className='w-[60%] ml-[20%] mt-[100px]'>
+          <div>
+            <h2 className="text-2xl font-bold mb-4">Loan Details</h2>
+            <div className="overflow-x-auto">
+              <table className="w-[80%] bg-slate-50 border border-gray-200">
+                <tbody>
+                  <tr>
+                    <th className="py-3 px-4 bg-white font-bold text-left">Field</th>
+                    <th className="py-3 px-4 sm:px-6 lg:px-11 bg-white font-bold text-left">Value</th>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Names</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.FirstName} {loanDetails.LastName}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Email</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.email || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Phone Number</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.phoneNumber || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">School Name</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.workSchool || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Amount Requested</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.amountRequested || "Not available"}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

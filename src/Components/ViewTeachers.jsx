@@ -131,9 +131,8 @@ function ViewTeachers() {
               <tr key={teacher._id}>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.accountNumber}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <Link to={`/teacherdetails/${teacher._id}`} className="text-black hover:underline">
-                    {teacher.username}
-                  </Link>
+                 <td className='px-6 py-4 whitespace-nowrap'>
+                    {teacher.username}</td>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.email}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -144,9 +143,9 @@ function ViewTeachers() {
                   >
                     <MdDelete />
                   </button>
-                  <button onClick={() => handleEditClick(teacher._id)}>
+                  <Link to={`/teacherdetails/${teacher._id}`} className="text-black hover:underline">
                           <FaEdit />
-                        </button>
+                        </Link>
                         </div>
                 </td>
               </tr>
