@@ -59,6 +59,7 @@ import TeacherAnalytics from './Pages/TeacherAnalytics';
 import MostRequestedLoans from './Pages/MostrequestedLoans';
 import UserignUp from './Components/Usersignup';
 import Otpuser from './Components/Otpuser';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 
 function App() {
@@ -106,7 +107,13 @@ function App() {
           <Route path="database" element={<Database />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
-          <Route path="maindash" element={<MainDash />} />
+          <Route path="maindash" 
+        element={
+          <ProtectedRoute>
+            <MainDash />
+          </ProtectedRoute>
+        } 
+      />
           <Route path="rightside" element={<RightSide />} />
           <Route path="loanmanage" element={<LoanManagement />} />
           <Route path="graph" element={<Graph />} />
