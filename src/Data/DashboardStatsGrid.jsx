@@ -1,3 +1,4 @@
+import React from 'react';
 import { FaHandHoldingUsd } from 'react-icons/fa';
 
 function DashboardStatsGrid() {
@@ -23,7 +24,7 @@ function DashboardStatsGrid() {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-20 ml-72">
+    <div className="flex flex-wrap justify-center sm:gap-5 mt-10">
       {statsData.map((stat, index) => (
         <BoxWrapper key={index}>
           <div className={`rounded-full h-16 w-16 flex items-center justify-center ${stat.iconBgColor}`}>
@@ -44,7 +45,7 @@ function DashboardStatsGrid() {
 
 function BoxWrapper({ children }) {
   return (
-    <div className="bg-white rounded-lg p-6 shadow-lg flex items-center transform transition-transform duration-150 ease-in-out hover:scale-105 cursor-pointer mt-24 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+    <div className="  lg:ml-7 bg-white rounded-lg p-6 shadow-lg flex items-center transform transition-transform duration-150 ease-in-out hover:scale-105 cursor-pointer w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
       {children}
     </div>
   );

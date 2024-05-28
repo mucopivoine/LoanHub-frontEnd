@@ -4,23 +4,18 @@ import LoanManagement from './LoanManagement'
 
 import DashboardStatsGrid from '../Data/DashboardStatsGrid'
 import Search from './Search'
+import Newdata from '../Data/NewData'
 
 function Analytics() {
   return (
-    <div>
-        <Sidebar/>
-
-        <Search/>
-        <div className='mt-[70px]'>
-{/* 
-        <div>
-          <Search/>
-          </div> */}
-
+    <div className="relative min-h-screen bg-gray-100">
+      <Search />
+      <Sidebar />
+      <div className="mx-auto mt-20 ml-36">
         <DashboardStatsGrid/>
-        <LoanManagement/>
-        </div>
-        </div>
+        <Newdata/>
+      </div>
+    </div>
     
   )
 }

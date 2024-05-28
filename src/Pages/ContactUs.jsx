@@ -1,15 +1,21 @@
-
-import Sidebar from '../Components/Sidebar';
-import  { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import {Link} from "react-router-dom"
 import Search from "./Search"
 
 const cookie =document.cookie.split('jwt=')[1];
+=======
+import { useNavigate } from 'react-router-dom';
+import Sidebar from '../Components/Sidebar';
+import Search from './Search';
+import { ToastContainer, toast } from 'react-toastify';
+const cookie = document.cookie.split('jwt=')[1];
+>>>>>>> 17aa24de7bf20b210ab916b160a09a1b0b8643bb
 
 const ManagerForm = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState('');
-  const [managers, setManagers] = useState([]);
   const [formData, setFormData] = useState({
     username: '',
     firstName: '',
@@ -18,20 +24,8 @@ const ManagerForm = () => {
     password: '',
     phoneNumber: ''
   });
-
-  useEffect(() => {
-    // Cleanup function to clear form data when the component unmounts
-    return () => {
-      setFormData({
-        username: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        phoneNumber: ''
-      });
-    };
-  }, []);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Define isLoading state
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,156 +35,119 @@ const ManagerForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form data submitted:', formData);
-    // Clear the form after submission
-    setFormData({
-      username: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      phoneNumber: ''
-    });
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent form submission
 
-  const fetchManagers = async () => {
     try {
       console.log('Token:', cookie);
-          const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/signup', {
+      setIsLoading(true); // Set isLoading to true when submitting form
+      const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/manager/signup', formData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookie}`
-        }
+        },
+        withCredentials: true,
       });
-      console.log('Response data:', response.data);
-      // Check if the response contains the users key and if it's an array
-      if (response.data && Array.isArray(response.data.users)) {
-        setManagers(response.data.users);
-      } else {
-        console.error('Expected an array but received:', response.data);
-        setError('Unexpected data format received from server');
-      }
+
+      console.log(response.data);// Log response
+
+      setIsLoading(false); // Set isLoading to false after receiving response
+
+      setTimeout(() => {
+        navigate('/admin/viewmanager');
+      }, 3000); // Redirect after 3 seconds
     } catch (error) {
-      console.error('Error fetching manager data:', error);
-      if (error.response) {
-        console.error('Response data:', error.response.data);
-        setError(error.response.data.error || 'Failed to fetch manager data');
-      } else {
-        setError('Failed to fetch manager data');
-      }
-  }
-};
-  useEffect(() => {
-    fetchManagers();
-  }, []);
-  // const handleDeletePerson = async() => {
-  //   // Implement delete logic here
-  // };
-  // const handleEditClick = (person) => {
-  //   setEditingManager(person);
-  // };
-  // const handleUpdateChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setUpdateData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-  // const handleUpdatePerson = () => {
-  //   // Implement update logic here
-  // };
-  // // Filter managers based on search term
-  // const filteredManagers = managers.filter(manager =>
-  //   manager.username.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
+      setIsLoading(false); // Set isLoading to false if there's an error
+      console.log(error);
+    }
+  };
 
   return (
     <>
-
-    <Search/>
-    <Sidebar/>
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Create Manager</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-gray-700">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Phone Number</label>
-          <input
-            type="text"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <Link to ="/admin/viewmanager">
-        <button
-          type="submit"
-          className="mt-4 w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
-        >
-          Create
-        </button>
-        </Link>
-      </form>
-    </div>
+      <Search/>
+      <Sidebar/>
+      <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+        <h2 className="text-2xl font-bold mb-6 text-center">Create Manager</h2>
+        {formSubmitted ? (
+          <p className="text-green-500 text-center mb-4">Manager created successfully!</p>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label className="block text-gray-700">Username</label>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Password</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Phone Number</label>
+              <input
+                type="text"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="mt-4 w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+            >
+              Create
+            </button>
+          </form>
+        )}
+      </div>
+      <ToastContainer/>
     </>
   );
 };

@@ -57,8 +57,15 @@ import AllLoans from './Components/AllLoans/AllLoans';
 import Manager from './Components/Manager';
 import Profile from './Forms/Profile';
 import TeacherAnalytics from './Pages/TeacherAnalytics';
+<<<<<<< HEAD
 import LoanDetails from './Components/AllLoans/LoanDetails';
 
+=======
+import MostRequestedLoans from './Pages/MostrequestedLoans';
+import UserignUp from './Components/Usersignup';
+import Otpuser from './Components/Otpuser';
+import ProtectedRoute from './Components/ProtectedRoute';
+>>>>>>> 17aa24de7bf20b210ab916b160a09a1b0b8643bb
 
 
 function App() {
@@ -72,18 +79,17 @@ function App() {
           <Route path="contact" element={<Contacts />} />
           <Route path="services" element={<Services />} />   
           <Route path="/auth" element={<AuthRoute />}>
-
+ 
               <Route path="signin" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="forgot" element={<Forgot />} />
               <Route path="forgotps" element={<Forgotps />} />
-
-
               <Route path='reset/token' element={<Reset />} />
-
               <Route path="otpinput" element={<OtpInput />} />
               <Route path="otpconfirm" element={<Otpconfirm />} />
               <Route path="logout" element={<Logout />} />
+              <Route path="otpuser" element={<Otpuser />} />
+              <Route path="usersignup" element={<UserignUp/>}/>
           </Route>
           </Route>
         <Route path="/layout" element={<Layout />}>
@@ -109,7 +115,13 @@ function App() {
           <Route path="database" element={<Database />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
-          <Route path="maindash" element={<MainDash />} />
+          <Route path="maindash" 
+        element={
+          <ProtectedRoute>
+            <MainDash />
+          </ProtectedRoute>
+        } 
+      />
           <Route path="rightside" element={<RightSide />} />
           <Route path="loanmanage" element={<LoanManagement />} />
           <Route path="graph" element={<Graph />} />
@@ -134,7 +146,9 @@ function App() {
           <Route path="manageAnalytics" element={<MnageAnalytics />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
+          <Route path="mostrequestedloans" element={<MostRequestedLoans/>}/>
           </Route>
+          
       </Routes>
     </Router>
   )

@@ -1,8 +1,7 @@
-
-import { useState} from "react";
+import { useState } from "react";
 import Barnav from "../Components/Barnav";
-// import { Sidebar } from "lucide-react";
 import Search from "./Search";
+
 const columns = [
   {
     Header: "ID",
@@ -25,6 +24,7 @@ const columns = [
     accessor: "status",
   },
 ];
+
 const data = [
   {
     id: 1,
@@ -55,70 +55,77 @@ const data = [
     status: "Completed",
   },
 ];
-const Table = ({ columns, data, searchTerm, setSearchTerm }) => {
-    const filteredData = data.filter((row) =>
-      row.teacherName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+
+const Table = ({ columns, data, searchTerm }) => {
+  const filteredData = data.filter((row) =>
+    row.teacherName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <>
-    
-    <Barnav/>
     <div>
-    <table className="min-w-full divide-y">
-      <thead className="bg-gray-50">
-        <tr>
-          {columns.map((column) => (
-            <th
-              key={column.accessor}
-              scope="col"
-              className=" text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              {column.Header}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody className="bg-white divide-y divide-gray-200">
-        {data.map((row) => (
-          <tr key={row.id}>
+      <h1 className="text-2xl font-bold mt-5 ">Loans statuses</h1>
+      <table className="min-w-full divide-y mt-[50px]">
+        <thead className="bg-white divide-y divide-gray-200">
+          <tr>
             {columns.map((column) => (
-              <td key={`cell-${column.accessor}-${row.id}`} className="px-6 py-4">
-                {column.accessor === "status" ? (
-                  <span
-                    className={`px-2 py-1 font-semibold leading-tight text-white cursor-pointer ${
-                      row[column.accessor] === "Pending"
-                        ? "bg-red-500"
-                        : "bg-green-500"
-                    }`}
-                  >
-                    {row[column.accessor]}
-                  </span>
-                ) : (
-                  row[column.accessor]
-                )}
-              </td>
+              <th
+                key={column.accessor}
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {column.Header}
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {filteredData.map((row) => (
+            <tr key={row.id}>
+              {columns.map((column) => (
+                <td key={`cell-${column.accessor}-${row.id}`} className="px-6 py-4 whitespace-nowrap">
+                  {column.accessor === "status" ? (
+                    <span
+                      className={`px-2 py-1 font-semibold leading-tight text-white cursor-pointer ${
+                        row[column.accessor] === "Pending"
+                          ? "bg-red-500"
+                          : "bg-green-500"
+                      }`}
+                    >
+                      {row[column.accessor]}
+                    </span>
+                  ) : (
+                    row[column.accessor]
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    </>
   );
 };
+
 const Loans = () => {
-    const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (value) => {
+    setSearchTerm(value);
+  };
+
   return (
-    <div>
-    <Search/>
-    <div className="p-6 w-[80%]">
-      <h2 className="text-2xl font-semibold mb-4">Manage Loans</h2>
-      <Table columns={columns} data={data} 
-       searchTerm={searchTerm}
-       setSearchTerm={setSearchTerm} />
+    <div className="min-h-screen bg-gray-100">
+      <Search setSearchTerm={handleSearch} />
+      <Barnav />
+      <div className="flex flex-col lg:flex-row gap-6 mt-20 mx-auto w-[90%]">
+        <div className="flex flex-col w-full lg:w-3/4">
+          <h2 className="text-2xl font-semibold mb-4">Manage Loans</h2>
+          <Table columns={columns} data={data} searchTerm={searchTerm} />
+        </div>
+        {/* Sidebar or additional content can go here */}
+      </div>
     </div>
-    </div>
-   
   );
 };
+
 export default Loans;

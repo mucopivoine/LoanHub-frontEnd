@@ -1,25 +1,20 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-// import { SigningUp } from '../api/teacher';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-function SignUp() {
+function UsersignUp() {
   const [username, setUsername] = useState('');
   const [usernameError, setUserNameError] = useState('')
-  const [accountNumber, setAccountNumber] = useState('');
-  const [accountNumberErr, setAccountNumberError] = useState('');
+ 
   const [email, setEmail] = useState('');
   const [emailErr, setEmailErr] = useState('');
   const [password, setPassword] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [firstnameErr, setFirstnameErr] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [lastnameErr, setLastnameErr] = useState('');
-  const [schoolname, setSchoolname] = useState('');
-  const [schoolnameErr, setSchoolnameErr] = useState('');
-  const [phonenumber, setPhonenumber] = useState('');
-  const [phonenumberErr, setPhonenumberErr] = useState('');
+
+  const [names, setNames] = useState('');
+  const [namesErr, setNamesErr] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
  
@@ -36,35 +31,12 @@ function SignUp() {
     } else {
       setUserNameError('');
     }
-    if (!accountNumber.trim()) {
-      setAccountNumberError('Account Number is required');
+    
+    if (!names.trim()) {
+      setNamesErr('firstname is required');
       valid = false
     } else {
-      setAccountNumberError(" ")
-    }
-    if (!firstname.trim()) {
-      setFirstnameErr('firstname is required');
-      valid = false
-    } else {
-      setFirstnameErr(" ");
-    }
-    if (!lastname.trim()) {
-      setLastnameErr('last name is required')
-      valid = false
-    }
-    else {
-      setLastnameErr('')
-    }
-    if (!schoolname.trim()) {
-      setSchoolnameErr('School name is required')
-      valid = false
-    } else {
-      setSchoolnameErr('')
-    } if (!phonenumber.trim()) {
-      setPhonenumberErr('Phone number is required')
-      valid = false
-    } else {
-      setPhonenumberErr('')
+        setNamesErr(" ");
     }
     if (!password.trim()) {
       setPasswordErr('password is required')
@@ -91,25 +63,16 @@ function SignUp() {
       try {
 
         console.log({
-          username: username,
-          email: email,
-          password: password,
-          firstName: firstname,
-          lastName: lastname,
-          schoolName: schoolname,
-          phoneNumber: phonenumber,
-          accountNumber: accountNumber,
+            username: username,
+            email: email,
+            password: password,
+            names: names,
         })
-
-        axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
+        axios.post('https://umwarimu-loan-hub-api.onrender.com/api/user/signup', {
           username: username,
           email: email,
           password: password,
-          firstName: firstname,
-          lastName: lastname,
-          schoolName: schoolname,
-          phoneNumber: phonenumber,
-          accountNumber: accountNumber,
+          names: names,
         }, {
           headers: {
             "Content-Type": 'application/json',
@@ -121,7 +84,7 @@ function SignUp() {
 
             setTimeout(() => {
               setIsLoading(false);
-              navigate('/auth/otpinput');
+              navigate('/auth/otpuser');
             }, 3000)
           }).catch((error) => {
             setIsLoading(false);
@@ -147,7 +110,7 @@ function SignUp() {
           className=''
         >
           <div className=''>
-            <div className='relative flex flex-col items-center h-[120vh] border-2 p-12 mt-24 bg-white'>
+            <div className='relative flex flex-col items-center h-[90vh] border-2 p-12 mt-24 bg-white'>
               <div>
                 <h1 className='p-10 text-2xl text-black font-bold'>SIGN UP HERE</h1>
               </div>
@@ -168,49 +131,17 @@ function SignUp() {
                       {usernameError ? (<p className='text-red-500 italic text-xs'>{usernameError}</p>) : null}
                     </div>
                     <div className='mb-5'>
-                      <label htmlFor='firstname' className='block text-sm text-black'>
-                        Enter Your Firstname
+                      <label htmlFor='names' className='block text-sm text-black'>
+                        Enter Your Names
                       </label>
                       <input
                         type='text'
-                        id='firstName'
-                        value={firstname}
-                        onChange={(e) => setFirstname(e.target.value)} required
+                        id='names'
+                        value={names}
+                        onChange={(e) => setNames(e.target.value)} required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-                      {firstnameErr ? (<p className='text-red-500 italic text-xs'>{firstnameErr}</p>) : null}
-                    </div>
-                  </div>
-                  <div className='flex flex-row gap-3'>
-                    <div className='mb-5'>
-                      <label htmlFor='lastname' className='block text-sm text-black'>
-                        Enter Your Lastname
-                      </label>
-                      <input
-                        type='text'
-                        id='lastName'
-                        value={lastname}
-                        onChange={(e) => setLastname(e.target.value)} required
-                        className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                      />
-                      {lastnameErr ? (<p className='text-red-500 italic text-xs'>{lastnameErr}</p>) : null}
-
-                    </div>
-                    <div className='mb-5'>
-                      <label htmlFor='lastname' className='block text-sm text-black'>
-                        Enter Schoolname
-                      </label>
-                      <input
-                        type='text'
-                        id='schoolname'
-                        value={schoolname}
-                        onChange={(e) => setSchoolname(e.target.value)} required
-                        className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                      />
-                      {/* {formSubmitted && error.schoolname && (
-                      <p className='text-red-500 italic text-xs'>{error.schoolname}</p>
-                    )} */}
-                      {schoolnameErr ? (<p className='text-red-500 italic text-xs'>{schoolnameErr}</p>) : null}
+                      {namesErr ? (<p className='text-red-500 italic text-xs'>{namesErr}</p>) : null}
                     </div>
                   </div>
                   <div className='mb-5'>
@@ -241,33 +172,6 @@ function SignUp() {
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
                     {passwordErr ? (<p className='text-red-500 italic text-xs'>{passwordErr}</p>) : null}
-
-                  </div>
-                  <div className='mb-5'>
-                    <label htmlFor='lastname' className='block text-sm text-black'>
-                      Enter Your Account Number
-                    </label>
-                    <input
-                      type='text'
-                      id='teacher_ID'
-                      value={accountNumber}
-                      onChange={(n) => setAccountNumber(n.target.value)} required
-                      className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                    />
-                    {accountNumberErr ? (<p className='text-red-500 italic text-xs'>{accountNumber}</p>) : null}
-                  </div>
-                  <div className='mb-5'>
-                    <label htmlFor='lastname' className='block text-sm text-black'>
-                      Enter Your Phonenumber
-                    </label>
-                    <input
-                      type='number'
-                      id='phoneNumber'
-                      value={phonenumber}
-                      onChange={(e) => setPhonenumber(e.target.value)} required
-                      className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                    />
-                    {phonenumberErr ? (<p className='text-red-500 italic text-xs'>{phonenumberErr}</p>) : null}
                   </div>
                   <button
                     type='submit'
@@ -291,7 +195,7 @@ function SignUp() {
     </>
   )
 }
-export default SignUp;
+export default UsersignUp;
 
 
 

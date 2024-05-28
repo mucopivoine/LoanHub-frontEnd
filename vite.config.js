@@ -23,6 +23,7 @@ export default defineConfig({
     },
   react()
   ],
+
   build:{
     outDir:'build',
     chunkSizeWarningLimit: 2000,

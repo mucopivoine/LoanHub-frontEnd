@@ -1,5 +1,21 @@
+<<<<<<< HEAD
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+=======
+import React from 'react';
+import { PureComponent } from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
+import MostRequestedLoans from '../Pages/MostrequestedLoans';
+>>>>>>> 17aa24de7bf20b210ab916b160a09a1b0b8643bb
 
 const data = [
   { name: 'Year 1', uv: 4000, pv: 2400, amt: 2400 },
@@ -16,6 +32,7 @@ export default class Example extends PureComponent {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="mt-20">
         <ResponsiveContainer width="80%" height={500}>
           <BarChart
@@ -33,6 +50,30 @@ export default class Example extends PureComponent {
             <Bar dataKey="uv" fill="#CAF0F8" /> 
           </BarChart>
         </ResponsiveContainer>
+=======
+      <div className='flex justify-between pl-32 gap-12'>
+        <div className="mt-20 w-[40rem] ">
+          <ResponsiveContainer width="110%" height={400}>
+            <BarChart
+              width={800}
+              height={300}
+              data={data}
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+            >
+              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="pv" fill="#f2cc8f" />
+              <Bar dataKey="uv" fill="#335c67" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <div className='mr-10 '>
+          <MostRequestedLoans />
+        </div>
+>>>>>>> 17aa24de7bf20b210ab916b160a09a1b0b8643bb
       </div>
     );
   }

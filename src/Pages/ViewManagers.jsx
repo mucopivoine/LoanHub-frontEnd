@@ -4,9 +4,13 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
+<<<<<<< HEAD
 // import { Search } from 'lucide-react';
 import Search from './Search';
 
+=======
+import Search from './Search';
+>>>>>>> 17aa24de7bf20b210ab916b160a09a1b0b8643bb
 const cookie = document.cookie.split('jwt=')[1];
 
 const ViewManager = () => {
@@ -103,18 +107,23 @@ const ViewManager = () => {
 
   return (
     <>
+<<<<<<< HEAD
 
     <div>
       <Search/>
+=======
+ <Search/>
+    <div className='flex'>
+>>>>>>> 17aa24de7bf20b210ab916b160a09a1b0b8643bb
     <Sidebar/>
     </div>
-    <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[50px] ">
+    <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[100px] ">
       <div className=''>
-    {/* <Link to="/admin/contactus">
+    <Link to="/admin/contactus">
       <button className="bg-red-500 hover:bg-red-400 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
 >
         Add Manager
-      </button></Link> */}
+      </button></Link>
       </div>
      
        
@@ -147,7 +156,7 @@ const ViewManager = () => {
                         <button onClick={() => handleDeletePerson(manager._id)}>
                           <MdDelete />
                         </button>
-                        <button onClick={() => handleEditClick(manager)}>
+                        <button onClick={() => handleEditClick(manager._id)}>
                           <FaEdit />
                         </button>
                         </div>
