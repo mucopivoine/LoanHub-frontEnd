@@ -17,41 +17,42 @@ function Search({ messages = [] }) {
     };
   }, []);
 
- 
   const handleLogout = async (e) => {
     e.preventDefault();
-    // Extract JWT token from cookies
-    const jwtCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('jwt='));
-    const cookie = jwtCookie ? jwtCookie.split('=')[1] : '';
   
-    if (!cookie) {
-      console.error('No JWT token found');
-      return;
+    // Attempt to extract JWT token from cookies
+     const jwtCookieMatch = document.cookie.split('; ').find(row => row.startsWith('jwt='));
+    // const jwtToken = jwtCookieMatch ? jwtCookieMatch.split('=')[1] : null;
+    const jwtToken = jwtCookieMatch ? jwtCookieMatch.split('=')[1] : null;
+    console.log('Extracted JWT Token:', jwtToken); 
+    if (!jwtToken) {
+      console.error('No JWT token found in cookies.');
+      return; // Exit early if no token is found
     }
   
     try {
+      console.log(`Attempting logout with token: ${jwtToken}`);
       const response = await axios.post(
         'https://umwarimu-loan-hub-api.onrender.com/api/user/logout',
         {},
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${cookie}`,
+            'Authorization': `Bearer ${jwtToken}`,
           },
-          withCredentials: true
+          withCredentials: true, // Important for sending cookies with the request
         }
       );
   
-      console.log('Logout successful');
-      console.log(response.data); // Logging the response data upon successful logout
+      console.log('Logout successful:', response.data);
   
-      // Clear authentication status
-      document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-      localStorage.removeItem('jwt');
-      // Assuming showError is defined somewhere else
-      showError(response.data.message, '#10E956', 3000);
-      // Assuming setAuth is defined somewhere else
-      setAuth(false);
+      // Reset authentication status on the client side
+      document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      localStorage.removeItem('jwt'); // Remove JWT from local storage
+      setAuth(false); // Assuming setAuth is a function to update auth state
+  
+      // Optionally, show a success message or redirect the user
+      // showError(response.data.message, '#10E956', 3000); // Uncomment if showError is defined
   
     } catch (error) {
       console.error('Error during logout:', error);
@@ -61,13 +62,12 @@ function Search({ messages = [] }) {
         console.error('Response status:', error.response.status);
         console.error('Response headers:', error.response.headers);
       } else if (error.request) {
-        console.error('Request data:', error.request);
+        console.error('Request was made but no response was received:', error.request);
       } else {
         console.error('Error message:', error.message);
       }
     }
   };
-
   return (
     <div
       className={`flex fixed mb-10 sm:w-[90%] lg:w-[81%] sm:ml-[70px] right-0 justify-between top-0 bg-gray-100 shadow-lg rounded-lg ${
