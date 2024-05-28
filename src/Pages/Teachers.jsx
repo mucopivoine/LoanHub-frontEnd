@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { MdDelete } from 'react-icons/md';
 import Barnav from '../Components/Barnav';
+import Search from './Search';
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -93,10 +94,10 @@ function Teachers() {
 
   return (
     <>
-    
-    <div className="flex">
+    <Search/>
+    <div className="">
     <Barnav/>
-      <div className="w-[70%] p-6 ml-[2%] lg:mt-[40px]">
+      <div className="w-[70%] p-6 lg:mt-[100px]">
         <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
         <input
           type="text"

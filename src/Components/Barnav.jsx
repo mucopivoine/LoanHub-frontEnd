@@ -38,19 +38,19 @@ function Barnav() {
         initial={{ x: 0 }}
         animate={{ x: isLargeScreen ? 0 : isOpen ? 0 : '-100%' }}
         transition={{ duration: 0.3 }}
-        className={`fixed top-0 left-0 h-full w-64 bg-red-400 text-black z-40 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-200 text-black z-40 ${
           isLargeScreen ? '' : 'transform transition-transform'
         }`}
       >
         <nav className="p-4 mt-16 w-full ">
           <h1 className="text-center font-bold text-xl">Manager Dashboard</h1>
-          <ul className="p-10">
+          <ul className="p-10 space-y-4">
             <li
               className="flex flex-col items-center relative cursor-pointer"
               onMouseEnter={() => setIsProfileOpen(true)}
               onMouseLeave={() => setIsProfileOpen(false)}
             >
-              <div className="h-[70px] w-[70px] rounded-full flex items-center justify-center mb-1 mr-6  p-3  gap-2 text-lg ">
+              <div className="h-[50px] w-[50px] rounded-full flex items-center justify-center mb-2 mr-6">
                 <img src="/happy.jpg" alt="User Profile" className="h-full w-full rounded-full object-cover" />
               </div>
               <p className="mr-6 mb-5" >Manager profile</p>
@@ -66,15 +66,15 @@ function Barnav() {
             </li>
 
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
-              <FaUser className="w-[20px]" />
+              <FaUser className="w-[20px] mr-3" />
               <Link to="/barnav/teachers">Teachers</Link>
             </li>
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
-              <FaUserFriends className="w-[20px]" />
+              <FaUserFriends className="w-[20px] mr-3" />
               <Link to="/barnav/loans">Loans</Link>
             </li>
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
-              <FaRegChartBar className="w-[20px]" />
+              <FaRegChartBar className="w-[20px mr-3" />
               <Link to="/barnav/manageAnalytics">Analytics</Link>
             </li>
           </ul>

@@ -1,26 +1,20 @@
-// Uncomment the imports as necessary
-
-import "./MainDash.css";
-import LoanManagement from "../../Pages/LoanManagement";
-import Sidebar from "../Sidebar";
-import Search from "../../Pages/Search";
-// import ViewManager from "../../Pages/ViewManagers";
+import React from 'react';
 import DashboardStatsGrid from "../../Data/DashboardStatsGrid";
+import Newdata from '../../Data/NewData'
+import Sidebar from '../Sidebar';
+import Search from '../../Pages/Search';
 
-
-const MainDash = () => {
+function MainDash() {
   return (
-    <div className="MainDash flex flex-row">
-      <div className="fixed">
-        <Sidebar />
-      </div>
-      <div className=""> 
-        <Search />
-        <DashboardStatsGrid />
-        <LoanManagement />
+    <div className="relative min-h-screen bg-gray-100">
+      <Search />
+      <Sidebar />
+      <div className="mx-auto mt-20 ml-36">
+        <DashboardStatsGrid/>
+        <Newdata/>
       </div>
     </div>
   );
-};
+}
 
 export default MainDash;

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Sidebar from './Sidebar';
 import { MdDelete } from 'react-icons/md';
 import Search from '../Pages/Search';
+import { FaEdit } from 'react-icons/fa';
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -95,8 +96,8 @@ function ViewTeachers() {
     <Search/>
     <div className="flex">
       <Sidebar />
-      <div className="w-[70%] p-6 ml-[2%] lg:mt-[30px]">
-        <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
+      <div className="w-[70%] p-6 ml-[2%] lg:mt-[100px]">
+        <h2 className="text-2xl font-semibold ">Teachers</h2>
         <input
           type="text"
           placeholder="Search by teacher name"
@@ -133,12 +134,17 @@ function ViewTeachers() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.email}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
+                  <div className='flex gap-5'>
                   <button
                     className="text-red-600 hover:text-red-800"
                     onClick={() => handleDeleteTeacher(teacher._id)}
                   >
                     <MdDelete />
                   </button>
+                  <button onClick={() => handleEditClick(teacher._id)}>
+                          <FaEdit />
+                        </button>
+                        </div>
                 </td>
               </tr>
             ))}

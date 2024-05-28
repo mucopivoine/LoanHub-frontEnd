@@ -8,10 +8,11 @@ import Search from './Search'
 function Analytics() {
   return (
     <div>
-        <Sidebar/>
+        
 
-        <Search/>
-        <div className='mt-[70px]'>
+        <Search className=""/>
+        <Sidebar/>
+        <div className=''>
 {/* 
         <div>
           <Search/>

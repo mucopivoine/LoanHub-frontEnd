@@ -56,7 +56,8 @@ import AllLoans from './Components/AllLoans/AllLoans';
 import Manager from './Components/Manager';
 import Profile from './Forms/Profile';
 import TeacherAnalytics from './Pages/TeacherAnalytics';
-
+import MostRequestedLoans from './Pages/MostrequestedLoans';
+// import Thisadmin from './Components/Thisadmin';
 
 
 function App() {
@@ -70,7 +71,7 @@ function App() {
           <Route path="contact" element={<Contacts />} />
           <Route path="services" element={<Services />} />   
           <Route path="/auth" element={<AuthRoute />}>
-
+ 
               <Route path="signin" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="forgot" element={<Forgot />} />
@@ -128,7 +129,9 @@ function App() {
           <Route path="manageAnalytics" element={<MnageAnalytics />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
+          <Route path="mostrequestedloans" element={<MostRequestedLoans/>}/>
           </Route>
+          {/* <Route path="thisadmin" element={<Thisadmin/>}/> */}
       </Routes>
     </Router>
   )
