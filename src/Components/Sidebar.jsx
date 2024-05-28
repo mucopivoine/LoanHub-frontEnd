@@ -54,6 +54,7 @@ function Sidebar() {
                 <img src="/happy.jpg" alt="User Profile" className="h-full w-full rounded-full object-cover" />
               </div>
               <p className="mr-6 mb-5">Profile</p>
+
               {isProfileOpen && (
                 <div className="absolute top-12 right-0 w-[200px] bg-white shadow-lg rounded-lg">
                   <div className="p-4 text-sm">

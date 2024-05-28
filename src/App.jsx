@@ -47,8 +47,7 @@ import Graph from './Components/Graphs/Graph'
 // import Settings from './Pages/Settings'
 import NewDash from "./Pages/NewDash"
 import Pie from './Pages/Pie'
-
-
+// import TeacherDetails from './Pages/TeacherDetails';
 import Database from './Components/Database';
 import Approves from './Pages/Approves ';
 import AddTeacherdtl from './Pages/AddTeacherdtl';
@@ -56,9 +55,12 @@ import AllLoans from './Components/AllLoans/AllLoans';
 import Manager from './Components/Manager';
 import Profile from './Forms/Profile';
 import TeacherAnalytics from './Pages/TeacherAnalytics';
+import LoanDetails from './Components/AllLoans/LoanDetails';
 import MostRequestedLoans from './Pages/MostrequestedLoans';
 import UserignUp from './Components/Usersignup';
 import Otpuser from './Components/Otpuser';
+import ProtectedRoute from './Components/ProtectedRoute';
+
 
 
 function App() {
@@ -96,9 +98,11 @@ function App() {
           <Route path="teacherprofile/:id" element={<TeacherProfile/>} />
           <Route path="teacheranalytics" element={<TeacherAnalytics />} />
         </Route>
+       
+
         <Route path="/admin" element={<Dashboards />}>
           <Route path="navbar" element={<Navbar />} />
-          <Route path="teacherdetails/:id" element={<TeacherDetails />} />
+          <Route path="teacherprofile/:id" element={<TeacherDetails />} />
           <Route path="manager" element={<Manager />} />
           <Route path="Pie" element={<Pie />} />
           <Route path="allLoans" element={<AllLoans />} />
@@ -106,7 +110,13 @@ function App() {
           <Route path="database" element={<Database />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
-          <Route path="maindash" element={<MainDash />} />
+          <Route path="maindash" 
+        element={
+          <ProtectedRoute>
+            <MainDash />
+          </ProtectedRoute>
+        } 
+      />
           <Route path="rightside" element={<RightSide />} />
           <Route path="loanmanage" element={<LoanManagement />} />
           <Route path="graph" element={<Graph />} />
@@ -121,6 +131,8 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="manageloans" element={<ManageLoans />} />
           <Route path="profile" element={<Profile />} />
+          
+          <Route path="loanDetails/:id" element={<LoanDetails />} /> 
         </Route>
         <Route path="/barnav" element={<Barnav />}>
           <Route path="managerdash" element={<ManagerDash />} />

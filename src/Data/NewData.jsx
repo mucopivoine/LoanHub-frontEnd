@@ -1,5 +1,5 @@
-import React from 'react';
-import { PureComponent } from 'react';
+
+import React, { PureComponent } from 'react';
 import {
   BarChart,
   Bar,
@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import MostRequestedLoans from '../Pages/MostrequestedLoans';
+
 
 const data = [
   { name: 'Year 1', uv: 4000, pv: 2400, amt: 2400 },
@@ -24,8 +25,10 @@ const data = [
 
 export default class Example extends PureComponent {
   static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-72d7y5';
+
   render() {
     return (
+
       <div className='flex justify-between pl-32 gap-12'>
         <div className="mt-20 w-[40rem] ">
           <ResponsiveContainer width="110%" height={400}>

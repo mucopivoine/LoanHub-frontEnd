@@ -1,8 +1,13 @@
+
+// import { Outlet } from "react-router-dom"
+import Barnav from "../Components/Barnav"
+// import NewData from '../Data/NewData'
+// import Loans from "./Loans"
 import React from 'react';
-import Barnav from "../Components/Barnav";
 import Search from "./Search";
 import DashboardStatsGrid from "./NewDash";
 import Newdata from '../Data/NewData'
+
 
 function ManagerDash() {
   return (

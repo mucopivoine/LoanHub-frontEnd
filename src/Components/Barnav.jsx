@@ -9,6 +9,9 @@ function Barnav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [managerData, setManagerData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -24,6 +27,29 @@ function Barnav() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  const fetchManagerData = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('https://cors-anywhere.herokuapp.com/http://umwarimu-loan-hub-api.onrender.com/api/manager/getOne/2');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setManagerData(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isProfileOpen) {
+      fetchManagerData();
+    }
+  }, [isProfileOpen]);
 
   return (
     <>
@@ -51,21 +77,27 @@ function Barnav() {
               onMouseEnter={() => setIsProfileOpen(true)}
               onMouseLeave={() => setIsProfileOpen(false)}
             >
-              <div className="h-[50px] w-[50px] rounded-full flex items-center justify-center mb-2 mr-6">
+
+              <div className="h-[70px] w-[70px] rounded-full flex items-center justify-center mb-1 mr-6 p-3 gap-2 text-lg">
                 <img src="/happy.jpg" alt="User Profile" className="h-full w-full rounded-full object-cover" />
               </div>
-              <p className="mr-6 mb-5" >Manager profile</p>
+              {/* <p className="mr-6 mb-5">Manager profile</p> */}
               {isProfileOpen && (
                 <div className="absolute top-12 right-0 w-[200px] bg-white shadow-lg rounded-lg">
                   <div className="p-4 text-sm">
-                    <p>Name: John Doe</p>
-                    <p>Email: johnDoe@gmail.com</p>
-                    <p>Phone: 078992900</p>
+                    {loading && <p>Loading...</p>}
+                    {error && <p>Error: {error}</p>}
+                    {managerData && (
+                      <>
+                        <p>Name: {managerData.name}</p>
+                        <p>Email: {managerData.email}</p>
+                        <p>Phone: {managerData.phone}</p>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
             </li>
-
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaUser className="w-[20px] mr-3" />
               <Link to="/barnav/teachers">Teachers</Link>
