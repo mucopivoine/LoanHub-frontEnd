@@ -5,7 +5,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const OtpInput = ({ length = 7, onOtpSubmit = () => {}, email }) => {
+const Otpuser = ({ length = 7, onOtpSubmit = () => {}, email }) => {
   const [otp, setOtp] = useState(new Array(length).fill(""));
   const inputRefs = useRef([]);
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const OtpInput = ({ length = 7, onOtpSubmit = () => {}, email }) => {
 
   const onOtpVerify = async (combinedOtp) => {
     try {
-      const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/verifyotp', {
+      const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/user/verifyotp', {
         otp: combinedOtp,
       }, {
         headers: {
@@ -112,4 +112,4 @@ const OtpInput = ({ length = 7, onOtpSubmit = () => {}, email }) => {
   );
 };
 
-export default OtpInput;
+export default Otpuser;

@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -26,11 +25,13 @@ function Login() {
     setPassword(e.target.value);
     setError({ ...error, password: '' });
   };
+
   const loginEndpoints = [
     'https://umwarimu-loan-hub-api.onrender.com/api/teacher/login',
     'https://umwarimu-loan-hub-api.onrender.com/api/manager/login',
     'https://umwarimu-loan-hub-api.onrender.com/api/user/login'
   ];
+
   const handleLogin = async (e) => {
     e.preventDefault();
     const emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
@@ -45,49 +46,58 @@ function Login() {
       setFormSubmitted(true);
       return;
     }
+
+    let anySuccess = false;
+    let errorMessages = [];
+
     for (const endpoint of loginEndpoints) {
-    try {
-      const response = await axios.post(
-        endpoint,
-        { email, password },
-        { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
-      );
+      try {
+        const response = await axios.post(
+          endpoint,
+          { email, password },
+          { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
+        );
 
-      if (response.data) {
-        const token = response.data.token;
-        const expires = new Date();
-        expires.setTime(expires.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day
-        document.cookie = `jwt=${token};expires=${expires.toUTCString()};path=/`;
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user.role));
+        if (response.data) {
+          const token = response.data.token;
+          const expires = new Date();
+          expires.setTime(expires.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day
+          document.cookie = `jwt=${token};expires=${expires.toUTCString()};path=/`;
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('user', JSON.stringify(response.data.user.role));
 
-        toast.success('Logged in successfully! Redirecting...', {
-          className: 'red-line',
-        });
+        
 
-        setTimeout(() => {
-          const userRole = response.data.user.role;
-          if (userRole === 'teacher') {
-            navigate('/layout/teacheranalytics');
-          } else if (userRole === 'manager') {
-            navigate('/barnav/manageAnalytics');
-          } else if (userRole === 'admin') {
-            navigate('/admin/analytics');
-          }
-        }, 2000); // 2 seconds delay for toast
-      } else {
-        console.error('Token not found in response:', response.data);
-        setFetchError('Token not found in response');
-        toast.error('Token not found in response');
+          setTimeout(() => {
+            const userRole = response.data.user.role;
+            if (userRole === 'teacher') {
+              navigate('/layout/teacheranalytics');
+            } else if (userRole === 'manager') {
+              navigate('/barnav/manageAnalytics');
+            } else if (userRole === 'admin') {
+              navigate('/admin/analytics');
+            }
+          }, 2000); // 2 seconds delay for toast
+
+          anySuccess = true;
+          break; // Stop after the first successful request
+        } else {
+          console.error('Token not found in response:', response.data);
+          errorMessages.push('Token not found in response');
+        }
+      } catch (error) {
+        console.error('Login failed', error);
+        errorMessages.push(error.response?.data?.message || 'An error occurred');
       }
-    } catch (error) {
-      console.error('Login failed', error);
-      setFetchError(error.response?.data?.message || 'An error occurred');
-      toast.error(error.response?.data?.message || ' Please try again ');
     }
-  }
-  toast.error('Login failed for all endpoints. Please check your credentials and try again.');
-}
+
+    if (anySuccess) {
+      setFetchError(null);
+    } else {
+      setFetchError(errorMessages.join(' '));
+      toast.error(errorMessages.join(' ') || ' Please try again ');
+    }
+  };
 
   return (
     <div className="mx-auto items-center justify-center flex flex-row bg-gray-100 h-[110vh]">

@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FaSearch, FaRegBell, FaEnvelope } from 'react-icons/fa';
 // import Logout from '../Components/Logout';
@@ -16,6 +16,58 @@ function Search({ messages = [] }) {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+ 
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    // Extract JWT token from cookies
+    const jwtCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('jwt='));
+    const cookie = jwtCookie ? jwtCookie.split('=')[1] : '';
+  
+    if (!cookie) {
+      console.error('No JWT token found');
+      return;
+    }
+  
+    try {
+      const response = await axios.post(
+        'https://umwarimu-loan-hub-api.onrender.com/api/user/logout',
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${cookie}`,
+          },
+          withCredentials: true
+        }
+      );
+  
+      console.log('Logout successful');
+      console.log(response.data); // Logging the response data upon successful logout
+  
+      // Clear authentication status
+      document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      localStorage.removeItem('jwt');
+      // Assuming showError is defined somewhere else
+      showError(response.data.message, '#10E956', 3000);
+      // Assuming setAuth is defined somewhere else
+      setAuth(false);
+  
+    } catch (error) {
+      console.error('Error during logout:', error);
+  
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+        console.error('Response headers:', error.response.headers);
+      } else if (error.request) {
+        console.error('Request data:', error.request);
+      } else {
+        console.error('Error message:', error.message);
+      }
+    }
+  };
+
   return (
     <div
       className={`flex fixed mb-10 sm:w-[90%] lg:w-[81%] sm:ml-[70px] right-0 justify-between top-0 bg-gray-100 shadow-lg rounded-lg ${
@@ -72,7 +124,7 @@ function Search({ messages = [] }) {
             </div>
           )}
         </div> */}
-       <Link to="/" ><button className='p-3 m-2 rounded-md text-md hover:bg-white hover:text-red-500'>Logout</button></Link>
+       <button className='p-3 m-2 rounded-md text-md hover:bg-white hover:text-red-500' onClick={handleLogout}>Logout</button>
       </div>
     </div>
   );

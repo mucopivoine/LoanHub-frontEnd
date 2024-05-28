@@ -11,16 +11,25 @@ function Logout() {
     'https://umwarimu-loan-hub-api.onrender.com/api/manager/logout',
     'https://umwarimu-loan-hub-api.onrender.com/api/user/logout'
   ];
+  const cookie = document.cookie.split('jwt=')[1];
   const handleLogout = async (e) => {
     e.preventDefault();
     for (const endpoint of loginEndpoints) {
     try {
-      const response = await axios.post(  endpoint, {}, { withCredentials: true });
+      const response = await axios.post(  endpoint, {},{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${cookie}`,
+        },
+         withCredentials: true });
       console.log(response.data); // Logging the response data upon successful logout
       
       // Clear authentication status
+      document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      localStorage.removeItem('jwt');
+      showError(data.message, '#10E956', 3000)
       setAuth(false);
-      navigate('/');
+  
     } catch (error) {
       console.error('Error during logout:', error);
       if (error.response) {
@@ -36,9 +45,12 @@ function Logout() {
   }};
 
   return (
+    <>
     <button onClick={handleLogout} className='p-3 m-2 rounded-md text-md hover:bg-white hover:text-red-500'>
-      Logou
+      Logout
     </button>
+    <Search onClick={handleLogout}/>
+    </>
   );
 }
 
