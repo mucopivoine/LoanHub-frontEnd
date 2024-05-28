@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import Search from './Search';
 import { ToastContainer, toast } from 'react-toastify';
-
 const cookie = document.cookie.split('jwt=')[1];
 
 const ManagerForm = () => {

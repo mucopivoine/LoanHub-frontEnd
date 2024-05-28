@@ -62,9 +62,10 @@ const Table = ({ columns, data, searchTerm }) => {
   );
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+    <div>
+      <h1 className="text-2xl font-bold mt-5 ">Loans statuses</h1>
+      <table className="min-w-full divide-y mt-[50px]">
+        <thead className="bg-white divide-y divide-gray-200">
           <tr>
             {columns.map((column) => (
               <th
@@ -77,7 +78,7 @@ const Table = ({ columns, data, searchTerm }) => {
             ))}
           </tr>
         </thead>
-        <tbody className="bg-whitem divide-y divide-gray-200">
+        <tbody className="bg-white divide-y divide-gray-200">
           {filteredData.map((row) => (
             <tr key={row.id}>
               {columns.map((column) => (
@@ -108,9 +109,13 @@ const Table = ({ columns, data, searchTerm }) => {
 const Loans = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const handleSearch = (value) => {
+    setSearchTerm(value);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
-      <Search setSearchTerm={setSearchTerm} />
+      <Search setSearchTerm={handleSearch} />
       <Barnav />
       <div className="flex flex-col lg:flex-row gap-6 mt-20 mx-auto w-[90%]">
         <div className="flex flex-col w-full lg:w-3/4">

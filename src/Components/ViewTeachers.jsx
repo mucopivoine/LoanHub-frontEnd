@@ -96,8 +96,11 @@ function ViewTeachers() {
     <Search/>
     <div className="flex">
       <Sidebar />
-      <div className="w-[70%] p-6 ml-[2%] lg:mt-[100px]">
-        <h2 className="text-2xl font-semibold ">Teachers</h2>
+
+
+      <div className="w-[70%] p-6 ml-[2%] lg:mt-[50px]">
+        <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
+
         <input
           type="text"
           placeholder="Search by teacher name"
@@ -169,6 +172,7 @@ function ViewTeachers() {
         </div>
       </div>
     </div>
+   
     </>
   );
 }

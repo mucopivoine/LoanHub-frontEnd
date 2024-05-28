@@ -26,16 +26,16 @@ export default class Example extends PureComponent {
   static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-72d7y5';
   render() {
     return (
-      <div className='flex justify-between'>
-        <div className="mt-20 w-full md:w-[70%]">
-          <ResponsiveContainer width="100%" height={400}>
+      <div className='flex justify-between pl-32 gap-12'>
+        <div className="mt-20 w-[40rem] ">
+          <ResponsiveContainer width="110%" height={400}>
             <BarChart
-              width={500}
+              width={800}
               height={300}
               data={data}
               margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
-              <CartesianGrid strokeDasharray="3 3" />
+              {/* <CartesianGrid strokeDasharray="3 3" /> */}
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
@@ -45,7 +45,7 @@ export default class Example extends PureComponent {
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className='w-full md:w-[90%]'>
+        <div className='mr-10 '>
           <MostRequestedLoans />
         </div>
       </div>

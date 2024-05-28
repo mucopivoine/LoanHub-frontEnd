@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { FaRegChartBar, FaUser, FaUserFriends } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
+import Search from '../Pages/Search';
 
 function Barnav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -80,6 +81,7 @@ function Barnav() {
           </ul>
         </nav>
       </motion.div>
+      <Search/>
       <div className={`${isLargeScreen ? 'ml-64' : ''}`}>
         <Outlet />
       </div>

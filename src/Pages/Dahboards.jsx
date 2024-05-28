@@ -1,10 +1,12 @@
 
-import { Search } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
+import Search from './Search'
 function Dahboards() {
   return (
-    
+    <>
+   <Search/>
  <Outlet/>
+ </>
   )
 }
 

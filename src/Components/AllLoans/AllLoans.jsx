@@ -3,6 +3,7 @@ import axios from 'axios';
 import Sidebar from '../Sidebar';
 import { MdDelete } from 'react-icons/md';
 import Search from '../../Pages/Search';
+import { FaEdit } from 'react-icons/fa';
 
 const cookie = document.cookie.split('jwt=')[1];
 

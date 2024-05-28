@@ -2,15 +2,15 @@ import React from 'react';
 
 function MostRequestedLoans() {
   const loansData = [
-    { type: "Personal Loan", count: 120 },
-    { type: "Home Loan", count: 98 },
-    { type: "Car Loan", count: 85 },
-    { type: "Education Loan", count: 72 },
+    { type: "Short term loans", count: 120 },
+    { type: "Emergency loans", count: 98 },
+    { type: "Development loans", count: 85 },
+    { type: "Long term Loans", count: 72 },
   ];
 
   return (
-    <div className="bg-gradient-to-r from-navy-green to-navy-blue rounded-lg p-8 shadow-xl w-full sm:w-3/5 md:w-2/5 lg:w-1/3 mt-10">
-      <h3 className="text-3xl font-semibold text-white mb-8">Most Requested Loans</h3>
+    <div className="bg-gradient-to-r from-navy-green to-navy-blue rounded-lg p-8 shadow-xl mt-10">
+      <h3 className="text-3xl font-semibold text-black mb-8">Most Requested Loans</h3>
       <ul>
         {loansData.map((loan, index) => (
           <li
