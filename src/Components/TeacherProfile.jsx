@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Sidemenu from './Sidemenu';
+import axios from 'axios';
+import Sidebar from './Sidebar'; // Make sure this is not conflicting
 
 const TeacherProfile = () => {
   const { id } = useParams(); // Get the teacher ID from the URL params
