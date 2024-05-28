@@ -101,7 +101,7 @@ function Database() {
     <Search/>
     <div className="flex">
       <Sidebar />
-      <div className="w-[70%] ml-[2%]">
+      <div className="w-[70%] ml-[2%] mt-[100px]">
         <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
         <input
           type="text"
