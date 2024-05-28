@@ -10,7 +10,7 @@ function MainDash() {
 
   useEffect(() => {
     if (localStorage.getItem('jwt') === null) {
-      navigate('/login', { replace: true });
+      navigate('/auth/signin', { replace: true });
     }
   }, [navigate]);
   return (
