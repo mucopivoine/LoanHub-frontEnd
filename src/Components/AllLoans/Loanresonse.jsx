@@ -14,7 +14,7 @@ const LoanResponse = () => {
   useEffect(() => {
     const fetchLoanResponse = async () => {
       try {
-        const response = await axios.put(
+        const response = await axios.post(
           `https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/response/${id}`,
           {}, 
           {

@@ -36,7 +36,7 @@ const Mnguser = () => {
     try {
       console.log('Token:', cookie);
       setIsLoading(true); 
-      const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/manager/signup', formData, {
+      const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/add', formData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookie}`
@@ -49,7 +49,7 @@ const Mnguser = () => {
       setIsLoading(false); 
 
       setTimeout(() => {
-        navigate('/admin/viewmanager');
+        navigate('/barnav/databasemg');
       }, 3000); // Redirect after 3 seconds
     } catch (error) {
       setIsLoading(false); 
