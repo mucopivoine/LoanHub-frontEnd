@@ -21,7 +21,7 @@ const LoanDetails = () => {
           withCredentials: true
         });
         console.log('Cookie:', cookie);
-        console.log('Response data:', response.data); // Log response data
+        console.log('Response data:', response.data); 
 
         if (response.data.loan) {
           setLoanDetails(response.data.loan);
@@ -29,7 +29,7 @@ const LoanDetails = () => {
           setError('Loan details not found');
         }
       } catch (error) {
-        console.error('Error fetching loan details:', error); // Log the error object
+        console.error('Error fetching loan details:', error); 
         setError(error.message);
       } finally {
         setLoading(false);
@@ -67,7 +67,7 @@ const LoanDetails = () => {
                   </tr>
                   <tr>
                     <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Names</td>
-                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.FirstName} {loanDetails.LastName}</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.fullName} </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Email</td>
@@ -84,6 +84,22 @@ const LoanDetails = () => {
                   <tr>
                     <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Amount Requested</td>
                     <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.amountRequested || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Monthly Salary</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.monthlySalary || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Purpose of the loan</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.purpose || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Bank Account Number</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.bankkAccountNumber || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Proof of Employment</td>
+                    <td className="py-3 px-4 sm:px-6 lg:px-8">{loanDetails.proofOfEmployment || "Not available"}</td>
                   </tr>
                 </tbody>
               </table>

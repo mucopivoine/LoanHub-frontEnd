@@ -9,8 +9,9 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [loading,setLoading] = useState(false)
   const navigate = useNavigate();
-  const [fetchError, setFetchError] = useState(null); // Fix the state declaration
+  const [fetchError, setFetchError] = useState(null); 
   const [error, setError] = useState({
     email: '',
     password: '',
@@ -52,6 +53,7 @@ function Login() {
 
     for (const endpoint of loginEndpoints) {
       try {
+        setLoading(true)
         const response = await axios.post(
           endpoint,
           { email, password },
@@ -61,10 +63,12 @@ function Login() {
         if (response.data) {
           const token = response.data.token;
           const expires = new Date();
+          const userId = response.data.user._id;
           expires.setTime(expires.getTime() + 1 * 24 * 60 * 60 * 1000); // 1 day
           document.cookie = `jwt=${token};expires=${expires.toUTCString()};path=/`;
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('user', JSON.stringify(response.data.user.role));
+          localStorage.setItem('userId', JSON.stringify(response.data.user._id));
           
           toast.success('Logged in successfully ');
         
@@ -78,15 +82,16 @@ function Login() {
             } else if (userRole === 'admin') {
               navigate('/admin/analytics');
             }
-          }, 2000); // 2 seconds delay for toast
+          }, 2000);
 
           anySuccess = true;
-          break; // Stop after the first successful request
+          break;
         } else {
           console.error('Token not found in response:', response.data);
           errorMessages.push('Token not found in response');
         }
       } catch (error) {
+        setLoading(false)
         console.error('Login failed', error);
         errorMessages.push(error.response?.data?.message || 'An error occurred');
       }
@@ -151,7 +156,8 @@ function Login() {
                   className="bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5"
                   onClick={handleLogin}
                 >
-                  Sign In
+                  {loading?("Logging In ..."):"Sign In"}
+                  
                 </button>
                 <div className="flex flex-col mt-24 text-black">
                   <div className="flex flex-row">

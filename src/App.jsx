@@ -14,7 +14,6 @@ import Barnav from './Components/Barnav';
 import Teachers from './Pages/Teachers';
 import Loans from './Pages/Loans';
 import ManagerDash from './Pages/ManagerDash';
-import MnageAnalytics from './Pages/MnageAnalytics';
 import Addmanager from './Pages/Addmanager';
 import ViewData from './Pages/ViewData';
 import TeacherLoans from './Pages/TeacherLoans';
@@ -60,6 +59,8 @@ import MostRequestedLoans from './Pages/MostrequestedLoans';
 import UserignUp from './Components/Usersignup';
 import Otpuser from './Components/Otpuser';
 import ProtectedRoute from './Components/ProtectedRoute';
+import Loanresponse from './Components/AllLoans/Loanresonse';
+import ManagerAnalytics from './Pages/MnageAnalytics';
 
 
 
@@ -102,7 +103,7 @@ function App() {
 
         <Route path="/admin" element={<Dashboards />}>
           <Route path="navbar" element={<Navbar />} />
-          <Route path="teacherprofile/:id" element={<TeacherDetails />} />
+          {/* <Route path="teacherprofile/:id" element={<TeacherDetails />} /> */}
           <Route path="manager" element={<Manager />} />
           <Route path="Pie" element={<Pie />} />
           <Route path="allLoans" element={<AllLoans />} />
@@ -131,17 +132,17 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="manageloans" element={<ManageLoans />} />
           <Route path="profile" element={<Profile />} />
-          
           <Route path="loanDetails/:id" element={<LoanDetails />} /> 
         </Route>
         <Route path="/barnav" element={<Barnav />}>
           <Route path="managerdash" element={<ManagerDash />} />
           <Route path="teachers" element={<Teachers />} />
           <Route path="loans" element={<Loans />} />
-          <Route path="manageAnalytics" element={<MnageAnalytics />} />
+          <Route path="manageAnalytics" element={<ManagerAnalytics />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
           <Route path="mostrequestedloans" element={<MostRequestedLoans/>}/>
+          <Route path="loanresponse" element={<Loanresponse/>}/>
           </Route>
           
       </Routes>

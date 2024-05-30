@@ -4,6 +4,7 @@ import axios from 'axios';
 import Sidebar from './Sidebar';
 import { MdDelete } from 'react-icons/md';
 import { Search } from 'lucide-react';
+import { FaEdit } from 'react-icons/fa';
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -136,11 +137,12 @@ function Database() {
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.salary}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
-                    className="text-red-600 hover:text-red-800"
+                    className="text-red-600 hover:text-red-800 items-center text-xl"
                     onClick={() => handleDeleteTeacher(teacher._id)}
                   >
                     <MdDelete />
                   </button>
+                 
                 </td>
               </tr>
             ))}

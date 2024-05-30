@@ -26,8 +26,6 @@ function Search({ messages = [] }) {
     localStorage.clear()
     deleteCookie('jwt')
     window.location.pathname="/auth/signin"
-    //window.location.reload(); 
-
 
   };
 

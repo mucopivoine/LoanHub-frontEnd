@@ -1,17 +1,22 @@
 
-// import Barnav from '../Components/Barnav'
-import NewData from '../Data/NewData'
+import Sidemenu from '../Components/Sidemenu'
+import DashboardStatsGrid from './NewDash'
 import LoanManagement from './LoanManagement'
+import Newdata from '../Data/NewData'
 import Search from './Search'
+import Barnav from '../Components/Barnav'
 
-function MnageAnalytics() {
+function ManagerAnalytics() {
   return (
-    <div>
-      <Search/>
-        <NewData/>
-        
+    <div className="relative min-h-screen bg-gray-100">
+    <Search />
+    <Barnav />
+    <div className="mx-auto mt-20">
+     <DashboardStatsGrid/>
+      <Newdata/>
     </div>
+  </div>
   )
 }
 
-export default MnageAnalytics
+export default ManagerAnalytics

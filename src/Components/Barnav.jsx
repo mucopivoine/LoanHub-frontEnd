@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
-import { FaRegChartBar, FaUser, FaUserFriends } from 'react-icons/fa';
+import { FaMoneyBill, FaRegChartBar, FaUser, FaUserFriends } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
 import Search from '../Pages/Search';
 
@@ -103,8 +103,8 @@ function Barnav() {
               <Link to="/barnav/teachers">Teachers</Link>
             </li>
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
-              <FaUserFriends className="w-[20px] mr-3" />
-              <Link to="/barnav/loans">Loans</Link>
+              <FaMoneyBill className="w-[20px] mr-3" />
+              <Link to="/barnav/manageloans">Loans</Link>
             </li>
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaRegChartBar className="w-[20px mr-3" />

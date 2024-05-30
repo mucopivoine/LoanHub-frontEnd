@@ -5,7 +5,7 @@ import Barnav from "../Components/Barnav"
 // import Loans from "./Loans"
 import React from 'react';
 import Search from "./Search";
-import DashboardStatsGrid from "./NewDash";
+import DashboardStatsGrid from "../Data/DashboardStatsGrid";
 import Newdata from '../Data/NewData'
 
 

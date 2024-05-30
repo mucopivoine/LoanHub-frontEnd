@@ -98,7 +98,7 @@ function ViewTeachers() {
       <Sidebar />
 
 
-      <div className="w-[70%] p-6 ml-[2%] lg:mt-[50px]">
+      <div className="w-[60%] p-6s ml-[2%] lg:mt-[50px]">
         <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
 
         <input

@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Barnav from "../Components/Barnav";
 import Search from "./Search";
+
+const cookie = document.cookie.split('jwt=')[1];
 
 const columns = [
   {
@@ -22,37 +25,6 @@ const columns = [
   {
     Header: "Status",
     accessor: "status",
-  },
-];
-
-const data = [
-  {
-    id: 1,
-    teacherName: "John Doe",
-    loanType: "Short Term",
-    amount: "$5000",
-    status: "Pending",
-  },
-  {
-    id: 2,
-    teacherName: "Jane Smith",
-    loanType: "Long Term",
-    amount: "$10000",
-    status: "Completed",
-  },
-  {
-    id: 3,
-    teacherName: "Bob Johnson",
-    loanType: "Development",
-    amount: "$7500",
-    status: "Pending",
-  },
-  {
-    id: 4,
-    teacherName: "Mary Williams",
-    loanType: "Emergency",
-    amount: "$8000",
-    status: "Completed",
   },
 ];
 
@@ -108,10 +80,42 @@ const Table = ({ columns, data, searchTerm }) => {
 
 const Loans = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchLoanResponses = async () => {
+      try {
+        const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/response', {
+          headers: {
+            'Authorization': `Bearer ${cookie}`
+          },
+          withCredentials: true
+        });
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching loan responses:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLoanResponses();
+  }, []);
 
   const handleSearch = (value) => {
     setSearchTerm(value);
   };
+
+  if (loading) {
+    return <div className="mt-32 text-center">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="mt-32 text-center text-red-500">{error}</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">

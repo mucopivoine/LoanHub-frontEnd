@@ -136,7 +136,7 @@ function AllLoans() {
                       className="text-red-600 hover:text-red-800 ml-2"
                       
                     >
-                      Edit
+                      View more
                     </button></Link>
                   </td>
                 </tr>

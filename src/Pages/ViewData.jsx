@@ -10,7 +10,6 @@ function ViewData() {
   const [email, setEmail] = useState('');
   const [maritalStatus, setMaritalStatus] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [teacher_ID, setTeacherId] = useState('');
   const [bankAccountNumber, setBankNumber] = useState('');
   const [amountRequested, setLoanAmount] = useState('');
   const [purpose, setPurpose] = useState('');
@@ -34,7 +33,6 @@ function ViewData() {
     formData.append('workSchool', workSchool);
     formData.append('email', email);
     formData.append('phoneNumber', phoneNumber);
-    formData.append('teacher_ID', teacher_ID);
     formData.append('bankAccountNumber', bankAccountNumber);
     formData.append('amountRequested', amountRequested);
     formData.append('purpose', purpose);
@@ -65,13 +63,12 @@ function ViewData() {
         toast.success('Loan Application Submitted Successfully', {
           className: 'toast-message',
           onClose: () => {
-            // Clear input fields
+
             setFullName('');
             setSchoolName('');
             setEmail('');
             setMaritalStatus('');
             setPhoneNumber('');
-            setTeacherId('');
             setBankNumber('');
             setLoanAmount('');
             setPurpose('');
@@ -143,34 +140,12 @@ function ViewData() {
               </div>
             </div>
             <div className="mb-4 flex flex-wrap -mx-2">
-              <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                <label className="block text-gray-700">Teacher Id</label>
-                <input
-                  type="text"
-                  value={teacher_ID}
-                  onChange={(e) => setTeacherId(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded mt-2"
-                  required
-                />
-              </div>
               <div className="w-full md:w-1/2 px-2">
                 <label className="block text-gray-700">Bank Account Number</label>
                 <input
                   type="text"
                   value={bankAccountNumber}
                   onChange={(e) => setBankNumber(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded mt-2"
-                  required
-                />
-              </div>
-            </div>
-            <div className="mb-4 flex flex-wrap -mx-2">
-              <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                <label className="block text-gray-700">Loan Amount Requested</label>
-                <input
-                  type="number"
-                  value={amountRequested}
-                  onChange={(e) => setLoanAmount(e.target.value)}
                   className="w-full p-2 border border-gray-300 rounded mt-2"
                   required
                 />
@@ -188,6 +163,19 @@ function ViewData() {
                   <option value="married">Married</option>
                 </select>
               </div>
+            </div>
+            <div className="mb-4 flex flex-wrap -mx-2">
+              <div className="w-full">
+                <label className="block text-gray-700">Loan Amount Requested</label>
+                <input
+                  type="number"
+                  value={amountRequested}
+                  onChange={(e) => setLoanAmount(e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded mt-2"
+                  required
+                />
+              </div>
+              
             </div>
             <div className="mb-4">
               <label className="block text-gray-700">Purpose of the Loan</label>
@@ -224,7 +212,6 @@ function ViewData() {
                 className="w-full p-2 border border-gray-300 rounded mt-2"
               />
             </div>
-
             <button
               type="submit"
               className="w-full p-2 bg-red-500 text-white rounded"

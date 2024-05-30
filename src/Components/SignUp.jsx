@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-// import { SigningUp } from '../api/teacher';
 import axios from 'axios';
+
 function SignUp() {
   const [username, setUsername] = useState('');
-  const [usernameError, setUserNameError] = useState('')
+  const [usernameError, setUserNameError] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
   const [accountNumberErr, setAccountNumberError] = useState('');
   const [email, setEmail] = useState('');
@@ -20,77 +20,87 @@ function SignUp() {
   const [schoolnameErr, setSchoolnameErr] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
   const [phonenumberErr, setPhonenumberErr] = useState('');
-
   const [isLoading, setIsLoading] = useState(false);
- 
+
   const navigate = useNavigate();
+
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+
   const isValid = () => {
-    let valid = true
+    let valid = true;
+
     if (!username.trim()) {
-      setUserNameError('username is required');
-      valid = false
+      setUserNameError('Username is required');
+      valid = false;
     } else {
       setUserNameError('');
     }
+
     if (!accountNumber.trim()) {
       setAccountNumberError('Account Number is required');
-      valid = false
+      valid = false;
     } else {
-      setAccountNumberError(" ")
+      setAccountNumberError('');
     }
+
     if (!firstname.trim()) {
-      setFirstnameErr('firstname is required');
-      valid = false
+      setFirstnameErr('First name is required');
+      valid = false;
     } else {
-      setFirstnameErr(" ");
+      setFirstnameErr('');
     }
+
     if (!lastname.trim()) {
-      setLastnameErr('last name is required')
-      valid = false
+      setLastnameErr('Last name is required');
+      valid = false;
+    } else {
+      setLastnameErr('');
     }
-    else {
-      setLastnameErr('')
-    }
+
     if (!schoolname.trim()) {
-      setSchoolnameErr('School name is required')
-      valid = false
+      setSchoolnameErr('School name is required');
+      valid = false;
     } else {
-      setSchoolnameErr('')
-    } if (!phonenumber.trim()) {
-      setPhonenumberErr('Phone number is required')
-      valid = false
-    } else {
-      setPhonenumberErr('')
+      setSchoolnameErr('');
     }
+
+    if (!phonenumber.trim()) {
+      setPhonenumberErr('Phone number is required');
+      valid = false;
+    } else {
+      setPhonenumberErr('');
+    }
+
     if (!password.trim()) {
-      setPasswordErr('password is required')
-      valid = false
+      setPasswordErr('Password is required');
+      valid = false;
     } else {
-      setPasswordErr('')
+      setPasswordErr('');
     }
+
     if (!email.trim()) {
-      setEmailErr('Email is required')
-      valid = false
+      setEmailErr('Email is required');
+      valid = false;
     } else if (!isValidEmail(email)) {
-      setEmailErr('Email is invalid')
-      valid = false
+      setEmailErr('Email is invalid');
+      valid = false;
     } else {
-      setEmailErr('')
+      setEmailErr('');
     }
-    return valid
+
+    return valid;
   };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    if (isValid() == true) {
+
+    if (isValid()) {
       try {
-
-        console.log({
+        const data = {
           username: username,
           email: email,
           password: password,
@@ -99,39 +109,30 @@ function SignUp() {
           schoolName: schoolname,
           phoneNumber: phonenumber,
           accountNumber: accountNumber,
-        })
+        };
 
-        axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', {
-          username: username,
-          email: email,
-          password: password,
-          firstName: firstname,
-          lastName: lastname,
-          schoolName: schoolname,
-          phoneNumber: phonenumber,
-          accountNumber: accountNumber,
-        }, {
+        const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacher/signup', data, {
           headers: {
             "Content-Type": 'application/json',
           },
           withCredentials: true,
-        })
-          .then((response) => {
-            console.log(response.data);// Store the token in localStorage
+        });
 
-            setTimeout(() => {
-              setIsLoading(false);
-              navigate('/auth/otpinput');
-            }, 3000)
-          }).catch((error) => {
-            setIsLoading(false);
-            console.log(error);
-          })
+        console.log(response.data);
+
+        setTimeout(() => {
+          setIsLoading(false);
+          navigate('/auth/otpinput');
+        }, 3000);
       } catch (error) {
- console.log(error);
+        setIsLoading(false);
+        console.log(error);
+      }
+    } else {
+      setIsLoading(false);
     }
-  }
-}
+  };
+
   return (
     <>
       {isLoading && (
@@ -152,7 +153,7 @@ function SignUp() {
                 <h1 className='p-10 text-2xl text-black font-bold'>SIGN UP HERE</h1>
               </div>
               <div>
-                <form >
+                <form>
                   <div className='flex flex-row gap-3'>
                     <div className='mb-5'>
                       <label htmlFor='username' className='block text-sm text-black'>
@@ -160,12 +161,13 @@ function SignUp() {
                       </label>
                       <input
                         type='text'
-                        id='userName'
+                        id='username'
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)} required
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-                      {usernameError ? (<p className='text-red-500 italic text-xs'>{usernameError}</p>) : null}
+                      {usernameError && <p className='text-red-500 italic text-xs'>{usernameError}</p>}
                     </div>
                     <div className='mb-5'>
                       <label htmlFor='firstname' className='block text-sm text-black'>
@@ -173,12 +175,13 @@ function SignUp() {
                       </label>
                       <input
                         type='text'
-                        id='firstName'
+                        id='firstname'
                         value={firstname}
-                        onChange={(e) => setFirstname(e.target.value)} required
+                        onChange={(e) => setFirstname(e.target.value)}
+                        required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-                      {firstnameErr ? (<p className='text-red-500 italic text-xs'>{firstnameErr}</p>) : null}
+                      {firstnameErr && <p className='text-red-500 italic text-xs'>{firstnameErr}</p>}
                     </div>
                   </div>
                   <div className='flex flex-row gap-3'>
@@ -188,86 +191,84 @@ function SignUp() {
                       </label>
                       <input
                         type='text'
-                        id='lastName'
+                        id='lastname'
                         value={lastname}
-                        onChange={(e) => setLastname(e.target.value)} required
+                        onChange={(e) => setLastname(e.target.value)}
+                        required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-                      {lastnameErr ? (<p className='text-red-500 italic text-xs'>{lastnameErr}</p>) : null}
-
+                      {lastnameErr && <p className='text-red-500 italic text-xs'>{lastnameErr}</p>}
                     </div>
                     <div className='mb-5'>
-                      <label htmlFor='lastname' className='block text-sm text-black'>
+                      <label htmlFor='schoolname' className='block text-sm text-black'>
                         Enter Schoolname
                       </label>
                       <input
                         type='text'
                         id='schoolname'
                         value={schoolname}
-                        onChange={(e) => setSchoolname(e.target.value)} required
+                        onChange={(e) => setSchoolname(e.target.value)}
+                        required
                         className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                       />
-                      {/* {formSubmitted && error.schoolname && (
-                      <p className='text-red-500 italic text-xs'>{error.schoolname}</p>
-                    )} */}
-                      {schoolnameErr ? (<p className='text-red-500 italic text-xs'>{schoolnameErr}</p>) : null}
+                      {schoolnameErr && <p className='text-red-500 italic text-xs'>{schoolnameErr}</p>}
                     </div>
                   </div>
                   <div className='mb-5'>
-                    <label htmlFor='lastname' className='block text-sm text-black'>
+                    <label htmlFor='email' className='block text-sm text-black'>
                       Enter Your Email Address
                     </label>
                     <input
                       type='text'
                       id='email'
                       value={email}
-                      onChange={(p) => setEmail(p.target.value)} required
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                    {/* {formSubmitted && error.email && (
-                      <p className='text-red-500 italic text-xs'>{error.email}</p>
-                    )} */}
-                    {emailErr ? (<p className='text-red-500 italic text-xs'>{emailErr}</p>) : null}
+                    {emailErr && <p className='text-red-500 italic text-xs'>{emailErr}</p>}
                   </div>
                   <div className='mb-5'>
-                    <label htmlFor='lastname' className='block text-sm text-black'>
+                    <label htmlFor='password' className='block text-sm text-black'>
                       Enter Your Password
                     </label>
                     <input
                       type='password'
                       id='password'
                       value={password}
-                      onChange={(text) => setPassword(text.target.value)} required
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                    {passwordErr ? (<p className='text-red-500 italic text-xs'>{passwordErr}</p>) : null}
-
+                    {passwordErr && <p className='text-red-500 italic text-xs'>{passwordErr}</p>}
                   </div>
                   <div className='mb-5'>
-                    <label htmlFor='lastname' className='block text-sm text-black'>
+                    <label htmlFor='accountNumber' className='block text-sm text-black'>
                       Enter Your Account Number
                     </label>
                     <input
                       type='text'
-                      id='teacher_ID'
+                      id='accountNumber'
                       value={accountNumber}
-                      onChange={(n) => setAccountNumber(n.target.value)} required
+                      onChange={(e) => setAccountNumber(e.target.value)}
+                      required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                    {accountNumberErr ? (<p className='text-red-500 italic text-xs'>{accountNumber}</p>) : null}
+                    {accountNumberErr && <p className='text-red-500 italic text-xs'>{accountNumberErr}</p>}
                   </div>
                   <div className='mb-5'>
-                    <label htmlFor='lastname' className='block text-sm text-black'>
+                    <label htmlFor='phonenumber' className='block text-sm text-black'>
                       Enter Your Phonenumber
                     </label>
                     <input
                       type='number'
-                      id='phoneNumber'
+                      id='phonenumber'
                       value={phonenumber}
-                      onChange={(e) => setPhonenumber(e.target.value)} required
+                      onChange={(e) => setPhonenumber(e.target.value)}
+                      required
                       className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
                     />
-                    {phonenumberErr ? (<p className='text-red-500 italic text-xs'>{phonenumberErr}</p>) : null}
+                    {phonenumberErr && <p className='text-red-500 italic text-xs'>{phonenumberErr}</p>}
                   </div>
                   <button
                     type='submit'
@@ -277,7 +278,7 @@ function SignUp() {
                     Sign Up
                   </button>
                   <div className='flex gap-2 mt-5 mb-3 text-black'>
-                    <p>Already have an account. </p>
+                    <p>Already have an account?</p>
                     <Link to='/auth/signin' className='text-red-700'>
                       Log in
                     </Link>
@@ -289,15 +290,7 @@ function SignUp() {
         </motion.div>
       </div>
     </>
-  )
+  );
 }
+
 export default SignUp;
-
-
-
-
-
-
-
-
-
