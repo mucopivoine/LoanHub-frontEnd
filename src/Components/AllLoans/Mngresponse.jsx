@@ -5,54 +5,15 @@ import Sidebar from '../Sidebar';
 
 const cookie = document.cookie.split('jwt=')[1];
 
-const LoanResponse = () => {
+const Mngresponse = () => {
   const { id } = useParams();
-  const [loanResponse, setLoanResponse] = useState(null);
+  const [loanResponse, setLoanResponse] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchLoanResponse = async () => {
-      try {
-        const response = await axios.put(
-          `https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/response/${id}`,
-          {}, 
-          {
-            headers: {
-              'Authorization': `Bearer ${cookie}`
-            },
-            withCredentials: true
-          }
-        );
-        console.log('Cookie:', cookie);
-        console.log('Response data:', response.data);
-
-        if (response.data.loan) {
-          setLoanResponse(response.data.loan);
-        } else {
-          setError('Loan details not found');
-        }
-      } catch (error) {
-        console.error('Error fetching loan details:', error);
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLoanResponse();
-  }, [id]);
-
-  if (loading) {
-    return <div className="mt-32 text-center">Loading...</div>;
-  }
 
   if (error) {
     return <div className="mt-32 text-center text-red-500">{error}</div>;
-  }
-
-  if (!loanResponse) {
-    return <div className="mt-32 text-center">Loan details not found</div>;
   }
 
   return (
@@ -93,7 +54,6 @@ const LoanResponse = () => {
                     <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Loan Status</td>
                     <td className="py-3 px-4 sm:px-6 lg:px-8">{loanResponse.loanStatus || "Not available"}</td>
                   </tr>
-                  
                 </tbody>
               </table>
             </div>
@@ -104,4 +64,4 @@ const LoanResponse = () => {
   );
 }
 
-export default LoanResponse;
+export default Mngresponse;

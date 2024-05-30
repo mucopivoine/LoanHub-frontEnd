@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import { Link } from 'react-router-dom';
+import Barnav from '../Barnav';
 
 const cookie = document.cookie.split('jwt=')[1];
 
-const LoanDetails = () => {
+const Mngdetails = () => {
   const { id } = useParams();
   const [loanDetails, setLoanDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -55,14 +56,14 @@ const LoanDetails = () => {
   return (
     <>
       <div>
-        <Sidebar />
-        <div className='w-[60%] ml-[20%] mt-[100px]'>
+        <Barnav />
+        <div className='w-[70%] ml-[30px] mt-[100px]'>
           <div className='flex justify-between'>
             <div className=''>
             <h2 className="text-2xl font-bold mb-4">Loan Details</h2>
             </div>
             <div>
-           <Link to="loanresponse" ><button className="bg-blue-900 hover:bg-blue-800 items-end text-white font-bold py-2 px-4 rounded"
+           <Link to="mngresponse" ><button className="bg-blue-900 hover:bg-blue-800 items-end text-white font-bold py-2 px-4 rounded"
 >
         Response
       </button></Link>
@@ -72,15 +73,15 @@ const LoanDetails = () => {
               <table className="w-[80%] bg-slate-50 border border-gray-200">
                 <tbody>
                   <tr>
-                    <th className="py-3 px-4 bg-white font-bold text-left">Field</th>
-                    <th className="py-3 px-4 sm:px-6 lg:px-11 bg-white font-bold text-center">Value</th>
+                    <th className="py-3 px-5 bg-white font-bold text-left">Field</th>
+                    <th className="py-3 px-4 sm:px-6 lg:px-11 bg-white font-bold">Value</th>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Names</td>
                     <td className="py-3 px-4 sm:px-6 lg:px-8 text-center">{loanDetails.fullName} </td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Email</td>
+                    <td className="py-3 px-5 sm:px-6 lg:px-8 font-bold">Email</td>
                     <td className="py-3 px-4 sm:px-6 lg:px-8 text-center">{loanDetails.email || "Not available"}</td>
                   </tr>
                   <tr>
@@ -124,4 +125,4 @@ const LoanDetails = () => {
     </>
   );
 }
-export default LoanDetails;
+export default Mngdetails;

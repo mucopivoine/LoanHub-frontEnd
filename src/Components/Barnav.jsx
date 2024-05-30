@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { FaMoneyBill, FaRegChartBar, FaUser, FaUserFriends } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
-import Search from '../Pages/Search';
+
 
 function Barnav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -104,16 +104,20 @@ function Barnav() {
             </li>
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaMoneyBill className="w-[20px] mr-3" />
-              <Link to="/barnav/manageloans">Loans</Link>
+              <Link to="/barnav/mngloans">Loans</Link>
             </li>
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaRegChartBar className="w-[20px mr-3" />
               <Link to="/barnav/manageAnalytics">Analytics</Link>
             </li>
+            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+              <FaRegChartBar className="w-[20px mr-3" />
+              <Link to="/barnav/databasemg">Databse</Link>
+            </li>
           </ul>
         </nav>
       </motion.div>
-      <Search/>
+
       <div className={`${isLargeScreen ? 'ml-64' : ''}`}>
         <Outlet />
       </div>

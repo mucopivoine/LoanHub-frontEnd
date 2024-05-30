@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { MdDelete } from 'react-icons/md';
 import Barnav from '../Components/Barnav';
-import Search from './Search';
+
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -95,10 +95,10 @@ function Teachers() {
   return (
     <>
 
-    <Search/>
+   
     <div className="">
     <Barnav/>
-      <div className="w-[70%] p-6 lg:mt-[100px]">
+      <div className="w-[70%] p-6 lg:mt-[40px]">
 
         <h2 className="text-2xl font-semibold mb-4">Teachers</h2>
         <input
@@ -138,7 +138,7 @@ function Teachers() {
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.email}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
-                    className="text-red-600 hover:text-red-800"
+                    className="text-blue-900 hover:text-blue-800"
                     onClick={() => handleDeleteTeacher(teacher._id)}
                   >
                     <MdDelete />
