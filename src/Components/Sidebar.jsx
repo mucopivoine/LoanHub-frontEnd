@@ -3,11 +3,15 @@ import { motion } from 'framer-motion';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { FaRegChartBar, FaUser, FaUserFriends, FaChalkboardTeacher, FaHandHoldingUsd, FaDatabase } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+
+ 
+
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -23,7 +27,13 @@ function Sidebar() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   if (localStorage.getItem('jwt') === null) {
+  //     navigate('/auth/signin', { replace: true });
+  //   }
+  // }, [navigate]);
   return (
     <>
       {!isLargeScreen && (

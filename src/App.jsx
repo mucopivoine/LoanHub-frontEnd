@@ -80,7 +80,7 @@ function App() {
               <Route path="signup" element={<SignUp />} />
               <Route path="forgot" element={<Forgot />} />
               <Route path="forgotps" element={<Forgotps />} />
-              <Route path='reset/token' element={<Reset />} />
+              <Route path='reset/:token' element={<Reset />} />
               <Route path="otpinput" element={<OtpInput />} />
               <Route path="otpconfirm" element={<Otpconfirm />} />
               <Route path="logout" element={<Logout />} />
@@ -112,12 +112,8 @@ function App() {
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
           <Route path="maindash" 
-        element={
-          <ProtectedRoute>
-            <MainDash />
-          </ProtectedRoute>
-        } 
-      />
+        element={ <MainDash /> } />
+    
           <Route path="rightside" element={<RightSide />} />
           <Route path="loanmanage" element={<LoanManagement />} />
           <Route path="graph" element={<Graph />} />

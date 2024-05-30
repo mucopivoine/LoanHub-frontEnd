@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 const Sidemenu = () => {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +57,13 @@ const Sidemenu = () => {
       navigate(`/layout/teacherprofile/${teacher._id}`);
     }
   }, [teacher, navigate]);
+ 
 
+  // useEffect(() => {
+  //   if (localStorage.getItem('jwt') === null) {
+  //     navigate('/auth/signin', { replace: true });
+  //   }
+  // }, [navigate]);
   return (
     <>
       {!isLargeScreen && (
