@@ -90,10 +90,10 @@ function ViewData() {
   return (
     <>
       <Sidemenu />
-      <div className={`flex justify-center items-center min-h-screen mt-[50px] ${ToastContainer.hasToast ? 'background-blur' : ''}`}>
+      <div className={`flex justify-center items-center mt-[50px] ${ToastContainer.hasToast ? 'background-blur' : ''}`}>
         <div className="bg-white p-8 rounded shadow-md w-full max-w-3xl">
-          <h1 className="text-2xl font-bold mb-6">Teacher Account Details</h1>
-          <h2 className="text-xl font-bold mb-4">Loan Application Form</h2>
+          <h1 className="text-2xl font-bold mb-6">Loan Application Form</h1>
+          
           <form onSubmit={handleSubmit}>
             <div className="mb-4 flex flex-wrap -mx-2">
               <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">

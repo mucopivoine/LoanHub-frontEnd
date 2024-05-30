@@ -61,6 +61,12 @@ import Otpuser from './Components/Otpuser';
 import ProtectedRoute from './Components/ProtectedRoute';
 import Loanresponse from './Components/AllLoans/Loanresonse';
 import ManagerAnalytics from './Pages/MnageAnalytics';
+import AddUser from './Components/User/AddUser';
+import Databasemg from './Components/Databasemg';
+import Mnguser from './Components/User/Mnguser';
+import Mngloans from './Components/AllLoans/Mngloans';
+import Mngdetails from './Components/AllLoans/MngDetails';
+import Mngresponse from './Components/AllLoans/Mngresponse';
 
 
 
@@ -96,10 +102,9 @@ function App() {
           <Route path="addteacherdtl" element={<AddTeacherdtl />} />
           <Route path="teachercontact" element={<TeacherContact />} />
           <Route path="manageteachers" element={<ManageTeachers />} />
-          <Route path="teacherprofile/:id" element={<TeacherProfile/>} />
+          <Route path="teacherprofile" element={<TeacherProfile/>} />
           <Route path="teacheranalytics" element={<TeacherAnalytics />} />
         </Route>
-       
 
         <Route path="/admin" element={<Dashboards />}>
           <Route path="navbar" element={<Navbar />} />
@@ -128,7 +133,9 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="manageloans" element={<ManageLoans />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="loanDetails/:id" element={<LoanDetails />} /> 
+          <Route path="loanresponse" element={<Loanresponse/>}/>
+          <Route path="loanDetails/:id" element={<LoanDetails />} />
+          <Route path="database/adduser" element={<AddUser/>} />  
         </Route>
         <Route path="/barnav" element={<Barnav />}>
           <Route path="managerdash" element={<ManagerDash />} />
@@ -138,9 +145,13 @@ function App() {
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
           <Route path="mostrequestedloans" element={<MostRequestedLoans/>}/>
-          <Route path="loanresponse" element={<Loanresponse/>}/>
+          <Route path="databasemg" element={<Databasemg/>}/>
+          <Route path="manageloans" element={<ManageLoans/>}/>
+          <Route path="databasemg/mnguser" element={<Mnguser/>}/>
+          <Route path="mngloans" element={<Mngloans/>}/>
+          <Route path="mngdetails/:id" element={<Mngdetails/>}/>
+          <Route path="mngdetails/:id/mngresponse" element={<Mngresponse/>}/>
           </Route>
-          
       </Routes>
     </Router>
   )

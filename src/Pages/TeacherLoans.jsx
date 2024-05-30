@@ -47,22 +47,22 @@ function TeacherLoans() {
 
   return (
     <div className="flex flex-col lg:flex-row">
-      <Sidemenu className="lg:w-1/5" />
+      <Sidemenu className="" />
       <div className="flex-grow flex flex-col lg:flex-row justify-center items-center lg:items-start min-h-screen p-5 lg:ml-[2%]">
-        <div className="w-full p-7 mt-[30px]">
+        <div className="w-full p-7 ">
           <h1 className="text-2xl font-bold mb-4 text-center lg:text-left">Available Loans</h1>
           <p className="text-lg text-gray-800 mb-8 text-center lg:text-left">
-            We offer two kinds of loans to suit your needs:
+            We offer a range of loan options to meet your financial needs:
             <br />
-            - Non-Collateral Loans: These loans range from below 5 million and are ideal for smaller financial requirements.
+            - <span className="font-semibold">Non-Collateral Loans:</span> These loans, ideal for smaller financial requirements, are available for amounts below 5 million.
             <br />
-            - Collateral Loans: These loans start from 5 million and are suitable for larger financial commitments.
+            - <span className="font-semibold">Collateral Loans:</span> Suitable for larger financial commitments, these loans start from 5 million.
           </p>
           <div className="grid grid-cols-1 mx-auto lg:grid-cols-2 gap-10">
             {loanTypes.map((loan, index) => (
               <div
                 key={index}
-                className={`relative bg-white p-10 lg:p-20 rounded shadow-md transition duration-300 cursor-pointer ${clickedIndex === index ? 'bg-red-500 text-white' : ''}`}
+                className={`relative bg-white items-center p-10 lg:p-20 rounded shadow-md transition duration-300 cursor-pointer ${clickedIndex === index ? 'bg-red-500 text-white' : ''}`}
                 onClick={() => handleClick(index)}
               >
                 <h2 className="text-xl lg:text-2xl font-bold mb-2">{loan.type}</h2>
@@ -86,7 +86,6 @@ function TeacherLoans() {
           </div>
         </div>
         <div className="w-full lg:w-2/5 p-4">
-          <TeacherProfile />
         </div>
       </div>
     </div>

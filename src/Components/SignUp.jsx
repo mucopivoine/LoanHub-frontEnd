@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUp() {
   const [username, setUsername] = useState('');
@@ -119,7 +121,7 @@ function SignUp() {
         });
 
         console.log(response.data);
-
+        toast.success('Signed up successfully!');
         setTimeout(() => {
           setIsLoading(false);
           navigate('/auth/otpinput');
@@ -127,19 +129,12 @@ function SignUp() {
       } catch (error) {
         setIsLoading(false);
         console.log(error);
+        toast.error('Signing up failed. Please try again.');
       }
-    } else {
-      setIsLoading(false);
+      }
     }
-  };
-
   return (
     <>
-      {isLoading && (
-        <div className='absolute border-2 top-28 w-64 right-4 p-4 text-sm text-green-500 border-green-500 bg-white rounded-md'>
-          Loading...
-        </div>
-      )}
       <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[140vh]'>
         <motion.div
           initial={{ opacity: 0, y: 50 }}

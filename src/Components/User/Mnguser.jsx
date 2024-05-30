@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../Components/Sidebar';
-import Search from '../Pages/Searchtch';
+import Sidebar from '../Sidebar';
+import Search from '../../Pages/Searchtch';
 import { ToastContainer, toast } from 'react-toastify';
+import Barnav from '../Barnav';
 const cookie = document.cookie.split('jwt=')[1];
 
 
-const ManagerForm = () => {
+const Mnguser = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    phoneNumber: ''
+    names: '',
+    accountNumber: '',
+    schoolName: '',
+    salary: ''
+   
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false); 
@@ -59,75 +59,53 @@ const ManagerForm = () => {
 
   return (
     <>
-      <Search/>
-      <Sidebar/>
+    <Search/>
+      <Barnav/>
       <div className="max-w-md mx-auto mt-20 p-6 bg-white shadow-md rounded-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center">Create Manager</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Create New User</h2>
         {formSubmitted ? (
-          <p className="text-green-500 text-center mb-4">Manager created successfully!</p>
+          <p className="text-green-500 text-center mb-4">User created successfully!</p>
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700">Username</label>
+              <label className="block text-gray-700">Names</label>
               <input
                 type="text"
                 name="username"
-                value={formData.username}
+                value={formData.names}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700">First Name</label>
+              <label className="block text-gray-700">Account Number</label>
               <input
                 type="text"
                 name="firstName"
-                value={formData.firstName}
+                value={formData.accountNumber}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700">Last Name</label>
+              <label className="block text-gray-700">School Name</label>
               <input
                 type="text"
                 name="lastName"
-                value={formData.lastName}
+                value={formData.schoolName}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700">Email</label>
+              <label className="block text-gray-700">Salary</label>
               <input
                 type="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="mt-1 p-2 w-full border rounded-md"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="mt-1 p-2 w-full border rounded-md"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Phone Number</label>
-              <input
-                type="text"
-                name="phoneNumber"
-                value={formData.phoneNumber}
+                value={formData.salary}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
                 required
@@ -135,7 +113,7 @@ const ManagerForm = () => {
             </div>
             <button
               type="submit"
-              className="mt-4 w-full bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-800"
+              className="mt-4 w-full bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-600"
             >
               Create
             </button>
@@ -147,4 +125,4 @@ const ManagerForm = () => {
   );
 };
 
-export default ManagerForm;
+export default Mnguser;

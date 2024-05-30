@@ -5,7 +5,7 @@ import { FaSearch, FaRegBell, FaEnvelope } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { deleteCookie } from '../utils/cook';
 
-function Search({ messages = [] }) {
+function Searchtch({ messages = [] }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSearchFixed, setIsSearchFixed] = useState(false);
 
@@ -46,18 +46,11 @@ function Search({ messages = [] }) {
         </div>
       </div>
       <div className="flex items-center gap-[15px] relative">
-          <div className="relative">
-            <FaEnvelope />
-            {messages.length > 0 && (
-              <span className="absolute top-0 right-0 bg-red-600 text-white rounded-full h-5 w-5 text-xs flex items-center justify-center">
-                {messages.length}
-              </span>
-            )}
-          </div>
+        
         <button className='p-3 m-2 rounded-md text-md hover:bg-white hover:text-red-500' onClick={handleLogout}>Logout</button>
       </div>
     </div>
   );
 }
 
-export default Search;
+export default Searchtch;

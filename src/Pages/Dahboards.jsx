@@ -4,7 +4,7 @@ import Search from './Search'
 function Dahboards() {
   return (
     <>
-   <Search/>
+    <Search/>s
  <Outlet/>
  </>
   )

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Barnav from "../Components/Barnav";
-import Search from "./Search";
+
 
 const cookie = document.cookie.split('jwt=')[1];
 

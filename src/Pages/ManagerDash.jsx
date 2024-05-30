@@ -1,10 +1,8 @@
-
-// import { Outlet } from "react-router-dom"
-import Barnav from "../Components/Barnav"
-// import NewData from '../Data/NewData'
-// import Loans from "./Loans"
-import React from 'react';
 import Search from "./Search";
+import Barnav from "../Components/Barnav"
+
+import React from 'react';
+
 import DashboardStatsGrid from "../Data/DashboardStatsGrid";
 import Newdata from '../Data/NewData'
 

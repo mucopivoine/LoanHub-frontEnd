@@ -27,13 +27,14 @@ function TeacherContact() {
   return (
     <>
       <Sidemenu />
-      <div className="flex justify-center items-center min-h-screen ">
-        <div className=" w-[520px] p-[3rem] max-w-md">
-          <h1 className="text-2xl font-bold mb-4 text-center">Contact Bank Manager</h1>
-          <div className="bg-white p-6 rounded shadow-md">
+      <div className="flex justify-center items-center ">
+        <div className=" w-[40%] p-[3rem] ">
+         
+          <div className="bg-white p-10 rounded shadow-md">
+          <h1 className="text-2xl font-bold text-center mb-14">Contact Bank Manager.</h1>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label className="block text-gray-700">Full Name</label>
+                <label className="block text-gray-700 ">Full Name</label>
                 <input
                   type="text"
                   value={fullName}

@@ -90,7 +90,7 @@ function Sidebar() {
             </li>
             <li className="flex items-center p-3 rounded-md hover:bg-white hover:text-red-500">
               <FaHandHoldingUsd className="mr-3 w-[20px]" />
-              <Link to="/admin/allLoans">Loans Requests</Link>
+              <Link to="/admin/allLoans">Requests</Link>
             </li>
             <li className="flex items-center p-3 rounded-md hover:bg-white hover:text-red-500">
               <FaDatabase className="mr-3 w-[20px]" />

@@ -6,12 +6,11 @@ import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Search from '../../Pages/Search';
 import { FaEdit } from 'react-icons/fa';
-import Barnav from '../Components/Barnav';
-import Sidemenu from '../Components/Sidemenu';
+import Barnav from '../Barnav';
 
 const cookie = document.cookie.split('jwt=')[1];
 
-function Manageloans() {
+function Mngloans() {
   const [teachers, setTeachers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
@@ -76,13 +75,11 @@ function Manageloans() {
       }
     }
   };
-
-
   return (
     <>
-    <div className="flex">
-      <Sidemenu />
-      <div className="w-[70%] ml-[2%] mt-[100px] ">
+    <div className="">
+      <Barnav />
+      <div className="w-[70%] ml-[2%] mt-[50px]">
         <h2 className="text-2xl font-semibold mb-4">Loans requested</h2>
         <input
           type="text"
@@ -120,17 +117,19 @@ function Manageloans() {
                   <td className="px-6 py-4 whitespace-nowrap">{teacher.workSchool}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{teacher.amountRequested}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
+                    <div className='items-center text-center '>
                     <button
-                      className="text-red-600 hover:text-red-800"
+                      className="text-blue-800 hover:text-red-800"
                       onClick={() => handleDeleteTeacher(teacher._id)}
                     >
                       <MdDelete />
                     </button>
-                    <Link to={`/admin/loanDetails/${teacher._id}`}><button
-                      className="text-red-600 hover:text-red-800 ml-2"
+                    <Link to={`/barnav/mngdetails/${teacher._id}`}><button
+                      className="text-blue-800 hover:text-red-800 ml-5"
                     >
-                      View more
+                     View
                     </button></Link>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -142,4 +141,4 @@ function Manageloans() {
   );
 }
 
-export default Manageloans;
+export default Mngloans;

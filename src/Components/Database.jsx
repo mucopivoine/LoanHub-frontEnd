@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import { MdDelete } from 'react-icons/md';
@@ -102,16 +102,23 @@ function Database() {
     <Search/>
     <div className="flex">
       <Sidebar />
-      <div className="w-[70%] ml-[2%] mt-[100px]">
-        <h2 className="text-2xl font-semibold mb-4">View Teachers</h2>
+      <div className="w-[70%] ml-[2%] mt-[30px]">
+        <h2 className="text-2xl font-semibold mb-4">Sacco users</h2>
+        <div className='flex justify-between '>
         <input
           type="text"
-          placeholder="Search by teacher name"
+          placeholder="Search by..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none"
         />
         {error && <p className="text-red-500">{error}</p>}
+       
+      <Link to="adduser"><button className="bg-blue-900 hover:bg-blue-800 mb-5  items-end text-white font-bold py-2 px-4 rounded"
+>
+        Add User
+      </button></Link>
+      </div>
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -137,7 +144,7 @@ function Database() {
                 <td className="px-6 py-4 whitespace-nowrap">{teacher.salary}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
-                    className="text-red-600 hover:text-red-800 items-center text-xl"
+                    className="text-blue-900 hover:text-blue-800 items-center text-xl ml-5"
                     onClick={() => handleDeleteTeacher(teacher._id)}
                   >
                     <MdDelete />
