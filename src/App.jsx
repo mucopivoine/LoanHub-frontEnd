@@ -117,12 +117,8 @@ function App() {
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
           <Route path="maindash" 
-        element={
-          <ProtectedRoute>
-            <MainDash />
-          </ProtectedRoute>
-        } 
-      />
+        element={ <MainDash /> } />
+    
           <Route path="rightside" element={<RightSide />} />
           <Route path="loanmanage" element={<LoanManagement />} />
           <Route path="graph" element={<Graph />} />

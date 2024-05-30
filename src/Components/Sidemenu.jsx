@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 const Sidemenu = () => {
   const { id } = useParams(); // Get the id parameter from the URL
   const [isOpen, setIsOpen] = useState(false);
@@ -50,6 +51,15 @@ const Sidemenu = () => {
     }
   }, [id, cookie]);
 
+  // Navigate to the profile page if teacher data is available
+  useEffect(() => {
+    if (teacher) {
+      navigate(`/layout/teacherprofile/${teacher._id}`);
+    }
+  }, [teacher, navigate]);
+ 
+
+  
   return (
     <>
       {!isLargeScreen && (

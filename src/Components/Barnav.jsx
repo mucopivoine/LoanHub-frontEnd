@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { FaMoneyBill, FaRegChartBar, FaUser, FaUserFriends } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
+import Search from '../Pages/Search';
+import { useNavigate } from 'react-router-dom';
 
 
 function Barnav() {
@@ -50,7 +52,13 @@ function Barnav() {
       fetchManagerData();
     }
   }, [isProfileOpen]);
+  const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   if (localStorage.getItem('jwt') === null) {
+  //     navigate('/auth/signin', { replace: true });
+  //   }
+  // }, [navigate]);
   return (
     <>
       {!isLargeScreen && (

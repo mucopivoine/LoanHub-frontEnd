@@ -6,13 +6,7 @@ import Sidebar from '../Sidebar';
 import Search from '../../Pages/Search';
 
 function MainDash() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (localStorage.getItem('jwt') === null) {
-      navigate('/auth/signin', { replace: true });
-    }
-  }, [navigate]);
+ 
   return (
     <div className="relative min-h-screen bg-gray-100">
       <Search />
