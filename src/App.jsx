@@ -80,7 +80,7 @@ function App() {
               <Route path="signup" element={<SignUp />} />
               <Route path="forgot" element={<Forgot />} />
               <Route path="forgotps" element={<Forgotps />} />
-              <Route path='reset/:token' element={<Reset />} />
+              <Route path='reset' element={<Reset />} />
               <Route path="otpinput" element={<OtpInput />} />
               <Route path="otpconfirm" element={<Otpconfirm />} />
               <Route path="logout" element={<Logout />} />
