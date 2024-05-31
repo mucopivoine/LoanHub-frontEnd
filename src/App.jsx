@@ -58,7 +58,7 @@ import LoanDetails from './Components/AllLoans/LoanDetails';
 import MostRequestedLoans from './Pages/MostrequestedLoans';
 import UserignUp from './Components/Usersignup';
 import Otpuser from './Components/Otpuser';
-import ProtectedRoute from './Components/ProtectedRoute';
+// import ProtectedRoute from './Components/ProtectedRoute';
 import Loanresponse from './Components/AllLoans/Loanresonse';
 import ManagerAnalytics from './Pages/MnageAnalytics';
 import AddUser from './Components/User/AddUser';
@@ -105,7 +105,7 @@ function App() {
           <Route path="manageteachers" element={<ManageTeachers />} />
           <Route path="teacherprofile" element={<TeacherProfile/>} />
           <Route path="teacheranalytics" element={<TeacherAnalytics />} />
-          <Route path="teacherReponse" element={<TeacherResponse />} />
+          <Route path="teacherResponse" element={<TeacherResponse />} />
         </Route>
 
         <Route path="/admin" element={<Dashboards />}>
