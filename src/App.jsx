@@ -67,6 +67,7 @@ import Mnguser from './Components/User/Mnguser';
 import Mngloans from './Components/AllLoans/Mngloans';
 import Mngdetails from './Components/AllLoans/MngDetails';
 import Mngresponse from './Components/AllLoans/Mngresponse';
+import TeacherResponse from './Components/AllLoans/TeacherResponse';
 
 
 
@@ -104,6 +105,7 @@ function App() {
           <Route path="manageteachers" element={<ManageTeachers />} />
           <Route path="teacherprofile" element={<TeacherProfile/>} />
           <Route path="teacheranalytics" element={<TeacherAnalytics />} />
+          <Route path="teacherReponse" element={<TeacherResponse />} />
         </Route>
 
         <Route path="/admin" element={<Dashboards />}>

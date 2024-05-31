@@ -59,6 +59,7 @@ function ViewData() {
         body: formData,
       });
 
+
       if (response.ok) {
         toast.success('Loan Application Submitted Successfully', {
           className: 'toast-message',
@@ -77,6 +78,10 @@ function ViewData() {
             setCopyOfNationalId(null);
           },
         });
+        setTimeout(() => {
+          setIsLoading(false); 
+          navigate(`/layout/teacherResponse`);
+        }, 3000);
       } else {
         const errorData = await response.json();
         toast.error('Loan Application Submission Failed', errorData);
@@ -212,7 +217,7 @@ function ViewData() {
                 className="w-full p-2 border border-gray-300 rounded mt-2"
               />
             </div>
-            <button
+           <button
               type="submit"
               className="w-full p-2 bg-red-500 text-white rounded"
             >

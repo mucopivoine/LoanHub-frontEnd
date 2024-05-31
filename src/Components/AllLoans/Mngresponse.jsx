@@ -52,7 +52,7 @@ const Mngresponse = () => {
         toast.success("Response sent successfully!");
             setTimeout(() => {
           setIsLoading(false); 
-          navigate('/barnav/mngdetails/id');
+          navigate('/barnav/mngloans');
         }, 3000);   
      // Redirect after 3 seconds
     } catch (error) {

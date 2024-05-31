@@ -49,7 +49,7 @@ const LoanResponse = () => {
 
           setTimeout(() => {
             setIsLoading(false); 
-            navigate(`/admin/loanDetails/${id}`);
+            navigate(`/admin/allLoans`);
           }, 3000); 
       
       } catch (error) {
