@@ -11,6 +11,8 @@ const Mngresponse = () => {
   const [loanResponse, setLoanResponse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
     reply: '',
     approvedAmount: '',
     interestRate: '',
@@ -64,6 +66,28 @@ const Mngresponse = () => {
           <p className="text-green-500 text-center mb-4">Response sent successfully!</p>
         ) : (
           <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label className="block text-gray-700">Names</label>
+              <input
+                type="text"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Email</label>
+              <input
+                type="text"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
             <div className="mb-4">
               <label className="block text-gray-700">Reply Message</label>
               <input
