@@ -71,7 +71,7 @@ const Mnguser = () => {
               <label className="block text-gray-700">Names</label>
               <input
                 type="text"
-                name="username"
+                name="names"
                 value={formData.names}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
@@ -82,7 +82,7 @@ const Mnguser = () => {
               <label className="block text-gray-700">Account Number</label>
               <input
                 type="text"
-                name="firstName"
+                name="accountNumber"
                 value={formData.accountNumber}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
@@ -93,7 +93,7 @@ const Mnguser = () => {
               <label className="block text-gray-700">School Name</label>
               <input
                 type="text"
-                name="lastName"
+                name="schoolName"
                 value={formData.schoolName}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
@@ -103,8 +103,8 @@ const Mnguser = () => {
             <div className="mb-4">
               <label className="block text-gray-700">Salary</label>
               <input
-                type="email"
-                name="email"
+                type="text"
+                name="salary"
                 value={formData.salary}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
