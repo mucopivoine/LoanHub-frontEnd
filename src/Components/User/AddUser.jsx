@@ -102,7 +102,7 @@ const AddUser = () => {
             <div className="mb-4">
               <label className="block text-gray-700">Salary</label>
               <input
-                type="text"
+                type=""
                 name="salary"
                 value={formData.salary}
                 onChange={handleChange}

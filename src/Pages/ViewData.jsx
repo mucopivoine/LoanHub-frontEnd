@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Sidemenu from '../Components/Sidemenu';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 // Import custom CSS for background obscuring
+
 
 function ViewData() {
   const [fullName, setFullName] = useState('');
@@ -16,7 +18,8 @@ function ViewData() {
   const [monthlySalary, setMonthlyIncome] = useState('');
   const [proofOfEmployment, setProofOfEmployment] = useState(null);
   const [copyOfNationalId, setCopyOfNationalId] = useState(null);
-
+  const [IsLoading, setIsLoading] =useState('')
+const navigate = useNavigate();
   const handleProofOfEmploymentUpload = (e) => {
     setProofOfEmployment(e.target.files[0]);
   };
@@ -80,7 +83,7 @@ function ViewData() {
         });
         setTimeout(() => {
           setIsLoading(false); 
-          navigate(`/layout/teacherResponse`);
+          navigate(`/layout/teacheranalytics`);
         }, 3000);
       } else {
         const errorData = await response.json();

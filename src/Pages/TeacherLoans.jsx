@@ -50,7 +50,7 @@ function TeacherLoans() {
       <Sidemenu className="" />
       <div className="flex-grow flex flex-col lg:flex-row justify-center items-center lg:items-start min-h-screen p-5 lg:ml-[2%]">
         <div className="w-full p-7 ">
-          <h1 className="text-2xl font-bold mb-4 text-center lg:text-left">Available Loans</h1>
+          <h1 className="text-2xl font-bold mb-4 text-center lg:text-left">Loans Available</h1>
           <p className="text-lg text-gray-800 mb-8 text-center lg:text-left">
             We offer a range of loan options to meet your financial needs:
             <br />

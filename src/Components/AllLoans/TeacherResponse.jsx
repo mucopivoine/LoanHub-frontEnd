@@ -1,11 +1,57 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
+const cookie = document.cookie.split('jwt=')[1];
 
 function TeacherResponse() {
-  const teachers = [
-    { id: 1, name: "Teacher", content: "John Doe is requesting a loan to further his education. He plans to use the funds to enroll in a professional development program that will enhance his teaching skills. The program includes various workshops and courses that focus on advanced teaching methodologies, technology integration in the classroom, and curriculum development. John has been a dedicated teacher for over 10 years and believes that this additional training will significantly benefit his students." },
-    // You can add more teacher objects here
-  ];
+  const { id } = useParams();
+  const [loanDetails, setLoanDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchLoanDetails = async () => {
+      try {
+        console.log('Fetching loan details for ID:', id);
+        const response = await axios.get(`https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/getOne/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${cookie}`
+          },
+          withCredentials: true
+        });
+
+        console.log('Response data:', response.data);
+
+        if (response.data.loan) {
+          setLoanDetails(response.data.loan);
+        } else {
+          setError('Loan details not found');
+        }
+      } catch (error) {
+        console.error('Error fetching loan details:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+ fetchLoanDetails();
+   
+  }, [id]);
+
+  if (loading) {
+    return <div className="mt-32 text-center">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="mt-32 text-center text-red-500">{error}</div>;
+  }
+
+  if (!loanDetails) {
+    return <div className="mt-32 text-center">Loan details not found</div>;
+  }
 
   const [modalContent, setModalContent] = useState(null);
 
@@ -25,36 +71,8 @@ function TeacherResponse() {
         </h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center pt-10">
-          
-          {teachers.map(teacher => (
-            <div key={teacher.id} className="flex flex-col justify-between h-full group transform hover:translate-y-[-10px] transition duration-300 max-w-lg">
-              <div className="bg-white p-8 rounded-lg shadow-gray-500 shadow-lg transition hover:border-blue-500/50 hover:shadow-blue-500/50">
-                {!modalContent && (
-                  <>
-                    <div className="flex justify-center mb-6">
-                      <FaUserCircle className="w-32 h-32 text-gray-500" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-center mb-4 font-serif animate-pulse">
-                      {teacher.name}
-                    </h3>
-                  </>
-                )}
-                <button 
-                  className="text-blue-800 text-center mb-4 font-serif px-4 py-2 text-lg"
-                  onClick={() => openModal(teacher)}
-                >
-                  View More
-                </button>
-              </div>
-            </div>
-          ))}
-
-          {/* Card 2 */}
           <div className="flex flex-col justify-between h-full group transform hover:translate-y-[-10px] transition duration-300 max-w-lg">
             <div className="bg-white p-8 rounded-lg shadow-gray-500 shadow-lg transition hover:border-blue-500/50 hover:shadow-blue-500/50">
-              {/* <div className="flex justify-center mb-6">
-                <FaUserCircle className="w-32 h-32 text-gray-500" />
-              </div> */}
               <h3 className="text-2xl font-bold text-center mb-4 font-serif animate-pulse">
                 Response
               </h3>
@@ -65,30 +83,48 @@ function TeacherResponse() {
               </div>
             </div>
           </div>
-
         </div>
 
         {modalContent && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-8 rounded-lg max-w-lg w-full mx-auto relative">
-              <button onClick={closeModal} className="absolute top-2 right-2 text-gray-700 hover:text-gray-900">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M18 6L6 18" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M6 6L18 18" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-              <h3 className="text-2xl font-bold mb-4">{modalContent.name}</h3>
-              <p className="text-gray-700">{modalContent.content}</p>
-              <div className="mt-4">
-                <p>Loan Amount: $5,000</p>
-                <p>Purpose: Professional Development</p>
-                <p>Duration: 6 months</p>
-                <p>Repayment Plan: Monthly installments</p>
-              </div>
-            </div>
+          <div className="overflow-x-auto">
+            <table className="w-[80%] bg-slate-50 border border-gray-200">
+              <tbody>
+                <tr>
+                  <th className="py-3 px-5 bg-white font-bold text-left">Field</th>
+                  <th className="py-3 px-4 sm:px-6 lg:px-11 bg-white font-bold">Value</th>
+                </tr>
+                <tr>
+                  <td className="py-3 px-5 sm:px-6 lg:px-8 font-bold">Email</td>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 text-center">{loanDetails.email || "Not available"}</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Phone Number</td>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 text-center">{loanDetails.phoneNumber || "Not available"}</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">School Name</td>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 text-center">{loanDetails.workSchool || "Not available"}</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Amount Requested</td>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 text-center">{loanDetails.amountRequested || "Not available"}</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Monthly Salary</td>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 text-center">{loanDetails.monthlySalary || "Not available"}</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Purpose of the loan</td>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 text-center">{loanDetails.purpose || "Not available"}</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 font-bold">Bank Account Number</td>
+                  <td className="py-3 px-4 sm:px-6 lg:px-8 text-center">{loanDetails.bankAccountNumber || "Not available"}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         )}
-
       </div>
     </div>
   );
