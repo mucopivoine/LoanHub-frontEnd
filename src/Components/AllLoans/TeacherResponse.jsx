@@ -56,7 +56,7 @@ function TeacherResponse() {
                 <FaUserCircle className="w-32 h-32 text-gray-500" />
               </div> */}
               <h3 className="text-2xl font-bold text-center mb-4 font-serif animate-pulse">
-                Our Mission
+                Response
               </h3>
               <div className="text-gray-600 text-center">
                 <p>Empowering educators through accessible loan services, supporting their personal and professional growth.</p>
