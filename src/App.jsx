@@ -133,8 +133,8 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="manageloans" element={<ManageLoans />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="loanresponse" element={<Loanresponse/>}/>
           <Route path="loanDetails/:id" element={<LoanDetails />} />
+          <Route path="loanDetails/:id/loanresponse" element={<Loanresponse/>}/>
           <Route path="database/adduser" element={<AddUser/>} />  
         </Route>
         <Route path="/barnav" element={<Barnav />}>

@@ -12,7 +12,7 @@ const getTokenFromCookie = () => {
   }
 };
 
-function NewDash() {
+function TeacherGrids() {
   const [totalLoans, setTotalLoans] = useState(0);
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [totalManagers, setTotalManagers] = useState(0);
@@ -101,4 +101,4 @@ function BoxWrapper({ children }) {
   );
 }
 
-export default NewDash;
+export default TeacherGrids;

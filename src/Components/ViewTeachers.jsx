@@ -23,7 +23,6 @@ function ViewTeachers() {
           'Authorization': `Bearer ${cookie}`,
         }
       });
-
       console.log('Response data:', response.data);
 
       if (response.data && Array.isArray(response.data.users)) {
@@ -100,7 +99,6 @@ function ViewTeachers() {
 
       <div className="w-[60%] p-6s ml-[2%] lg:mt-[50px]">
         <h2 className="text-2xl font-semibold mb-4">Teachers</h2>
-
         <input
           type="text"
           placeholder="Search by..."

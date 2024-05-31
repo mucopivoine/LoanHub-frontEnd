@@ -5,14 +5,15 @@ import LoanManagement from './LoanManagement'
 import Newdata from '../Data/NewData'
 import Search from './Search'
 import Barnav from '../Components/Barnav'
+import NewDash from './NewDash'
 
 function ManagerAnalytics() {
   return (
-    <div className="relative min-h-screen bg-gray-100">
+    <div className="relative  bg-gray-100">
     <Search />
     <Barnav />
-    <div className="mx-auto mt-20">
-     <DashboardStatsGrid/>
+    <div className="mt-20">
+     <NewDash/>
       <Newdata/>
     </div>
   </div>

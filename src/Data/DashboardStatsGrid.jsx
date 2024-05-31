@@ -1,30 +1,84 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { FaHandHoldingUsd } from 'react-icons/fa';
 
+const getTokenFromCookie = () => {
+  const cookies = document.cookie.split(';');
+  const jwtCookie = cookies.find(cookie => cookie.trim().startsWith('jwt='));
+  if (jwtCookie) {
+    return jwtCookie.split('=')[1];
+  } else {
+    return null;
+  }
+};
+
 function DashboardStatsGrid() {
+  const [totalLoans, setTotalLoans] = useState(0);
+  const [totalTeachers, setTotalTeachers] = useState(0);
+  const [totalManagers, setTotalManagers] = useState(0);
+  const [totalDetails, setTotalDetails] = useState(0);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const calculateTotals = async () => {
+      try {
+        const token = getTokenFromCookie();
+        if (!token) {
+          setError('No token found');
+          return;
+        }
+        console.log('Token:', token);
+
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        };
+
+        const [loansResponse, teachersResponse, managersResponse, detailsResponse] = await Promise.all([
+          axios.get('https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/getAll', { headers }),
+          axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacher/all', { headers }),
+          axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', { headers }),
+          axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', { headers })
+        ]);
+
+        setTotalLoans(loansResponse.data.loans.length);
+        setTotalTeachers(teachersResponse.data.users.length);
+        setTotalManagers(managersResponse.data.users.length);
+        setTotalDetails(detailsResponse.data.teachers.length);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('Error fetching data');
+      }
+    };
+
+    calculateTotals();
+  }, []);
+
   const statsData = [
     {
-      label: "Total Loans",
-      value: "$3425.60",
-      change: "+234",
-      iconBgColor: "bg-red-400",
+      label: 'Total Loans',
+      value: totalLoans,
+      iconBgColor: 'bg-red-400',
     },
     {
-      label: "Total Teachers",
-      value: "$5423.80",
-      change: "+452",
-      iconBgColor: "bg-blue-500",
+      label: 'Total Teachers',
+      value: totalTeachers,
+      iconBgColor: 'bg-blue-500',
     },
     {
-      label: "Total Managers",
-      value: "$7325.20",
-      change: "+658",
-      iconBgColor: "bg-yellow-500",
+      label: 'Total Sacco Users',
+      value: totalDetails,
+      iconBgColor: 'bg-yellow-500',
+    },
+    {
+      label: 'Total Managers',
+      value: totalManagers,
+      iconBgColor: 'bg-green-500',
     },
   ];
 
   return (
-    <div className="flex flex-wrap justify-center sm:gap-5 mt-10">
+    <div className="flex flex-wrap justify-center gap-8 mt-10">
       {statsData.map((stat, index) => (
         <BoxWrapper key={index}>
           <div className={`rounded-full h-16 w-16 flex items-center justify-center ${stat.iconBgColor}`}>
@@ -33,8 +87,7 @@ function DashboardStatsGrid() {
           <div className="pl-4">
             <span className="text-sm text-gray-500 font-light">{stat.label}</span>
             <div className="flex items-center">
-              <strong className="text-2xl text-gray-700 font-semibold">{stat.value}</strong>
-              <span className="text-sm text-green-500 pl-2">{stat.change}</span>
+              <strong className="text-2xl text-gray-700 font-semibold">{error ? 'Error' : stat.value}</strong>
             </div>
           </div>
         </BoxWrapper>
@@ -45,7 +98,7 @@ function DashboardStatsGrid() {
 
 function BoxWrapper({ children }) {
   return (
-    <div className="  lg:ml-7 bg-white rounded-lg p-6 shadow-lg flex items-center transform transition-transform duration-150 ease-in-out hover:scale-105 cursor-pointer w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+    <div className="bg-white rounded-lg p-6 shadow-lg flex items-center transform transition-transform duration-150 ease-in-out hover:scale-105 cursor-pointer w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
       {children}
     </div>
   );

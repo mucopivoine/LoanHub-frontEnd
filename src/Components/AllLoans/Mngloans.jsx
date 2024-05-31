@@ -79,7 +79,7 @@ function Mngloans() {
     <>
     <div className="">
       <Barnav />
-      <div className="w-[70%] ml-[2%] mt-[50px]">
+      <div className="w-[70%] ml-[2%] mt-[100px]">
         <h2 className="text-2xl font-semibold mb-4">Loans requested</h2>
         <input
           type="text"

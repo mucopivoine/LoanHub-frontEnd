@@ -32,7 +32,7 @@ const ViewManager = () => {
       if (response.data && Array.isArray(response.data.users)) {
         setManagers(response.data.users);
       } else {
-        console.error('Expected an array but received:', response.data);
+        console.error('Expected an array but received:', response.data);a
         setError('Unexpected data format received from server');
       }
     } catch (error) {

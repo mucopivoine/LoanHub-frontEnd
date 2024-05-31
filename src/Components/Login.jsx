@@ -70,9 +70,7 @@ function Login() {
           localStorage.setItem('user', JSON.stringify(response.data.user.role));
           localStorage.setItem('userId', JSON.stringify(response.data.user._id));
           
-          toast.success('Logged in successfully ');
-        
-
+          toast.success('Logged in successfully! Redirecting ');
           setTimeout(() => {
             const userRole = response.data.user.role;
             if (userRole === 'teacher') {

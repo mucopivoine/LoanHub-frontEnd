@@ -92,7 +92,7 @@ function ViewData() {
       <Sidemenu />
       <div className={`flex justify-center items-center mt-[50px] ${ToastContainer.hasToast ? 'background-blur' : ''}`}>
         <div className="bg-white p-8 rounded shadow-md w-full max-w-3xl">
-          <h1 className="text-2xl font-bold mb-6">Loan Application Form</h1>
+          <h1 className="text-2xl font-bold text-center mr-5 mb-7">Loan Application Form</h1>
           
           <form onSubmit={handleSubmit}>
             <div className="mb-4 flex flex-wrap -mx-2">
@@ -214,7 +214,7 @@ function ViewData() {
             </div>
             <button
               type="submit"
-              className="w-full p-2 bg-red-500 text-white rounded"
+              className="w-full p-2 bg-blue-900 text-white rounded"
             >
               Submit Loan Application
             </button>

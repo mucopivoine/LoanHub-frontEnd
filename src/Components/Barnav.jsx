@@ -125,7 +125,7 @@ function Barnav() {
           </ul>
         </nav>
       </motion.div>
-
+        <Search/>
       <div className={`${isLargeScreen ? 'ml-64' : ''}`}>
         <Outlet />
       </div>

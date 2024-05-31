@@ -18,7 +18,7 @@ function Loanpercentage() {
                   withCredentials: true,
             });
             console.log('Loan Percentage Response:', response.data);
-            setLoanPercentage(response.data); // Assuming response.data contains the loan percentage
+            setLoanPercentage(response.data); 
           } catch (error) {
             console.error('Error fetching loan percentage:', error);
           } finally {

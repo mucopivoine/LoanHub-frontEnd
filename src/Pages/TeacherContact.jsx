@@ -74,7 +74,7 @@ function TeacherContact() {
               </div>
               <button
                 type="submit"
-                className="w-full p-2 bg-red-500 text-white rounded"
+                className="w-full p-2 bg-blue-900 text-white rounded"
               >
                 Send Message
               </button>

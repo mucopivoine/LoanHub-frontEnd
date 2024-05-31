@@ -36,16 +36,13 @@ function Search({ messages = [] }) {
       }`}
     >
       <div className="flex items-center rounded-[5px]">
-        <input
-          type="text"
-          className="bg-[#F8F9FC] h-[40px] outline-none pl-[13px] w-[350px] rounded-[5px] placeholder:text-[14px] leading-[20px] lg:ml-[40px] font-normal"
-          placeholder="Search for..."
-        />
-        <div className="bg-gray-400 h-[40px] w-[40px] flex items-center justify-center cursor-pointer rounded-tr-[5px] rounded-br-[5px]">
-          <FaSearch color="white" />
-        </div>
+       <div className="flex items-center italic ">
+              <img className="h-12 w-12" src="/money.png" alt="Money Icon" />
+              <h1 className="ml-2 text-xl font-playfair ">Umwalimu Loan Hub</h1>
+            </div>
       </div>
       <div className="flex items-center gap-[15px] relative">
+        
           <div className="relative">
             <FaEnvelope />
             {messages.length > 0 && (
