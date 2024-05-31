@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Sidemenu from '../Components/Sidemenu';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 // Import custom CSS for background obscuring
+
 
 function ViewData() {
   const [fullName, setFullName] = useState('');
@@ -16,7 +18,8 @@ function ViewData() {
   const [monthlySalary, setMonthlyIncome] = useState('');
   const [proofOfEmployment, setProofOfEmployment] = useState(null);
   const [copyOfNationalId, setCopyOfNationalId] = useState(null);
-
+  const [IsLoading, setIsLoading] =useState('')
+const navigate = useNavigate();
   const handleProofOfEmploymentUpload = (e) => {
     setProofOfEmployment(e.target.files[0]);
   };
@@ -59,6 +62,7 @@ function ViewData() {
         body: formData,
       });
 
+
       if (response.ok) {
         toast.success('Loan Application Submitted Successfully', {
           className: 'toast-message',
@@ -77,6 +81,10 @@ function ViewData() {
             setCopyOfNationalId(null);
           },
         });
+        setTimeout(() => {
+          setIsLoading(false); 
+          navigate(`/layout/teacheranalytics`);
+        }, 3000);
       } else {
         const errorData = await response.json();
         toast.error('Loan Application Submission Failed', errorData);
@@ -212,7 +220,7 @@ function ViewData() {
                 className="w-full p-2 border border-gray-300 rounded mt-2"
               />
             </div>
-            <button
+           <button
               type="submit"
               className="w-full p-2 bg-blue-900 text-white rounded"
             >

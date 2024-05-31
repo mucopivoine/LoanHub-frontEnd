@@ -1,29 +1,60 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import Sidemenu from '../Components/Sidemenu';
-import ManageTeachers from './ManageTechers';
 
-function TeacherContact() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+import { useNavigate } from 'react-router-dom';
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic, such as sending data to the server
-    console.log('Contact Form Submitted', {
-      fullName,
-      email,
-      subject,
-      message
+const cookie = document.cookie.split('jwt=')[1];
+
+  const TeacherContact = () => {
+    const navigate = useNavigate();
+    const [error, setError] = useState('');
+    const [formData, setFormData] = useState({
+      fullName:'',
+        email:'',
+       subject:'',
+       message:''
     });
-    // Clear the form fields after submission
-    setFullName('');
-    setEmail('');
-    setSubject('');
-    setMessage('');
-  };
-
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); 
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        console.log('Token:', cookie);
+        setIsLoading(true); 
+        const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/add', formData, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${cookie}`
+          },
+          withCredentials: true,
+        });
+  
+        console.log(response.data);
+        toast.success("Message sent successfully!");
+       
+  
+        setTimeout(() => {
+          setIsLoading(false); 
+          navigate('/layout/teacheranalytics');
+        }, 3000); // Redirect after 3 seconds
+      } catch (error) {
+        toast.error("Failed to send response.");
+        setIsLoading(false); 
+        console.log(error);
+      }
+    };
+  
   return (
     <>
       <Sidemenu />
@@ -37,8 +68,8 @@ function TeacherContact() {
                 <label className="block text-gray-700 ">Full Name</label>
                 <input
                   type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
+                  value={formData.fullName}
+                  onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded mt-2"
                   required
                 />
@@ -47,8 +78,8 @@ function TeacherContact() {
                 <label className="block text-gray-700">Email Address</label>
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded mt-2"
                   required
                 />
@@ -57,8 +88,8 @@ function TeacherContact() {
                 <label className="block text-gray-700">Subject</label>
                 <input
                   type="text"
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
+                  value={formData.subject}
+                  onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded mt-2"
                   required
                 />
@@ -66,8 +97,8 @@ function TeacherContact() {
               <div className="mb-4">
                 <label className="block text-gray-700">Message</label>
                 <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  value={formData.message}
+                  onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded mt-2"
                   required
                 ></textarea>
@@ -84,6 +115,7 @@ function TeacherContact() {
        
       </div>
       {/* <ManageTeachers/> */}
+      <ToastContainer/>
     </>
   );
 }

@@ -58,7 +58,7 @@ import LoanDetails from './Components/AllLoans/LoanDetails';
 import MostRequestedLoans from './Pages/MostrequestedLoans';
 import UserignUp from './Components/Usersignup';
 import Otpuser from './Components/Otpuser';
-import ProtectedRoute from './Components/ProtectedRoute';
+// import ProtectedRoute from './Components/ProtectedRoute';
 import Loanresponse from './Components/AllLoans/Loanresonse';
 import ManagerAnalytics from './Pages/MnageAnalytics';
 import AddUser from './Components/User/AddUser';
@@ -67,11 +67,8 @@ import Mnguser from './Components/User/Mnguser';
 import Mngloans from './Components/AllLoans/Mngloans';
 import Mngdetails from './Components/AllLoans/MngDetails';
 import Mngresponse from './Components/AllLoans/Mngresponse';
-
-
-
+import TeacherResponse from './Components/AllLoans/TeacherResponse';
 function App() {
-
   return (
     <Router>
       <Routes>
@@ -79,9 +76,8 @@ function App() {
           <Route index element={<Main />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contacts />} />
-          <Route path="services" element={<Services />} />   
+          <Route path="services" element={<Services />} />
           <Route path="/auth" element={<AuthRoute />}>
- 
               <Route path="signin" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="forgot" element={<Forgot />} />
@@ -104,8 +100,8 @@ function App() {
           <Route path="manageteachers" element={<ManageTeachers />} />
           <Route path="teacherprofile" element={<TeacherProfile/>} />
           <Route path="teacheranalytics" element={<TeacherAnalytics />} />
+          <Route path="teacherResponse" element={<TeacherResponse />} />
         </Route>
-
         <Route path="/admin" element={<Dashboards />}>
           <Route path="navbar" element={<Navbar />} />
           {/* <Route path="teacherprofile/:id" element={<TeacherDetails />} /> */}
@@ -116,9 +112,8 @@ function App() {
           <Route path="database" element={<Database />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="viewdata" element={<ViewDataForm />} />
-          <Route path="maindash" 
+          <Route path="maindash"
         element={ <MainDash /> } />
-    
           <Route path="rightside" element={<RightSide />} />
           <Route path="loanmanage" element={<LoanManagement />} />
           <Route path="graph" element={<Graph />} />
@@ -134,8 +129,8 @@ function App() {
           <Route path="manageloans" element={<ManageLoans />} />
           <Route path="profile" element={<Profile />} />
           <Route path="loanDetails/:id" element={<LoanDetails />} />
-          <Route path="loanDetails/:id/loanresponse" element={<Loanresponse/>}/>
-          <Route path="database/adduser" element={<AddUser/>} />  
+          <Route path="loanDetails/:id/loanresponse" element={<Loanresponse />} />
+          <Route path="database/adduser" element={<AddUser/>} />
         </Route>
         <Route path="/barnav" element={<Barnav />}>
           <Route path="managerdash" element={<ManagerDash />} />
@@ -157,10 +152,3 @@ function App() {
   )
   }
   export default App;
-
-
-
-
-
-
-

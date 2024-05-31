@@ -4,17 +4,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import Barnav from '../Barnav';
-
 const cookie = document.cookie.split('jwt=')[1];
-
 const Mngresponse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [loanResponse, setLoanResponse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
-    fullName:'',
-    email:'',
     reply: '',
     approvedAmount: '',
     interestRate: '',
@@ -23,23 +19,21 @@ const Mngresponse = () => {
     loanStatus: ''
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); 
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: name === 'loanStatus' ? value.toLowerCase() : value
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); 
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/response/${id}`,
-        formData, 
+        formData,
         {
           headers: {
             'Authorization': `Bearer ${cookie}`
@@ -47,25 +41,20 @@ const Mngresponse = () => {
           withCredentials: true
         }
       );
-
       console.log('Cookie:', cookie);
       console.log('Response data:', response.data);
-
-      setIsLoading(false); 
-      setFormSubmitted(true);
-
-      toast.success("Response sent successfully!");
-
-      setTimeout(() => {
-        navigate(`/barnav/mngdetails/${id}`);
-      }, 3000); 
+        toast.success("Response sent successfully!");
+            setTimeout(() => {
+          setIsLoading(false);
+          navigate('/barnav/mngloans');
+        }, 3000);
+     // Redirect after 3 seconds
     } catch (error) {
-      setIsLoading(false); 
+      toast.error("Failed to send response.");
+      setIsLoading(false);
       console.log(error);
-      toast.error("Failed to send response!");
     }
   };
-
   return (
     <>
       <Barnav/>
@@ -75,28 +64,6 @@ const Mngresponse = () => {
           <p className="text-green-500 text-center mb-4">Response sent successfully!</p>
         ) : (
           <form onSubmit={handleSubmit}>
-             <div className="mb-4">
-              <label className="block text-gray-700">Names</label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                className="mt-1 p-2 w-full border rounded-md"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Email</label>
-              <input
-                type="text"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="mt-1 p-2 w-full border rounded-md"
-                required
-              />
-            </div>
             <div className="mb-4">
               <label className="block text-gray-700">Reply Message</label>
               <input
@@ -154,7 +121,7 @@ const Mngresponse = () => {
             </div>
             <div className="mb-4">
               <label className="block text-gray-700">Loan Status</label>
-              <select 
+              <select
                 name="loanStatus"
                 value={formData.loanStatus}
                 onChange={handleChange}
@@ -181,5 +148,4 @@ const Mngresponse = () => {
     </>
   );
 };
-
 export default Mngresponse;
