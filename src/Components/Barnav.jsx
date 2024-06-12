@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
-import { FaMoneyBill, FaRegChartBar, FaUser, FaUserFriends } from 'react-icons/fa';
+import { FaDatabase, FaMoneyBill, FaRegChartBar, FaUser, FaUserFriends } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
 import Search from '../Pages/Search';
 import { useNavigate } from 'react-router-dom';
@@ -34,7 +34,7 @@ function Barnav() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://cors-anywhere.herokuapp.com/http://umwarimu-loan-hub-api.onrender.com/api/manager/getOne/2');
+      const response = await fetch(`https://umwarimu-loan-hub-api.onrender.com/api/manager/getOne/${id}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -106,20 +106,20 @@ function Barnav() {
                 </div>
               )}
             </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:text-red-500 ">
               <FaUser className="w-[20px] mr-3" />
               <Link to="/barnav/teachers">Teachers</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:text-red-500">
               <FaMoneyBill className="w-[20px] mr-3" />
               <Link to="/barnav/mngloans">Loans</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:text-red-500">
               <FaRegChartBar className="w-[20px mr-3" />
               <Link to="/barnav/manageAnalytics">Analytics</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
-              <FaRegChartBar className="w-[20px mr-3" />
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:text-red-500">
+              <FaDatabase className="w-[20px mr-3" />
               <Link to="/barnav/databasemg">Database</Link>
             </li>
           </ul>
