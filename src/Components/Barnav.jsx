@@ -120,7 +120,7 @@ function Barnav() {
             </li>
             <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaRegChartBar className="w-[20px mr-3" />
-              <Link to="/barnav/databasemg">Databse</Link>
+              <Link to="/barnav/databasemg">Database</Link>
             </li>
           </ul>
         </nav>

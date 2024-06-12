@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { FaWpforms, FaUser, FaUserFriends, FaHandHoldingUsd, FaRegChartBar } from 'react-icons/fa';
-import { IoMdClose, IoMdExit, IoMdMenu } from 'react-icons/io';
+import { FaWpforms, FaUser, FaHandHoldingUsd } from 'react-icons/fa';
+import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { motion } from 'framer-motion';
 import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 
 const Sidemenu = () => {
   const { id } = useParams(); // Get the id parameter from the URL
@@ -51,15 +50,12 @@ const Sidemenu = () => {
     }
   }, [id, cookie]);
 
-  // Navigate to the profile page if teacher data is available
   useEffect(() => {
     if (teacher) {
       navigate(`/layout/teacherprofile/${teacher._id}`);
     }
   }, [teacher, navigate]);
- 
 
-  
   return (
     <>
       {!isLargeScreen && (
@@ -80,30 +76,22 @@ const Sidemenu = () => {
       >
         <nav className="p-4 mt-16 w-full">
           <h1 className="text-center font-bold text-xl">Teacher Dashboard</h1>
-          <ul className="p-10">
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 cursor-pointer hover:bg-white hover:text-red-500 hover:border-2">
+          <ul className="p-10 space-y-4">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 cursor-pointer hover:bg-white hover:text-red-500 hover:border-2">
               <FaUser className="w-[20px]" />
-              {teacher && <Link to={`/layout/teacherprofile/${teacher._id}`}>Profile</Link>}
+              <Link to={`/layout/teacherprofile/${id}`}>Profile</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaHandHoldingUsd className="w-[20px]" />
               <Link to="/layout/teacherloans">Loans</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaWpforms className="w-[20px]" />
               <Link to="/layout/viewdata">Inquiry</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
               <FaUser className="w-[20px]" />
               <Link to="/layout/teachercontact">Reach us</Link>
-            </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
-              <FaRegChartBar className="w-[20px]" />
-              <Link to="/layout/teacheranalytics">Analytics</Link>
-            </li>
-            <li className="flex items-center p-3 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
-              <IoMdExit className="w-[20px]" />
-              <Link to="/">logout</Link>
             </li>
           </ul>
         </nav>
@@ -114,4 +102,5 @@ const Sidemenu = () => {
     </>
   );
 };
+
 export default Sidemenu;

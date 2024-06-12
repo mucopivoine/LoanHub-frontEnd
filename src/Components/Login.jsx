@@ -74,7 +74,7 @@ function Login() {
           setTimeout(() => {
             const userRole = response.data.user.role;
             if (userRole === 'teacher') {
-              navigate('/layout/teacheranalytics');
+              navigate('/layout/viewdata');
             } else if (userRole === 'manager') {
               navigate('/barnav/manageAnalytics');
             } else if (userRole === 'admin') {

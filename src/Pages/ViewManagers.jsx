@@ -1,10 +1,9 @@
-import  { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
-
 
 const cookie = document.cookie.split('jwt=')[1];
 
@@ -21,31 +20,22 @@ const ViewManager = () => {
 
   const fetchManagers = async () => {
     try {
-      console.log('Token:', cookie);
       const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookie}`
         }
       });
-      console.log('Response data:', response.data);
       if (response.data && Array.isArray(response.data.users)) {
         setManagers(response.data.users);
       } else {
-        console.error('Expected an array but received:', response.data);a
         setError('Unexpected data format received from server');
       }
     } catch (error) {
-      console.error('Error fetching manager data:', error);
       if (error.response) {
-        console.error('Response data:', error.response.data);
         setError(error.response.data.error || 'Failed to fetch manager data');
-      } else if (error.request) {
-        console.error('Request data:', error.request);
-        setError('Request to the server failed');
       } else {
-        console.error('Other error:', error.message);
-        setError('An unexpected error occurred');
+        setError('Request to the server failed');
       }
     }
   };
@@ -56,27 +46,19 @@ const ViewManager = () => {
 
   const handleDeletePerson = async (id) => {
     try {
-      console.log('Deleting manager with ID:', id);
       const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/manager/delete/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookie}`
         }
       });
-      console.log('Delete response status:', response.status);
       if (response.status === 200) {
         setManagers((prevManagers) => prevManagers.filter((manager) => manager._id !== id));
       } else {
         setError('Failed to delete manager');
       }
     } catch (error) {
-      console.error('Error deleting manager:', error);
-      if (error.response) {
-        console.error('Response data:', error.response.data);
-        setError(error.response.data.error || 'Failed to delete manager');
-      } else {
-        setError('Failed to delete manager');
-      }
+      setError('Failed to delete manager');
     }
   };
 
@@ -101,59 +83,57 @@ const ViewManager = () => {
   );
 
   return (
-    <>
-    <div className='flex'>
-    <Sidebar/>
-    </div>
-    <div className="flex flex-col w-[70%] ml-[20%] lg:mt-[100px] ">
-      <div className=''>
-    <Link to="/admin/contactus">
-      <button className="bg-blue-900 hover:bg-blue-800 lg:ml-[80%] w-[20%] items-end text-white font-bold py-2 px-4 rounded"
->
-        Add Manager
-      </button></Link>
-      </div>
-     
-       
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th  scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Names</th>
-                    <th  scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                    <th  scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone Number</th>
-                    <th  scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modify</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredManagers.map((manager) => (
-                    <tr key={manager._id}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{manager.username}</div></td>
-                      <td  className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{manager.email}</div></td>
-                      <td className="px-6 py-4 whitespace-nowrap"> <div className="text-sm text-gray-900">{manager.phoneNumber}</div></td>
-                      <td>
-                        <button className='pl-10' onClick={() => handleDeletePerson(manager._id)}>
-                          <MdDelete />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <div className="flex">
+      <Sidebar />
+      <div className="w-[89%] ml-[1%] mt-[100px]">
+        <h2 className="text-2xl font-semibold mb-4">Managers</h2>
+        <div className="flex justify-between mb-4">
+          <input
+            type="text"
+            placeholder="Search by name"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none w-[30%]"
+          />
+          <Link to="/admin/contactus">
+            <button className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
+              Add Manager
+            </button>
+          </Link>
+        </div>
+        {error && <p className="text-red-500">{error}</p>}
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Names</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone Number</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modify</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredManagers.map((manager) => (
+                <tr key={manager._id}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{manager.username}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{manager.email}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{manager.phoneNumber}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <button className="text-red-600 hover:text-red-800" onClick={() => handleDeletePerson(manager._id)}>
+                      <MdDelete />
+                    </button>
+                    <button className="ml-4 text-blue-600 hover:text-blue-800" onClick={() => handleEditClick(manager)}>
+                      <FaEdit />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
         {editingManager && (
           <div className="mt-8">
-            <h2>Edit Manager: {editingManager.name}</h2>
+            <h2 className="text-xl font-semibold mb-4">Edit Manager: {editingManager.username}</h2>
             <div className="flex flex-col gap-4">
               <input
                 type="password"
@@ -161,6 +141,7 @@ const ViewManager = () => {
                 placeholder="Current Password"
                 value={updateData.currentPassword}
                 onChange={handleUpdateChange}
+                className="px-4 py-2 border border-gray-300 rounded-md"
               />
               <input
                 type="password"
@@ -168,6 +149,7 @@ const ViewManager = () => {
                 placeholder="New Password"
                 value={updateData.newPassword}
                 onChange={handleUpdateChange}
+                className="px-4 py-2 border border-gray-300 rounded-md"
               />
               <input
                 type="password"
@@ -175,16 +157,16 @@ const ViewManager = () => {
                 placeholder="Confirm Password"
                 value={updateData.confirm}
                 onChange={handleUpdateChange}
+                className="px-4 py-2 border border-gray-300 rounded-md"
               />
-              <button onClick={handleUpdatePerson}>
+              <button onClick={handleUpdatePerson} className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
                 Update Manager
               </button>
             </div>
           </div>
         )}
       </div>
-    
-    </>
+    </div>
   );
 };
 

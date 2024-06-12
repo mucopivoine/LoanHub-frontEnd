@@ -53,7 +53,6 @@ import AddTeacherdtl from './Pages/AddTeacherdtl';
 import AllLoans from './Components/AllLoans/AllLoans';
 import Manager from './Components/Manager';
 import Profile from './Forms/Profile';
-import TeacherAnalytics from './Pages/TeacherAnalytics';
 import LoanDetails from './Components/AllLoans/LoanDetails';
 import MostRequestedLoans from './Pages/MostrequestedLoans';
 import UserignUp from './Components/Usersignup';
@@ -99,7 +98,6 @@ function App() {
           <Route path="teachercontact" element={<TeacherContact />} />
           <Route path="manageteachers" element={<ManageTeachers />} />
           <Route path="teacherprofile" element={<TeacherProfile/>} />
-          <Route path="teacheranalytics" element={<TeacherAnalytics />} />
           <Route path="teacherResponse" element={<TeacherResponse />} />
         </Route>
         <Route path="/admin" element={<Dashboards />}>

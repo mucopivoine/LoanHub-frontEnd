@@ -98,7 +98,7 @@ function Teachers() {
    
     <div className="">
     <Barnav/>
-      <div className="w-[70%] p-6 lg:mt-[40px]">
+      <div className="w-[95%] ml-[1%] mt-[100px]">
 
         <h2 className="text-2xl font-semibold mb-4">Teachers</h2>
         <input

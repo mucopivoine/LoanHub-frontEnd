@@ -99,11 +99,11 @@ const navigate = useNavigate();
     <>
       <Sidemenu />
       <div className={`flex justify-center items-center mt-[50px] ${ToastContainer.hasToast ? 'background-blur' : ''}`}>
-        <div className="bg-white p-8 rounded shadow-md w-full max-w-3xl">
+        <div className="bg-white p-8 rounded shadow-md w-full max-w-3xl mt-[50px]">
           <h1 className="text-2xl font-bold text-center mr-5 mb-7">Loan Application Form</h1>
           
           <form onSubmit={handleSubmit}>
-            <div className="mb-4 flex flex-wrap -mx-2">
+            <div className="mb-4 flex flex-wrap ">
               <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
                 <label className="block text-gray-700">Full Name</label>
                 <input

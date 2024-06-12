@@ -59,7 +59,7 @@ const cookie = document.cookie.split('jwt=')[1];
     <>
       <Sidemenu />
       <div className="flex justify-center items-center ">
-        <div className=" w-[40%] p-[3rem] ">
+        <div className=" w-[40%] p-[3rem] mt-[50px] ">
          
           <div className="bg-white p-10 rounded shadow-md">
           <h1 className="text-2xl font-bold text-center mb-14">Contact Bank Manager.</h1>

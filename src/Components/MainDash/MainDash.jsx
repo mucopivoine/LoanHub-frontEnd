@@ -4,6 +4,7 @@ import DashboardStatsGrid from "../../Data/DashboardStatsGrid";
 import Newdata from '../../Data/NewData'
 import Sidebar from '../Sidebar';
 import Search from '../../Pages/Search';
+import StatsGrids from './StatsGrids';
 
 function MainDash() {
  
@@ -12,7 +13,7 @@ function MainDash() {
       <Search />
       <Sidebar />
       <div className="mx-auto mt-20 ml-36">
-        <DashboardStatsGrid/>
+        <StatsGrids/>
         <Newdata/>
       </div>
     </div>

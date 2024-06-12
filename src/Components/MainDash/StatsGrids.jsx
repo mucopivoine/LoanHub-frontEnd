@@ -12,7 +12,7 @@ const getTokenFromCookie = () => {
   }
 };
 
-function DashboardStatsGrid() {
+function StatsGrids() {
   const [totalLoans, setTotalLoans] = useState(0);
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [totalManagers, setTotalManagers] = useState(0);
@@ -79,7 +79,7 @@ function DashboardStatsGrid() {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="flex flex-wrap justify-center gap-8 mt-10">
+      <div className="flex flex-wrap justify-center gap-8  ml-[10%]">
         {statsData.map((stat, index) => (
           <BoxWrapper key={index}>
             <div className={`rounded-full h-16 w-16 flex items-center justify-center ${stat.iconBgColor}`}>
@@ -106,4 +106,4 @@ function BoxWrapper({ children }) {
   );
 }
 
-export default DashboardStatsGrid;
+export default StatsGrids;

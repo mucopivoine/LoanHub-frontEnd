@@ -5,6 +5,7 @@ import LoanManagement from './LoanManagement'
 import DashboardStatsGrid from '../Data/DashboardStatsGrid'
 
 import Newdata from '../Data/NewData'
+import StatsGrids from '../Components/MainDash/StatsGrids'
 
 function Analytics() {
   return (
@@ -12,7 +13,7 @@ function Analytics() {
       {/* <Search /> */}
       <Sidebar />
       <div className="mx-auto mt-20 ml-36">
-        <DashboardStatsGrid/>
+       <StatsGrids/>
         <Newdata/>
       </div>
     </div>

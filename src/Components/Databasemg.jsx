@@ -3,8 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import { MdDelete } from 'react-icons/md';
-import { Search } from 'lucide-react';
-import { FaEdit } from 'react-icons/fa';
 import Barnav from './Barnav';
 
 const cookie = document.cookie.split('jwt=')[1];
@@ -41,9 +39,6 @@ function Databasemg() {
       console.error('Error fetching teacher data:', error.message);
       if (error.response) {
         setError(error.response.data.message || 'Failed to fetch teacher data');
-        if (error.response.status === 403) {
-          navigate('/login');  // Redirect to login page if token is invalid
-        }
       } else {
         setError('Failed to fetch teacher data');
       }
@@ -102,23 +97,25 @@ function Databasemg() {
     <>
     <div className="">
       <Barnav />
-      <div className="w-[70%] ml-[1%] mt-[40px] ">
+      <div className="w-[95%] ml-[1%] mt-[100px]">
         <h2 className="text-2xl font-semibold mb-4">Sacco users</h2>
-        <div className='flex justify-between '>
-        <input
-          type="text"
-          placeholder="Search by..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none"
-        />
-        {error && <p className="text-red-500">{error}</p>}
-       
-      <Link to="mnguser"><button className="bg-blue-900 hover:bg-blue-800 mb-5  items-end text-white font-bold py-2 px-4 rounded"
->
-        Add User
-      </button></Link>
-      </div>
+        <div className='flex justify-between mb-4'>
+          <div className="flex flex-col w-full">
+            <input
+              type="text"
+              placeholder="Search by..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="px-4 py-2 w-[40%] border border-gray-300 rounded-md focus:outline-none"
+            />
+            {error && <p className="text-red-500 mt-2">{error}</p>}
+          </div>
+          <Link to="mnguser">
+            <button className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
+              Add User
+            </button>
+          </Link>
+        </div>
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -149,7 +146,6 @@ function Databasemg() {
                   >
                     <MdDelete />
                   </button>
-                 
                 </td>
               </tr>
             ))}
@@ -174,8 +170,8 @@ function Databasemg() {
         </div>
       </div>
     </div>
-    </>
-  );
+  </>
+);
 }
 
 export default Databasemg;

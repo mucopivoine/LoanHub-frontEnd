@@ -89,22 +89,19 @@ function ViewTeachers() {
   const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
-
   return (
     <>
     <Search/>
     <div className="flex">
       <Sidebar />
-
-
-      <div className="w-[60%] p-6s ml-[2%] lg:mt-[50px]">
+      <div className="w-[95%]  ml-[1%] mt-[100px]">
         <h2 className="text-2xl font-semibold mb-4">Teachers</h2>
         <input
           type="text"
           placeholder="Search by..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none"
+          className="px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none w-[30%]"
         />
         {error && <p className="text-red-500">{error}</p>}
         <table className="min-w-full divide-y divide-gray-200">
