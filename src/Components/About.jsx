@@ -46,7 +46,7 @@ function About() {
                   Our Mission
                 </h3>
                 <p className="text-gray-600 text-center">
-                  Empowering educators through accessible loans, supporting their personal and professional_growth.
+                  Empowering educators through accessible loans, supporting their personal and professional growth.
                 </p>
               </div>
             </div>
