@@ -114,7 +114,7 @@ function Login() {
         <div className="">
           <div className="relative flex flex-col items-center h-[80vh] border-2 p-12 mt-24 bg-white">
             <div>
-              <h1 className="p-10 text-2xl text-black font-bold">LOG IN HERE</h1>
+              <h1 className="p-10 text-2xl text-black font-bold">Sign In</h1>
             </div>
             <div>
               <form>

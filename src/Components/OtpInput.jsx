@@ -70,7 +70,7 @@ const OtpInput = ({ length = 7, onOtpSubmit = () => {}, email }) => {
   };
 
   return (
-    <div className='mx-auto items-center flex-col justify-center flex bg-gray-100 h-[60vh]'>
+    <div className='mx-auto items-center flex-col justify-center flex bg-gray-100 h-[70vh]'>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
