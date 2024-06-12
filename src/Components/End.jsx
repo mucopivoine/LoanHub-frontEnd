@@ -4,7 +4,7 @@ function End() {
   return (
     <>
       <footer className="bg-gray-800 text-gray-300">
-        <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+        <div className="container bg-gray-800 mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div className="mb-4 sm:mb-0">
               <Link to="/">
