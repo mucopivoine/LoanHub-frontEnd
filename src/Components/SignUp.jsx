@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaUserPlus } from 'react-icons/fa';
 
 function SignUp() {
   const [username, setUsername] = useState('');
@@ -131,156 +132,138 @@ function SignUp() {
         console.log(error);
         toast.error('Signing up failed. Please try again.');
       }
-      }
+    } else {
+      setIsLoading(false);
     }
+  };
+
   return (
     <>
-      <div className='mx-auto items-center justify-center flex flex-row bg-gray-100 h-[140vh]'>
+      <ToastContainer />
+      <div className='flex justify-center items-center h-screen bg-gray-100'>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className=''
+          className='w-full max-w-md p-8 space-y-8 bg-white shadow-lg rounded-lg'
         >
-          <div className=''>
-            <div className='relative flex flex-col items-center h-[120vh] border-2 p-12 mt-24 bg-white'>
-              <div>
-                <h1 className='p-10 text-2xl text-black font-bold'>Create an account</h1>
+          <div className='flex justify-center'>
+            <FaUserPlus size={50} className='text-red-500' />
+          </div>
+          <div>
+            <h1 className='text-2xl font-bold text-center'>Create an account</h1>
+          </div>
+          <form onSubmit={handleSignUp} className='space-y-6'>
+            <div className='flex flex-col gap-4'>
+              <div className='flex flex-col'>
+                <label htmlFor='username' className='text-sm text-gray-600'>Username</label>
+                <input
+                  type='text'
+                  id='username'
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  className='mt-1 w-full rounded-lg bg-white p-2 border-gray-300'
+                />
+                {usernameError && <p className='text-red-500 text-xs italic'>{usernameError}</p>}
               </div>
-              <div>
-                <form>
-                  <div className='flex flex-row gap-3'>
-                    <div className='mb-5'>
-                      <label htmlFor='username' className='block text-sm text-black'>
-                        Enter Your Username
-                      </label>
-                      <input
-                        type='text'
-                        id='username'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                        className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                      />
-                      {usernameError && <p className='text-red-500 italic text-xs'>{usernameError}</p>}
-                    </div>
-                    <div className='mb-5'>
-                      <label htmlFor='firstname' className='block text-sm text-black'>
-                        Enter Your Firstname
-                      </label>
-                      <input
-                        type='text'
-                        id='firstname'
-                        value={firstname}
-                        onChange={(e) => setFirstname(e.target.value)}
-                        required
-                        className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                      />
-                      {firstnameErr && <p className='text-red-500 italic text-xs'>{firstnameErr}</p>}
-                    </div>
-                  </div>
-                  <div className='flex flex-row gap-3'>
-                    <div className='mb-5'>
-                      <label htmlFor='lastname' className='block text-sm text-black'>
-                        Enter Your Lastname
-                      </label>
-                      <input
-                        type='text'
-                        id='lastname'
-                        value={lastname}
-                        onChange={(e) => setLastname(e.target.value)}
-                        required
-                        className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                      />
-                      {lastnameErr && <p className='text-red-500 italic text-xs'>{lastnameErr}</p>}
-                    </div>
-                    <div className='mb-5'>
-                      <label htmlFor='schoolname' className='block text-sm text-black'>
-                        Enter Schoolname
-                      </label>
-                      <input
-                        type='text'
-                        id='schoolname'
-                        value={schoolname}
-                        onChange={(e) => setSchoolname(e.target.value)}
-                        required
-                        className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                      />
-                      {schoolnameErr && <p className='text-red-500 italic text-xs'>{schoolnameErr}</p>}
-                    </div>
-                  </div>
-                  <div className='mb-5'>
-                    <label htmlFor='email' className='block text-sm text-black'>
-                      Enter Your Email Address
-                    </label>
-                    <input
-                      type='text'
-                      id='email'
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                    />
-                    {emailErr && <p className='text-red-500 italic text-xs'>{emailErr}</p>}
-                  </div>
-                  <div className='mb-5'>
-                    <label htmlFor='password' className='block text-sm text-black'>
-                      Enter Your Password
-                    </label>
-                    <input
-                      type='password'
-                      id='password'
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                    />
-                    {passwordErr && <p className='text-red-500 italic text-xs'>{passwordErr}</p>}
-                  </div>
-                  <div className='mb-5'>
-                    <label htmlFor='accountNumber' className='block text-sm text-black'>
-                      Enter Your Account Number
-                    </label>
-                    <input
-                      type='text'
-                      id='accountNumber'
-                      value={accountNumber}
-                      onChange={(e) => setAccountNumber(e.target.value)}
-                      required
-                      className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                    />
-                    {accountNumberErr && <p className='text-red-500 italic text-xs'>{accountNumberErr}</p>}
-                  </div>
-                  <div className='mb-5'>
-                    <label htmlFor='phonenumber' className='block text-sm text-black'>
-                      Enter Your Phonenumber
-                    </label>
-                    <input
-                      type='number'
-                      id='phonenumber'
-                      value={phonenumber}
-                      onChange={(e) => setPhonenumber(e.target.value)}
-                      required
-                      className='mt-1 w-full rounded-lg bg-white text-sm text-black p-2 border-x-2 border-y-2 border-b-2 border-gray-300'
-                    />
-                    {phonenumberErr && <p className='text-red-500 italic text-xs'>{phonenumberErr}</p>}
-                  </div>
-                  <button
-                    type='submit'
-                    onClick={handleSignUp}
-                    className='bg-red-500 text-white w-full border-2 rounded-md px-[100px] p-1 mx-auto mt-5'
-                  >
-                    Sign Up
-                  </button>
-                  <div className='flex gap-2 mt-5 mb-3 text-black'>
-                    <p>Already have an account?</p>
-                    <Link to='/auth/signin' className='text-red-700'>
-                      Log in
-                    </Link>
-                  </div>
-                </form>
+              <div className='flex flex-col'>
+                <label htmlFor='firstname' className='text-sm text-gray-600'>First Name</label>
+                <input
+                  type='text'
+                  id='firstname'
+                  value={firstname}
+                  onChange={(e) => setFirstname(e.target.value)}
+                  required
+                  className='mt-1 w-full rounded-lg bg-white p-2 border-gray-300'
+                />
+                {firstnameErr && <p className='text-red-500 text-xs italic'>{firstnameErr}</p>}
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='lastname' className='text-sm text-gray-600'>Last Name</label>
+                <input
+                  type='text'
+                  id='lastname'
+                  value={lastname}
+                  onChange={(e) => setLastname(e.target.value)}
+                  required
+                  className='mt-1 w-full rounded-lg bg-white p-2 border-gray-300'
+                />
+                {lastnameErr && <p className='text-red-500 text-xs italic'>{lastnameErr}</p>}
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='schoolname' className='text-sm text-gray-600'>School Name</label>
+                <input
+                  type='text'
+                  id='schoolname'
+                  value={schoolname}
+                  onChange={(e) => setSchoolname(e.target.value)}
+                  required
+                  className='mt-1 w-full rounded-lg bg-white p-2 border-gray-300'
+                />
+                {schoolnameErr && <p className='text-red-500 text-xs italic'>{schoolnameErr}</p>}
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='email' className='text-sm text-gray-600'>Email</label>
+                <input
+                  type='email'
+                  id='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className='mt-1 w-full rounded-lg bg-white p-2 border-gray-300'
+                />
+                {emailErr && <p className='text-red-500 text-xs italic'>{emailErr}</p>}
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='password' className='text-sm text-gray-600'>Password</label>
+                <input
+                  type='password'
+                  id='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className='mt-1 w-full rounded-lg bg-white p-2 border-gray-300'
+                />
+                {passwordErr && <p className='text-red-500 text-xs italic'>{passwordErr}</p>}
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='accountNumber' className='text-sm text-gray-600'>Account Number</label>
+                <input
+                  type='text'
+                  id='accountNumber'
+                  value={accountNumber}
+                  onChange={(e) => setAccountNumber(e.target.value)}
+                  required
+                  className='mt-1 w-full rounded-lg bg-white p-2 border-gray-300'
+                />
+                {accountNumberErr && <p className='text-red-500 text-xs italic'>{accountNumberErr}</p>}
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='phonenumber' className='text-sm text-gray-600'>Phone Number</label>
+                <input
+                  type='text'
+                  id='phonenumber'
+                  value={phonenumber}
+                  onChange={(e) => setPhonenumber(e.target.value)}
+                  required
+                  className='mt-1 w-full rounded-lg bg-white p-2 border-gray-300'
+                />
+                {phonenumberErr && <p className='text-red-500 text-xs italic'>{phonenumberErr}</p>}
               </div>
             </div>
+            <button
+              type='submit'
+              disabled={isLoading}
+              className='w-full mt-4 py-2 px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700'
+            >
+              {isLoading ? 'Signing up...' : 'Sign Up'}
+            </button>
+          </form>
+          <div className='text-center'>
+            <p className='text-sm'>
+              Already have an account? <Link to='/auth/login' className='text-blue-500 hover:underline'>Log In</Link>
+            </p>
           </div>
         </motion.div>
       </div>
