@@ -52,7 +52,7 @@ function Sidebar() {
           isLargeScreen ? '' : 'transform transition-transform'
         }`}
       >
-        <nav className="p-4 mt-16 w-full">
+        <nav className="p-4 w-full">
           <h1 className="text-center font-bold text-xl">Admin Dashboard</h1>
           <ul className="p-10 space-y-4">
             <li

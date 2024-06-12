@@ -12,6 +12,7 @@ const Sidemenu = () => {
   const [teacher, setTeacher] = useState(null);
   const navigate = useNavigate();
 
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -55,7 +56,11 @@ const Sidemenu = () => {
       navigate(`/layout/teacherprofile/${teacher._id}`);
     }
   }, [teacher, navigate]);
-
+  useEffect(() => {
+    if (isProfileOpen) {
+      fetchManagerData();
+    }
+  }, [isProfileOpen]);
   return (
     <>
       {!isLargeScreen && (
@@ -74,9 +79,17 @@ const Sidemenu = () => {
           isLargeScreen ? '' : 'transform transition-transform'
         }`}
       >
-        <nav className="p-4 mt-16 w-full">
+        <nav className="p-4 w-full">
           <h1 className="text-center font-bold text-xl">Teacher Dashboard</h1>
           <ul className="p-10 space-y-4">
+          <li
+              className="flex flex-col items-center relative cursor-pointer"
+              onMouseEnter={() => setIsProfileOpen(true)}
+              onMouseLeave={() => setIsProfileOpen(false)}
+            />
+               <div className="h-[70px] w-[70px] rounded-full flex items-center justify-center ml-5 p-3 gap-2 text-lg">
+                <img src="/happy.jpg" alt="User Profile" className="h-full w-full rounded-full object-cover" />
+              </div>
             <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 cursor-pointer hover:bg-white hover:text-red-500 hover:border-2">
               <FaUser className="w-[20px]" />
               <Link to={`/layout/teacherprofile/${id}`}>Profile</Link>
