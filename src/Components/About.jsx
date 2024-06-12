@@ -42,13 +42,13 @@ function About() {
                     className="w-32 h-32 rounded-full object-cover"
                   />
                 </div>
-                {/* <h3 className="text-2xl font-bold text-center mb-4 font-serif animate-pulse">
+                <h3 className="text-2xl font-bold text-center mb-4 font-serif animate-pulse">
                   Our Mission
                 </h3>
                 <p className="text-gray-600 text-center">
                   Empowering educators through accessible loan services,
                   supporting their personal and professional growth.
-                </p> */}
+                </p>
               </div>
             </div>
 
