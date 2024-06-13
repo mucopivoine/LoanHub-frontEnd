@@ -36,7 +36,7 @@ const TeacherContact = () => {
       toast.success("Message sent successfully!");
       setTimeout(() => {
         setIsLoading(false);
-        navigate('/layout/teacheranalytics');
+        navigate('/layout/teacherloans');
       }, 3000);
     } catch (error) {
       toast.error("Failed to send response.");
