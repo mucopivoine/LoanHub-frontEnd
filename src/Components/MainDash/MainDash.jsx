@@ -5,6 +5,7 @@ import Newdata from '../../Data/NewData'
 import Sidebar from '../Sidebar';
 import Search from '../../Pages/Search';
 import StatsGrids from './StatsGrids';
+import NewGraph from './NewGraph'
 
 function MainDash() {
  
@@ -14,7 +15,7 @@ function MainDash() {
       <Sidebar />
       <div className="mx-auto mt-20">
         <StatsGrids/>
-        <Newdata/>
+        <NewGraph/>
       </div>
     </div>
   );

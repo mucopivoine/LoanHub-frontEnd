@@ -11,7 +11,7 @@ function Analytics() {
   return (
     <div className="relative min-h-screen bg-gray-100">
       <Sidebar />
-      <div className="mx-auto mt-20 ml-36">
+      <div className="mx-auto mt-20 ">
        <StatsGrids/>
        <Newdata/>
       </div>
