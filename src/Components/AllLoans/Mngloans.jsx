@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Sidebar from '../Sidebar';
 import { MdDelete } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+import Search from '../../Pages/Search';
+import { FaEdit } from 'react-icons/fa';
 import Barnav from '../Barnav';
 
 const cookie = document.cookie.split('jwt=')[1];
@@ -13,6 +17,7 @@ function Mngloans() {
 
   const handleFetch = async () => {
     try {
+      console.log('Token:', cookie);
       const response = await axios.get('https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/getAll', {
         headers: {
           'Content-Type': 'application/json',
@@ -21,16 +26,20 @@ function Mngloans() {
         withCredentials: true,
       });
 
+      console.log('API Response:', response);
+
       if (response.data && Array.isArray(response.data.loans)) {
         setTeachers(response.data.loans);
       } else {
+        console.error('Unexpected data format received from server:', response.data);
         setError('Unexpected data format received from server');
       }
     } catch (error) {
+      console.error('Error fetching teacher data:', error.message);
       if (error.response) {
-        setError(error.response.data.message || 'Failed to fetch loan data');
+        setError(error.response.data.message || 'Failed to fetch teacher data');
       } else {
-        setError('Network error: Failed to fetch loan data');
+        setError('Failed to fetch teacher data');
       }
     }
   };
@@ -41,6 +50,7 @@ function Mngloans() {
 
   const handleDeleteTeacher = async (id) => {
     try {
+      console.log('Deleting teacher with ID:', id);
       const response = await axios.delete(`https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/delete/${id}`, {
         headers: {
           'Content-Type': 'application/json',
@@ -49,83 +59,83 @@ function Mngloans() {
         withCredentials: true,
       });
 
+      console.log('Delete response status:', response.status);
       if (response.status === 200) {
         setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher._id !== id));
-        setError(''); // Clear any previous error message
+        console.log('Teacher deleted:', id);
       } else {
-        setError('Failed to delete loan');
+        setError('Failed to delete teacher');
       }
     } catch (error) {
+      console.error('Error deleting teacher:', error.message);
       if (error.response) {
-        setError(error.response.data.message || 'Failed to delete loan');
+        setError(error.response.data.message || 'Failed to delete teacher');
       } else {
-        setError('Network error: Failed to delete loan');
+        setError('Failed to delete teacher');
       }
     }
   };
-
-  const filteredTeachers = teachers.filter((teacher) => {
-    const fullName = teacher.fullName ? teacher.fullName.toLowerCase() : '';
-    const email = teacher.email ? teacher.email.toLowerCase() : '';
-    return fullName.includes(searchTerm.toLowerCase()) || email.includes(searchTerm.toLowerCase());
-  });
-
   return (
     <>
-      <div>
-        <Barnav />
-        <div className="w-[70%] ml-[30px] mt-[100px]">
-          <div className="flex justify-between">
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Manage Loan Requests</h2>
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Search by full name or email"
-                className="py-2 px-4 border border-gray-300 rounded-md"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-          </div>
-          {error && <div className="text-red-500 mb-4">{error}</div>}
-          <div className="overflow-x-auto">
-            <table className="w-full bg-white border border-gray-200">
-              <thead>
-                <tr>
-                  <th className="py-3 px-4 text-left">Names</th>
-                  <th className="py-3 px-4 text-left">Email</th>
-                  <th className="py-3 px-4 text-left">Phone Number</th>
-                  <th className="py-3 px-4 text-left">School Name</th>
-                  <th className="py-3 px-4 text-left">Amount</th>
-                  <th className="py-3 px-4 text-left">Salary</th>
-                  <th className="py-3 px-4 text-left">Actions</th>
+    <div className="">
+      <Barnav />
+      <div className="w-[95%] ml-[1%] mt-[100px]">
+        <h2 className="text-2xl font-semibold mb-4">Loans requested</h2>
+        <input
+          type="text"
+          placeholder="Search by teacher name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none"
+        />
+        {error && <p className="text-red-500">{error}</p>}
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Full Name
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                School Name
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Phone Number
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Amount
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {teachers.map((teacher) => (
+                <tr key={teacher._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">{teacher.fullName}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{teacher.phoneNumber}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{teacher.workSchool}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{teacher.amountRequested}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className='items-center text-center '>
+                    <button
+                      className="text-blue-800 hover:text-red-800"
+                      onClick={() => handleDeleteTeacher(teacher._id)}
+                    >
+                      <MdDelete />
+                    </button>
+                    <Link to={`/barnav/mngdetails/${teacher._id}`}><button
+                      className="text-blue-800 hover:text-red-800 ml-5"
+                    >
+                     View
+                    </button></Link>
+                    </div>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {filteredTeachers.map((teacher) => (
-                  <tr key={teacher._id}>
-                    <td className="py-3 px-4">{teacher.fullName}</td>
-                    <td className="py-3 px-4">{teacher.email}</td>
-                    <td className="py-3 px-4">{teacher.phoneNumber}</td>
-                    <td className="py-3 px-4">{teacher.workSchool}</td>
-                    <td className="py-3 px-4">{teacher.amountRequested}</td>
-                    <td className="py-3 px-4">{teacher.monthlySalary}</td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center space-x-2">
-                        <Link to={`/mngdetails/${teacher._id}`} className="text-blue-500 hover:underline">Details</Link>
-                        <button onClick={() => handleDeleteTeacher(teacher._id)} className="text-red-500 hover:underline">
-                          <MdDelete />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+              ))}
+            </tbody>
+          </table>
+        </div> 
       </div>
     </>
   );
