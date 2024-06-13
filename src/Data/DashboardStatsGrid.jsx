@@ -70,15 +70,15 @@ function DashboardStatsGrid() {
 
   return (
     <div className="flex">
-      <div className="w-1/4 p-4 bg-gray-200"> {/* Sidebar */}
-        {/* Add sidebar content here */}
+      <div className=" bg-gray-200"> {/* Sidebar */}
+       
       </div>
-      <div className="w-3/4 p-8">
+      <div className="w-3/4">
         <div className="flex justify-center items-center">
-          <div className="flex flex-wrap justify-center gap-8 mt-10">
+          <div className="flex flex-wrap justify-center gap-8 mt-5">
             {statsData.map((stat, index) => (
               <BoxWrapper key={index}>
-                <div className={`rounded-full h-20 w-20 flex items-center justify-center ${stat.iconBgColor}`}>
+                <div className={`rounded-full h-50 flex items-center justify-center ${stat.iconBgColor}`}>
                   <FaHandHoldingUsd className="text-5xl text-white" />
                 </div>
                 <div className="pl-4">
