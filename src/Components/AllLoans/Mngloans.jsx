@@ -124,7 +124,7 @@ function Mngloans() {
                     >
                       <MdDelete />
                     </button>
-                    <Link to={`/barnav/mngdetails/s}`}><button
+                    <Link to={`/barnav/mngdetails/${teacher._id}}`}><button
                       className="text-blue-800 hover:text-red-800 ml-5"
                     >
                      View
