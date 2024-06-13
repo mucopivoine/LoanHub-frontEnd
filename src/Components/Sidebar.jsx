@@ -78,7 +78,7 @@ function Sidebar() {
 
             <li className="flex items-center p-3 rounded-md  hover:text-red-500">
               <FaRegChartBar className="mr-3 w-[20px]" />
-              <Link to="/admin/analytics">Analytics</Link>
+              <Link to="/admin/maindash">Analytics</Link>
             </li>
             <li className="flex items-center p-3 rounded-md  hover:text-red-500">
               <FaUser className="mr-3 w-[20px]" />
