@@ -79,7 +79,7 @@ function StatsGrids() {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="flex flex-wrap justify-center gap-8  ml-[10%]">
+      <div className="flex flex-wrap justify-center gap-8 ml-[15%]">
         {statsData.map((stat, index) => (
           <BoxWrapper key={index}>
             <div className={`rounded-full h-16 w-16 flex items-center justify-center ${stat.iconBgColor}`}>

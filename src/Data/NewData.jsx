@@ -14,13 +14,13 @@ import MostRequestedLoans from '../Pages/MostrequestedLoans';
 
 
 const data = [
-  { name: 'Year 1', uv: 4000, pv: 2400, amt: 2400 },
-  { name: 'Year 2', uv: 3000, pv: 1398, amt: 2210 },
-  { name: 'Year 3', uv: 2000, pv: 9800, amt: 2290 },
-  { name: 'Year 4', uv: 2780, pv: 3908, amt: 2000 },
-  { name: 'Year 5', uv: 1890, pv: 4800, amt: 2181 },
-  { name: 'Year 6', uv: 2390, pv: 3800, amt: 2500 },
-  { name: 'Year 7', uv: 3490, pv: 4300, amt: 2100 },
+  { name: 'Month 1', my: 4000, ml: 2400, amt: 2400 },
+  { name: 'Month 2', my: 3000, ml: 1398, amt: 2210 },
+  { name: 'Month 3', my: 2000, ml: 800, amt: 2290 },
+  { name: 'Month 4', my: 2780, ml: 3208, amt: 2000 },
+  { name: 'Month 5', my: 4890, ml: 1800, amt: 2181 },
+  { name: 'Month 6', my: 3390, ml: 2100, amt: 2500 },
+  { name: 'Month 7', my: 4490, ml: 3200, amt: 2100 },
 ];
 
 export default class Example extends PureComponent {
@@ -28,9 +28,8 @@ export default class Example extends PureComponent {
 
   render() {
     return (
-
-      <div className='flex justify-between pl-32 gap-12'>
-        <div className="mt-20 w-[40rem] ">
+      <div className='flex justify-between pl-30 gap-12'>
+        <div className="mt-20 w-[60rem] ml-[17%]">
           <ResponsiveContainer width="110%" height={400}>
             <BarChart
               width={800}
@@ -43,13 +42,13 @@ export default class Example extends PureComponent {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="pv" fill="#f2cc8f" />
-              <Bar dataKey="uv" fill="#335c67" />
+              <Bar dataKey="my" fill="#f2cc8f" />
+              <Bar dataKey="ml" fill="#335c67" />
             </BarChart>
           </ResponsiveContainer>
         </div>
         <div className='mr-10 '>
-          <MostRequestedLoans />
+         
         </div>
       </div>
     );

@@ -10,11 +10,9 @@ import StatsGrids from '../Components/MainDash/StatsGrids'
 function Analytics() {
   return (
     <div className="relative min-h-screen bg-gray-100">
-      {/* <Search /> */}
       <Sidebar />
       <div className="mx-auto mt-20 ml-36">
        <StatsGrids/>
-        <Newdata/>
       </div>
     </div>
     

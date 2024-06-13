@@ -6,7 +6,7 @@ import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Sidemenu = () => {
-  const { id } = useParams(); // Get the id parameter from the URL
+  const { id } = useParams(); 
   const [isOpen, setIsOpen] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
   const [teacher, setTeacher] = useState(null);
@@ -31,7 +31,7 @@ const Sidemenu = () => {
   }, []);
 
   useEffect(() => {
-    const fetchTeacherData = async () => {
+    const fetchTeacherData = async (id) => {
       try {
         const response = await axios.get(`https://umwarimu-loan-hub-api.onrender.com/api/teacher/${id}`, {
           headers: {
@@ -51,11 +51,6 @@ const Sidemenu = () => {
     }
   }, [id, cookie]);
 
-  useEffect(() => {
-    if (teacher) {
-      navigate(`/layout/teacherprofile/${teacher._id}`);
-    }
-  }, [teacher, navigate]);
   useEffect(() => {
     if (isProfileOpen) {
       fetchManagerData();
@@ -90,19 +85,19 @@ const Sidemenu = () => {
                <div className="h-[70px] w-[70px] rounded-full flex items-center justify-center ml-5 p-3 gap-2 text-lg">
                 <img src="/happy.jpg" alt="User Profile" className="h-full w-full rounded-full object-cover" />
               </div>
-            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 cursor-pointer hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 cursor-pointer hover:text-red-500">
               <FaUser className="w-[20px]" />
-              <Link to={`/layout/teacherprofile/${id}`}>Profile</Link>
+              <Link to={`/layout/teacherprofile/${teacher._id}`}>Profile</Link>
             </li>
-            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:text-red-500">
               <FaHandHoldingUsd className="w-[20px]" />
               <Link to="/layout/teacherloans">Loans</Link>
             </li>
-            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:text-red-500">
               <FaWpforms className="w-[20px]" />
               <Link to="/layout/viewdata">Inquiry</Link>
             </li>
-            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:bg-white hover:text-red-500 hover:border-2">
+            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:text-red-500">
               <FaUser className="w-[20px]" />
               <Link to="/layout/teachercontact">Reach us</Link>
             </li>

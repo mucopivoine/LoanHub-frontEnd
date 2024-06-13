@@ -14,7 +14,7 @@ function ManagerAnalytics() {
     <Barnav />
     <div className="mt-20">
      <NewDash/>
-      <Newdata/>
+     
     </div>
   </div>
   )

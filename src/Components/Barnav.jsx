@@ -54,11 +54,6 @@ function Barnav() {
   }, [isProfileOpen]);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('jwt') === null) {
-  //     navigate('/auth/signin', { replace: true });
-  //   }
-  // }, [navigate]);
   return (
     <>
       {!isLargeScreen && (
@@ -89,7 +84,7 @@ function Barnav() {
               <div className="h-[70px] w-[70px] rounded-full flex items-center justify-center mb-1 mr-6 p-3 gap-2 text-lg">
                 <img src="/happy.jpg" alt="User Profile" className="h-full w-full rounded-full object-cover" />
               </div>
-              {/* <p className="mr-6 mb-5">Manager profile</p> */}
+             
               {isProfileOpen && (
                 <div className="absolute top-12 right-0 w-[200px] bg-white shadow-lg rounded-lg">
                   <div className="p-4 text-sm">

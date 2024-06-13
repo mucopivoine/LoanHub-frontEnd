@@ -3,9 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Sidemenu from '../Components/Sidemenu';
 import axios from 'axios'; // Make sure to import axios
 import { useNavigate } from 'react-router-dom';
-
 const cookie = document.cookie.split('jwt=')[1];
-
 const TeacherContact = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -14,8 +12,7 @@ const TeacherContact = () => {
     subject: '',
     message: ''
   });
-  const [isLoading, setIsLoading] = useState(false); 
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -23,35 +20,30 @@ const TeacherContact = () => {
       [name]: value
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       console.log('Token:', cookie);
-      setIsLoading(true); 
-      const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/add', formData, {
+      setIsLoading(true);
+      const response = await axios.post('https://umwarimu-loan-hub-api.onrender.com/api/message/send', formData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookie}`
         },
         withCredentials: true,
       });
-
       console.log(response.data);
       toast.success("Message sent successfully!");
-
       setTimeout(() => {
-        setIsLoading(false); 
+        setIsLoading(false);
         navigate('/layout/teacheranalytics');
-      }, 3000); 
+      }, 3000);
     } catch (error) {
       toast.error("Failed to send response.");
-      setIsLoading(false); 
+      setIsLoading(false);
       console.log(error);
     }
   };
-
   return (
     <>
       <Sidemenu />
@@ -114,10 +106,8 @@ const TeacherContact = () => {
           </div>
         </div>
       </div>
-
       <ToastContainer />
     </>
   );
 };
-
 export default TeacherContact;
