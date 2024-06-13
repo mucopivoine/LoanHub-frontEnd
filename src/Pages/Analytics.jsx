@@ -13,6 +13,7 @@ function Analytics() {
       <Sidebar />
       <div className="mx-auto mt-20 ml-36">
        <StatsGrids/>
+       <Newdata/>
       </div>
     </div>
     
