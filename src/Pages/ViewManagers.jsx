@@ -131,40 +131,6 @@ const ViewManager = () => {
             </tbody>
           </table>
         </div>
-        {editingManager && (
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Edit Manager: {editingManager.username}</h2>
-            <div className="flex flex-col gap-4">
-              <input
-                type="password"
-                name="currentPassword"
-                placeholder="Current Password"
-                value={updateData.currentPassword}
-                onChange={handleUpdateChange}
-                className="px-4 py-2 border border-gray-300 rounded-md"
-              />
-              <input
-                type="password"
-                name="newPassword"
-                placeholder="New Password"
-                value={updateData.newPassword}
-                onChange={handleUpdateChange}
-                className="px-4 py-2 border border-gray-300 rounded-md"
-              />
-              <input
-                type="password"
-                name="confirm"
-                placeholder="Confirm Password"
-                value={updateData.confirm}
-                onChange={handleUpdateChange}
-                className="px-4 py-2 border border-gray-300 rounded-md"
-              />
-              <button onClick={handleUpdatePerson} className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
-                Update Manager
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
