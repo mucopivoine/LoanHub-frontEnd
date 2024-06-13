@@ -41,6 +41,8 @@ function StatsGrids() {
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', { headers })
         ]);
 
+          
+
         setTotalLoans(loansResponse.data.loans.length);
         setTotalTeachers(teachersResponse.data.users.length);
         setTotalManagers(managersResponse.data.users.length);

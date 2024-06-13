@@ -37,13 +37,11 @@ function DashboardStatsGrid() {
         const [loansResponse, teachersResponse, managersResponse, detailsResponse] = await Promise.all([
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/getAll', { headers }),
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacher/all', { headers }),
-          axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', { headers }),
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', { headers })
         ]);
 
         setTotalLoans(loansResponse.data.loans.length);
         setTotalTeachers(teachersResponse.data.users.length);
-        setTotalManagers(managersResponse.data.users.length);
         setTotalDetails(detailsResponse.data.teachers.length);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -69,11 +67,6 @@ function DashboardStatsGrid() {
       label: 'Total Sacco Users',
       value: totalDetails,
       iconBgColor: 'bg-yellow-500',
-    },
-    {
-      label: 'Total Managers',
-      value: totalManagers,
-      iconBgColor: 'bg-green-500',
     },
   ];
 
