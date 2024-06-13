@@ -15,26 +15,24 @@ const getTokenFromCookie = () => {
 function DashboardStatsGrid() {
   const [totalLoans, setTotalLoans] = useState(0);
   const [totalTeachers, setTotalTeachers] = useState(0);
-  const [totalManagers, setTotalManagers] = useState(0);
   const [totalDetails, setTotalDetails] = useState(0);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const calculateTotals = async () => {
+    const fetchData = async () => {
       try {
         const token = getTokenFromCookie();
         if (!token) {
           setError('No token found');
           return;
         }
-        console.log('Token:', token);
 
         const headers = {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         };
 
-        const [loansResponse, teachersResponse, managersResponse, detailsResponse] = await Promise.all([
+        const [loansResponse, teachersResponse, detailsResponse] = await Promise.all([
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/getAll', { headers }),
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacher/all', { headers }),
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', { headers })
@@ -49,7 +47,7 @@ function DashboardStatsGrid() {
       }
     };
 
-    calculateTotals();
+    fetchData();
   }, []);
 
   const statsData = [

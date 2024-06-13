@@ -5,11 +5,7 @@ import { FaHandHoldingUsd } from 'react-icons/fa';
 const getTokenFromCookie = () => {
   const cookies = document.cookie.split(';');
   const jwtCookie = cookies.find(cookie => cookie.trim().startsWith('jwt='));
-  if (jwtCookie) {
-    return jwtCookie.split('=')[1];
-  } else {
-    return null;
-  }
+  return jwtCookie ? jwtCookie.split('=')[1] : null;
 };
 
 function StatsGrids() {
@@ -17,43 +13,50 @@ function StatsGrids() {
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [totalManagers, setTotalManagers] = useState(0);
   const [totalDetails, setTotalDetails] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const calculateTotals = async () => {
+    const fetchData = async () => {
+      setLoading(true);
       try {
         const token = getTokenFromCookie();
         if (!token) {
           setError('No token found');
+          setLoading(false);
           return;
         }
-        console.log('Token:', token);
 
         const headers = {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         };
 
-        const [loansResponse, teachersResponse, managersResponse, detailsResponse] = await Promise.all([
+        const [
+          loansResponse,
+          teachersResponse,
+          managersResponse,
+          detailsResponse,
+        ] = await Promise.all([
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/loanRequest/getAll', { headers }),
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacher/all', { headers }),
           axios.get('https://umwarimu-loan-hub-api.onrender.com/api/manager/all', { headers }),
-          axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', { headers })
+          axios.get('https://umwarimu-loan-hub-api.onrender.com/api/teacherDetails/getall', { headers }),
         ]);
-
-          
 
         setTotalLoans(loansResponse.data.loans.length);
         setTotalTeachers(teachersResponse.data.users.length);
         setTotalManagers(managersResponse.data.users.length);
         setTotalDetails(detailsResponse.data.teachers.length);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
         setError('Error fetching data');
+        setLoading(false);
       }
     };
 
-    calculateTotals();
+    fetchData();
   }, []);
 
   const statsData = [
@@ -81,21 +84,27 @@ function StatsGrids() {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="flex flex-wrap justify-center gap-8 ml-[15%]">
-        {statsData.map((stat, index) => (
-          <BoxWrapper key={index}>
-            <div className={`rounded-full h-16 w-16 flex items-center justify-center ${stat.iconBgColor}`}>
-              <FaHandHoldingUsd className="text-3xl text-white" />
-            </div>
-            <div className="pl-4">
-              <span className="text-sm text-gray-500 font-light">{stat.label}</span>
-              <div className="flex items-center">
-                <strong className="text-2xl text-gray-700 font-semibold">{error ? 'Error' : stat.value}</strong>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : (
+        <div className="flex flex-wrap justify-center gap-8 ml-[15%]">
+          {statsData.map((stat, index) => (
+            <BoxWrapper key={index}>
+              <div className={`rounded-full h-16 w-16 flex items-center justify-center ${stat.iconBgColor}`}>
+                <FaHandHoldingUsd className="text-3xl text-white" />
               </div>
-            </div>
-          </BoxWrapper>
-        ))}
-      </div>
+              <div className="pl-4">
+                <span className="text-sm text-gray-500 font-light">{stat.label}</span>
+                <div className="flex items-center">
+                  <strong className="text-2xl text-gray-700 font-semibold">{stat.value}</strong>
+                </div>
+              </div>
+            </BoxWrapper>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
