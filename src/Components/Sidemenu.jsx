@@ -85,10 +85,6 @@ const Sidemenu = () => {
                <div className="h-[70px] w-[70px] rounded-full flex items-center justify-center ml-5 p-3 gap-2 text-lg">
                 <img src="/happy.jpg" alt="User Profile" className="h-full w-full rounded-full object-cover" />
               </div>
-            <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 cursor-pointer hover:text-red-500">
-              <FaUser className="w-[20px]" />
-              <Link to={`/layout/teacherprofile/${teacher._id}`}>Profile</Link>
-            </li>
             <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:text-red-500">
               <FaHandHoldingUsd className="w-[20px]" />
               <Link to="/layout/teacherloans">Loans</Link>
