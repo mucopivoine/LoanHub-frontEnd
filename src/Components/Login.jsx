@@ -78,7 +78,7 @@ function Login() {
             } else if (userRole === 'manager') {
               navigate('/barnav/managerdash');
             } else if (userRole === 'admin') {
-              navigate('/admin/analytics');
+              navigate('/admin/maindash');
             }
           }, 2000);
 
