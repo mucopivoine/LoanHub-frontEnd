@@ -119,11 +119,8 @@ const ViewManager = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{manager.email}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{manager.phoneNumber}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <button className="text-red-600 hover:text-red-800" onClick={() => handleDeletePerson(manager._id)}>
+                    <button className="text-red-600 hover:text-red-800 mr-5" onClick={() => handleDeletePerson(manager._id)}>
                       <MdDelete />
-                    </button>
-                    <button className="ml-4 text-blue-600 hover:text-blue-800" onClick={() => handleEditClick(manager)}>
-                      <FaEdit />
                     </button>
                   </td>
                 </tr>
