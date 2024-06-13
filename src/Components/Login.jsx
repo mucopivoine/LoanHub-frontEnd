@@ -76,7 +76,7 @@ function Login() {
             if (userRole === 'teacher') {
               navigate('/layout/viewdata');
             } else if (userRole === 'manager') {
-              navigate('/barnav/mnagaAnalytics');
+              navigate('/barnav/mnageAnalytics');
             } else if (userRole === 'admin') {
               navigate('/admin/analytics');
             }
