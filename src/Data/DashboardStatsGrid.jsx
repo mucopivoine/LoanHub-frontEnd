@@ -69,21 +69,28 @@ function DashboardStatsGrid() {
   ];
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="flex flex-wrap justify-center gap-8 mt-10">
-        {statsData.map((stat, index) => (
-          <BoxWrapper key={index}>
-            <div className={`rounded-full h-16 w-16 flex items-center justify-center ${stat.iconBgColor}`}>
-              <FaHandHoldingUsd className="text-3xl text-white" />
-            </div>
-            <div className="pl-4">
-              <span className="text-sm text-gray-500 font-light">{stat.label}</span>
-              <div className="flex items-center">
-                <strong className="text-2xl text-gray-700 font-semibold">{error ? 'Error' : stat.value}</strong>
-              </div>
-            </div>
-          </BoxWrapper>
-        ))}
+    <div className="flex">
+      <div className="w-1/4 p-4 bg-gray-200"> {/* Sidebar */}
+        {/* Add sidebar content here */}
+      </div>
+      <div className="w-3/4 p-8">
+        <div className="flex justify-center items-center">
+          <div className="flex flex-wrap justify-center gap-8 mt-10">
+            {statsData.map((stat, index) => (
+              <BoxWrapper key={index}>
+                <div className={`rounded-full h-20 w-20 flex items-center justify-center ${stat.iconBgColor}`}>
+                  <FaHandHoldingUsd className="text-5xl text-white" />
+                </div>
+                <div className="pl-4">
+                  <span className="text-base text-gray-500 font-light">{stat.label}</span>
+                  <div className="flex items-center">
+                    <strong className="text-4xl text-gray-700 font-semibold">{error ? 'Error' : stat.value}</strong>
+                  </div>
+                </div>
+              </BoxWrapper>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
