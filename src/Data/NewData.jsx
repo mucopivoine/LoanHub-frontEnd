@@ -29,7 +29,7 @@ export default class Example extends PureComponent {
   render() {
     return (
       <div className='flex justify-between pl-30 gap-12'>
-        <div className="mt-20 w-[60rem] ml-[17%]">
+        <div className="mt-20 w-[60rem] ml-[15%]">
           <ResponsiveContainer width="110%" height={400}>
             <BarChart
               width={800}
