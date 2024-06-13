@@ -76,23 +76,23 @@ function Sidebar() {
               )}
             </li>
 
-            <li className="flex items-center p-3 rounded-md hover:bg-white hover:text-red-500">
+            <li className="flex items-center p-3 rounded-md  hover:text-red-500">
               <FaRegChartBar className="mr-3 w-[20px]" />
               <Link to="/admin/analytics">Analytics</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md hover:bg-white hover:text-red-500">
+            <li className="flex items-center p-3 rounded-md  hover:text-red-500">
               <FaUser className="mr-3 w-[20px]" />
               <Link to="/admin/viewmanager">Managers</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md hover:bg-white hover:text-red-500">
+            <li className="flex items-center p-3 rounded-md  hover:text-red-500">
               <FaChalkboardTeacher className="mr-3 w-[20px]" />
               <Link to="/admin/viewteachers">Teachers</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md hover:bg-white hover:text-red-500">
+            <li className="flex items-center p-3 rounded-md hover:text-red-500">
               <FaHandHoldingUsd className="mr-3 w-[20px]" />
               <Link to="/admin/allLoans">Requests</Link>
             </li>
-            <li className="flex items-center p-3 rounded-md hover:bg-white hover:text-red-500">
+            <li className="flex items-center p-3 rounded-md  hover:text-red-500">
               <FaDatabase className="mr-3 w-[20px]" />
               <Link to="/admin/database">Database</Link>
             </li>
