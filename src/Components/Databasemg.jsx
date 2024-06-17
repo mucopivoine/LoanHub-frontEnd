@@ -109,6 +109,10 @@ function Databasemg() {
               className="px-4 py-2 w-[40%] border border-gray-300 rounded-md focus:outline-none"
             />
             {error && <p className="text-red-500 mt-2">{error}</p>}
+            <Link to="mnguser"><button className="bg-blue-900 hover:bg-blue-800 mb-5  items-end text-white font-bold py-2 px-4 rounded"
+>
+        Add User
+      </button></Link>
           </div>
         </div>
         <table className="min-w-full divide-y divide-gray-200">

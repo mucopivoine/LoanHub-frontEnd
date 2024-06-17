@@ -112,6 +112,10 @@ function Database() {
             
           </div>
           {error && <p className="text-red-500 mb-4">{error}</p>}
+          <Link to="adduser"><button className="bg-blue-900 hover:bg-blue-800 mb-5  items-end text-white font-bold py-2 px-4 rounded"
+>
+        Add User
+      </button></Link>
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
