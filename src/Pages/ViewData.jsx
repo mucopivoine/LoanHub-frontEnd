@@ -18,7 +18,7 @@ function ViewData() {
   const [monthlySalary, setMonthlyIncome] = useState('');
   const [proofOfEmployment, setProofOfEmployment] = useState(null);
   const [copyOfNationalId, setCopyOfNationalId] = useState(null);
-  const [IsLoading, setIsLoading] =useState('')
+  const [isLoading, setIsLoading] = useState(false);
 const navigate = useNavigate();
   const handleProofOfEmploymentUpload = (e) => {
     setProofOfEmployment(e.target.files[0]);
@@ -83,15 +83,17 @@ const navigate = useNavigate();
         });
         setTimeout(() => {
           setIsLoading(false); 
-          navigate(`/layout/teacheranalytics`);
+          navigate(`/layout/teacherloans`);
         }, 3000);
       } else {
         const errorData = await response.json();
         toast.error('Loan Application Submission Failed', errorData);
         console.error('Loan Application Submission Failed', errorData);
+        setIsLoading(false);
       }
     } catch (error) {
       console.error('An error occurred while submitting the loan application:', error);
+      setIsLoading(false);
     }
   };
 
@@ -220,11 +222,12 @@ const navigate = useNavigate();
                 className="w-full p-2 border border-gray-300 rounded mt-2"
               />
             </div>
-           <button
+            <button
               type="submit"
               className="w-full p-2 bg-blue-900 text-white rounded"
+              disabled={isLoading}
             >
-              Submit Loan Application
+              {isLoading ? 'Submitting...' : 'Submit Loan Application'}
             </button>
           </form>
         </div>

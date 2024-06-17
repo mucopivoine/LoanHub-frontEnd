@@ -1,4 +1,3 @@
-
 import React, { PureComponent } from 'react';
 import {
   BarChart,
@@ -12,15 +11,14 @@ import {
 } from 'recharts';
 import MostRequestedLoans from '../Pages/MostrequestedLoans';
 
-
 const data = [
-  { name: 'Month 1', my: 4000, ml: 2400, amt: 2400 },
-  { name: 'Month 2', my: 3000, ml: 1398, amt: 2210 },
-  { name: 'Month 3', my: 2000, ml: 800, amt: 2290 },
-  { name: 'Month 4', my: 2780, ml: 3208, amt: 2000 },
-  { name: 'Month 5', my: 4890, ml: 1800, amt: 2181 },
-  { name: 'Month 6', my: 3390, ml: 2100, amt: 2500 },
-  { name: 'Month 7', my: 4490, ml: 3200, amt: 2100 },
+  { name: 'Month 1', ml: 1000000, r: 0.01, amt: 2400 },
+  { name: 'Month 2', ml: 700000, r: 0.02, amt: 2210 },
+  { name: 'Month 3', ml: 500000, r: 0.03, amt: 2290 },
+  { name: 'Month 4', ml: 250000, r: 0.04, amt: 2000 },
+  { name: 'Month 5', ml: 100000, r: 0.05, amt: 2181 },
+  { name: 'Month 6', ml: 70000, r: 0.06, amt: 2500 },
+  { name: 'Month 7', ml: 50000, r: 0.07, amt: 2100 },
 ];
 
 export default class Example extends PureComponent {
@@ -39,16 +37,22 @@ export default class Example extends PureComponent {
             >
               {/* <CartesianGrid strokeDasharray="3 3" /> */}
               <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
+              <YAxis yAxisId="left" />
+              <YAxis yAxisId="right" orientation="right" tickFormatter={(tick) => `${tick * 100}%`} />
+              <Tooltip formatter={(value, name) => {
+                  if (name === 'r') {
+                    return [`${value * 100}%`, 'Interest Rate'];
+                  }
+                  return [value, name];
+                }} />
               <Legend />
-              <Bar dataKey="my" fill="#f2cc8f" />
-              <Bar dataKey="ml" fill="#335c67" />
+              <Bar yAxisId="left" dataKey="ml" fill="#f2cc8f" />
+              <Bar yAxisId="right" dataKey="r" fill="#335c67" />
             </BarChart>
           </ResponsiveContainer>
         </div>
         <div className='mr-10 '>
-         
+          {/* Other content */}
         </div>
       </div>
     );
