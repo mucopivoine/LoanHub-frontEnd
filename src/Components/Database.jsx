@@ -109,11 +109,7 @@ function Database() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none w-[30%]"
             />
-            <Link to="adduser">
-              <button className="bg-blue-900 hover:bg-blue-800 mb-5 items-end text-white font-bold py-2 px-4 rounded">
-                Add User
-              </button>
-            </Link>
+            
           </div>
           {error && <p className="text-red-500 mb-4">{error}</p>}
           <table className="min-w-full divide-y divide-gray-200">
