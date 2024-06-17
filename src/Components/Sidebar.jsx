@@ -94,7 +94,7 @@ function Sidebar() {
             </li>
             <li className="flex items-center p-3 rounded-md  hover:text-red-500">
               <FaDatabase className="mr-3 w-[20px]" />
-              <Link to="/admin/database">Database</Link>
+              <Link to="/admin/database">Users</Link>
             </li>
           </ul>
         </nav>

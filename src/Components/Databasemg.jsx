@@ -100,19 +100,28 @@ function Databasemg() {
       <div className="w-[95%] ml-[1%] mt-[100px]">
         <h2 className="text-2xl font-semibold mb-4">Sacco users</h2>
         <div className='flex justify-between mb-4'>
-          <div className="flex flex-col w-full">
-            <input
-              type="text"
-              placeholder="Search by..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="px-4 py-2 w-[40%] border border-gray-300 rounded-md focus:outline-none"
-            />
-            {error && <p className="text-red-500 mt-2">{error}</p>}
-            <Link to="mnguser"><button className="bg-blue-900 hover:bg-blue-800 mb-5  items-end text-white font-bold py-2 px-4 rounded"
->
-        Add User
-      </button></Link>
+          <div className="w-full ">
+            <div className='flex justify-between'>
+              <div className='flex-1'>
+                <input
+                  type="text"
+                  placeholder="Search by..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="px-4 py-2 w-[40%] border border-gray-300 rounded-md focus:outline-none" // Adjust the width here
+                />
+              </div>
+              <div>
+                <Link to="mnguser">
+                  <button className="bg-blue-900 hover:bg-blue-800 mb-5 text-white font-bold py-2 px-4 rounded">
+                    Add User
+                  </button>
+                </Link>
+              </div>
+            </div>
+            <div className='' >
+              {error && <p className="text-red-500 mt-2">{error}</p>}
+            </div>
           </div>
         </div>
         <table className="min-w-full divide-y divide-gray-200">

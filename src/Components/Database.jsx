@@ -102,20 +102,30 @@ function Database() {
         <div className="w-[95%] ml-[2%] mt-[30px]">
           <h2 className="text-2xl font-semibold mb-4">Sacco users</h2>
           <div className="flex justify-between mb-4">
-            <input
-              type="text"
-              placeholder="Search by..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none w-[30%]"
-            />
-            
+          <div className="w-full ">
+            <div className='flex justify-between'>
+              <div className='flex-1'>
+                <input
+                  type="text"
+                  placeholder="Search by..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="px-4 py-2 w-[40%] border border-gray-300 rounded-md focus:outline-none" // Adjust the width here
+                />
+              </div>
+              <div>
+                <Link to="adduser">
+                  <button className="bg-blue-900 hover:bg-blue-800 mb-5 text-white font-bold py-2 px-4 rounded mr-5">
+                    Add User
+                  </button>
+                </Link>
+              </div>
+            </div>
+            <div className='' >
+              {error && <p className="text-red-500 mt-2">{error}</p>}
+            </div>
           </div>
-          {error && <p className="text-red-500 mb-4">{error}</p>}
-          <Link to="adduser"><button className="bg-blue-900 hover:bg-blue-800 mb-5  items-end text-white font-bold py-2 px-4 rounded"
->
-        Add User
-      </button></Link>
+          </div>
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>

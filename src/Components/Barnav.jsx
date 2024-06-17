@@ -115,7 +115,7 @@ function Barnav() {
             </li>
             <li className="flex items-center p-2 rounded-md gap-2 text-lg mb-5 hover:text-red-500">
               <FaDatabase className="w-[20px mr-3" />
-              <Link to="/barnav/databasemg">Database</Link>
+              <Link to="/barnav/databasemg">Users</Link>
             </li>
           </ul>
         </nav>
