@@ -159,7 +159,7 @@ function Login() {
                 </button>
                 <div className="flex flex-col mt-24 text-black">
                   <div className="flex flex-row">
-                    <p>Dont have an account..</p>
+                    <p>Don't have an account..</p>
                     <Link to="/auth/signup" className="text-red-900 mb-2">
                       Sign Up
                     </Link>
