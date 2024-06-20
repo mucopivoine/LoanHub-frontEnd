@@ -13,7 +13,7 @@ function ViewTeachers() {
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 7;
+  const itemsPerPage = 5;
   const handleFetch = async () => {
     try {
       console.log('Token:', cookie);

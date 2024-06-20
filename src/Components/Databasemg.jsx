@@ -108,7 +108,7 @@ function Databasemg() {
                   placeholder="Search by..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="px-4 py-2 w-[40%] border border-gray-300 rounded-md focus:outline-none" // Adjust the width here
+                  className="px-4 py-2 w-[40%] border border-gray-300 rounded-md focus:outline-none" 
                 />
               </div>
               <div>
