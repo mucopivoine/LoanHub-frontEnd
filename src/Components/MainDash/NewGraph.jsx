@@ -14,13 +14,13 @@ import {
 
 
 const data = [
-  { name: 'Month 1', ml: 1000000, r: 0.01, amt: 2400 },
-  { name: 'Month 2', ml: 700000, r: 0.02, amt: 2210 },
-  { name: 'Month 3', ml: 500000, r: 0.03, amt: 2290 },
-  { name: 'Month 4', ml: 250000, r: 0.04, amt: 2000 },
-  { name: 'Month 5', ml: 100000, r: 0.05, amt: 2181 },
-  { name: 'Month 6', ml: 70000, r: 0.06, amt: 2500 },
-  { name: 'Month 7', ml: 50000, r: 0.07, amt: 2100 },
+  { name: 'January', ml: 15000000, mp: 0.001},
+  { name: 'February', ml: 30000000, mp: 0.0026},
+  { name: 'March', ml: 20000000, mp: 0.0013 },
+  { name: 'April', ml: 25000000, mp: 0.0013 },
+  { name: 'May', ml: 15000000, mp: 0.0015 },
+  { name: 'June', ml: 18000000, mp: 0.005},
+  { name: 'July', ml: 20000000, mp: 0.0018},
 ];
 
 export default class Example extends PureComponent {
@@ -43,13 +43,13 @@ export default class Example extends PureComponent {
               <YAxis yAxisId="right" orientation="right" tickFormatter={(tick) => `${tick * 100}%`} />
               <Tooltip formatter={(value, name) => {
                   if (name === 'r') {
-                    return [`${value * 100}%`, 'Interest Rate'];
+                    return [`${value * 100}%`, 'Monthly payment'];
                   }
                   return [value, name];
                 }} />
               <Legend />
               <Bar yAxisId="left" dataKey="ml" fill="#f2cc8f" />
-              <Bar yAxisId="right" dataKey="r" fill="#335c67" />
+              <Bar yAxisId="right" dataKey="mp" fill="#335c67" />
             </BarChart>
           </ResponsiveContainer>
         </div>
